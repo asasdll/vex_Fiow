@@ -60,7 +60,6 @@ function draw_notes() {
   stave.setContext(context).draw();
   voice.draw(context, stave);
 
-
   arrindex();
 
 }
@@ -104,14 +103,11 @@ function arrindex() {
 
 }
 
-
-
 function mouseDown() {
   $(".vf-stavenote").on("click", function (e) {
    
-  
     arrindex();
-    
+
     var arr_index = $(this).attr("arr-index");
     var id_y = $(this).attr("id");
     
@@ -119,9 +115,11 @@ function mouseDown() {
     notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
     
     redraw_notes();
+
     $( function() {
       $("#" + id_y).draggable({ axis: "y" });
     } );
+
     $("div")
       .mouseup(function () {
         $(this).append(notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" }));
@@ -129,13 +127,12 @@ function mouseDown() {
      
 
       
-      var top_y = $(this).attr("style");
+      //var top_y = $(this).attr("style");
     //  console.log(id_y);
   
 
 
   })
-  console.log(i);
 
 }
 
@@ -143,7 +140,6 @@ function i_number() {
   i++;
   var value = document.querySelector(".increment-btn");
   
-  console.log(i);
 }
 
 

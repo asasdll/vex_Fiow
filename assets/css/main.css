@@ -37,21 +37,12 @@ body {
     margin-right: auto;
     text-align: center;
     min-height: 1500px;
-    min-width: 1500px;
+    max-width: 1500px;
     width: 90%;
    
     }
 
 
-  .area {
-    margin-top: 20px;
-    max-width: 500px;
-    max-height: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    border: 1px solid black;
-    }
       
 
 #panel {
