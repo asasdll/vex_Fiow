@@ -28,7 +28,6 @@ body {
 
 
 .vexbox {
-    position: absolute;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -38,7 +37,7 @@ body {
     margin-right: auto;
     text-align: center;
     min-height: 1500px;
-    max-width: 1500px;
+    min-width: 1500px;
     width: 90%;
    
     }
