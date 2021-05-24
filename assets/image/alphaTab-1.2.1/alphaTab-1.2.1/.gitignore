@@ -1,0 +1,13 @@
+dist/
+node_modules/
+private/
+playground/
+obj/
+bin/
+.idea/
+.vs/
+*.user
+*.tgz
+test-results/
+debug.log
+src/generated/VersionInfo.ts
