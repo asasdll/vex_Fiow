@@ -89,10 +89,6 @@ function add_note(key, octave, duration) {
     notes[idx] = get_new_note(key, octave, duration);
     redraw_notes();
 
-  } else {
-    i = -1;
-    
-
   }
   console.log(i);
 
