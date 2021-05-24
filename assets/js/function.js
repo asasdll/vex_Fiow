@@ -4,6 +4,7 @@ var context = null;
 var stave = null;
 var voice = null;
 var notes = [];
+var i = -1;
 function get_new_note(key, octave, duration) {
 
   let obj = new VF.StaveNote({
@@ -139,19 +140,13 @@ function mouseDown() {
 }
 
 function i_number() {
-  var count = 0;
-      var button = document.querySelector(".increment-btn");
-      //console.log(button);
-    if (true) {
-      count++;
-      console.log();
-      console.log('[  ]', )
-      console.log('[  ]', )
- 
-     
-    }
-
+  i++;
+  var value = document.querySelector(".increment-btn");
+  
+  console.log(i);
 }
+
+
 
 
 
