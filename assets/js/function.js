@@ -5,6 +5,8 @@ var stave = null;
 var voice = null;
 var notes = [];
 var i = -1;
+var y_top = null;
+
 function get_new_note(key, octave, duration) {
 
   let obj = new VF.StaveNote({
@@ -45,11 +47,11 @@ function draw_notes() {
 
   voice = new VF.Voice({ num_beats: 5, beat_value: 4 });
   notes = [
-    get_new_note('a', 4, 'qr'),
-    get_new_note('b', 4, 'qr'),
-    get_new_note('c', 4, 'qr'),
-    get_new_note('d', 4, 'qr'),
-    get_new_note('d', 4, 'qr')
+    get_new_note('a', 4, 'q'),
+    get_new_note('b', 4, 'q'),
+    get_new_note('c', 4, 'q'),
+    get_new_note('d', 4, 'q'),
+    get_new_note('d', 4, 'q')
   ];
 
   voice.addTickables(notes);
@@ -111,20 +113,27 @@ function mouseDown() {
 
     var arr_index = $(this).attr("arr-index");
     var id_y = $(this).attr("id");
+    var top_y = $(this).attr("style");
+    
 
     //notes[arr_index] = get_new_note('c', '4', 'q').setKeyStyle(2, {shadowColor: "yellow", shadowBlur: 3});
     notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 
     redraw_notes();
+    $("#" + id_y).draggable({ axis: "y" });
 
-    $(function () {
-      $("#" + id_y).draggable({ axis: "y" });
-    });
-
+  
     $("div")
       .mouseup(function () {
         $(this).append(notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" }));
+      //console.log(y_top);
       });
+      
+     
+      //console.log(top_y);
+      
+  
+    
 
 
 
