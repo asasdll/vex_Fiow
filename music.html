@@ -15,7 +15,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="/assets/js/vextab-div.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -28,10 +27,10 @@
     <input class="increment-btn" type="submit" onclick="add_note('c', '4','q')" value="keyNote_3">
     <input class="increment-btn" type="submit" onclick="add_note('c', '6','q')" value="keyNote_4">
     <input class="increment-btn" type="submit" onclick="add_note('c','4','q')" value="keyNote_5">
-  </br>
-  <p id="top_y" style="color:rgb(255, 255, 255);">tset</p>
-  <span style="color:rgb(255, 255, 255);">&nbsp;</span>
 
+  <style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+    </style>
   </div>
 </head>
 
@@ -40,7 +39,9 @@
   <div class="vexbox">
     <br>
     <div id="page"   class="" onmouseover="mouseDown()" draggable></div>
-    
+    <div id="draggable" class="ui-widget-content">
+      <p>Drag me around</p>
+    </div>
   </div>
   <div class="buttonBar">
     <img id="panel" src="assets/image/Keyboard.jpg">
@@ -58,6 +59,17 @@
   integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
 
+  </script>
+
+  <script>
+
+    $(function(){
+
+      $("#syceColor0").draggable();
+
+      $("#draggable").draggable();
+
+    })
   </script>
 
 </html>
