@@ -5,6 +5,8 @@ var stave = null;
 var voice = null;
 var notes = [];
 var i = -1;
+var arr_index = null;
+var pix_y = null;
 
 function get_new_note(key, octave, duration) {
 
@@ -28,14 +30,6 @@ function draw_notes() {
   renderer.resize(500, 500);
 
   context = renderer.getContext();
-  //console.log("context :",renderer);
-
-
-  context.setViewBox(0, 0, 500, 100);
-  const svg = context.svg;
-  svg.removeAttribute('width');
-  svg.removeAttribute('height');
-
 
 
   context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
@@ -46,11 +40,11 @@ function draw_notes() {
 
   voice = new VF.Voice({ num_beats: 5, beat_value: 4 });
   notes = [
-    get_new_note('a', 5, 'q'),
+    get_new_note('a', 4, 'q'),
     get_new_note('b', 4, 'q'),
     get_new_note('c', 4, 'q'),
     get_new_note('d', 4, 'q'),
-    get_new_note('d', 4, 'q')
+    get_new_note('g#', 4, 'q')
   ];
 
   voice.addTickables(notes);
@@ -58,11 +52,9 @@ function draw_notes() {
   window.renderer = renderer;
   stave.setContext(context).draw();
   voice.draw(context, stave);
-  
-
-  
 
   arrindex();
+
 
 }
 
@@ -94,7 +86,6 @@ function add_note(key, octave, duration) {
     redraw_notes();
 
   }
-  console.log(i);
 
 }
 
@@ -102,38 +93,38 @@ function arrindex() {  // new arr-index and id
 
   var arr_in = $(".vf-stavenote").each(function (e) {
     $(this).attr("arr-index", e),
-    $(this).attr("id", "syceColor" + e);
+      $(this).attr("id", "syceColor" + e);
   });
   return arr_in;
 
 }
 
-function mouseDown() {
-  
+function mouseDown(e) {
 
-  $(".vf-stavenote").on("click",function (e) {
-  //$(".vf-stavenote").mousedown(function (e) {
-    var arr_index = $(this).attr("arr-index");
-    var id_y = $(this).attr("id");
-    
-    notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-    
-   redraw_notes();
-   $("#" + id_y).draggable();
-   console.log("Id : ", id_y);
-  
-    $("div")
-    .mouseup(function () {
-      $(this).append(notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" }));
+  $(".vf-stavenote")
+    .mousedown(function (e) {
+       arr_index = $(this).attr("arr-index");
+       id_y = $(this).attr("id");
+      notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+      redraw_notes();
+      $("#" + id_y).draggable();
 
-      //console.log(y_top);
+      
+
+
     })
- 
-  });
- 
+    .mouseup(function (e) {
+      notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    });
+
+
+}
+function draggable_Y() {
+     pix_y = $("#" + id_y).draggable();
+  
 }
 
-function DragNote(){
+function DragNote() {
   $("#draggable").draggable();
 }
 
@@ -164,5 +155,5 @@ function i_number() {
 
 
 
-window.addEventListener('load', draw_notes,mouseDown,DragNote);
+window.addEventListener('load', draw_notes, arrindex);
 

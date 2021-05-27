@@ -55,7 +55,7 @@ body {
       }
 
     .divzoom {
-    
+        zoom: 200%;
         width: 500px;
         height: 100px;
         border: 1px solid black;
