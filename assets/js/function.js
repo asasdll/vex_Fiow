@@ -6,7 +6,6 @@ var voice = null;
 var notes = [];
 var i = -1;
 var arr_index = null;
-var pix_y = null;
 
 function get_new_note(key, octave, duration) {
 
@@ -34,7 +33,7 @@ function draw_notes() {
 
   context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
 
-  stave = new VF.Stave(40, -10, 400);
+  stave = new VF.Stave(40, 0, 400);
   stave.addClef("treble").addTimeSignature("4/4");
 
 
@@ -52,7 +51,6 @@ function draw_notes() {
   window.renderer = renderer;
   stave.setContext(context).draw();
   voice.draw(context, stave);
-
   arrindex();
 
 
@@ -95,33 +93,40 @@ function arrindex() {  // new arr-index and id
     $(this).attr("arr-index", e),
       $(this).attr("id", "syceColor" + e);
   });
+
   return arr_in;
 
 }
 
 function mouseDown(e) {
-
+  //window.addEventListener('load', arrindex);
+ 
   $(".vf-stavenote")
+    //.on("click",function (e) {
     .mousedown(function (e) {
        arr_index = $(this).attr("arr-index");
        id_y = $(this).attr("id");
+       $("#" + id_y).draggable({ axis: "y"});
+      // redraw_notes();
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-      redraw_notes();
-      $("#" + id_y).draggable();
+    
+    $("#" + id_y).draggable();
+    
 
+
+    
       
-
-
+   
     })
     .mouseup(function (e) {
-      notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+        // notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
     });
 
 
 }
 function draggable_Y() {
-     pix_y = $("#" + id_y).draggable();
-  
+    var  pix_y = $("#" + id_y).draggable();
+  return pix_y;
 }
 
 function DragNote() {
@@ -137,11 +142,6 @@ function i_number() {
 
 
 
-// $("div").mouseup(function () {
-//     $(this).append(notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" }));
-
-//     //console.log(y_top);
-//   });
 
 
 
@@ -152,8 +152,5 @@ function i_number() {
 
 
 
-
-
-
-window.addEventListener('load', draw_notes, arrindex);
+window.addEventListener('load', draw_notes,redraw_notes);
 
