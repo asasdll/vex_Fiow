@@ -39,11 +39,11 @@ function draw_notes() {
 
   voice = new VF.Voice({ num_beats: 5, beat_value: 4 });
   notes = [
-    get_new_note('a', 2, 'q'),
-    get_new_note('b', 2, 'q'),
-    get_new_note('c', 2, 'q'),
-    get_new_note('d', 6, 'q'),
-    get_new_note('g#', 6, 'q')
+    get_new_note('a', 4, 'q'),
+    get_new_note('b', 4, 'q'),
+    get_new_note('c', 4, 'q'),
+    get_new_note('g', 6, 'q'),
+    get_new_note('g', 6, 'q')
   ];
 
   voice.addTickables(notes);
@@ -116,7 +116,9 @@ function mouseDown(e) {
       });
      var note_key =  notes[arr_index].keys;
        note_text =  document.innerText = (note_key[0]);
-      console.log(note_text.substr(0,));
+       note_te_k = note_text.substr(0,1);
+       note_num_k = note_text.substr(-1);
+      console.log("note_text :",note_text, "note_te_k :" ,note_te_k ,"note_num_k :",note_num_k);
 
     })
     .mouseup(function (e) {
