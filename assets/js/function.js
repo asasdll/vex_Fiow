@@ -99,39 +99,44 @@ function arrindex() {  // new arr-index and id
 }
 
 function mouseDown(e) {
-  //window.addEventListener('load', arrindex);
- 
+
   $(".vf-stavenote")
     //.on("click",function (e) {
     .mousedown(function (e) {
-       arr_index = $(this).attr("arr-index");
-       id_y = $(this).attr("id");
-       $("#" + id_y).draggable({ axis: "y"});
-      // redraw_notes();
+      arr_index = $(this).attr("arr-index");
+      id_y = $(this).attr("id");
+      $("#" + id_y).draggable({ axis: "y" });
+
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-    
-    $("#" + id_y).draggable();
-    
+      redraw_notes();
+      $(document).bind('mousemove', function (e) {
+        $("p").html(`${e.clientX} , ${e.clientY}`)
+      });
 
-
-    
-      
-   
     })
     .mouseup(function (e) {
-        // notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+      mouseUp();
     });
 
 
 }
-function draggable_Y() {
-    var  pix_y = $("#" + id_y).draggable();
-  return pix_y;
+
+function mouseUp() {  // setStyle Black
+  notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" }); // setStyle Black
+  unBind();   // unbind mousemove 
 }
 
-function DragNote() {
-  $("#draggable").draggable();
+$('html') // unbind mousemove all html
+  .mouseup(function (e) {
+    mouseUp();
+  });
+
+function unBind() { // unbind mousemove
+  $(document).unbind("mousemove");
 }
+
+
+
 
 function i_number() {
   i++;
@@ -152,5 +157,5 @@ function i_number() {
 
 
 
-window.addEventListener('load', draw_notes,redraw_notes);
+window.addEventListener('load', draw_notes, redraw_notes);
 
