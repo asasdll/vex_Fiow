@@ -33,17 +33,17 @@ function draw_notes() {
 
   context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
 
-  stave = new VF.Stave(40, 0, 400);
+  stave = new VF.Stave(40, 40, 400);
   stave.addClef("treble").addTimeSignature("4/4");
 
 
   voice = new VF.Voice({ num_beats: 5, beat_value: 4 });
   notes = [
-    get_new_note('a', 4, 'q'),
-    get_new_note('b', 4, 'q'),
-    get_new_note('c', 4, 'q'),
-    get_new_note('d', 4, 'q'),
-    get_new_note('g#', 4, 'q')
+    get_new_note('a', 2, 'q'),
+    get_new_note('b', 2, 'q'),
+    get_new_note('c', 2, 'q'),
+    get_new_note('d', 6, 'q'),
+    get_new_note('g#', 6, 'q')
   ];
 
   voice.addTickables(notes);
@@ -114,6 +114,9 @@ function mouseDown(e) {
        var pixels =  $("p").html(ev_y)
        console.log("pixels  :" , ev_y);
       });
+     var note_key =  notes[arr_index].keys;
+       note_text =  document.innerText = (note_key[0]);
+      console.log(note_text.substr(0,));
 
     })
     .mouseup(function (e) {

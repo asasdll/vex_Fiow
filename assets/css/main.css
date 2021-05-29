@@ -56,6 +56,7 @@ body {
       }
 
     .divzoom {
+        top: 12pc;
         zoom: 200%;
         margin-left: auto;
         margin-right: auto;
