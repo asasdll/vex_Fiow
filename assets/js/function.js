@@ -110,7 +110,9 @@ function mouseDown(e) {
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
       redraw_notes();
       $(document).bind('mousemove', function (e) {
-        $("p").html(`${e.clientX} , ${e.clientY}`)
+        var ev_y = event.clientY; 
+       var pixels =  $("p").html(ev_y)
+       console.log("pixels  :" , ev_y);
       });
 
     })
@@ -142,6 +144,14 @@ function i_number() {
   i++;
   var value = document.querySelector(".increment-btn");
 }
+
+function name(params) {
+  arr_notes = [
+
+  ];
+}
+
+
 
 
 
