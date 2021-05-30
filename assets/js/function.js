@@ -6,6 +6,9 @@ var voice = null;
 var notes = [];
 var i = -1;
 var arr_index = null;
+var e_Click;
+var note_te_k;
+var note_num_k
 
 function get_new_note(key, octave, duration) {
 
@@ -39,9 +42,9 @@ function draw_notes() {
 
   voice = new VF.Voice({ num_beats: 5, beat_value: 4 });
   notes = [
-    get_new_note('a', 4, 'q'),
-    get_new_note('b', 4, 'q'),
-    get_new_note('c', 4, 'q'),
+    get_new_note('e##', 4, 'q'),
+    get_new_note('e', 4, 'q'),
+    get_new_note('a', 6, 'q'),
     get_new_note('g', 6, 'q'),
     get_new_note('g', 6, 'q')
   ];
@@ -109,16 +112,31 @@ function mouseDown(e) {
 
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
       redraw_notes();
+      e_Click = event.clientY;
+      var note_key = notes[arr_index].keys;
+      note_text = document.innerText = (note_key[0]);
+      note_te_k = note_text.substr(0, 1);
+      note_num_k = note_text.substr(-1);
+
+
       $(document).bind('mousemove', function (e) {
-        var ev_y = event.clientY; 
-       var pixels =  $("p").html(ev_y)
-       console.log("pixels  :" , ev_y);
+        var ev_move = event.clientY;
+        var pixels = $("p").html(ev_move)
+        sum_pixels = e_Click + 20;
+        sum_pix = ev_move + 20;
+
+        if (e_Click <= ev_move) {
+
+          notes_down();
+
+        } else if(e_Click >= ev_move) {
+
+          notes_up();
+
+        }
       });
-     var note_key =  notes[arr_index].keys;
-       note_text =  document.innerText = (note_key[0]);
-       note_te_k = note_text.substr(0,1);
-       note_num_k = note_text.substr(-1);
-      console.log("note_text :",note_text, "note_te_k :" ,note_te_k ,"note_num_k :",note_num_k);
+
+      //console.log(e_Click);
 
     })
     .mouseup(function (e) {
@@ -127,6 +145,36 @@ function mouseDown(e) {
 
 
 }
+
+function notes_up() {
+
+
+  var idx = arr_index;
+  var key = note_te_k;
+  var octave = "6";
+  var duration = "q";
+  notes[idx] = get_new_note(key, octave, duration);
+  redraw_notes();
+  unBind();
+  
+  
+}
+
+function notes_down() {
+
+
+  var idx = arr_index;
+  var key = note_te_k;
+  var octave = "1";
+  var duration = "q";
+  notes[idx] = get_new_note(key, octave, duration);
+  redraw_notes();
+  unBind();
+}
+  
+  
+
+
 
 function mouseUp() {  // setStyle Black
   notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" }); // setStyle Black
