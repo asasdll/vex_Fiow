@@ -29,47 +29,27 @@ function draw_notes() {
   var div = document.getElementById("page")
   var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
-  renderer.resize(500, 500);
+  renderer.resize(1500, 1500);
 
   context = renderer.getContext();
 
 
-  context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
+  context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
-  stave = new VF.Stave(40, 40, 400);
+  stave = new VF.Stave(40, 100, 900);
   stave.addClef("treble").addTimeSignature("4/4");
 
 
-  voice = new VF.Voice({ num_beats: 28, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 7, beat_value: 4 });
   notes = [
-    get_new_note('a', 0, 'q'),
-    get_new_note('b', 0, 'q'),
-    get_new_note('c', 1, 'q'),
-    get_new_note('d', 1, 'q'),
-    get_new_note('e', 1, 'q'),
-    get_new_note('f', 1, 'q'),
-    get_new_note('g', 1, 'q'),
-    get_new_note('a', 1, 'q'),
-    get_new_note('b', 1, 'q'),
-    get_new_note('c', 2, 'q'),
-    get_new_note('d', 2, 'q'),
-    get_new_note('e', 2, 'q'),
-    get_new_note('f', 2, 'q'),
-    get_new_note('g', 2, 'q'),
-    get_new_note('a', 2, 'q'),
-    get_new_note('b', 2, 'q'),
-    get_new_note('c', 3, 'q'),
-    get_new_note('d', 3, 'q'),
-    get_new_note('e', 3, 'q'),
-    get_new_note('f', 3, 'q'),
-    get_new_note('g', 3, 'q'),
-    get_new_note('a', 2, 'q'),
-    get_new_note('b', 2, 'q'),
-    get_new_note('c', 3, 'q'),
-    get_new_note('d', 3, 'q'),
-    get_new_note('e', 3, 'q'),
-    get_new_note('f', 3, 'q'),
-    get_new_note('g', 3, 'q')
+    get_new_note('a', 4, 'q'),
+    get_new_note('b', 4, 'q'),
+    get_new_note('c', 4, 'q'),
+    get_new_note('d', 4, 'q'),
+    get_new_note('e', 4, 'q'),
+    get_new_note('f', 4, 'q'),
+    get_new_note('g', 4, 'q'),
+ 
    
 
   ];
@@ -86,7 +66,7 @@ function draw_notes() {
 
 
 function redraw_notes() {
-  voice = new VF.Voice({ num_beats: 49, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 7, beat_value: 4 });
 
   voice.addTickables(notes);
   var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
@@ -223,10 +203,19 @@ function i_number() {
   var value = document.querySelector(".increment-btn");
 }
 
-function name(params) {
+function group_notes(params) {
   arr_notes = [
+    "a/0", "b/0","c/1","d/1","e/1","f/1","g/1",
+    "a/1", "b/1","c/2","d/2","e/2","f/2","g/2",
+    "a/2", "b/2","c/3","d/3","e/3","f/3","g/3",
+    "a/3", "b/3","c/4","d/4","e/4","f/4","g/4",
+    "a/4", "b/4","c/5","d/5","e/5","f/5","g/5",
+    "a/5", "b/5","c/6","d/6","e/6","f/6","g/6",
+    "a/6", "b/6","c/7","d/7","e/7","f/7","g/7",
+    "a/7", "b/7","c/8","d/8","e/8","f/8","g/8"
 
   ];
+
 }
 
 
