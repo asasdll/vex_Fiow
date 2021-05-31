@@ -132,11 +132,12 @@ function mouseDown(e) {
         if (e_Click <= ev_move) {
 
           notes_down();
-         
+          
 
         } else if(e_Click >= ev_move) {
 
           notes_up();
+         
 
         }
       });
@@ -152,13 +153,13 @@ function mouseDown(e) {
 }
 
 function notes_up() {
-
-
+  
   var idx = arr_index;
   var key = note_te_k;
   var octave = "5";
   var duration = "q";
   notes[idx] = get_new_note(key, octave, duration);
+  notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
   redraw_notes();
   unBind();
   
@@ -167,12 +168,12 @@ function notes_up() {
 
 function notes_down() {
 
-
   var idx = arr_index;
   var key = note_te_k;
   var octave = "3";
   var duration = "q";
   notes[idx] = get_new_note(key, octave, duration);
+  notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
   redraw_notes();
   unBind();
 }
@@ -203,7 +204,8 @@ function i_number() {
   var value = document.querySelector(".increment-btn");
 }
 
-function group_notes(params) {
+function group_notes() {
+  
   arr_notes = [
     "a/0", "b/0","c/1","d/1","e/1","f/1","g/1",
     "a/1", "b/1","c/2","d/2","e/2","f/2","g/2",
@@ -213,9 +215,12 @@ function group_notes(params) {
     "a/5", "b/5","c/6","d/6","e/6","f/6","g/6",
     "a/6", "b/6","c/7","d/7","e/7","f/7","g/7",
     "a/7", "b/7","c/8","d/8","e/8","f/8","g/8"
-
   ];
 
+}
+function test_fu() {
+  console.log("test_fu");
+  
 }
 
 
