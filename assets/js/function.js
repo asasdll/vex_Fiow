@@ -40,13 +40,38 @@ function draw_notes() {
   stave.addClef("treble").addTimeSignature("4/4");
 
 
-  voice = new VF.Voice({ num_beats: 5, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 28, beat_value: 4 });
   notes = [
-    get_new_note('e##', 4, 'q'),
-    get_new_note('e', 4, 'q'),
-    get_new_note('a', 6, 'q'),
-    get_new_note('g', 6, 'q'),
-    get_new_note('g', 6, 'q')
+    get_new_note('a', 0, 'q'),
+    get_new_note('b', 0, 'q'),
+    get_new_note('c', 1, 'q'),
+    get_new_note('d', 1, 'q'),
+    get_new_note('e', 1, 'q'),
+    get_new_note('f', 1, 'q'),
+    get_new_note('g', 1, 'q'),
+    get_new_note('a', 1, 'q'),
+    get_new_note('b', 1, 'q'),
+    get_new_note('c', 2, 'q'),
+    get_new_note('d', 2, 'q'),
+    get_new_note('e', 2, 'q'),
+    get_new_note('f', 2, 'q'),
+    get_new_note('g', 2, 'q'),
+    get_new_note('a', 2, 'q'),
+    get_new_note('b', 2, 'q'),
+    get_new_note('c', 3, 'q'),
+    get_new_note('d', 3, 'q'),
+    get_new_note('e', 3, 'q'),
+    get_new_note('f', 3, 'q'),
+    get_new_note('g', 3, 'q'),
+    get_new_note('a', 2, 'q'),
+    get_new_note('b', 2, 'q'),
+    get_new_note('c', 3, 'q'),
+    get_new_note('d', 3, 'q'),
+    get_new_note('e', 3, 'q'),
+    get_new_note('f', 3, 'q'),
+    get_new_note('g', 3, 'q')
+   
+
   ];
 
   voice.addTickables(notes);
@@ -56,13 +81,12 @@ function draw_notes() {
   voice.draw(context, stave);
   arrindex();
 
-
 }
 
 
 
 function redraw_notes() {
-  voice = new VF.Voice({ num_beats: 5, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 49, beat_value: 4 });
 
   voice.addTickables(notes);
   var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
@@ -124,10 +148,11 @@ function mouseDown(e) {
         var pixels = $("p").html(ev_move)
         sum_pixels = e_Click + 20;
         sum_pix = ev_move + 20;
-
+        console.log("ev_move");
         if (e_Click <= ev_move) {
 
           notes_down();
+         
 
         } else if(e_Click >= ev_move) {
 
@@ -151,7 +176,7 @@ function notes_up() {
 
   var idx = arr_index;
   var key = note_te_k;
-  var octave = "6";
+  var octave = "5";
   var duration = "q";
   notes[idx] = get_new_note(key, octave, duration);
   redraw_notes();
@@ -165,7 +190,7 @@ function notes_down() {
 
   var idx = arr_index;
   var key = note_te_k;
-  var octave = "1";
+  var octave = "3";
   var duration = "q";
   notes[idx] = get_new_note(key, octave, duration);
   redraw_notes();
