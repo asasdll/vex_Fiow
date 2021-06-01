@@ -180,10 +180,6 @@ function mouseDown(e) {
       });
 
 
-    })
-    .mouseup(function (e) {
-      unBind();
-
     });
 
 
@@ -223,6 +219,7 @@ function notes_down() {
 $('html') // unbind mousemove all html
   .mouseup(function (e) {
     unBind();
+    notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
     
       mouseDown(e);
 
