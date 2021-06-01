@@ -36,14 +36,14 @@ function draw_notes() {
   var div = document.getElementById("page")
   var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
-  renderer.resize(1500, 1500);
+  renderer.resize(500, 500);
 
   context = renderer.getContext();
 
 
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
-  stave = new VF.Stave(40, 100, 900);
+  stave = new VF.Stave(40, 100, 400);
   stave.addClef("treble").addTimeSignature("4/4");
 
 
