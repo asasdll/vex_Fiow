@@ -117,7 +117,6 @@ function arrindex() {  // new arr-index and id
 function mouseDown(e) {
 
   $(".vf-stavenote")
-    //.on("click",function (e) {
     .mousedown(function (e) {
       arr_index = $(this).attr("arr-index");
       id_y = $(this).attr("id");
@@ -126,39 +125,40 @@ function mouseDown(e) {
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
       redraw_notes();
       e_Click = event.clientY;//413
+
       var note_key = notes[arr_index].keys;
       note_text = document.innerText = (note_key[0]);
 
       group_notes();
       search_array = arr_notes.indexOf(note_text);
 
-      console.log(note_text);
-      //console.log("e_Click :" ,e_Click);
 
 
       $(document).bind('mousemove', function (e) {
-        ev_move = event.clientY;//434
-        //console.log("ev_move" + ev_move)
-        var pixels = $("p").html(ev_move)
-
+    //$( this ).addClass('mousemove', function (e) {
+        var ev_move = e.clientY;//434
+        var pixels = $("p").html(ev_move);
         sum_pixels = e_Click + 10;//443
         del_pix = e_Click - 10;
 
 
-        if (ev_move === sum_pixels) {//443 note_down
+
+        if (ev_move >= sum_pixels) {//443 note_down
           move_pixel = ev_move;
           e_Click = sum_pixels;//433
 
           if (ev_move == move_pixel) {
+
             search_array = search_array - array_a;
-            substr_notes();
+
 
           }
-          console.log(sum_pixels);
+          //console.log(search_array);
           substr_notes();
           notes_down();
 
-        } else if (ev_move === del_pix) { //note_up
+
+        } else if (ev_move <= del_pix) { //note_up
 
           move_pixel = ev_move;
           e_Click = del_pix;//433
@@ -168,28 +168,27 @@ function mouseDown(e) {
 
 
           }
-      
 
           substr_notes();
           notes_up();
+        
+   
 
         }
-
-
       });
-
-      //console.log(e_Click);
+  
 
     })
     .mouseup(function (e) {
-      mouseUp();
+      //bind_up();
+      
     });
 
 
 }
 
 function notes_up() {
- // console.log(note_sea);
+  // console.log(note_sea);
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
@@ -197,6 +196,7 @@ function notes_up() {
   notes[idx] = get_new_note(key, octave, duration);
   notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
   redraw_notes();
+
 
 
   //unBind();
@@ -207,38 +207,40 @@ function notes_up() {
 function notes_down() {
 
 
-   var idx = arr_index;
-   var key = note_te_k;
-   var octave = note_num_k;
-   var duration = "q";
-   notes[idx] = get_new_note(key, octave, duration);
-   notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-   redraw_notes();
+  var idx = arr_index;
+  var key = note_te_k;
+  var octave = note_num_k;
+  var duration = "q";
+  notes[idx] = get_new_note(key, octave, duration);
+  notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+  redraw_notes();
 
 
-}
-
-
-
-
-
-function mouseUp() {  // setStyle Black
-  notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" }); // setStyle Black
-  unBind();   // unbind mousemove 
 }
 
 $('html') // unbind mousemove all html
   .mouseup(function (e) {
-    mouseUp();
+   //unBind();
+ 
   });
 
 function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
+ 
 }
+
+
+
+
 function substr_notes() {
-  note_sea = arr_notes[search_array];
-  note_te_k = note_sea.substr(0, 1);
-  note_num_k = note_sea.substr(-1);
+
+
+  if (search_array <= arr_notes.length) {
+    note_sea = arr_notes[search_array];
+    note_te_k = note_sea.substr(0,1);
+    note_num_k = note_sea.substr(-1);
+  }
+
 
 }
 
