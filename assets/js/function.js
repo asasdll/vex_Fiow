@@ -1,4 +1,3 @@
-
 var VF = null;
 var context = null;
 var stave = null;
@@ -116,8 +115,10 @@ function arrindex() {  // new arr-index and id
 
 function mouseDown(e) {
 
+  console.log("tset_01");
   $(".vf-stavenote")
     .mousedown(function (e) {
+      console.log("tset_02");
       arr_index = $(this).attr("arr-index");
       id_y = $(this).attr("id");
       $("#" + id_y).draggable({ axis: "y" });
@@ -134,8 +135,9 @@ function mouseDown(e) {
 
 
 
-      $(window).bind('mousemove', function (e) {
-    //$( this ).addClass('mousemove', function (e) {
+      $(document).bind('mousemove', function (e) {
+        
+        //$( this ).addClass('mousemove', function (e) {
         var ev_move = e.clientY;//434
         var pixels = $("p").html(ev_move);
         sum_pixels = e_Click + 10;//443
@@ -171,17 +173,17 @@ function mouseDown(e) {
 
           substr_notes();
           notes_up();
-        
-   
+
+
 
         }
       });
-  
+
 
     })
     .mouseup(function (e) {
       unBind();
-      
+
     });
 
 
@@ -220,13 +222,15 @@ function notes_down() {
 
 $('html') // unbind mousemove all html
   .mouseup(function (e) {
-   //unBind();
- 
-  });
+    unBind();
+    
+      mouseDown(e);
+
+});
 
 function unBind() { // unbind mousemove
-  $(window).unbind("mousemove");
- 
+  $(document).unbind("mousemove");
+
 }
 
 
@@ -237,7 +241,7 @@ function substr_notes() {
 
   if (search_array <= arr_notes.length) {
     note_sea = arr_notes[search_array];
-    note_te_k = note_sea.substr(0,1);
+    note_te_k = note_sea.substr(0, 1);
     note_num_k = note_sea.substr(-1);
   }
 
@@ -272,4 +276,3 @@ function group_notes() {
 
 
 window.addEventListener('load', draw_notes, redraw_notes);
-
