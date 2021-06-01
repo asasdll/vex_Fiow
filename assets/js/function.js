@@ -134,7 +134,7 @@ function mouseDown(e) {
 
 
 
-      $(document).bind('mousemove', function (e) {
+      $(window).bind('mousemove', function (e) {
     //$( this ).addClass('mousemove', function (e) {
         var ev_move = e.clientY;//434
         var pixels = $("p").html(ev_move);
@@ -180,7 +180,7 @@ function mouseDown(e) {
 
     })
     .mouseup(function (e) {
-      //bind_up();
+      unBind();
       
     });
 
@@ -225,7 +225,7 @@ $('html') // unbind mousemove all html
   });
 
 function unBind() { // unbind mousemove
-  $(document).unbind("mousemove");
+  $(window).unbind("mousemove");
  
 }
 
