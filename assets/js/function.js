@@ -40,35 +40,30 @@ function draw_notes() {
 
   context = renderer.getContext();
 
-
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
   stave = new VF.Stave(40, 100, 400);
   stave.addClef("treble").addTimeSignature("4/4");
 
-
-  voice = new VF.Voice({ num_beats: 7, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  stave.setContext(context).draw();
   notes = [
-    get_new_note('a', 4, '16'),
+    get_new_note('a', 4, 'qr'),
     get_new_note('b', 4, 'qr'),
     get_new_note('c', 4, 'qr'),
-    get_new_note('d', 4, 'qr'),
-    get_new_note('e', 4, 'qr'),
-    get_new_note('f', 4, 'qr'),
-    get_new_note('g', 4, 'qr'),
-
-
+    get_new_note('d', 4, 'qr')
 
   ];
-  var beams = VF.Beam.generateBeams(notes);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
-  beams.forEach(function(b) {b.setContext(context).draw()})
-  
+
+
   voice.addTickables(notes);
+  var beams = VF.Beam.generateBeams(notes);
   var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
   window.renderer = renderer;
-  stave.setContext(context).draw();
+  
   voice.draw(context, stave);
+
+  
   arrindex();
 
 
@@ -77,7 +72,7 @@ function draw_notes() {
 
 
 function redraw_notes() {
-  voice = new VF.Voice({ num_beats: 7, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
   voice.addTickables(notes);
   var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
@@ -124,7 +119,6 @@ function mouseDown(e) {
       console.log("tset_02");
       arr_index = $(this).attr("arr-index");
       id_y = $(this).attr("id");
-      $("#" + id_y).draggable({ axis: "y" });
 
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
       redraw_notes();
@@ -139,7 +133,7 @@ function mouseDown(e) {
 
 
       $(document).bind('mousemove', function (e) {
-        
+
         //$( this ).addClass('mousemove', function (e) {
         var ev_move = e.clientY;//434
         var pixels = $("p").html(ev_move);
@@ -193,7 +187,7 @@ function notes_up() {
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
-  var duration = "16";
+  var duration = "q";
   notes[idx] = get_new_note(key, octave, duration);
   notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
   redraw_notes();
@@ -223,10 +217,10 @@ $('html') // unbind mousemove all html
   .mouseup(function (e) {
     unBind();
     notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-    
-      mouseDown(e); //function mouseDown(e) ใหม่
 
-});
+    mouseDown(e); //function mouseDown(e) ใหม่
+
+  });
 
 function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
