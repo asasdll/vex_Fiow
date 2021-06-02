@@ -49,7 +49,7 @@ function draw_notes() {
 
   voice = new VF.Voice({ num_beats: 7, beat_value: 4 });
   notes = [
-    get_new_note('a', 4, 'qr'),
+    get_new_note('a', 4, '16'),
     get_new_note('b', 4, 'qr'),
     get_new_note('c', 4, 'qr'),
     get_new_note('d', 4, 'qr'),
@@ -60,7 +60,10 @@ function draw_notes() {
 
 
   ];
-
+  var beams = VF.Beam.generateBeams(notes);
+  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
+  beams.forEach(function(b) {b.setContext(context).draw()})
+  
   voice.addTickables(notes);
   var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
   window.renderer = renderer;
@@ -190,7 +193,7 @@ function notes_up() {
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
-  var duration = "q";
+  var duration = "16";
   notes[idx] = get_new_note(key, octave, duration);
   notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
   redraw_notes();
