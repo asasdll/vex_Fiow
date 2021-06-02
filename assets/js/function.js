@@ -49,13 +49,13 @@ function draw_notes() {
 
   voice = new VF.Voice({ num_beats: 7, beat_value: 4 });
   notes = [
-    get_new_note('a', 4, 'q'),
-    get_new_note('b', 4, 'q'),
-    get_new_note('c', 4, 'q'),
-    get_new_note('d', 4, 'q'),
-    get_new_note('e', 4, 'q'),
-    get_new_note('f', 4, 'q'),
-    get_new_note('g', 4, 'q'),
+    get_new_note('a', 4, 'qr'),
+    get_new_note('b', 4, 'qr'),
+    get_new_note('c', 4, 'qr'),
+    get_new_note('d', 4, 'qr'),
+    get_new_note('e', 4, 'qr'),
+    get_new_note('f', 4, 'qr'),
+    get_new_note('g', 4, 'qr'),
 
 
 
@@ -115,7 +115,7 @@ function arrindex() {  // new arr-index and id
 
 function mouseDown(e) {
 
-  console.log("tset_01");
+
   $(".vf-stavenote")
     .mousedown(function (e) {
       console.log("tset_02");
@@ -221,7 +221,7 @@ $('html') // unbind mousemove all html
     unBind();
     notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
     
-      mouseDown(e);
+      mouseDown(e); //function mouseDown(e) ใหม่
 
 });
 
