@@ -49,8 +49,8 @@ function draw_notes() {
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
   notes = [
-    get_new_note('b', 4, 'qr'),
-    get_new_note('b', 4, 'qr'),
+    get_new_note('b', 4, '8'),
+    get_new_note('b', 4, '16'),
     get_new_note('b', 4, 'qr'),
     get_new_note('b', 4, 'qr')
 
@@ -59,10 +59,15 @@ function draw_notes() {
   ];
 
   voice.addTickables(notes);
-  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
+
+  
+  //var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
   window.renderer = renderer;
   stave.setContext(context).draw();
-  voice.draw(context, stave);
+  var voice = VF.Beam.generateBeams(notes);
+  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
+  voice.forEach(function(b) {b.setContext(context).draw()});
+  //voice.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
 
 
@@ -73,12 +78,14 @@ function draw_notes() {
 function redraw_notes() {
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
-  voice.addTickables(notes);
+  /*voice.addTickables(notes);
   var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
-
+*/
   renderer.ctx.clear();
   stave.setContext(context).draw();
-  voice.draw(context, stave);
+  var voice = VF.Beam.generateBeams(notes);
+  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
+  voice.forEach(function(b) {b.setContext(context).draw()});
   arrindex();
 
 }
@@ -133,7 +140,7 @@ function mouseDown(e) {
 
 
       $(document).bind('mousemove', function (e) {
-        
+
         //$( this ).addClass('mousemove', function (e) {
         var ev_move = e.clientY;//434
         var pixels = $("p").html(ev_move);
@@ -217,10 +224,10 @@ $('html') // unbind mousemove all html
   .mouseup(function (e) {
     unBind();
     notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-    
-      mouseDown(e); //function mouseDown(e) ใหม่
 
-});
+    mouseDown(e); //function mouseDown(e) ใหม่
+
+  });
 
 function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
