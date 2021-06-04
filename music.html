@@ -22,7 +22,10 @@
 
   <link rel="stylesheet" href="assets/css/main.css">
   <div class="headText">
-   
+    <div class="paletteElement paletteButton note3 selected advanced" data-bind="visible: visible, css: css, click: clicked, tip: {title: title, shortcut: shortcut}, attr: {id: controlId}" id="control-thirtysecond">
+      <span data-bind="resource: title" data-resource="palette.thirtysecond">32nd Note</span>
+      <!-- ko if: shortcut --><!-- /ko -->
+  </div>
   </div>
 </head>
 <body>

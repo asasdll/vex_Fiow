@@ -17,12 +17,13 @@ var octave;
 var note_text;
 
 
+
 function get_new_note(key, octave, duration) {
 
   let obj = new VF.StaveNote({
     clef: "treble",
     keys: [key + "/" + octave],
-    duration: duration,
+    duration: duration, align_center: true,
   });
   //obj.setAttribute('id', 'test555');
 
@@ -48,26 +49,315 @@ function draw_notes() {
 
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
-  notes = [
-    get_new_note('b', 4, '8'),
+
+
+  notes = [ 
+    
+    
+    /*get_new_note('b', 4, 'q'),
     get_new_note('b', 4, '16'),
-    get_new_note('b', 4, 'qr'),
+    get_new_note('b', 4, '8'),*/
+    get_new_note('b', 4, 'wr')
+
+  ];
+
+ /* notes_1 = [  // 1
+
+    get_new_note('b', 4, 'wr')
+
+  
+
+  ];*/
+
+  /*notes_2 = [ // 2
+    
+     get_new_note('b', 4, 'hr'),
+     get_new_note('b', 4, 'hr')
+ 
+   ];*/
+
+   /*notes_4 = [ //4
+    
+    get_new_note('b', 4, 'q'),
+    get_new_note('b', 4, '16'),
+    get_new_note('b', 4, '8'),
     get_new_note('b', 4, 'qr')
 
+  ];*/
+
+/*
+  notes_8 = [ //8
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r'),
+    get_new_note('b', 4, '8r')
+
+  ];
+
+  notes_16 = [ //16
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r'),
+    get_new_note('b', 4, '16r')
+
+  ];
+
+  notes_32 = [ //32
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r'),
+    get_new_note('b', 4, '32r')
 
 
   ];
 
+  notes_64 = [ //64
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r'),
+    get_new_note('b', 4, '64r')
+
+
+
+  ];*/
+  
+ 
+ 
+ 
+
   voice.addTickables(notes);
 
   
-  //var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
+
   window.renderer = renderer;
   stave.setContext(context).draw();
   var voice = VF.Beam.generateBeams(notes);
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
   voice.forEach(function(b) {b.setContext(context).draw()});
-  //voice.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
 
 
@@ -78,9 +368,7 @@ function draw_notes() {
 function redraw_notes() {
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
-  /*voice.addTickables(notes);
-  var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
-*/
+
   renderer.ctx.clear();
   stave.setContext(context).draw();
   var voice = VF.Beam.generateBeams(notes);
@@ -270,9 +558,12 @@ function group_notes() {
     "a/7", "b/7", "c/8", "d/8", "e/8", "f/8", "g/8"
   ];
 
-
-
 }
+
+
+
+
+
 
 
 
