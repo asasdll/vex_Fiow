@@ -14,6 +14,7 @@ var search_array;
 var key;
 var octave;
 var note_text;
+var duration_note = null;
 
 
 
@@ -130,6 +131,7 @@ function mouseDown(e) {
   $(".vf-stavenote")
     .mousedown(function (e) {
 
+    
       arr_index = $(this).attr("arr-index");
       //notes[arr_index] = get_new_note("b", 4, "q");
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
@@ -195,11 +197,11 @@ function mouseDown(e) {
 }
 
 function notes_up() {
-  // console.log(note_sea);
+   console.log(duration_note);
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
-  var duration = "64";
+  var duration = duration_note;
   notes[idx] = get_new_note(key, octave, duration);
   notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
   redraw_notes();
@@ -213,11 +215,11 @@ function notes_up() {
 
 function notes_down() {
 
-
+  console.log(duration_note);
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
-  var duration = "64";
+  var duration = duration_note;
   notes[idx] = get_new_note(key, octave, duration);
   notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
   redraw_notes();
@@ -276,33 +278,33 @@ function group_notes() {
 }
 
 
-function note_w() { // note w
+function note_w() { // note w 1 ตัว
 
   notes.push(
     get_new_note('b', 4, 'w'),
   );
-  
+  duration_note = "w";
   redraw_notes();
 
 }
 
 
-function note_h() { // note ขาว
+function note_h() { // note ขาว 1 ตัว
 
   notes.push(
     get_new_note('b', 4, 'h'),
   );
-  
+  duration_note = "h";
   redraw_notes();
 
 }
 
-function note_q() { // note ดำ
+function note_q() { // note ดำ  1 ตัว
 
   notes.push(
     get_new_note('b', 4, 'q'),
   );
-  
+  duration_note = "q";
   redraw_notes();
 
 }
@@ -311,24 +313,24 @@ function note_q() { // note ดำ
 
 
 
-function note_8() { // note 2
+function note_8() { // note 2 ตัว
 
   notes.push(
     get_new_note('b', 4, '8r'),
   );
-  
+  duration_note = "8";
   redraw_notes();
 
 }
 
-function note_16() { // note 4
+function note_16() { // note 4 ตัว
 
   notes.push(
 
     get_new_note('b', 4, '16r'),
     get_new_note('b', 4, '8r'),
   );
-  
+  duration_note = "16";
   redraw_notes();
 
 
@@ -336,7 +338,7 @@ function note_16() { // note 4
 }
 
 
-function note_32() { // note 8
+function note_32() { // note 8 ตัว
 
   notes.push(
 
@@ -344,7 +346,7 @@ function note_32() { // note 8
     get_new_note('b', 4, '16r'),
     get_new_note('b', 4, '8r'),
   );
-  
+  duration_note = "32";
   redraw_notes();
 
 
@@ -352,15 +354,16 @@ function note_32() { // note 8
 }
 
 
-function note_64() { // note 16
+function note_64() { // note 16 ตัว
 
   notes.push(
     get_new_note('b', 4, '64r'),
     get_new_note('b', 4, '32r'),
     get_new_note('b', 4, '16r'),
     get_new_note('b', 4, '8r'),
+    
   );
-  
+  duration_note = "64";
   redraw_notes();
 
 }
