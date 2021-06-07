@@ -280,7 +280,7 @@ function group_notes() {
 function note_w() { // note 16
 
   notes.push(
-    get_new_note('b', 4, 'h'),
+    get_new_note('b', 4, 'w'),
   );
   
   redraw_notes();
@@ -301,7 +301,7 @@ function note_h() { // note 16
 function note_q() { // note 16
 
   notes.push(
-    get_new_note('b', 4, 'h'),
+    get_new_note('b', 4, 'q'),
   );
   
   redraw_notes();
