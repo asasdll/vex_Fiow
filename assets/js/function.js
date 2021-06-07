@@ -86,9 +86,10 @@ function redraw_notes() {
   
   
   renderer.ctx.clear();
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  
 
   stave.setContext(context).draw();
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
   var voice = VF.Beam.generateBeams(notes);
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
   voice.forEach(function (b) { b.setContext(context).draw() });
@@ -130,7 +131,7 @@ function mouseDown(e) {
     .mousedown(function (e) {
 
       arr_index = $(this).attr("arr-index");
-      notes[arr_index] = get_new_note("b", 4, "q");
+      //notes[arr_index] = get_new_note("b", 4, "q");
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
       redraw_notes();
       e_Click = event.clientY;//413
@@ -275,7 +276,7 @@ function group_notes() {
 }
 
 
-function note_w() { // note 16
+function note_w() { // note w
 
   notes.push(
     get_new_note('b', 4, 'w'),
@@ -286,7 +287,7 @@ function note_w() { // note 16
 }
 
 
-function note_h() { // note 16
+function note_h() { // note ขาว
 
   notes.push(
     get_new_note('b', 4, 'h'),
@@ -296,7 +297,7 @@ function note_h() { // note 16
 
 }
 
-function note_q() { // note 16
+function note_q() { // note ดำ
 
   notes.push(
     get_new_note('b', 4, 'q'),
@@ -307,18 +308,10 @@ function note_q() { // note 16
 }
 
 
-function note_8() { // note 16
-
-  notes.push(
-    get_new_note('b', 4, 'qr'),
-  );
-  
-  redraw_notes();
-
-}
 
 
-function note_8() { // note 16
+
+function note_8() { // note 2
 
   notes.push(
     get_new_note('b', 4, '8r'),
@@ -328,7 +321,7 @@ function note_8() { // note 16
 
 }
 
-function note_16() { // note 16
+function note_16() { // note 4
 
   notes.push(
 
@@ -343,7 +336,7 @@ function note_16() { // note 16
 }
 
 
-function note_32() { // note 16
+function note_32() { // note 8
 
   notes.push(
 
@@ -369,8 +362,6 @@ function note_64() { // note 16
   );
   
   redraw_notes();
-
-
 
 }
 
