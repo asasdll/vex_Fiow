@@ -51,8 +51,8 @@ function draw_notes() {
 
 
   notes = [
-    get_new_note('b', 4, 'h'),
-    get_new_note('b', 4, 'q'),
+    get_new_note('b', 4, 'qr'),
+    get_new_note('b', 4, 'qr'),
    
   ];
 
@@ -130,9 +130,7 @@ function mouseDown(e) {
     .mousedown(function (e) {
 
       arr_index = $(this).attr("arr-index");
-      id_y = $(this).attr("id");
-      $("#" + id_y).draggable({ axis: "y" });
-
+      notes[arr_index] = get_new_note("b", 4, "q");
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
       redraw_notes();
       e_Click = event.clientY;//413
