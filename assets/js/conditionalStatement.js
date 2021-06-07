@@ -1,3 +1,4 @@
+var notes = [];
 function fillTheRest(button) {
     let note = notes[arr_index].duration;
     let note_k = notes[arr_index].keys;
@@ -10,8 +11,9 @@ function fillTheRest(button) {
    
     key = note_text.substr(0, 1);
     octave = note_text.substr(-1);
-
-    console.log(key,octave);
+    notes[0] = get_new_note(key, octave, duration);
+    notes[1] = get_new_note(key, octave, duration);
+    
     //console.log(`key, octave, ${button}`);
 
 
@@ -22,11 +24,11 @@ function fillTheRest(button) {
         let val = findValue(array[i]);
        // console.log(`key, octave, ${array[i]}`)
        let duration = `${array[i]}`;
-        notes[i] = get_new_note(key, octave, duration);
+       notes[i] = get_new_note(key, octave, duration);
         spaceVal = spaceVal - val;
         i++;
     }
-console.log(notes);
+console.log("55555")
     redraw_notes();
 
 }
