@@ -15,7 +15,7 @@ var key;
 var octave;
 var note_text;
 var duration_note = null;
-
+var notes = [];
 
 
 function get_new_note(key, octave, duration) {
@@ -24,7 +24,7 @@ function get_new_note(key, octave, duration) {
     clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
-  });
+  })
   //obj.setAttribute('id', 'test555');
 
 
@@ -48,13 +48,11 @@ function draw_notes() {
   stave.addClef("treble").addTimeSignature("4/4");
 
 
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4});
 
 
   notes = [
-    get_new_note('b', 4, 'qr'),
-    get_new_note('b', 4, 'qr'),
-   
+    get_new_note('b', 4, "wr" ),
   ];
 
 
@@ -94,6 +92,7 @@ function redraw_notes() {
   var voice = VF.Beam.generateBeams(notes);
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
   voice.forEach(function (b) { b.setContext(context).draw() });
+  console.log("NORS" , notes);
   arrindex();
 
 }
@@ -125,15 +124,14 @@ function arrindex() {  // new arr-index and id
 
 }
 
-function mouseDown(e) {
+function mouseDown(_e) {
 
 
   $(".vf-stavenote")
-    .mousedown(function (e) {
+    .mousedown(function (_e) {
 
     
       arr_index = $(this).attr("arr-index");
-      //notes[arr_index] = get_new_note("b", 4, "q");
       notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
       redraw_notes();
       e_Click = event.clientY;//413
@@ -256,12 +254,6 @@ function substr_notes() {
 
 
 
-
-function i_number() {
-  i++;
-  var value = document.querySelector(".increment-btn");
-}
-
 function group_notes() {
 
   arr_notes = [
@@ -277,96 +269,132 @@ function group_notes() {
 
 }
 
+function fillTheRest(button) {
+  let note = notes[arr_index].duration;
+  let note_k = notes[arr_index].keys;
+  let noteVal = findValue(note);
+  let buttonVal = findValue(button);
+  let spaceVal = noteVal - buttonVal * 2;
+ let duration =  `${button}`;
 
-function note_w() { // note w 1 ตัว
+ note_text = document.innerText = (note_k[0]);
 
-  notes.push(
-    get_new_note('b', 4, 'w'),
-  );
-  duration_note = "w";
-  redraw_notes();
+ key = note_text.substr(0, 1);
+ octave = note_text.substr(-1);
+
+
+
+  notes[0] = get_new_note(key, octave, duration);
+  notes[1] = get_new_note(key, octave, duration);
+/*  console.log("aa" ,`key, octave, ${button}`); //c/4
+  console.log("sss",`key, octave, ${button}`);  // c/4*/
+
+
+  let array = ['64', '32', '16', '8', 'q', 'h', 'w'];
+  let i = array.indexOf(button) + 1;
+
+  while (spaceVal > 0) {
+      let val = findValue(array[i]);
+      let duration = `${array[i]}`;
+      notes[i] = get_new_note(key, octave, duration);
+
+      console.log(notes);
+      spaceVal = spaceVal - val;
+      i++;
+  }
+ // redraw_notes();
+
+}
+
+function findValue(note) {
+  let value = note;
+  let returnValue;
+
+  switch (value) {
+      case 'w': returnValue = 4;
+          break;
+      case 'h': returnValue = 2;
+          break;
+      case 'q': returnValue = 1;
+          break;
+      case '8': returnValue = 0.5;
+          break;
+      case '16': returnValue = 0.25;
+          break;
+      case '32': returnValue = 0.125;
+          break;
+      case '64': returnValue = 0.025;
+          break;
+      default: console.log("Don't have this value");
+  }
+  return returnValue;
 
 }
 
 
-function note_h() { // note ขาว 1 ตัว
+function fillTheRest(button) {
+  let note = notes[arr_index].duration;
+  let note_k = notes[arr_index].keys;
+  let noteVal = findValue(note);
+  let buttonVal = findValue(button);
+  let spaceVal = noteVal - buttonVal * 2;
+ let duration =  `${button}`;
 
-  notes.push(
-    get_new_note('b', 4, 'h'),
-  );
-  duration_note = "h";
+ note_text = document.innerText = (note_k[0]);
+
+ key = note_text.substr(0, 1);
+ octave = note_text.substr(-1);
+
+
+
+  /*notes[0] = get_new_note(key, octave, duration);
+  notes[1] = get_new_note(key, octave, duration);*/
+/*  console.log("aa" ,`key, octave, ${button}`); //c/4
+  console.log("sss",`key, octave, ${button}`);  // c/4*/
+
+
+  let array = ['64', '32', '16', '8', 'q', 'h', 'w'];
+  let i = array.indexOf(button) + 1;
+
+  while (spaceVal > 0) {
+      let val = findValue(array[i]);
+      let duration = `${array[i]}`;
+      notes[i] = get_new_note(key, octave, duration);
+      spaceVal = spaceVal - val;
+      i++;
+  }
+  // console.log(notes);
   redraw_notes();
 
 }
 
-function note_q() { // note ดำ  1 ตัว
+function findValue(note) {
+  let value = note;
+  let returnValue;
 
-  notes.push(
-    get_new_note('b', 4, 'q'),
-  );
-  duration_note = "q";
-  redraw_notes();
-
-}
-
-
-
-
-
-function note_8() { // note 2 ตัว
-
-  notes.push(
-    get_new_note('b', 4, '8r'),
-  );
-  duration_note = "8";
-  redraw_notes();
-
-}
-
-function note_16() { // note 4 ตัว
-
-  notes.push(
-
-    get_new_note('b', 4, '16r'),
-    get_new_note('b', 4, '8r'),
-  );
-  duration_note = "16";
-  redraw_notes();
-
-
+  switch (value) {
+      case 'w': returnValue = 4;
+          break;
+      case 'h': returnValue = 2;
+          break;
+      case 'q': returnValue = 1;
+          break;
+      case '8': returnValue = 0.5;
+          break;
+      case '16': returnValue = 0.25;
+          break;
+      case '32': returnValue = 0.125;
+          break;
+      case '64': returnValue = 0.025;
+          break;
+      default: console.log("Don't have this value");
+  }
+  return returnValue;
 
 }
 
 
-function note_32() { // note 8 ตัว
 
-  notes.push(
-
-    get_new_note('b', 4, '32r'),
-    get_new_note('b', 4, '16r'),
-    get_new_note('b', 4, '8r'),
-  );
-  duration_note = "32";
-  redraw_notes();
-
-
-
-}
-
-
-function note_64() { // note 16 ตัว
-
-  notes.push(
-    get_new_note('b', 4, '64r'),
-    get_new_note('b', 4, '32r'),
-    get_new_note('b', 4, '16r'),
-    get_new_note('b', 4, '8r'),
-    
-  );
-  duration_note = "64";
-  redraw_notes();
-
-}
 
 
 
