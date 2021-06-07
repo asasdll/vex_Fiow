@@ -1,24 +1,22 @@
-function fillTheRest(note, button) {
+function fillTheRest(button) {
+    let note = notes[arr_index].duration;
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
-    let spaceVal = noteVal - buttonVal;
+    let spaceVal = noteVal - buttonVal * 2;
 
-    spaceValDec = spaceVal % 1;
-    spaceValOdd = (spaceVal - spaceValDec) % 2;
-    spaceValEven = (spaceVal - spaceValOdd) - spaceValDec;
-
-
-    console.log(`key, octave, ${button}`)
+    console.log(`key, octave, ${button}`);
+    console.log(`key, octave, ${button}`);
 
 
+    let array = ['64', '32', '16', '8', 'q', 'h', 'w'];
+    let i = array.indexOf(button) + 1;
 
-    determineSpace(spaceValDec);
-    determineSpace(spaceValOdd);
-    determineSpace(spaceValEven);
-    // console.log(spaceValDec);
-    // console.log(spaceValOdd);
-    // console.log(spaceValEven)
-
+    while (spaceVal > 0) {
+        let val = findValue(array[i]);
+        console.log(`key, octave, ${array[i]}`)
+        spaceVal = spaceVal - val;
+        i++;
+    }
 
 }
 
@@ -46,49 +44,4 @@ function findValue(note) {
     return returnValue;
 
 }
-
-function determineSpace(space) {
-
-    let values = space;
-
-    while (values > 0) {
-        if (values < 1 && values > 0.5 || values == 0.25) {
-            console.log(`key, octave, 16`);
-            values = values - 0.25;
-        } else if (values == 0.5) {
-            console.log(`key, octave, 8`);
-            values = values - 0.5;
-        } else if (values == 1) {
-            console.log(`key, octave, q`);
-            values = values - 1;
-        } else if (values > 1) {
-            console.log(`key, octave, h`);
-            values = values - 2;
-        } else {
-            console.log('tada');
-        }
-
-    }
-
-}
-
-// (values < 1 && values > 0.75) {
-//     console.log('key, octave, 32');
-//     values = values - 0.125;
-
-
-
-
-// function determineSpace
-
-// q
-// 50 50
-// 25 25 25 25
-// 12 12 12 12 / 12 12 12 12 
-
-// 25 click 12 easy 12 12
-// 50 click 12 = 12 12 25
-// q  clink 12 = 12 12 25 50 
-
-
 
