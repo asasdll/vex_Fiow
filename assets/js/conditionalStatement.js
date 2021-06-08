@@ -11,7 +11,6 @@ function fillTheRest(button) {
     let i = array.indexOf(button) + 1;
     let u = Number(arr_index) + 2;
     let next = Number(arr_index) + 1;
-
     let rope = array.indexOf(button);
     let anchor = array.indexOf(note);
     let between = anchor - rope;
