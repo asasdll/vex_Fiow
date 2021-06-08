@@ -7,21 +7,23 @@ function fillTheRest(button) {
     let buttonVal = findValue(button);
     let spaceVal = noteVal - (buttonVal * 2);
 
-    // if(notes[Number(arr_index) + 1] != null) {
-    //    while()
-    //     let k = array.length
-    //     notes[k] = notes[k - 1];
-    //     k--;
-    // }
-
-    notes[arr_index] = get_new_note('b', 4, `${button}r`);
-    notes[Number(arr_index) + 1] = get_new_note('b', 4, `${button}r`);
-
-
     let array = ['64', '32', '16', '8', 'q', 'h', 'w'];
     let i = array.indexOf(button) + 1;
     let u = Number(arr_index) + 2;
+    let next = Number(arr_index) + 1;
 
+    if (notes[next] != null) {
+        let rope = array.indexOf(button);
+        let anchor = array.indexOf(note);
+        let between = anchor - rope;
+        let lastElement = notes.length - 1;
+        for (idx = lastElement; idx > Number(arr_index); idx--) {
+            notes[idx + between] = notes[idx];
+        }
+    }
+
+    notes[arr_index] = get_new_note('b', 4, `${button}r`);
+    notes[Number(arr_index) + 1] = get_new_note('b', 4, `${button}r`);
 
     while (spaceVal > 0) {
         let val = findValue(array[i]);
