@@ -12,10 +12,16 @@ function fillTheRest(button) {
     let u = Number(arr_index) + 2;
     let next = Number(arr_index) + 1;
 
+    let rope = array.indexOf(button);
+    let anchor = array.indexOf(note);
+    let between = anchor - rope;
+
+    if (rope > anchor || rope === anchor) {
+        alert("Invalid Note");
+        return;
+    }
+
     if (notes[next] != null) {
-        let rope = array.indexOf(button);
-        let anchor = array.indexOf(note);
-        let between = anchor - rope;
         let lastElement = notes.length - 1;
         for (idx = lastElement; idx > Number(arr_index); idx--) {
             notes[idx + between] = notes[idx];
