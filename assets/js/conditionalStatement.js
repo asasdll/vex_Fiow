@@ -61,7 +61,7 @@ function findValue(note) {
             break;
         case '32': returnValue = 0.125;
             break;
-        case '64': returnValue = 0.025;
+        case '64': returnValue = 0.0625;
             break;
         default: console.log("Don't have this value");
     }
