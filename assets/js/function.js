@@ -129,19 +129,31 @@ function mouseDown(_e) {
   $(".vf-stavenote")
     .mousedown(function (_e) {
 
-    
+
       arr_index = $(this).attr("arr-index");
-      notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-      redraw_notes();
+     // notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+      
+      
       e_Click = event.clientY;//413
 
       var note_key = notes[arr_index].keys;
-      note_text = document.innerText = (note_key[0]);
-
+      var duration = notes[arr_index].duration;
+      note_sea = document.innerText = (note_key[0]);
+      key = note_sea.substr(0, 1);
+      octave = note_sea.substr(-1);
+    // redraw_notes();
+      if (duration == "w") {
+        notes[arr_index] = get_new_note(key, octave, duration);
+        setStyle();
+      }else{
+      notes[arr_index] = get_new_note(key, octave, duration);
+      setStyle();  
+    }
+      redraw_notes();
       group_notes();
-      search_array = arr_notes.indexOf(note_text);
+     // search_array = arr_notes.indexOf(note_sea);
 
-
+      console.log(search_array);
 
       $(document).bind('mousemove', function (e) {
 
@@ -161,7 +173,6 @@ function mouseDown(_e) {
 
             search_array = search_array - array_a;
 
-
           }
           //console.log(search_array);
           substr_notes();
@@ -180,6 +191,7 @@ function mouseDown(_e) {
           }
 
           substr_notes();
+          
           notes_up();
 
 
@@ -192,15 +204,18 @@ function mouseDown(_e) {
 
 
 }
+function setStyle() {
+  notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+}
 
 function notes_up() {
-   console.log(duration_note);
+   console.log("66666");
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
   var duration = duration_note;
   notes[idx] = get_new_note(key, octave, duration);
-  notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+  setStyle();
   redraw_notes();
 
 
@@ -212,13 +227,13 @@ function notes_up() {
 
 function notes_down() {
 
-  console.log(duration_note);
+  console.log("5555");
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
   var duration = duration_note;
   notes[idx] = get_new_note(key, octave, duration);
-  notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+  setStyle();
   redraw_notes();
 
 
@@ -246,6 +261,7 @@ function substr_notes() {
     note_sea = arr_notes[search_array];
     note_te_k = note_sea.substr(0, 1);
     note_num_k = note_sea.substr(-1);
+   console.log("5555aaa");
   }
 
 
