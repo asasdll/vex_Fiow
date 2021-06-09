@@ -138,22 +138,24 @@ function mouseDown(_e) {
 
       var note_key = notes[arr_index].keys;
       var duration = notes[arr_index].duration;
+      duration_note = duration;
       note_sea = document.innerText = (note_key[0]);
       key = note_sea.substr(0, 1);
       octave = note_sea.substr(-1);
-    // redraw_notes();
+     redraw_notes();
       if (duration == "w") {
-        notes[arr_index] = get_new_note(key, octave, duration);
+        notes[arr_index] = get_new_note(key, octave, "wr");
         setStyle();
       }else{
       notes[arr_index] = get_new_note(key, octave, duration);
       setStyle();  
     }
+   //console.log(notes);
       redraw_notes();
       group_notes();
-     // search_array = arr_notes.indexOf(note_sea);
+      search_array = arr_notes.indexOf(note_sea);
 
-      console.log(search_array);
+   //   console.log(search_array,note_key);
 
       $(document).bind('mousemove', function (e) {
 
@@ -189,7 +191,7 @@ function mouseDown(_e) {
 
 
           }
-
+          //console.log(search_array);
           substr_notes();
           
           notes_up();
@@ -209,12 +211,13 @@ function setStyle() {
 }
 
 function notes_up() {
-   console.log("66666");
+ 
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
   var duration = duration_note;
-  notes[idx] = get_new_note(key, octave, duration);
+  //console.log(key,octave,duration);
+ notes[idx] = get_new_note(key, octave, duration);
   setStyle();
   redraw_notes();
 
@@ -227,11 +230,12 @@ function notes_up() {
 
 function notes_down() {
 
-  console.log("5555");
+
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
   var duration = duration_note;
+  //console.log(key,octave,duration);
   notes[idx] = get_new_note(key, octave, duration);
   setStyle();
   redraw_notes();
@@ -261,7 +265,7 @@ function substr_notes() {
     note_sea = arr_notes[search_array];
     note_te_k = note_sea.substr(0, 1);
     note_num_k = note_sea.substr(-1);
-   console.log("5555aaa");
+
   }
 
 
