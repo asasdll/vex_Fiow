@@ -16,7 +16,7 @@ var octave;
 var note_text;
 var duration_note = null;
 var notes = [];
-
+var checkIndex;
 
 function get_new_note(key, octave, duration) {
 
@@ -48,11 +48,11 @@ function draw_notes() {
   stave.addClef("treble").addTimeSignature("4/4");
 
 
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4});
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
 
   notes = [
-    get_new_note('b', 4, "wr" ),
+    get_new_note('b', 4, "wr"),
   ];
 
 
@@ -82,10 +82,10 @@ function draw_notes() {
 
 function redraw_notes() {
   //notes;
-  
-  
+
+
   renderer.ctx.clear();
-  
+
 
   stave.setContext(context).draw();
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
@@ -131,9 +131,8 @@ function mouseDown(_e) {
 
 
       arr_index = $(this).attr("arr-index");
-     // notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-      
-      
+      // notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+
       e_Click = event.clientY;//413
 
       var note_key = notes[arr_index].keys;
@@ -142,20 +141,28 @@ function mouseDown(_e) {
       note_sea = document.innerText = (note_key[0]);
       key = note_sea.substr(0, 1);
       octave = note_sea.substr(-1);
-     redraw_notes();
+      redraw_notes();
       if (duration == "w") {
         notes[arr_index] = get_new_note(key, octave, "wr");
         setStyle();
-      }else{
-      notes[arr_index] = get_new_note(key, octave, duration);
-      setStyle();  
-    }
-   //console.log(notes);
+      } else {
+        notes[arr_index] = get_new_note(key, octave, duration);
+        setStyle();
+      }
+      //console.log(notes);
       redraw_notes();
       group_notes();
       search_array = arr_notes.indexOf(note_sea);
 
-   //   console.log(search_array,note_key);
+      //   console.log(search_array,note_key);
+      let previous = Number(arr_index) - 1;
+
+      if (Number(arr_index) != 0) {
+        if (checkIndex == previous) {
+          let button = notes[previous].duration;
+          fillTheRest(button, 'b');
+        }
+      }
 
       $(document).bind('mousemove', function (e) {
 
@@ -193,7 +200,7 @@ function mouseDown(_e) {
           }
           //console.log(search_array);
           substr_notes();
-          
+
           notes_up();
 
 
@@ -204,20 +211,20 @@ function mouseDown(_e) {
 
     });
 
-
+  checkIndex = arr_index;
 }
 function setStyle() {
   notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 }
 
 function notes_up() {
- 
+
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
   var duration = duration_note;
   //console.log(key,octave,duration);
- notes[idx] = get_new_note(key, octave, duration);
+  notes[idx] = get_new_note(key, octave, duration);
   setStyle();
   redraw_notes();
 

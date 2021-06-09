@@ -1,6 +1,19 @@
 var notes = [];
 
-function fillTheRest(button) {
+// let previous = Number(arr_index) - 1;
+// let checkIndex = 0;
+
+// if (Number(arr_index) != 0) {
+//     if (checkIndex === previous) {
+//         let button = notes[previous].duration;
+//         fillTheRest(button);
+//     }
+// }
+// checkIndex = arr_index;
+
+// console.log(arr_index);
+
+function fillTheRest(button, version) {
     let note = notes[arr_index].duration;
 
     let noteVal = findValue(note);
@@ -16,7 +29,6 @@ function fillTheRest(button) {
     let between = anchor - rope;
 
     if (rope > anchor || rope === anchor) {
-        alert("Invalid Note");
         return;
     }
 
@@ -27,8 +39,15 @@ function fillTheRest(button) {
         }
     }
 
-    notes[arr_index] = get_new_note('b', 4, `${button}r`);
+    if (version === 'a') {
+        notes[arr_index] = get_new_note('b', 4, `${button}r`);
+    } else {
+        notes[arr_index] = get_new_note('b', 4, `${button}`);
+    }
+
     notes[Number(arr_index) + 1] = get_new_note('b', 4, `${button}r`);
+
+
 
     while (spaceVal > 0) {
         let val = findValue(array[i]);
