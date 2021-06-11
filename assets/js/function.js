@@ -48,25 +48,28 @@ function draw_notes() {
   stave.addClef("treble").addTimeSignature("4/4");
 
 
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  var voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
 
   notes = [
     get_new_note('b', 4, "wr"),
+
+    new Vex.Flow.BarNote(),
+
+    get_new_note('b', 4, "wr"),
+
   ];
 
 
 
-
-
-
+  voice.setStrict(false)
   voice.addTickables(notes);
 
 
 
   window.renderer = renderer;
   stave.setContext(context).draw();
-  var voice = VF.Beam.generateBeams(notes);
+  voice = VF.Beam.generateBeams(notes);
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
   voice.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
@@ -88,8 +91,8 @@ function redraw_notes() {
 
 
   stave.setContext(context).draw();
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
-  var voice = VF.Beam.generateBeams(notes);
+  var voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  voice = VF.Beam.generateBeams(notes);
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
   voice.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
@@ -154,7 +157,7 @@ function mouseDown(_e) {
       group_notes();
       search_array = arr_notes.indexOf(note_sea);
 
-      //   console.log(search_array,note_key);
+      //   console.log(search_array,note_key)
       let previous = Number(arr_index) - 1;
 
       if (Number(arr_index) != 0) {
@@ -163,6 +166,7 @@ function mouseDown(_e) {
           fillTheRest(button, 'b');
         }
       }
+
 
       $(document).bind('mousemove', function (e) {
 

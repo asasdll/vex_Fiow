@@ -32,6 +32,8 @@ function fillTheRest(button, version) {
         return;
     }
 
+    console.log(notes[Number(arr_index)]);
+
     if (notes[next] != null) {
         let lastElement = notes.length - 1;
         for (idx = lastElement; idx > Number(arr_index); idx--) {
@@ -39,10 +41,10 @@ function fillTheRest(button, version) {
         }
     }
 
-    if (version === 'a') {
-        notes[arr_index] = get_new_note('b', 4, `${button}r`);
-    } else {
+    if (version === 'b') {
         notes[arr_index] = get_new_note('b', 4, `${button}`);
+    } else {
+        notes[arr_index] = get_new_note('b', 4, `${button}r`);
     }
 
     notes[Number(arr_index) + 1] = get_new_note('b', 4, `${button}r`);
