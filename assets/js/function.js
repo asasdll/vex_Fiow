@@ -17,6 +17,7 @@ var note_text;
 var duration_note = null;
 var notes = [];
 var checkIndex;
+var arr_type = [];
 
 function get_new_note(key, octave, duration) {
 
@@ -48,31 +49,52 @@ function draw_notes() {
   stave.addClef("treble").addTimeSignature("4/4");
 
 
-  var voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
 
   notes = [
     get_new_note('b', 4, "wr"),
 
-    new Vex.Flow.BarNote(),
+    new VF.BarNote(),
 
     get_new_note('b', 4, "wr"),
 
+    new VF.BarNote(),
+
+    get_new_note('b', 4, "wr"),
+
+    new VF.BarNote(),
+
+    get_new_note('b', 4, "wr"),
+
+
+
   ];
+  /*
+    new Voice({alignCenter: true}).addTickables([
+      new StaveNote({ keys: ['c4'], duration: '4' }),
+      new StaveNote({ keys: ['c4'], duration: '4' }),
+    ])*/
 
 
 
-  voice.setStrict(false)
-  voice.addTickables(notes);
+
+
+
+
+
+
+  //voice.addTickables(notes);
 
 
 
   window.renderer = renderer;
   stave.setContext(context).draw();
-  voice = VF.Beam.generateBeams(notes);
+  var voice = VF.Beam.generateBeams(notes);
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
   voice.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
+  arrline();
 
 
 
@@ -91,13 +113,17 @@ function redraw_notes() {
 
 
   stave.setContext(context).draw();
-  var voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
-  voice = VF.Beam.generateBeams(notes);
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  var voice = VF.Beam.generateBeams(notes);
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
   voice.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
+  arrline();
+
+
 
 }
+
 
 
 function add_note(key, octave, duration) {
@@ -116,13 +142,56 @@ function add_note(key, octave, duration) {
 }
 
 function arrindex() {  // new arr-index and id
+  id_type();
 
-  var arr_in = $(".vf-stavenote").each(function (e) {
-    $(this).attr("arr-index", e),
-      $(this).attr("id", "syceColor" + e);
+
+  var i = 0;
+
+
+ // console.log(text);
+   $(".vf-stavenote").each(function () {
+    
+
+    $(this).attr("arr-index", arr_type[i]),
+    $(this).attr("id", "syceColor" + arr_type[i]);
+    i++;
+
+
+
   });
 
-  return arr_in;
+  //return arr_in;
+
+}
+
+function id_type() {
+
+  arr_type = [];
+  var i;
+  for (i = 0; i < notes.length; i++) {
+    type = notes[i].duration;
+    // console.log(type,i);
+    if (type != "b") {
+
+      var typeidex = i;
+
+      arr_type.push(typeidex);
+      //console.log(typeidex);
+
+    }
+  }
+
+}
+
+function arrline() {  // new arr-index and id
+
+  var arr_lin = $('rect').each(function (e) {
+    //console.log(e);
+    $(this).attr("arr-line", e)
+
+  });
+
+  return arr_lin;
 
 }
 
@@ -134,11 +203,13 @@ function mouseDown(_e) {
 
 
       arr_index = $(this).attr("arr-index");
+      console.log(arr_index);
       // notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-
+     // console.log("notes", notes, "id", arr_index);
       e_Click = event.clientY;//413
 
       var note_key = notes[arr_index].keys;
+      //console.log(note_key);
       var duration = notes[arr_index].duration;
       duration_note = duration;
       note_sea = document.innerText = (note_key[0]);
@@ -155,9 +226,10 @@ function mouseDown(_e) {
       //console.log(notes);
       redraw_notes();
       group_notes();
+
       search_array = arr_notes.indexOf(note_sea);
 
-      //   console.log(search_array,note_key)
+      //   console.log(search_array,note_key);
       let previous = Number(arr_index) - 1;
 
       if (Number(arr_index) != 0) {
@@ -166,7 +238,6 @@ function mouseDown(_e) {
           fillTheRest(button, 'b');
         }
       }
-
 
       $(document).bind('mousemove', function (e) {
 
