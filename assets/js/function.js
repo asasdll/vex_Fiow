@@ -18,13 +18,16 @@ var duration_note = null;
 var notes = [];
 var checkIndex;
 var arr_type = [];
+//var array_sum = [];
 
 function get_new_note(key, octave, duration) {
 
   let obj = new VF.StaveNote({
-    clef: "treble",
+   // clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
+    auto_stem: true,
+    clef: "treble"
   })
   //obj.setAttribute('id', 'test555');
 
@@ -46,10 +49,19 @@ function draw_notes() {
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
   stave = new VF.Stave(40, 100, 400);
-  stave.addClef("treble").addTimeSignature("4/4");
+  stave2 = new VF.Stave(40, 200, 400);
+ 
 
+  stave.addClef("treble").addTimeSignature("4/4");
+  stave2.addClef("bass").addTimeSignature("4/4");
+
+
+  var brace = new Vex.Flow.StaveConnector(stave, stave2).setType(3);
+  var lineLeft = new Vex.Flow.StaveConnector(stave, stave2).setType(1);
+  var lineRight = new Vex.Flow.StaveConnector(stave, stave2).setType(6);
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  
 
 
   notes = [
@@ -67,22 +79,34 @@ function draw_notes() {
 
     get_new_note('b', 4, "wr"),
 
+    new VF.BarNote(),
+
+    get_new_note('b', 4, "wr"),
 
 
   ];
-  /*
-    new Voice({alignCenter: true}).addTickables([
-      new StaveNote({ keys: ['c4'], duration: '4' }),
-      new StaveNote({ keys: ['c4'], duration: '4' }),
-    ])*/
+
+  notes_2 = [
+    get_new_note('b', 4, "wr"),
+
+    new VF.BarNote(),
+
+    get_new_note('b', 4, "wr"),
+
+    new VF.BarNote(),
+
+    get_new_note('b', 4, "wr"),
+
+    new VF.BarNote(),
+
+    get_new_note('b', 4, "wr"),
+
+    new VF.BarNote(),
+
+    get_new_note('b', 4, "wr"),
 
 
-
-
-
-
-
-
+  ];
 
   //voice.addTickables(notes);
 
@@ -90,12 +114,19 @@ function draw_notes() {
 
   window.renderer = renderer;
   stave.setContext(context).draw();
+  stave2.setContext(context).draw();
+  brace.setContext(context).draw();
+  lineLeft.setContext(context).draw();
+  lineRight.setContext(context).draw();
   var voice = VF.Beam.generateBeams(notes);
+  var voice_2 = VF.Beam.generateBeams(notes_2); //note เส้นหาย
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
+  Vex.Flow.Formatter.FormatAndDraw(context, stave2, notes_2);//note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
+  voice_2.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
   arrline();
-
+  room_create();
 
 
 }
@@ -103,22 +134,33 @@ function draw_notes() {
 
 
 
-
-
 function redraw_notes() {
   //notes;
 
-
+ 
   renderer.ctx.clear();
+
+  var brace = new Vex.Flow.StaveConnector(stave, stave2).setType(3);
+  var lineLeft = new Vex.Flow.StaveConnector(stave, stave2).setType(1);
+  var lineRight = new Vex.Flow.StaveConnector(stave, stave2).setType(6);
 
 
   stave.setContext(context).draw();
+  stave2.setContext(context).draw();
+  brace.setContext(context).draw();
+  lineLeft.setContext(context).draw();
+  lineRight.setContext(context).draw();
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  
   var voice = VF.Beam.generateBeams(notes);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
+  var voice_2 = VF.Beam.generateBeams(notes_2); //note เส้นหาย
+  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes); 
+  Vex.Flow.Formatter.FormatAndDraw(context, stave2, notes_2); //note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
+  voice_2.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
   arrline();
+  room_create();
 
 
 
@@ -168,6 +210,7 @@ function id_type() {
 
   arr_type = [];
   var i;
+  
   for (i = 0; i < notes.length; i++) {
     type = notes[i].duration;
     // console.log(type,i);
@@ -191,7 +234,14 @@ function arrline() {  // new arr-index and id
 
   });
 
-  return arr_lin;
+  var arr_path = $('path').each(function (e) {
+    //console.log(e);
+    $(this).attr("arr-path", e)
+
+  });
+
+
+  return arr_lin,arr_path;
 
 }
 
@@ -200,18 +250,19 @@ function mouseDown(_e) {
 
   $(".vf-stavenote")
     .mousedown(function (_e) {
-
+      
 
       arr_index = $(this).attr("arr-index");
-      console.log(arr_index);
+      //console.log(arr_index);
       // notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
      // console.log("notes", notes, "id", arr_index);
       e_Click = event.clientY;//413
 
       var note_key = notes[arr_index].keys;
-      //console.log(note_key);
+     
       var duration = notes[arr_index].duration;
       duration_note = duration;
+      //console.log(arr_index);
       note_sea = document.innerText = (note_key[0]);
       key = note_sea.substr(0, 1);
       octave = note_sea.substr(-1);
@@ -351,6 +402,14 @@ function substr_notes() {
   }
 
 
+}
+
+function room_create() {
+ 
+  $('path')
+    .mousedown(function (_e) {
+    
+    });
 }
 
 
