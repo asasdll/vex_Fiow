@@ -23,11 +23,11 @@ var arr_type = [];
 function get_new_note(key, octave, duration) {
 
   let obj = new VF.StaveNote({
-   // clef: "treble",
+    clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
-    auto_stem: true,
-    clef: "treble"
+    //auto_stem: true,
+    //clef: "treble"
   })
   //obj.setAttribute('id', 'test555');
 
@@ -35,6 +35,24 @@ function get_new_note(key, octave, duration) {
 
   return obj;
 }
+
+
+function get_new_note_down(key, octave, duration) {
+
+  let obj = new VF.StaveNote({
+    clef: 'treble',
+    keys: [key + "/" + octave],
+    duration: duration,
+    //auto_stem: true,
+    //clef: "treble"
+  })
+  //obj.setAttribute('id', 'test555');
+
+
+
+  return obj;
+}
+
 
 function draw_notes() {
   VF = Vex.Flow;
@@ -49,16 +67,16 @@ function draw_notes() {
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
   stave = new VF.Stave(40, 100, 400);
-  stave2 = new VF.Stave(40, 200, 400);
+  stave_2 = new VF.Stave(40, 200, 400);
  
 
   stave.addClef("treble").addTimeSignature("4/4");
-  stave2.addClef("bass").addTimeSignature("4/4");
+  stave_2.addClef("bass").addTimeSignature("4/4");
 
 
-  var brace = new Vex.Flow.StaveConnector(stave, stave2).setType(3);
-  var lineLeft = new Vex.Flow.StaveConnector(stave, stave2).setType(1);
-  var lineRight = new Vex.Flow.StaveConnector(stave, stave2).setType(6);
+  var brace = new Vex.Flow.StaveConnector(stave, stave_2).setType(3);
+  var lineLeft = new Vex.Flow.StaveConnector(stave, stave_2).setType(1);
+  var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
   
@@ -87,23 +105,23 @@ function draw_notes() {
   ];
 
   notes_2 = [
-    get_new_note('b', 4, "wr"),
+    get_new_note_down('b', 4, "wr"),
 
     new VF.BarNote(),
 
-    get_new_note('b', 4, "wr"),
+    get_new_note_down('b', 4, "wr"),
 
     new VF.BarNote(),
 
-    get_new_note('b', 4, "wr"),
+    get_new_note_down('b', 4, "wr"),
 
     new VF.BarNote(),
 
-    get_new_note('b', 4, "wr"),
+    get_new_note_down('b', 4, "wr"),
 
     new VF.BarNote(),
 
-    get_new_note('b', 4, "wr"),
+    get_new_note_down('b', 4, "wr"),
 
 
   ];
@@ -114,14 +132,14 @@ function draw_notes() {
 
   window.renderer = renderer;
   stave.setContext(context).draw();
-  stave2.setContext(context).draw();
+  stave_2.setContext(context).draw();
   brace.setContext(context).draw();
   lineLeft.setContext(context).draw();
   lineRight.setContext(context).draw();
   var voice = VF.Beam.generateBeams(notes);
   var voice_2 = VF.Beam.generateBeams(notes_2); //note เส้นหาย
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave2, notes_2);//note เส้นหาย
+  Vex.Flow.Formatter.FormatAndDraw(context, stave_2, notes_2);//note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
@@ -140,13 +158,13 @@ function redraw_notes() {
  
   renderer.ctx.clear();
 
-  var brace = new Vex.Flow.StaveConnector(stave, stave2).setType(3);
-  var lineLeft = new Vex.Flow.StaveConnector(stave, stave2).setType(1);
-  var lineRight = new Vex.Flow.StaveConnector(stave, stave2).setType(6);
+  var brace = new Vex.Flow.StaveConnector(stave, stave_2).setType(3);
+  var lineLeft = new Vex.Flow.StaveConnector(stave, stave_2).setType(1);
+  var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
 
 
   stave.setContext(context).draw();
-  stave2.setContext(context).draw();
+  stave_2.setContext(context).draw();
   brace.setContext(context).draw();
   lineLeft.setContext(context).draw();
   lineRight.setContext(context).draw();
@@ -155,7 +173,7 @@ function redraw_notes() {
   var voice = VF.Beam.generateBeams(notes);
   var voice_2 = VF.Beam.generateBeams(notes_2); //note เส้นหาย
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes); 
-  Vex.Flow.Formatter.FormatAndDraw(context, stave2, notes_2); //note เส้นหาย
+  Vex.Flow.Formatter.FormatAndDraw(context, stave_2, notes_2); //note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
   arrindex();
@@ -183,8 +201,9 @@ function add_note(key, octave, duration) {
 
 }
 
+
 function arrindex() {  // new arr-index and id
-  id_type();
+  id_type_top();
 
 
   var i = 0;
@@ -206,7 +225,7 @@ function arrindex() {  // new arr-index and id
 
 }
 
-function id_type() {
+function id_type_top() {
 
   arr_type = [];
   var i;
@@ -224,6 +243,26 @@ function id_type() {
     }
   }
 
+
+  function id_type_down() {
+
+    arr_type = [];
+    var i;
+    
+    for (i = 0; i < notes.length; i++) {
+      type = notes[i].duration;
+      // console.log(type,i);
+      if (type != "b") {
+  
+        var typeidex = i;
+  
+        arr_type.push(typeidex);
+        //console.log(typeidex);
+  
+      }
+    }
+  
+  }
 }
 
 function arrline() {  // new arr-index and id
