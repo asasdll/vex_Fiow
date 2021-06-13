@@ -68,7 +68,7 @@ function draw_notes() {
 
   stave = new VF.Stave(40, 100, 400);
   stave_2 = new VF.Stave(40, 200, 400);
- 
+
 
   stave.addClef("treble").addTimeSignature("4/4");
   stave_2.addClef("bass").addTimeSignature("4/4");
@@ -79,50 +79,16 @@ function draw_notes() {
   var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
-  
+
 
 
   notes = [
     get_new_note('b', 4, "wr"),
 
-    new VF.BarNote(),
-
-    get_new_note('b', 4, "wr"),
-
-    new VF.BarNote(),
-
-    get_new_note('b', 4, "wr"),
-
-    new VF.BarNote(),
-
-    get_new_note('b', 4, "wr"),
-
-    new VF.BarNote(),
-
-    get_new_note('b', 4, "wr"),
-
-
   ];
 
   notes_2 = [
     get_new_note_down('b', 4, "wr"),
-
-    new VF.BarNote(),
-
-    get_new_note_down('b', 4, "wr"),
-
-    new VF.BarNote(),
-
-    get_new_note_down('b', 4, "wr"),
-
-    new VF.BarNote(),
-
-    get_new_note_down('b', 4, "wr"),
-
-    new VF.BarNote(),
-
-    get_new_note_down('b', 4, "wr"),
-
 
   ];
 
@@ -155,7 +121,7 @@ function draw_notes() {
 function redraw_notes() {
   //notes;
 
- 
+
   renderer.ctx.clear();
 
   var brace = new Vex.Flow.StaveConnector(stave, stave_2).setType(3);
@@ -169,10 +135,10 @@ function redraw_notes() {
   lineLeft.setContext(context).draw();
   lineRight.setContext(context).draw();
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
-  
+
   var voice = VF.Beam.generateBeams(notes);
   var voice_2 = VF.Beam.generateBeams(notes_2); //note เส้นหาย
-  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes); 
+  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
   Vex.Flow.Formatter.FormatAndDraw(context, stave_2, notes_2); //note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
@@ -209,12 +175,12 @@ function arrindex() {  // new arr-index and id
   var i = 0;
 
 
- // console.log(text);
-   $(".vf-stavenote").each(function () {
-    
+  // console.log(text);
+  $(".vf-stavenote").each(function () {
+
 
     $(this).attr("arr-index", arr_type[i]),
-    $(this).attr("id", "syceColor" + arr_type[i]);
+      $(this).attr("id", "syceColor" + arr_type[i]);
     i++;
 
 
@@ -229,7 +195,7 @@ function id_type_top() {
 
   arr_type = [];
   var i;
-  
+
   for (i = 0; i < notes.length; i++) {
     type = notes[i].duration;
     // console.log(type,i);
@@ -248,20 +214,20 @@ function id_type_top() {
 
     arr_type = [];
     var i;
-    
+
     for (i = 0; i < notes.length; i++) {
       type = notes[i].duration;
       // console.log(type,i);
       if (type != "b") {
-  
+
         var typeidex = i;
-  
+
         arr_type.push(typeidex);
         //console.log(typeidex);
-  
+
       }
     }
-  
+
   }
 }
 
@@ -280,7 +246,7 @@ function arrline() {  // new arr-index and id
   });
 
 
-  return arr_lin,arr_path;
+  return arr_lin, arr_path;
 
 }
 
@@ -289,16 +255,16 @@ function mouseDown(_e) {
 
   $(".vf-stavenote")
     .mousedown(function (_e) {
-      
+
 
       arr_index = $(this).attr("arr-index");
       //console.log(arr_index);
       // notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-     // console.log("notes", notes, "id", arr_index);
+      // console.log("notes", notes, "id", arr_index);
       e_Click = event.clientY;//413
 
       var note_key = notes[arr_index].keys;
-     
+
       var duration = notes[arr_index].duration;
       duration_note = duration;
       //console.log(arr_index);
@@ -318,6 +284,8 @@ function mouseDown(_e) {
       group_notes();
 
       search_array = arr_notes.indexOf(note_sea);
+
+      console.log(arr_index);
 
       //   console.log(search_array,note_key);
       let previous = Number(arr_index) - 1;
@@ -444,11 +412,21 @@ function substr_notes() {
 }
 
 function room_create() {
- 
+
   $('path')
     .mousedown(function (_e) {
-    
+
     });
+}
+
+function add_measure_after() {
+  let shift = notes.length + 1;
+  let shift1 = notes_2.length + 1;
+  notes[shift - 1] = new VF.BarNote();
+  notes[shift] = get_new_note('b', 4, "wr");
+  notes_2[shift1 - 1] = new VF.BarNote();
+  notes_2[shift1] = get_new_note('b', 4, "wr");
+  redraw_notes();
 }
 
 
