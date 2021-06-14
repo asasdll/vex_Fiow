@@ -18,6 +18,7 @@ var duration_note = null;
 var notes = [];
 var checkIndex;
 var arr_type = [];
+//var arr_type_down = [];
 //var array_sum = [];
 
 function get_new_note(key, octave, duration) {
@@ -87,15 +88,16 @@ function draw_notes() {
 
   ];
 
-  notes_2 = [
+ notes_2 = [
     get_new_note_down('b', 4, "wr"),
 
   ];
 
+
+//console.log(arr_type);
   //voice.addTickables(notes);
 
 
-  console.log(notes);
 
   window.renderer = renderer;
   stave.setContext(context).draw();
@@ -121,7 +123,8 @@ function draw_notes() {
 
 function redraw_notes() {
   //notes;
-
+  console.log("top",arr_type);
+  //console.log("down",arr_type_down);
 
   renderer.ctx.clear();
 
@@ -171,6 +174,7 @@ function add_note(key, octave, duration) {
 
 function arrindex() {  // new arr-index and id
   id_type_top();
+  id_type_down();
 
 
   var i = 0;
@@ -188,6 +192,8 @@ function arrindex() {  // new arr-index and id
 
   });
 
+
+
   //return arr_in;
 
 }
@@ -202,35 +208,37 @@ function id_type_top() {
     // console.log(type,i);
     if (type != "b") {
 
+     // console.log(i);
       var typeidex = i;
-
+    //  console.log(typeidex);
       arr_type.push(typeidex);
-      //console.log(typeidex);
-
+      //console.log(arr_type);
     }
   }
+ 
+}
 
 
   function id_type_down() {
+    
+  
+    let i;
 
-    arr_type = [];
-    var i;
-
-    for (i = 0; i < notes.length; i++) {
-      type = notes[i].duration;
+    for (i = 0; i < notes_2.length; i++) {
+      type = notes_2[i].duration;
       // console.log(type,i);
       if (type != "b") {
 
-        var typeidex = i;
+        let typeidex = i;
 
         arr_type.push(typeidex);
-        //console.log(typeidex);
+       // console.log("down",arr_type_down);
 
       }
     }
 
   }
-}
+
 
 function arrline() {  // new arr-index and id
 
@@ -286,7 +294,7 @@ function mouseDown(_e) {
 
       search_array = arr_notes.indexOf(note_sea);
 
-      console.log(arr_index);
+      //console.log(arr_index);
 
       //   console.log(search_array,note_key);
       let previous = Number(arr_index) - 1;
