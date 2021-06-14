@@ -40,11 +40,11 @@ function get_new_note(key, octave, duration) {
 function get_new_note_down(key, octave, duration) {
 
   let obj = new VF.StaveNote({
-    clef: 'treble',
+    //clef: 'treble',
     keys: [key + "/" + octave],
     duration: duration,
-    //auto_stem: true,
-    //clef: "treble"
+    auto_stem: true,
+    clef: "treble"
   })
   //obj.setAttribute('id', 'test555');
 
@@ -95,6 +95,7 @@ function draw_notes() {
   //voice.addTickables(notes);
 
 
+  console.log(notes);
 
   window.renderer = renderer;
   stave.setContext(context).draw();
