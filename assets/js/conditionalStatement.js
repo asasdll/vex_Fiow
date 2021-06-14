@@ -32,7 +32,7 @@ function fillTheRest(button, version) {
         return;
     }
 
-    console.log(notes[Number(arr_index)]);
+    //console.log(notes[Number(arr_index)]);
 
     if (notes[next] != null) {
         let lastElement = notes.length - 1;
