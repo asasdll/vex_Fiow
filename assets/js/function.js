@@ -431,12 +431,20 @@ function add_measure_after() {
 
 function add_measure_before() {
   let end = notes.length + 1;
+  let end1 = notes_2.length + 1;
 
   for (i = end; i > 1; i--) {
     notes[i] = notes[i - 2];
   }
   notes[0] = get_new_note('b', 4, "wr");
   notes[1] = new VF.BarNote();
+
+  for (u = end1; u > 1; u--) {
+    notes_2[u] = notes_2[u - 2];
+  }
+  notes_2[0] = get_new_note('b', 4, "wr");
+  notes_2[1] = new VF.BarNote();
+
   redraw_notes();
 }
 
