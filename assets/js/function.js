@@ -18,8 +18,7 @@ var duration_note = null;
 var notes = [];
 var checkIndex;
 var arr_type = [];
-//var arr_type_down = [];
-//var array_sum = [];
+var arr_sum = [];
 
 function get_new_note(key, octave, duration) {
 
@@ -93,10 +92,11 @@ function draw_notes() {
 
   ];
 
+  sum_array();
 
 //console.log(arr_type);
   //voice.addTickables(notes);
-
+  var children = notes.concat(notes_2); 
 
 
   window.renderer = renderer;
@@ -122,9 +122,7 @@ function draw_notes() {
 
 
 function redraw_notes() {
-  //notes;
-  console.log("top",arr_type);
-  //console.log("down",arr_type_down);
+  sum_array();
 
   renderer.ctx.clear();
 
@@ -173,9 +171,8 @@ function add_note(key, octave, duration) {
 
 
 function arrindex() {  // new arr-index and id
-  id_type_top();
-  id_type_down();
-
+  id_type();
+  
 
   var i = 0;
 
@@ -198,13 +195,14 @@ function arrindex() {  // new arr-index and id
 
 }
 
-function id_type_top() {
+function id_type() {
 
+  
   arr_type = [];
   var i;
 
-  for (i = 0; i < notes.length; i++) {
-    type = notes[i].duration;
+  for (i = 0; i < arr_sum.length; i++) {
+    type = arr_sum[i].duration;
     // console.log(type,i);
     if (type != "b") {
 
@@ -219,25 +217,6 @@ function id_type_top() {
 }
 
 
-  function id_type_down() {
-    
-  
-    let i;
-
-    for (i = 0; i < notes_2.length; i++) {
-      type = notes_2[i].duration;
-      // console.log(type,i);
-      if (type != "b") {
-
-        let typeidex = i;
-
-        arr_type.push(typeidex);
-       // console.log("down",arr_type_down);
-
-      }
-    }
-
-  }
 
 
 function arrline() {  // new arr-index and id
@@ -267,22 +246,21 @@ function mouseDown(_e) {
 
 
       arr_index = $(this).attr("arr-index");
-      //console.log(arr_index);
-      // notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-      // console.log("notes", notes, "id", arr_index);
+   //console.log(arr_index);
       e_Click = event.clientY;//413
 
       var note_key = notes[arr_index].keys;
-
       var duration = notes[arr_index].duration;
       duration_note = duration;
-      //console.log(arr_index);
-      note_sea = document.innerText = (note_key[0]);
+
+      note_sea = document.innerText = (note_key[0]); 
       key = note_sea.substr(0, 1);
       octave = note_sea.substr(-1);
+
       redraw_notes();
       if (duration == "w") {
         notes[arr_index] = get_new_note(key, octave, "wr");
+
         setStyle();
       } else {
         notes[arr_index] = get_new_note(key, octave, duration);
@@ -472,6 +450,14 @@ function group_notes() {
     "a/7", "b/7", "c/8", "d/8", "e/8", "f/8", "g/8"
   ];
 
+}
+
+function sum_array() {
+
+   arr_sum = notes.concat(new VF.BarNote(),notes_2); 
+ // console.log(children);
+ /// new VF.BarNote();
+  
 }
 
 
