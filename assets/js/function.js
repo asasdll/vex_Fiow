@@ -429,6 +429,17 @@ function add_measure_after() {
   redraw_notes();
 }
 
+function add_measure_before() {
+  let end = notes.length + 1;
+
+  for (i = end; i > 1; i--) {
+    notes[i] = notes[i - 2];
+  }
+  notes[0] = get_new_note('b', 4, "wr");
+  notes[1] = new VF.BarNote();
+  redraw_notes();
+}
+
 
 
 function group_notes() {
