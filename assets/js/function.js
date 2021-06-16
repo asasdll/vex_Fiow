@@ -19,6 +19,8 @@ var note_array;
 var checkIndex;
 var arr_type = [];
 var arr_sum = [];
+var arr_type_to = [];
+var arr_to = [];
 
 function get_new_note(key, octave, duration) {
 
@@ -122,7 +124,7 @@ function draw_notes() {
 
 
 function redraw_notes() {
-
+  
   sum_array();
 
   renderer.ctx.clear();
@@ -148,6 +150,7 @@ function redraw_notes() {
   arrindex();
   arrline();
   room_create();
+  index_array();
 
 
 
@@ -155,20 +158,6 @@ function redraw_notes() {
 
 
 
-/*function add_note(key, octave, duration) {  //  เพิ่ม note
-  i_number();
-  //console.log(key, octave, duration);
-  if (i < notes.length) {
-    var idx = i;
-    var key = key;
-    var octave = octave;
-    var duration = duration;
-    notes[idx] = get_new_note(key, octave, duration);
-    redraw_notes();
-
-  }
-
-}*/
 
 
 function arrindex() {  // new arr-index and id
@@ -198,22 +187,28 @@ function arrindex() {  // new arr-index and id
 
 function id_type() {
 
-
+  arr_type_to = [];
   arr_type = [];
   var i;
-
+  var y;
   for (i = 0; i < arr_sum.length; i++) {
     type = arr_sum[i].duration;
     // console.log(type,i);
     if (type != "b") {
 
-      // console.log(i);
-      var typeidex = i;
-      //  console.log(typeidex);
-      arr_type.push(typeidex);
-     // console.log(arr_type);
+      arr_type.push(i);
+
     }
   }
+
+  for (y = 0; y < arr_sum.length; y++) {
+
+      arr_type_to.push(y);
+
+    
+  }
+
+
 
 }
 
@@ -245,14 +240,13 @@ function mouseDown(_e) {
   $(".vf-stavenote")
     .mousedown(function (_e) {
       arr_index = $(this).attr("arr-index");
-
-
+     
 
       //console.log(arr_index);
       e_Click = event.clientY;//413
       index_array();
-
-      //console.log(note_sea);
+    
+     // console.log("888",note_sea);
       redraw_notes();
       group_notes();
 
@@ -358,7 +352,7 @@ function notes_down() {
 
 $('html') // unbind mousemove all html
   .mouseup(function (e) {
-    unBind();
+   unBind();
     notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
 
     mouseDown(e); //function mouseDown(e) ใหม่
@@ -447,34 +441,54 @@ function sum_array() {
 }
 
 function index_array() {
-  let arr_in = arr_sum.length;
-  var in_array = arr_in / 2;
+  var in_array = notes.length;
+  var arr_to = [];
+  in_to = in_array + 1 ;
 
-
-  if (arr_index <= in_array) {
-
-    var note_key = notes[arr_index].keys;
-    var duration = notes[arr_index].duration;
-    duration_note = duration;
-    note_sea = document.innerText = (note_key[0]);
-    key = note_sea.substr(0, 1);
-    octave = note_sea.substr(-1);
-
-    if (duration == "w") {
-      notes[arr_index] = get_new_note(key, octave, "wr");
-
-      setStyle();
-    } else {
-      notes[arr_index] = get_new_note(key, octave, duration);
-      setStyle();
-    }
-
-  } else {
-  
-    
-
-
+  for (i = in_to; i < arr_type_to.length; i++) {
+    arr_to.push(arr_type_to[i]);
+    //console.log(arr_to);
   }
+
+  note_idx = parseInt(arr_index);
+ // console.log(arr_index);
+  //notes[arr_index] = get_new_note(key, octave, "wr");
+  to = [1,0,6,9,3,5]
+  var index_in = arr_to.indexOf(note_idx);
+
+  //console.log(index_in);
+if (arr_index <= in_array ) {
+
+  var note_key = notes[arr_index].keys;
+      var duration = notes[arr_index].duration;
+      duration_note = duration;
+      note_sea = document.innerText = (note_key[0]);
+      key = note_sea.substr(0, 1);
+      octave = note_sea.substr(-1);
+  
+  
+      if (duration == "w") {
+        
+        notes[arr_index] = get_new_note(key, octave, "wr");
+   
+      setStyle();
+      } else {
+        notes[arr_index] = get_new_note(key, octave, duration);
+  
+        setStyle();
+      }
+
+  
+}else{
+
+  notes_2[index_in] = get_new_note_down("a", "4", "q");
+
+}  
+
+
+
+
+
 }
 
 
