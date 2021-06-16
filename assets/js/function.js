@@ -21,6 +21,8 @@ var arr_type = [];
 var arr_sum = [];
 var arr_type_to = [];
 var arr_to = [];
+var index_in = null;
+
 
 function get_new_note(key, octave, duration) {
 
@@ -124,7 +126,7 @@ function draw_notes() {
 
 
 function redraw_notes() {
-  
+
   sum_array();
 
   renderer.ctx.clear();
@@ -203,9 +205,9 @@ function id_type() {
 
   for (y = 0; y < arr_sum.length; y++) {
 
-      arr_type_to.push(y);
+    arr_type_to.push(y);
 
-    
+
   }
 
 
@@ -240,13 +242,13 @@ function mouseDown(_e) {
   $(".vf-stavenote")
     .mousedown(function (_e) {
       arr_index = $(this).attr("arr-index");
-     
+
 
       //console.log(arr_index);
       e_Click = event.clientY;//413
       index_array();
-    
-     // console.log("888",note_sea);
+
+      // console.log("888",note_sea);
       redraw_notes();
       group_notes();
 
@@ -314,8 +316,16 @@ function mouseDown(_e) {
   checkIndex = arr_index;
 }
 function setStyle() {
+
   notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 }
+
+function setStyle_to() {
+
+  notes_2[index_in].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+}
+
+
 
 function notes_up() {
 
@@ -352,9 +362,9 @@ function notes_down() {
 
 $('html') // unbind mousemove all html
   .mouseup(function (e) {
-   unBind();
+    unBind();
     notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-
+    notes_2[index_in].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
     mouseDown(e); //function mouseDown(e) ใหม่
 
   });
@@ -443,47 +453,64 @@ function sum_array() {
 function index_array() {
   var in_array = notes.length;
   var arr_to = [];
-  in_to = in_array + 1 ;
-
+  in_to = in_array + 1;
+ 
   for (i = in_to; i < arr_type_to.length; i++) {
     arr_to.push(arr_type_to[i]);
     //console.log(arr_to);
   }
 
   note_idx = parseInt(arr_index);
- // console.log(arr_index);
+  // console.log(arr_index);
   //notes[arr_index] = get_new_note(key, octave, "wr");
-  to = [1,0,6,9,3,5]
-  var index_in = arr_to.indexOf(note_idx);
+
+   index_in = arr_to.indexOf(note_idx);
 
   //console.log(index_in);
-if (arr_index <= in_array ) {
+  if (arr_index <= in_array) {
 
-  var note_key = notes[arr_index].keys;
-      var duration = notes[arr_index].duration;
-      duration_note = duration;
-      note_sea = document.innerText = (note_key[0]);
-      key = note_sea.substr(0, 1);
-      octave = note_sea.substr(-1);
-  
-  
-      if (duration == "w") {
-        
-        notes[arr_index] = get_new_note(key, octave, "wr");
-   
+    var note_key = notes[arr_index].keys;
+    var duration = notes[arr_index].duration;
+    duration_note = duration;
+    note_sea = document.innerText = (note_key[0]);
+    key = note_sea.substr(0, 1);
+    octave = note_sea.substr(-1);
+
+
+    if (duration == "w") {
+
+      notes[arr_index] = get_new_note(key, octave, "wr");
+
       setStyle();
-      } else {
-        notes[arr_index] = get_new_note(key, octave, duration);
-  
-        setStyle();
-      }
+    } else {
+      notes[arr_index] = get_new_note(key, octave, duration);
 
-  
-}else{
+      setStyle();
+    }
 
-  notes_2[index_in] = get_new_note_down("a", "4", "q");
 
-}  
+  } else {
+ //console.log(arr_type);
+    var note_key = notes_2[index_in].keys;
+    var duration = notes_2[index_in].duration;
+    duration_note = duration;
+    note_sea = document.innerText = (note_key[0]);
+    key = note_sea.substr(0, 1);
+    octave = note_sea.substr(-1);
+
+
+    if (duration == "w") {
+
+      notes_2[index_in] = get_new_note(key, octave, "wr");
+      setStyle_to();
+    } else {
+      notes_2[index_in] = get_new_note(key, octave, duration);
+      setStyle_to();
+    }
+
+
+
+  }
 
 
 
