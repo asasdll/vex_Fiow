@@ -90,7 +90,8 @@ function fillTheRest(button, version) {
     }
     console.log(arr_sum);
 
-
+    arr_index = "";
+    index_in = "";
     redraw_notes();
 
 }

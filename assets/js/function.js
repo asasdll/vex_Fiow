@@ -244,7 +244,7 @@ function mouseDown(_e) {
       arr_index = $(this).attr("arr-index");
 
 
-      //console.log(arr_index);
+      
       e_Click = event.clientY;//413
       index_array();
 
@@ -261,11 +261,10 @@ function mouseDown(_e) {
 
       if (Number(arr_index) != 0) {
         if (checkIndex == previous) {
-          let button = arr_sum[previous].duration;
+          let button = notes[previous].duration;
           fillTheRest(button, 'b');
         }
       }
-      console.log(arr_index + 'index');
 
       $(document).bind('mousemove', function (e) {
 
@@ -303,8 +302,8 @@ function mouseDown(_e) {
           }
           //console.log(search_array);
           substr_notes();
-
           notes_up();
+         
 
 
 
@@ -328,6 +327,19 @@ function setStyle_to() {
 
 
 
+function notes_up_2() {
+
+  var idx = index_in;
+  var key = note_te_k;
+  var octave = note_num_k;
+  var duration = duration_note;
+  //console.log(key,octave,duration);
+  notes_2[idx] = get_new_note_down(key, octave, duration);
+  setStyle();
+  redraw_notes();
+
+}
+
 function notes_up() {
 
   var idx = arr_index;
@@ -338,11 +350,6 @@ function notes_up() {
   notes[idx] = get_new_note(key, octave, duration);
   setStyle();
   redraw_notes();
-
-
-
-  //unBind();
-
 
 }
 
@@ -355,6 +362,21 @@ function notes_down() {
   var duration = duration_note;
   //console.log(key,octave,duration);
   notes[idx] = get_new_note(key, octave, duration);
+  setStyle();
+  redraw_notes();
+
+
+}
+
+function notes_down_2() {
+
+
+  var idx = index_in;
+  var key = note_te_k;
+  var octave = note_num_k;
+  var duration = duration_note;
+  //console.log(key,octave,duration);
+  notes_2[idx] = get_new_note_down(key, octave, duration);
   setStyle();
   redraw_notes();
 
@@ -448,13 +470,14 @@ function sum_array() {
   arr_sum = notes.concat(new VF.BarNote(), notes_2);
   // console.log(children);
   /// new VF.BarNote();
+
 }
 
 function index_array() {
   var in_array = notes.length;
   var arr_to = [];
   in_to = in_array + 1;
-
+ 
   for (i = in_to; i < arr_type_to.length; i++) {
     arr_to.push(arr_type_to[i]);
     //console.log(arr_to);
@@ -464,9 +487,8 @@ function index_array() {
   // console.log(arr_index);
   //notes[arr_index] = get_new_note(key, octave, "wr");
 
-  index_in = arr_to.indexOf(note_idx);
+   index_in = arr_to.indexOf(note_idx);
 
-  //console.log(index_in);
   if (arr_index <= in_array) {
 
     var note_key = notes[arr_index].keys;
@@ -478,19 +500,22 @@ function index_array() {
 
 
     if (duration == "w") {
-
+     
       notes[arr_index] = get_new_note(key, octave, "wr");
-
       setStyle();
+      
     } else {
+    
+     
       notes[arr_index] = get_new_note(key, octave, duration);
-
       setStyle();
+
+     
     }
 
 
   } else {
-    //console.log(arr_type);
+ //console.log(arr_type);
     var note_key = notes_2[index_in].keys;
     var duration = notes_2[index_in].duration;
     duration_note = duration;
@@ -500,10 +525,11 @@ function index_array() {
 
 
     if (duration == "w") {
-
+   // console.log(index_in);
       notes_2[index_in] = get_new_note(key, octave, "wr");
       setStyle_to();
     } else {
+      //console.log(index_in);
       notes_2[index_in] = get_new_note(key, octave, duration);
       setStyle_to();
     }
