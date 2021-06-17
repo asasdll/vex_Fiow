@@ -322,7 +322,7 @@ function setStyle() {
 
 function setStyle_to() {
 
-  notes_2[index_in].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+  notes_2[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 }
 
 
@@ -339,14 +339,9 @@ function notes_up() {
   redraw_notes();
 
 
-
-  //unBind();
-
-
 }
 
 function notes_down() {
-
 
   var idx = arr_index;
   var key = note_te_k;
@@ -454,7 +449,7 @@ function index_array() {
   var in_array = notes.length;
   var arr_to = [];
   in_to = in_array + 1;
- 
+
   for (i = in_to; i < arr_type_to.length; i++) {
     arr_to.push(arr_type_to[i]);
     //console.log(arr_to);
@@ -464,7 +459,7 @@ function index_array() {
   // console.log(arr_index);
   //notes[arr_index] = get_new_note(key, octave, "wr");
 
-   index_in = arr_to.indexOf(note_idx);
+  index_in = arr_to.indexOf(note_idx);
 
   //console.log(index_in);
   if (arr_index <= in_array) {
@@ -479,6 +474,7 @@ function index_array() {
 
     if (duration == "w") {
 
+
       notes[arr_index] = get_new_note(key, octave, "wr");
 
       setStyle();
@@ -490,9 +486,11 @@ function index_array() {
 
 
   } else {
- //console.log(arr_type);
-    var note_key = notes_2[index_in].keys;
-    var duration = notes_2[index_in].duration;
+    //console.log(arr_type);
+
+     arr_index = index_in;
+    var note_key = notes_2[arr_index].keys;
+    var duration = notes_2[arr_index].duration;
     duration_note = duration;
     note_sea = document.innerText = (note_key[0]);
     key = note_sea.substr(0, 1);
@@ -501,10 +499,10 @@ function index_array() {
 
     if (duration == "w") {
 
-      notes_2[index_in] = get_new_note(key, octave, "wr");
+      notes_2[arr_index] = get_new_note(key, octave, "wr");
       setStyle_to();
     } else {
-      notes_2[index_in] = get_new_note(key, octave, duration);
+      notes_2[arr_index] = get_new_note(key, octave, duration);
       setStyle_to();
     }
 
