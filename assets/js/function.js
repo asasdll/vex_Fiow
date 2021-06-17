@@ -261,10 +261,11 @@ function mouseDown(_e) {
 
       if (Number(arr_index) != 0) {
         if (checkIndex == previous) {
-          let button = notes[previous].duration;
+          let button = arr_sum[previous].duration;
           fillTheRest(button, 'b');
         }
       }
+      console.log(arr_index + 'index');
 
       $(document).bind('mousemove', function (e) {
 
@@ -447,14 +448,13 @@ function sum_array() {
   arr_sum = notes.concat(new VF.BarNote(), notes_2);
   // console.log(children);
   /// new VF.BarNote();
-
 }
 
 function index_array() {
   var in_array = notes.length;
   var arr_to = [];
   in_to = in_array + 1;
- 
+
   for (i = in_to; i < arr_type_to.length; i++) {
     arr_to.push(arr_type_to[i]);
     //console.log(arr_to);
@@ -464,7 +464,7 @@ function index_array() {
   // console.log(arr_index);
   //notes[arr_index] = get_new_note(key, octave, "wr");
 
-   index_in = arr_to.indexOf(note_idx);
+  index_in = arr_to.indexOf(note_idx);
 
   //console.log(index_in);
   if (arr_index <= in_array) {
@@ -490,7 +490,7 @@ function index_array() {
 
 
   } else {
- //console.log(arr_type);
+    //console.log(arr_type);
     var note_key = notes_2[index_in].keys;
     var duration = notes_2[index_in].duration;
     duration_note = duration;
