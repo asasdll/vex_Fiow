@@ -22,6 +22,8 @@ var arr_sum = [];
 var arr_type_to = [];
 var arr_to = [];
 var index_in = null;
+var index_note_1 = null;
+var idex_click = null;
 
 
 function get_new_note(key, octave, duration) {
@@ -242,8 +244,8 @@ function mouseDown(_e) {
   $(".vf-stavenote")
     .mousedown(function (_e) {
       arr_index = $(this).attr("arr-index");
-
-
+      idex_click = arr_index;
+     
       
       e_Click = event.clientY;//413
       index_array();
@@ -273,7 +275,7 @@ function mouseDown(_e) {
         var pixels = $("p").html(ev_move);
         sum_pixels = e_Click + 10;//443
         del_pix = e_Click - 10;
-
+      //  console.log(del_pix,ev_move);
 
 
         if (ev_move >= sum_pixels) {//443 note_down
@@ -285,9 +287,10 @@ function mouseDown(_e) {
             search_array = search_array - array_a;
 
           }
-          //console.log(search_array);
-          substr_notes();
-          notes_down();
+ 
+            substr_notes();
+            notes_down();
+        
 
 
         } else if (ev_move <= del_pix) { //note_up
@@ -300,10 +303,11 @@ function mouseDown(_e) {
 
 
           }
-          //console.log(search_array);
-          substr_notes();
-          notes_up();
-         
+       
+            substr_notes();
+            notes_up();
+      
+ 
 
 
 
@@ -317,77 +321,83 @@ function mouseDown(_e) {
 }
 function setStyle() {
 
-  notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+//  notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 }
 
 function setStyle_to() {
 
-  notes_2[index_in].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+  //notes_2[index_in].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 }
 
 
 
-function notes_up_2() {
+
+function notes_up() {
+
+if (idex_click <= index_note_1) {
+ 
+  var idx = arr_index;
+  var key = note_te_k;
+  var octave = note_num_k;
+  var duration = duration_note;
+  console.log(key,octave,duration);
+  notes[idx] = get_new_note(key, octave, duration);
+  setStyle();
+  redraw_notes();
+
+}else{
 
   var idx = index_in;
   var key = note_te_k;
   var octave = note_num_k;
   var duration = duration_note;
-  //console.log(key,octave,duration);
+  console.log(key,octave,duration);
   notes_2[idx] = get_new_note_down(key, octave, duration);
   setStyle();
   redraw_notes();
+  
 
 }
 
-function notes_up() {
-
-  var idx = arr_index;
-  var key = note_te_k;
-  var octave = note_num_k;
-  var duration = duration_note;
-  //console.log(key,octave,duration);
-  notes[idx] = get_new_note(key, octave, duration);
-  setStyle();
-  redraw_notes();
 
 }
 
 function notes_down() {
 
+  if (idex_click <= index_note_1) {
 
   var idx = arr_index;
   var key = note_te_k;
   var octave = note_num_k;
   var duration = duration_note;
-  //console.log(key,octave,duration);
+  console.log(key,octave,duration);
   notes[idx] = get_new_note(key, octave, duration);
   setStyle();
   redraw_notes();
 
-
-}
-
-function notes_down_2() {
-
+  }else{
 
   var idx = index_in;
   var key = note_te_k;
   var octave = note_num_k;
   var duration = duration_note;
-  //console.log(key,octave,duration);
+  console.log(key,octave,duration);
   notes_2[idx] = get_new_note_down(key, octave, duration);
   setStyle();
   redraw_notes();
 
+  }
+
 
 }
+
+
 
 $('html') // unbind mousemove all html
   .mouseup(function (e) {
     unBind();
-    notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-    notes_2[index_in].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    //notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    //notes_2[index_in].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
     mouseDown(e); //function mouseDown(e) ใหม่
 
   });
@@ -474,10 +484,11 @@ function sum_array() {
 }
 
 function index_array() {
-  var in_array = notes.length;
-  var arr_to = [];
+  let in_array = notes.length;
+  let arr_to = [];
   in_to = in_array + 1;
- 
+  index_note_1 = notes.length;
+
   for (i = in_to; i < arr_type_to.length; i++) {
     arr_to.push(arr_type_to[i]);
     //console.log(arr_to);
@@ -527,11 +538,11 @@ function index_array() {
     if (duration == "w") {
    // console.log(index_in);
       notes_2[index_in] = get_new_note(key, octave, "wr");
-      setStyle_to();
+      //setStyle_to();
     } else {
       //console.log(index_in);
       notes_2[index_in] = get_new_note(key, octave, duration);
-      setStyle_to();
+      //setStyle_to();
     }
 
 
