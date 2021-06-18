@@ -262,7 +262,7 @@ function mouseDown(_e) {
 
       if (Number(arr_index) != 0) {
         if (checkIndex == previous) {
-          let button = notes[previous].duration;
+          let button = arr_sum[previous].duration;
           fillTheRest(button, 'b');
         }
       }
