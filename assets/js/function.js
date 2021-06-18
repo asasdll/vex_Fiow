@@ -432,13 +432,7 @@ function substr_notes() {
 
 }
 
-function room_create() {
 
-  $('path')
-    .mousedown(function (_e) {
-
-    });
-}
 
 function add_measure_after() {
   let shift = notes.length + 1;
