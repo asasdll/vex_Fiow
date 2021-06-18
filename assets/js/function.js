@@ -400,12 +400,12 @@ $('html') // unbind mousemove all html
     unBind();
     if (idex_click <= index_note_1) {
       notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-      arr_index = "";
-      index_in = "";
+      //arr_index = "";
+      //index_in = "";
     } else {
       notes_2[index_in].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-      index_in = "";
-      arr_index = "";
+      //index_in = "";
+      //arr_index = "";
     }
 
 
