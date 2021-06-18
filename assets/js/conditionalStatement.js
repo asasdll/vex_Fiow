@@ -88,7 +88,7 @@ function fillTheRest(button, version) {
             equalizer_u++;
         }
     }
-    console.log(arr_sum);
+    //console.log(arr_sum);
 
     arr_index = "";
     index_in = "";

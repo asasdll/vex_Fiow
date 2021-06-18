@@ -262,7 +262,7 @@ function mouseDown(_e) {
 
       if (Number(arr_index) != 0) {
         if (checkIndex == previous) {
-          let button = arr_sum[previous].duration;
+          let button = notes[previous].duration;
           fillTheRest(button, 'b');
         }
       }
@@ -432,7 +432,13 @@ function substr_notes() {
 
 }
 
+function room_create() {
 
+  $('path')
+    .mousedown(function (_e) {
+
+    });
+}
 
 function add_measure_after() {
   let shift = notes.length + 1;
