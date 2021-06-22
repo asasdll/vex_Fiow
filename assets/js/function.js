@@ -523,7 +523,7 @@ function index_array() {
 
     if (duration == "w") {
 
-      notes[arr_index] = get_new_note(key, octave, "wr");
+      notes[arr_index] = get_new_note(key, octave, duration);
       setStyle();
 
     } else {
@@ -548,7 +548,7 @@ function index_array() {
 
     if (duration == "w") {
       // console.log(index_in);
-      notes_2[index_in] = get_new_note(key, octave, "wr");
+      notes_2[index_in] = get_new_note(key, octave, duration);
       setStyle();
     } else {
       //console.log(index_in);
