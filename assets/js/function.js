@@ -129,6 +129,8 @@ function draw_notes() {
 
 function redraw_notes() {
 
+
+  console.log(notes);
   sum_array();
 
   renderer.ctx.clear();
@@ -558,6 +560,10 @@ function index_array() {
 
 
 
+  }
+
+  function box_note() {
+    
   }
 
 
