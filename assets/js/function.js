@@ -32,8 +32,7 @@ function get_new_note(key, octave, duration) {
     clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
-    //auto_stem: true,
-    //clef: "treble"
+    //align_center: true
   })
   //obj.setAttribute('id', 'test555');
 
@@ -46,11 +45,11 @@ function get_new_note(key, octave, duration) {
 function get_new_note_down(key, octave, duration) {
 
   let obj = new VF.StaveNote({
-    //clef: 'treble',
+    clef: 'treble',
     keys: [key + "/" + octave],
     duration: duration,
     auto_stem: true,
-    clef: "treble"
+    //align_center: true
   })
   //obj.setAttribute('id', 'test555');
 
@@ -82,7 +81,7 @@ function draw_notes() {
 
   var brace = new Vex.Flow.StaveConnector(stave, stave_2).setType(3);
   var lineLeft = new Vex.Flow.StaveConnector(stave, stave_2).setType(1);
-  var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
+  var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(0);
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
@@ -90,6 +89,7 @@ function draw_notes() {
 
   notes = [
     get_new_note('b', 4, "wr"),
+    
 
   ];
 
@@ -100,8 +100,7 @@ function draw_notes() {
 
   sum_array();
 
-  //console.log(arr_type);
-  //voice.addTickables(notes);
+  //voice.addIterables(notes);
   var children = notes.concat(notes_2);
 
 
@@ -128,16 +127,14 @@ function draw_notes() {
 
 
 function redraw_notes() {
-
-
-  console.log(notes);
+  console.log(notes[0].context);
   sum_array();
 
   renderer.ctx.clear();
 
   var brace = new Vex.Flow.StaveConnector(stave, stave_2).setType(3);
   var lineLeft = new Vex.Flow.StaveConnector(stave, stave_2).setType(1);
-  var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
+  var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(0);
 
 
   stave.setContext(context).draw();
@@ -453,6 +450,7 @@ function add_measure_after() {
 }
 
 function add_measure_before() {
+
   let end = notes.length + 1;
   let end1 = notes_2.length + 1;
 
@@ -465,6 +463,7 @@ function add_measure_before() {
   for (u = end1; u > 1; u--) {
     notes_2[u] = notes_2[u - 2];
   }
+
   notes_2[0] = get_new_note('b', 4, "wr");
   notes_2[1] = new VF.BarNote();
 
@@ -563,7 +562,7 @@ function index_array() {
   }
 
   function box_note() {
-    
+
   }
 
 

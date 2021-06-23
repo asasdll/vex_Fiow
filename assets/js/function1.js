@@ -32,7 +32,7 @@ function get_new_note(key, octave, duration) {
     clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
-    align_center: true
+    //align_center: true
 
     //auto_stem: true,
     //clef: "treble"
@@ -53,7 +53,7 @@ function get_new_note_down(key, octave, duration) {
     duration: duration,
     auto_stem: true,
     clef: "treble",
-    align_center: true
+   // align_center: true
 
   })
   //obj.setAttribute('id', 'test555');
