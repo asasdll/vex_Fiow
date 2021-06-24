@@ -88,7 +88,7 @@ function draw_notes() {
 
 
   notes = [
-    get_new_note('b', 4, "wr"),
+    new VF.StaveNote({ keys: ["r/4"], duration: "qr" }),
     
 
   ];
@@ -119,15 +119,23 @@ function draw_notes() {
   arrindex();
   arrline();
   room_create();
+  
 
 
 }
-
-
+/*
+class FixedStaveNote extends VF.StaveNote {
+  getAbsoluteX() {
+      return 72;
+  }
+};*/
 
 
 function redraw_notes() {
+ 
+ 
   console.log(notes[0].context);
+  
   sum_array();
 
   renderer.ctx.clear();

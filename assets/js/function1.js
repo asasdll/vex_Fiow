@@ -1,29 +1,3 @@
-var VF = null;
-var context = null;
-var stave = null;
-var voice = null;
-var i = -1;
-var arr_index = null;
-var e_Click;
-var note_te_k;
-var note_num_k;
-var arr_notes;
-var move_pixel;
-var array_a = 1;
-var search_array;
-var key;
-var octave;
-var note_text;
-var duration_note = null;
-var note_array;
-var checkIndex;
-var arr_type = [];
-var arr_sum = [];
-var arr_type_to = [];
-var arr_to = [];
-var index_in = null;
-var index_note_1 = null;
-var idex_click = null;
 var width = 500;
 var height = 100;
 var height2 = 200;
@@ -100,7 +74,7 @@ function draw_notes() {
   ];
 
 
-  //console.log(arr_type);
+  console.log(notesMeasure1);
   //voice.addTickables(notes);
 
 
