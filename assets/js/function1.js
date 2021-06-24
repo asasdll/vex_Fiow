@@ -24,6 +24,9 @@ var arr_to = [];
 var index_in = null;
 var index_note_1 = null;
 var idex_click = null;
+var width = 500;
+var height = 100;
+var height2 = 200;
 
 
 function get_new_note(key, octave, duration) {
@@ -32,7 +35,7 @@ function get_new_note(key, octave, duration) {
     clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
-    //align_center: true
+    align_center: true
 
     //auto_stem: true,
     //clef: "treble"
@@ -53,7 +56,7 @@ function get_new_note_down(key, octave, duration) {
     duration: duration,
     auto_stem: true,
     clef: "treble",
-   // align_center: true
+    align_center: true
 
   })
   //obj.setAttribute('id', 'test555');
@@ -69,207 +72,58 @@ function draw_notes() {
   var div = document.getElementById("page")
   var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
-  renderer.resize(500, 500);
+  renderer.resize(500, 700);
 
   context = renderer.getContext();
 
 
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
-  stave = new VF.Stave(30, 100, 150);
-  stave_2 = new VF.Stave(30, 200, 150);
-  stave.addClef("treble").addTimeSignature("4/4");
-  stave_2.addClef("bass").addTimeSignature("4/4");
-  var brace = new Vex.Flow.StaveConnector(stave, stave_2).setType(3);
-  var lineLeft = new Vex.Flow.StaveConnector(stave, stave_2).setType(1);
+  staveMeasure1 = new VF.Stave(30, 100, 150);
+  stave_2Measure1 = new VF.Stave(30, 200, 150);
+  staveMeasure1.addClef("treble").addTimeSignature("4/4");
+  stave_2Measure1.addClef("bass").addTimeSignature("4/4");
+  var brace = new Vex.Flow.StaveConnector(staveMeasure1, stave_2Measure1).setType(3);
+  var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1, stave_2Measure1).setType(1);
   // var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
-
-
-  staveMeasure2 = new Vex.Flow.Stave(
-    stave.width + stave.x,
-    100,
-    100
-  );
-  staveMeasure2.setContext(context).draw();
-
-  staveMeasure3 = new Vex.Flow.Stave(
-    staveMeasure2.width + staveMeasure2.x,
-    100,
-    100
-  );
-  staveMeasure3.setContext(context).draw();
-
-  staveMeasure4 = new Vex.Flow.Stave(
-    staveMeasure3.width + staveMeasure3.x,
-    100,
-    100
-  );
-  staveMeasure4.setContext(context).draw();
-
-  staveMeasure5 = new Vex.Flow.Stave(
-    30,
-    300,
-    150
-  );
-
-  staveMeasure6 = new Vex.Flow.Stave(
-    staveMeasure5.width + staveMeasure5.x,
-    300,
-    100
-  );
-  staveMeasure6.setContext(context).draw();
-
-  staveMeasure7 = new Vex.Flow.Stave(
-    staveMeasure6.width + staveMeasure6.x,
-    300,
-    100
-  );
-  staveMeasure7.setContext(context).draw();
-
-  staveMeasure8 = new Vex.Flow.Stave(
-    staveMeasure7.width + staveMeasure7.x,
-    300,
-    100
-  );
-  staveMeasure8.setContext(context).draw();
-
-
-
-
-
-
-  stave2Measure2 = new Vex.Flow.Stave(
-    stave_2.width + stave_2.x,
-    200,
-    100
-  );
-  stave2Measure2.setContext(context).draw();
-
-  stave2Measure3 = new Vex.Flow.Stave(
-    stave2Measure2.width + stave2Measure2.x,
-    200,
-    100
-  );
-  stave2Measure3.setContext(context).draw();
-
-  stave2Measure4 = new Vex.Flow.Stave(
-    stave2Measure3.width + stave2Measure3.x,
-    200,
-    100
-  );
-  stave2Measure4.setContext(context).draw();
-
-  stave2Measure5 = new Vex.Flow.Stave(
-    30,
-    400,
-    150
-  );
-
-  stave2Measure6 = new Vex.Flow.Stave(
-    stave2Measure5.width + stave2Measure5.x,
-    400,
-    100
-  );
-  stave2Measure6.setContext(context).draw();
-
-  stave2Measure7 = new Vex.Flow.Stave(
-    stave2Measure6.width + stave2Measure6.x,
-    400,
-    100
-  );
-  stave2Measure7.setContext(context).draw();
-
-  staveMeasure8 = new Vex.Flow.Stave(
-    stave2Measure7.width + stave2Measure7.x,
-    400,
-    100
-  );
-  staveMeasure8.setContext(context).draw();
-
-
-  staveMeasure5.addClef("treble").addTimeSignature("4/4");
-  stave2Measure5.addClef("bass").addTimeSignature("4/4");
-
-  staveMeasure5.setContext(context).draw();
-  stave2Measure5.setContext(context).draw();
-
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
-  notes = [
+  notesMeasure1 = [
     get_new_note('b', 4, "1r"),
 
   ];
 
-  notes_2 = [
+  notes_2Measure1 = [
     get_new_note_down('b', 4, "1r"),
 
   ];
 
-  noteMeasure2 = [
-    get_new_note('b', 4, "1r"),
-
-  ];
-
-  notes2Measure2 = [
-    get_new_note_down('b', 4, "1r"),
-
-  ];
-
-  noteMeasure3 = [
-    get_new_note('b', 4, "1r"),
-
-  ];
-
-  notes2Measure3 = [
-    get_new_note_down('b', 4, "1r"),
-
-  ];
-
-  noteMeasure4 = [
-    get_new_note('b', 4, "1r"),
-
-  ];
-
-  notes2Measure4 = [
-    get_new_note_down('b', 4, "1r"),
-
-  ];
-
-  sum_array();
 
   //console.log(arr_type);
   //voice.addTickables(notes);
-  var children = notes.concat(notes_2);
 
-  window.renderer = renderer;
-  stave.setContext(context).draw();
-  stave_2.setContext(context).draw();
+
+  staveMeasure1.setContext(context).draw();
+  stave_2Measure1.setContext(context).draw();
   brace.setContext(context).draw();
   lineLeft.setContext(context).draw();
   // lineRight.setContext(context).draw();
-  var brace2 = new Vex.Flow.StaveConnector(staveMeasure5, stave2Measure5).setType(3);
-  var lineLeft2 = new Vex.Flow.StaveConnector(staveMeasure5, stave2Measure5).setType(1);
-  var lineRight2 = new Vex.Flow.StaveConnector(staveMeasure5, stave2Measure5).setType(1);
-  brace2.setContext(context).draw();
-  lineLeft2.setContext(context).draw();
-  lineRight2.setContext(context).draw();
+  // var brace2 = new Vex.Flow.StaveConnector(staveMeasure5, stave2Measure5).setType(3);
+  // var lineLeft2 = new Vex.Flow.StaveConnector(staveMeasure5, stave2Measure5).setType(1);
+  // var lineRight2 = new Vex.Flow.StaveConnector(staveMeasure5, stave2Measure5).setType(1);
+  // brace2.setContext(context).draw();
+  // lineLeft2.setContext(context).draw();
+  // lineRight2.setContext(context).draw();
 
 
 
-  var voice = VF.Beam.generateBeams(notes);
-  var voice_2 = VF.Beam.generateBeams(notes_2); //note เส้นหาย
-  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave_2, notes_2);//note เส้นหาย
+  var voice = VF.Beam.generateBeams(notesMeasure1);
+  var voice_2 = VF.Beam.generateBeams(notes_2Measure1); //note เส้นหาย
+  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure1, notesMeasure1);
+  Vex.Flow.Formatter.FormatAndDraw(context, stave_2Measure1, notes_2Measure1);//note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
-
-  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure2, noteMeasure2);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave2Measure2, notes2Measure2);
-  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure3, noteMeasure3);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave2Measure3, notes2Measure3);
-  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure4, noteMeasure4);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave2Measure4, notes2Measure4);
 
   arrindex();
   arrline();
@@ -281,328 +135,76 @@ function draw_notes() {
 
 
 
-function redraw_notes() {
-
-  sum_array();
-
-  renderer.ctx.clear();
-
-  var brace = new Vex.Flow.StaveConnector(stave, stave_2).setType(3);
-  var lineLeft = new Vex.Flow.StaveConnector(stave, stave_2).setType(1);
-  var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
-
-
-  stave.setContext(context).draw();
-  stave_2.setContext(context).draw();
-  brace.setContext(context).draw();
-  lineLeft.setContext(context).draw();
-  lineRight.setContext(context).draw();
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
-
-  var voice = VF.Beam.generateBeams(notes);
-  var voice_2 = VF.Beam.generateBeams(notes_2); //note เส้นหาย
-  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave_2, notes_2); //note เส้นหาย
-  voice.forEach(function (b) { b.setContext(context).draw() });
-  voice_2.forEach(function (b) { b.setContext(context).draw() });
-  arrindex();
-  arrline();
-  room_create();
-  index_array();
-
-
-
-}
-
-
-
-
-
-function arrindex() {  // new arr-index and id
-  id_type();
-
-
-  var i = 0;
-
-
-  // console.log(text);
-  $(".vf-stavenote").each(function () {
-
-
-    $(this).attr("arr-index", arr_type[i]),
-      $(this).attr("id", "syceColor" + arr_type[i]);
-    i++;
-
-
-
-  });
-
-
-
-  //return arr_in;
-
-}
-
-function id_type() {
-
-  arr_type_to = [];
-  arr_type = [];
-  var i;
-  var y;
-  for (i = 0; i < arr_sum.length; i++) {
-    type = arr_sum[i].duration;
-    // console.log(type,i);
-    if (type != "b") {
-
-      arr_type.push(i);
-
-    }
-  }
-
-  for (y = 0; y < arr_sum.length; y++) {
-
-    arr_type_to.push(y);
-
-
-  }
-
-
-
-}
-
-
-
-
-function arrline() {  // new arr-index and id
-
-  var arr_lin = $('rect').each(function (e) {
-    //console.log(e);
-    $(this).attr("arr-line", e)
-
-  });
-
-  var arr_path = $('path').each(function (e) {
-    //console.log(e);
-    $(this).attr("arr-path", e)
-
-  });
-
-
-  return arr_lin, arr_path;
-
-}
-
-function mouseDown(_e) {
-
-
-  $(".vf-stavenote")
-    .mousedown(function (_e) {
-      arr_index = $(this).attr("arr-index");
-      idex_click = arr_index;
-
-
-      e_Click = event.clientY;//413
-      index_array();
-
-      redraw_notes();
-      group_notes();
-
-      search_array = arr_notes.indexOf(note_sea);
-
-      //console.log(search_array);
-
-      //   console.log(search_array,note_key);
-      let previous = Number(arr_index) - 1;
-
-      if (Number(arr_index) != 0) {
-        if (checkIndex == previous) {
-          let button = notes[previous].duration;
-          fillTheRest(button, 'b');
-        }
-      }
-
-      $(document).bind('mousemove', function (e) {
-
-        //$( this ).addClass('mousemove', function (e) {
-        var ev_move = e.clientY;//434
-        var pixels = $("p").html(ev_move);
-        sum_pixels = e_Click + 10;//443
-        del_pix = e_Click - 10;
-        //  console.log(del_pix,ev_move);
-
-
-        if (ev_move >= sum_pixels) {//443 note_down
-          move_pixel = ev_move;
-          e_Click = sum_pixels;//433
-
-          if (ev_move == move_pixel) {
-
-            search_array = search_array - array_a;
-
-          }
-
-          substr_notes();
-          notes_down();
-
-
-
-        } else if (ev_move <= del_pix) { //note_up
-
-          move_pixel = ev_move;
-          e_Click = del_pix;//433
-
-          if (ev_move == move_pixel) {  //note_up
-            search_array = search_array + array_a;
-
-
-          }
-
-          substr_notes();
-          notes_up();
-
-
-
-
-
-        }
-      });
-
-
-    });
-
-  checkIndex = arr_index;
-}
-function setStyle() {
-  //console.log(arr_index,idex_click);
-  if (idex_click <= index_note_1) {
-    notes[arr_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-  } else {
-    notes_2[index_in].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-  }
-
-
-}
-
-
-
-
-
-
-function notes_up() {
-
-  if (idex_click <= index_note_1) {
-
-    var idx = arr_index;
-    var key = note_te_k;
-    var octave = note_num_k;
-    var duration = duration_note;
-    console.log(key, octave, duration);
-    notes[idx] = get_new_note(key, octave, duration);
-    setStyle();
-    redraw_notes();
-
-  } else {
-
-    var idx = index_in;
-    var key = note_te_k;
-    var octave = note_num_k;
-    var duration = duration_note;
-    console.log(key, octave, duration);
-    notes_2[idx] = get_new_note_down(key, octave, duration);
-    setStyle();
-    redraw_notes();
-
-
-  }
-
-
-}
-
-function notes_down() {
-
-  if (idex_click <= index_note_1) {
-
-    var idx = arr_index;
-    var key = note_te_k;
-    var octave = note_num_k;
-    var duration = duration_note;
-    console.log(key, octave, duration);
-    notes[idx] = get_new_note(key, octave, duration);
-    setStyle();
-    redraw_notes();
-
-  } else {
-
-    var idx = index_in;
-    var key = note_te_k;
-    var octave = note_num_k;
-    var duration = duration_note;
-    console.log(key, octave, duration);
-    notes_2[idx] = get_new_note_down(key, octave, duration);
-    setStyle();
-    redraw_notes();
-
-  }
-
-
-}
-
-
-
-$('html') // unbind mousemove all html
-  .mouseup(function (e) {
-    unBind();
-    if (idex_click <= index_note_1) {
-      notes[arr_index].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-      //arr_index = "";
-      //index_in = "";
-    } else {
-      notes_2[index_in].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-      //index_in = "";
-      //arr_index = "";
-    }
-
-
-    mouseDown(e); //function mouseDown(e) ใหม่
-
-  });
-
-function unBind() { // unbind mousemove
-  $(document).unbind("mousemove");
-
-}
-
-
-function substr_notes() {
-
-
-  if (search_array <= arr_notes.length) {
-    note_sea = arr_notes[search_array];
-    note_te_k = note_sea.substr(0, 1);
-    note_num_k = note_sea.substr(-1);
-
-  }
-
-
-}
-
-function room_create() {
-
-  $('path')
-    .mousedown(function (_e) {
-
-    });
-}
+let measure = 1;
 
 function add_measure_after() {
-  let shift = notes.length + 1;
-  let shift1 = notes_2.length + 1;
-  notes[shift - 1] = new VF.BarNote();
-  notes[shift] = get_new_note('b', 4, "wr");
-  notes_2[shift1 - 1] = new VF.BarNote();
-  notes_2[shift1] = get_new_note('b', 4, "wr");
-  redraw_notes();
+
+  if (width > 250) {
+    PreviousStave = this["staveMeasure" + measure];
+    this["staveMeasure" + (measure + 1)] = new VF.Stave(PreviousStave.width + PreviousStave.x, height, 100);
+    this["notesMeasure" + (measure + 1)] = [
+      get_new_note('b', 4, "1r"),
+
+    ];
+    this["staveMeasure" + (measure + 1)].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["staveMeasure" + (measure + 1)],
+      this["notesMeasure" + (measure + 1)]);
+
+    PreviousStave = this["stave_2Measure" + measure];
+    this["stave_2Measure" + (measure + 1)] = new VF.Stave(PreviousStave.width + PreviousStave.x, height2, 100);
+    this["notes_2Measure" + (measure + 1)] = [
+      get_new_note('b', 4, "1r"),
+
+    ];
+    this["stave_2Measure" + (measure + 1)].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["stave_2Measure" + (measure + 1)],
+      this["notes_2Measure" + (measure + 1)]);
+
+    measure++;
+    width -= 100;
+    console.log(width);
+  }
+  else {
+    this["staveMeasure" + (measure + 1)] = new VF.Stave(30, height + 200, 150);
+    this["notesMeasure" + (measure + 1)] = [
+      get_new_note('b', 4, "1r"),
+
+    ];
+    this["staveMeasure" + (measure + 1)].addClef("treble").addTimeSignature("4/4");
+    this["staveMeasure" + (measure + 1)].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["staveMeasure" + (measure + 1)],
+      this["notesMeasure" + (measure + 1)]);
+
+    this["stave_2Measure" + (measure + 1)] = new VF.Stave(30, height2 + 200, 150);
+    this["notes_2Measure" + (measure + 1)] = [
+      get_new_note('b', 4, "1r"),
+
+    ];
+    this["stave_2Measure" + (measure + 1)].addClef("bass").addTimeSignature("4/4");
+    this["stave_2Measure" + (measure + 1)].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["stave_2Measure" + (measure + 1)],
+      this["notes_2Measure" + (measure + 1)]);
+
+    var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + (measure + 1)],
+      this["stave_2Measure" + (measure + 1)]).setType(3);
+    var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + (measure + 1)],
+      this["stave_2Measure" + (measure + 1)]).setType(1);
+
+    brace.setContext(context).draw();
+    lineLeft.setContext(context).draw();
+
+    height += 200;
+    height2 += 200;
+    width = 500;
+    measure++;
+  }
+
 }
+
 
 function add_measure_before() {
   let end = notes.length + 1;
@@ -640,89 +242,10 @@ function group_notes() {
 
 }
 
-function sum_array() {
-
-  arr_sum = notes.concat(new VF.BarNote(), notes_2);
-  // console.log(children);
-  /// new VF.BarNote();
-
-}
-
-function index_array() {
-  let in_array = notes.length;
-  let arr_to = [];
-  in_to = in_array + 1;
-  index_note_1 = notes.length;
-
-  for (i = in_to; i < arr_type_to.length; i++) {
-    arr_to.push(arr_type_to[i]);
-    //console.log(arr_to);
-  }
-
-  note_idx = parseInt(arr_index);
-  // console.log(arr_index);
-  //notes[arr_index] = get_new_note(key, octave, "wr");
-
-  index_in = arr_to.indexOf(note_idx);
-
-  if (arr_index <= in_array) {
-
-    var note_key = notes[arr_index].keys;
-    var duration = notes[arr_index].duration;
-    duration_note = duration;
-    note_sea = document.innerText = (note_key[0]);
-    key = note_sea.substr(0, 1);
-    octave = note_sea.substr(-1);
-
-
-    if (duration == "w") {
-
-      notes[arr_index] = get_new_note(key, octave, duration);
-      setStyle();
-
-    } else {
-
-
-      notes[arr_index] = get_new_note(key, octave, duration);
-      setStyle();
-
-
-    }
-
-
-  } else {
-    //console.log(arr_type);
-    var note_key = notes_2[index_in].keys;
-    var duration = notes_2[index_in].duration;
-    duration_note = duration;
-    note_sea = document.innerText = (note_key[0]);
-    key = note_sea.substr(0, 1);
-    octave = note_sea.substr(-1);
-
-
-    if (duration == "w") {
-      // console.log(index_in);
-      notes_2[index_in] = get_new_note(key, octave, duration);
-      setStyle();
-    } else {
-      //console.log(index_in);
-      notes_2[index_in] = get_new_note(key, octave, duration);
-      setStyle();
-    }
-
-
-
-  }
-
-
-
-
-
-}
 
 
 
 
 
 
-window.addEventListener('load', draw_notes, redraw_notes);
+window.addEventListener('load', draw_notes);
