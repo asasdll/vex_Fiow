@@ -97,9 +97,7 @@ function draw_notes() {
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
 
-  arrindex();
-  arrline();
-  room_create();
+  array_type();
 
 
 }
@@ -345,6 +343,19 @@ function add_measure_before() {
 
 
 
+
+}
+
+
+function array_type() {  // new arr-index and id
+
+
+    let type_array = ["type_01" , "type_02"];
+    let i = 0;
+  $('.vf-stavenote').each(function (e) {
+    $(this).attr("array-type", type_array[i])
+    i++;
+  });
 
 }
 
