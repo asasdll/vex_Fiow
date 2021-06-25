@@ -182,239 +182,295 @@ k = 1;
 function add_measure_before() {
   renderer.ctx.clear();
 
-  if (width > 250) {
-    CurrentStave = this["staveMeasure" + 1];
-    CurrentStave2 = this["stave_2Measure" + 1];
-    let xS = CurrentStave.x;
-    let yS = CurrentStave.y;
-    let yS2 = CurrentStave2.y;
-    this["staveMeasure" + 1] = new VF.Stave(CurrentStave.width + CurrentStave.x, CurrentStave.y, 100);
-    this["staveMeasure" + 1].setContext(context).draw();
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["staveMeasure" + 1],
-      this["notesMeasure" + 1]);
+  // if (width > 250) {
 
-    this["stave_2Measure" + 1] = new VF.Stave(CurrentStave2.width + CurrentStave2.x, CurrentStave2.y, 100);
-    this["stave_2Measure" + 1].setContext(context).draw();
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["stave_2Measure" + 1],
-      this["notes_2Measure" + 1]);
+  if (measure > 1) {
+    for (i = measure; i > 1; i--) {
 
-    if (measure > 1) {
-      for (i = measure; i > 1; i--) {
+      CurrentStave = this["staveMeasure" + measure];
+      CurrentStave2 = this["stave_2Measure" + measure];
 
-        CurrentStave = this["staveMeasure" + measure];
-        CurrentStave2 = this["stave_2Measure" + measure];
+      xM = CurrentStave.width + CurrentStave.x;
+      yM = CurrentStave.y;
+      yM2 = CurrentStave2.y;
+      let widthM = 100;
 
-        this["staveMeasure" + measure] = new VF.Stave(CurrentStave.width + CurrentStave.x, CurrentStave.y, 100);
-        this["staveMeasure" + measure].setContext(context).draw();
-        Vex.Flow.Formatter.FormatAndDraw(context,
-          this["staveMeasure" + measure],
-          this["notesMeasure" + measure]);
-
-        this["stave_2Measure" + measure] = new VF.Stave(CurrentStave2.width + CurrentStave2.x, CurrentStave2.y, 100);
-        this["stave_2Measure" + measure].setContext(context).draw();
-        Vex.Flow.Formatter.FormatAndDraw(context,
-          this["stave_2Measure" + measure],
-          this["notes_2Measure" + measure]);
-
-      }
-    }
-
-    j = u;
-
-    for (i = 1; i <= j; i++) {
-      widthS = 0;
-
-      if (i == j || i == j - 4 || i == j - 8) {
-        widthS = 150;
-      } else {
-        widthS = 100;
+      if (CurrentStave.x == 380) {
+        xM = 30;
+        widthM = 150;
+        yM = CurrentStave.y += 200;
+        yM2 = CurrentStave2.y += 200;
       }
 
-      this["staveMeasure" + (1 - i)] = new VF.Stave(xS, yS, widthS);
-      this["notesMeasure" + (1 - i)] = [
-        get_new_note('b', 4, "1r", true),
+      this["staveMeasure" + i] = new VF.Stave(xM, yM, widthM);
+      this["stave_2Measure" + i] = new VF.Stave(xM, yM2, widthM);
 
-      ];
-
-      this["stave_2Measure" + (1 - i)] = new VF.Stave(xS, yS2, widthS);
-      this["notes_2Measure" + (1 - i)] = [
-        get_new_note('b', 4, "1r", true),
-
-      ];
-
-      if (i == j || i == j - 4 || i == j - 8) {
-        this["staveMeasure" + (1 - i)].addClef("treble").addTimeSignature("4/4");
-        this["stave_2Measure" + (1 - i)].addClef("bass").addTimeSignature("4/4");
-
+      if (CurrentStave.x == 380) {
+        this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
+        this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
       }
 
-      this["staveMeasure" + (1 - i)].setContext(context).draw();
+      this["staveMeasure" + i].setContext(context).draw();
       Vex.Flow.Formatter.FormatAndDraw(context,
-        this["staveMeasure" + (1 - i)],
-        this["notesMeasure" + (1 - i)]);
-
-      this["stave_2Measure" + (1 - i)].setContext(context).draw();
+        this["staveMeasure" + i],
+        this["notesMeasure" + i]);
+      console.log(xM, yM, widthM);
+      this["stave_2Measure" + i].setContext(context).draw();
       Vex.Flow.Formatter.FormatAndDraw(context,
-        this["stave_2Measure" + (1 - i)],
-        this["notes_2Measure" + (1 - i)]);
+        this["stave_2Measure" + i],
+        this["notes_2Measure" + i]);
 
-      if (i == j || i == j - 4 || i == j - 8) {
-        var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
-          this["stave_2Measure" + (1 - i)]).setType(3);
-        var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
-          this["stave_2Measure" + (1 - i)]).setType(1);
+      if (CurrentStave.x == 380) {
+        var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + i],
+          this["stave_2Measure" + i]).setType(3);
+        var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + i],
+          this["stave_2Measure" + i]).setType(1);
         brace.setContext(context).draw();
         lineLeft.setContext(context).draw()
       }
 
-      if (i + 1 == j || i == j - 5 || i == j - 9) {
-        xS -= 150;
-      } else {
-        xS -= 100;
-      }
-
-      if (i == j - 4 || i == j - 8) {
-        xS = 380;
-        yS -= 200;
-        yS2 -= 200;
-      }
-
     }
-    width -= 100;
-    u++;
-  } else {
+  }
 
-    if (measure > 1) {
-      for (i = measure; i > 1; i--) {
+  CurrentStave = this["staveMeasure" + 1];
+  CurrentStave2 = this["stave_2Measure" + 1];
+  let xS = CurrentStave.x;
+  let yS = CurrentStave.y;
+  let yS2 = CurrentStave2.y;
+  let xN = CurrentStave.x + CurrentStave.width;
+  let yN = CurrentStave.y;
+  let yN2 = CurrentStave2.y;
+  let widthN = 100;
 
-        CurrentStave = this["staveMeasure" + measure];
-        CurrentStave2 = this["stave_2Measure" + measure];
-        xM = CurrentStave.width + CurrentStave.x;
-        yM = CurrentStave.y;
+  if (CurrentStave.x == 380) {
+    xN = 30;
+    widthN = 150;
+    yN = CurrentStave.y += 200;
+    yN2 = CurrentStave2.y += 200;
+  }
 
-        this["staveMeasure" + measure] = new VF.Stave(xM, yM, 100);
-        this["staveMeasure" + measure].setContext(context).draw();
-        Vex.Flow.Formatter.FormatAndDraw(context,
-          this["staveMeasure" + measure],
-          this["notesMeasure" + measure]);
+  this["staveMeasure" + 1] = new VF.Stave(xN, yN, widthN);
+  this["stave_2Measure" + 1] = new VF.Stave(xN, yN2, widthN);
 
-        this["stave_2Measure" + measure] = new VF.Stave(xM, yM, 100);
-        this["stave_2Measure" + measure].setContext(context).draw();
-        Vex.Flow.Formatter.FormatAndDraw(context,
-          this["stave_2Measure" + measure],
-          this["notes_2Measure" + measure]);
-
-      }
-    }
-
-    this["staveMeasure" + 1] = new VF.Stave(30, height + 200, 150);
+  if (CurrentStave.x == 380) {
     this["staveMeasure" + 1].addClef("treble").addTimeSignature("4/4");
-    this["staveMeasure" + 1].setContext(context).draw();
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["staveMeasure" + 1],
-      this["notesMeasure" + 1]);
-
-    this["stave_2Measure" + 1] = new VF.Stave(30, height2 + 200, 150);
     this["stave_2Measure" + 1].addClef("bass").addTimeSignature("4/4");
-    this["stave_2Measure" + 1].setContext(context).draw();
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["stave_2Measure" + 1],
-      this["notes_2Measure" + 1]);
+  }
 
+  this["staveMeasure" + 1].setContext(context).draw();
+  Vex.Flow.Formatter.FormatAndDraw(context,
+    this["staveMeasure" + 1],
+    this["notesMeasure" + 1]);
+  this["stave_2Measure" + 1].setContext(context).draw();
+  Vex.Flow.Formatter.FormatAndDraw(context,
+    this["stave_2Measure" + 1],
+    this["notes_2Measure" + 1]);
+
+  if (CurrentStave.x == 380) {
     var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + 1],
       this["stave_2Measure" + 1]).setType(3);
     var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + 1],
       this["stave_2Measure" + 1]).setType(1);
-
     brace.setContext(context).draw();
-    lineLeft.setContext(context).draw();
+    lineLeft.setContext(context).draw()
+  }
 
-    j = u;
+  j = u;
+  console.log(j, u);
+  for (i = 1; i <= j; i++) {
+    widthS = 0;
 
-    CurrentStave = this["staveMeasure" + 1];
-    CurrentStave2 = this["stave_2Measure" + 1];
-    let xS = CurrentStave.x;
-    let yS = CurrentStave.y;
-    let yS2 = CurrentStave2.y;
-    xS = 380;
-    yS -= 200;
-    yS2 -= 200;
+    if (i == j || i == j - 4 || i == j - 8) {
+      widthS = 150;
+    } else {
+      widthS = 100;
+    }
 
-    for (i = 1; i <= j; i++) {
-      widthS = 0;
-      if (i == j || i == j - 4 || i == j - 8) {
-        widthS = 150;
-      } else {
-        widthS = 100;
-      }
+    this["staveMeasure" + (1 - i)] = new VF.Stave(xS, yS, widthS);
+    this["notesMeasure" + (1 - i)] = [
+      get_new_note('b', 4, "1r", true),
 
-      this["staveMeasure" + (1 - i)] = new VF.Stave(xS, yS, widthS);
-      this["notesMeasure" + (1 - i)] = [
-        get_new_note('b', 4, "1r", true),
+    ];
+    console.log(xS, yS, widthS);
 
-      ];
-      console.log(xS, yS, widthS);
-      this["stave_2Measure" + (1 - i)] = new VF.Stave(xS, yS2, widthS);
-      this["notes_2Measure" + (1 - i)] = [
-        get_new_note('b', 4, "1r", true),
+    this["stave_2Measure" + (1 - i)] = new VF.Stave(xS, yS2, widthS);
+    this["notes_2Measure" + (1 - i)] = [
+      get_new_note('b', 4, "1r", true),
 
-      ];
+    ];
 
-      if (i == j || i == j - 4 || i == j - 8) {
-        this["staveMeasure" + (1 - i)].addClef("treble").addTimeSignature("4/4");
-        this["stave_2Measure" + (1 - i)].addClef("bass").addTimeSignature("4/4");
-
-      }
-
-      this["staveMeasure" + (1 - i)].setContext(context).draw();
-      Vex.Flow.Formatter.FormatAndDraw(context,
-        this["staveMeasure" + (1 - i)],
-        this["notesMeasure" + (1 - i)]);
-
-      this["stave_2Measure" + (1 - i)].setContext(context).draw();
-      Vex.Flow.Formatter.FormatAndDraw(context,
-        this["stave_2Measure" + (1 - i)],
-        this["notes_2Measure" + (1 - i)]);
-
-      if (i == j || i == j - 4 || i == j - 8) {
-        console.log('alamus');
-        var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
-          this["stave_2Measure" + (1 - i)]).setType(3);
-        var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
-          this["stave_2Measure" + (1 - i)]).setType(1);
-        brace.setContext(context).draw();
-        lineLeft.setContext(context).draw()
-      }
-
-      if (i + 1 == j || i == j - 5 || i == j - 9) {
-        xS -= 150;
-        console.log('jaja');
-      } else {
-        xS -= 100;
-      }
-
-      if (i == j - 4 || i == j - 8) {
-        xS = 380;
-        yS -= 200;
-        yS2 -= 200;
-      }
+    if (i == j || i == j - 4 || i == j - 8) {
+      this["staveMeasure" + (1 - i)].addClef("treble").addTimeSignature("4/4");
+      this["stave_2Measure" + (1 - i)].addClef("bass").addTimeSignature("4/4");
 
     }
 
-    width = 500;
-    u++;
-    height += 200;
-    height2 += 200;
-    k++;
+    this["staveMeasure" + (1 - i)].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["staveMeasure" + (1 - i)],
+      this["notesMeasure" + (1 - i)]);
+
+    this["stave_2Measure" + (1 - i)].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["stave_2Measure" + (1 - i)],
+      this["notes_2Measure" + (1 - i)]);
+
+    if (i == j || i == j - 4 || i == j - 8) {
+      var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
+        this["stave_2Measure" + (1 - i)]).setType(3);
+      var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
+        this["stave_2Measure" + (1 - i)]).setType(1);
+      brace.setContext(context).draw();
+      lineLeft.setContext(context).draw()
+    }
+    if (i + 1 == j || i == j - 5 || i == j - 9) {
+      xS -= 150;
+      console.log('jaja');
+      console.log(j, i);
+    } else {
+      xS -= 100;
+    }
+
+    if (i == j - 4 || i == j - 8) {
+      xS = 380;
+      yS -= 200;
+      yS2 -= 200;
+    }
   }
-
-
+  width -= 100;
+  u++;
 
 
 
 }
+
+// } 
+// else {
+
+//   if (measure > 1) {
+//     for (i = measure; i > 1; i--) {
+
+//       CurrentStave = this["staveMeasure" + measure];
+//       CurrentStave2 = this["stave_2Measure" + measure];
+//       xM = CurrentStave.width + CurrentStave.x;
+//       yM = CurrentStave.y;
+
+//       this["staveMeasure" + measure] = new VF.Stave(xM, yM, 100);
+//       this["staveMeasure" + measure].setContext(context).draw();
+//       Vex.Flow.Formatter.FormatAndDraw(context,
+//         this["staveMeasure" + measure],
+//         this["notesMeasure" + measure]);
+
+//       this["stave_2Measure" + measure] = new VF.Stave(xM, yM, 100);
+//       this["stave_2Measure" + measure].setContext(context).draw();
+//       Vex.Flow.Formatter.FormatAndDraw(context,
+//         this["stave_2Measure" + measure],
+//         this["notes_2Measure" + measure]);
+
+//     }
+//   }
+
+//   this["staveMeasure" + 1] = new VF.Stave(30, height + 200, 150);
+//   this["staveMeasure" + 1].addClef("treble").addTimeSignature("4/4");
+//   this["staveMeasure" + 1].setContext(context).draw();
+//   Vex.Flow.Formatter.FormatAndDraw(context,
+//     this["staveMeasure" + 1],
+//     this["notesMeasure" + 1]);
+
+//   this["stave_2Measure" + 1] = new VF.Stave(30, height2 + 200, 150);
+//   this["stave_2Measure" + 1].addClef("bass").addTimeSignature("4/4");
+//   this["stave_2Measure" + 1].setContext(context).draw();
+//   Vex.Flow.Formatter.FormatAndDraw(context,
+//     this["stave_2Measure" + 1],
+//     this["notes_2Measure" + 1]);
+
+//   var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + 1],
+//     this["stave_2Measure" + 1]).setType(3);
+//   var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + 1],
+//     this["stave_2Measure" + 1]).setType(1);
+
+//   brace.setContext(context).draw();
+//   lineLeft.setContext(context).draw();
+
+//   j = u;
+
+//   CurrentStave = this["staveMeasure" + 1];
+//   CurrentStave2 = this["stave_2Measure" + 1];
+//   let xS = CurrentStave.x;
+//   let yS = CurrentStave.y;
+//   let yS2 = CurrentStave2.y;
+//   xS = 380;
+//   yS -= 200;
+//   yS2 -= 200;
+
+//   for (i = 1; i <= j; i++) {
+//     widthS = 0;
+//     if (i == j || i == j - 4 || i == j - 8) {
+//       widthS = 150;
+//     } else {
+//       widthS = 100;
+//     }
+
+//     this["staveMeasure" + (1 - i)] = new VF.Stave(xS, yS, widthS);
+//     this["notesMeasure" + (1 - i)] = [
+//       get_new_note('b', 4, "1r", true),
+
+//     ];
+//     console.log(xS, yS, widthS);
+//     this["stave_2Measure" + (1 - i)] = new VF.Stave(xS, yS2, widthS);
+//     this["notes_2Measure" + (1 - i)] = [
+//       get_new_note('b', 4, "1r", true),
+
+//     ];
+
+//     if (i == j || i == j - 4 || i == j - 8) {
+//       this["staveMeasure" + (1 - i)].addClef("treble").addTimeSignature("4/4");
+//       this["stave_2Measure" + (1 - i)].addClef("bass").addTimeSignature("4/4");
+
+//     }
+
+//     this["staveMeasure" + (1 - i)].setContext(context).draw();
+//     Vex.Flow.Formatter.FormatAndDraw(context,
+//       this["staveMeasure" + (1 - i)],
+//       this["notesMeasure" + (1 - i)]);
+
+//     this["stave_2Measure" + (1 - i)].setContext(context).draw();
+//     Vex.Flow.Formatter.FormatAndDraw(context,
+//       this["stave_2Measure" + (1 - i)],
+//       this["notes_2Measure" + (1 - i)]);
+
+//     if (i == j || i == j - 4 || i == j - 8) {
+//       console.log('alamus');
+//       var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
+//         this["stave_2Measure" + (1 - i)]).setType(3);
+//       var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
+//         this["stave_2Measure" + (1 - i)]).setType(1);
+//       brace.setContext(context).draw();
+//       lineLeft.setContext(context).draw()
+//     }
+
+//     if (i + 1 == j || i == j - 5 || i == j - 9) {
+//       xS -= 150;
+//       console.log('jaja');
+//     } else {
+//       xS -= 100;
+//     }
+
+//     if (i == j - 4 || i == j - 8) {
+//       xS = 380;
+//       yS -= 200;
+//       yS2 -= 200;
+//     }
+
+//   }
+
+//   width = 500;
+//   u++;
+//   height += 200;
+//   height2 += 200;
+//   k++;
+// }
+
 
 
 
