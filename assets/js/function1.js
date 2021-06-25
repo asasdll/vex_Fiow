@@ -187,8 +187,8 @@ function add_measure_before() {
   if (measure > 1) {
     for (i = measure; i > 1; i--) {
 
-      CurrentStave = this["staveMeasure" + measure];
-      CurrentStave2 = this["stave_2Measure" + measure];
+      CurrentStave = this["staveMeasure" + i];
+      CurrentStave2 = this["stave_2Measure" + i];
 
       xM = CurrentStave.width + CurrentStave.x;
       yM = CurrentStave.y;
@@ -200,10 +200,12 @@ function add_measure_before() {
         widthM = 150;
         yM = CurrentStave.y += 200;
         yM2 = CurrentStave2.y += 200;
+        console.log('jaja');
       }
 
       this["staveMeasure" + i] = new VF.Stave(xM, yM, widthM);
       this["stave_2Measure" + i] = new VF.Stave(xM, yM2, widthM);
+      console.log(xM, yM, widthM);
 
       if (CurrentStave.x == 380) {
         this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
@@ -214,7 +216,6 @@ function add_measure_before() {
       Vex.Flow.Formatter.FormatAndDraw(context,
         this["staveMeasure" + i],
         this["notesMeasure" + i]);
-      console.log(xM, yM, widthM);
       this["stave_2Measure" + i].setContext(context).draw();
       Vex.Flow.Formatter.FormatAndDraw(context,
         this["stave_2Measure" + i],
@@ -276,7 +277,6 @@ function add_measure_before() {
   }
 
   j = u;
-  console.log(j, u);
   for (i = 1; i <= j; i++) {
     widthS = 0;
 
@@ -291,7 +291,7 @@ function add_measure_before() {
       get_new_note('b', 4, "1r", true),
 
     ];
-    console.log(xS, yS, widthS);
+
 
     this["stave_2Measure" + (1 - i)] = new VF.Stave(xS, yS2, widthS);
     this["notes_2Measure" + (1 - i)] = [
@@ -325,8 +325,6 @@ function add_measure_before() {
     }
     if (i + 1 == j || i == j - 5 || i == j - 9) {
       xS -= 150;
-      console.log('jaja');
-      console.log(j, i);
     } else {
       xS -= 100;
     }
