@@ -26,13 +26,13 @@ var index_note_1 = null;
 var idex_click = null;
 
 
-function get_new_note(key, octave, duration) {
+function get_new_note(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
     clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
-    //align_center: true
+    align_center: position
   })
   //obj.setAttribute('id', 'test555');
 
@@ -42,14 +42,14 @@ function get_new_note(key, octave, duration) {
 }
 
 
-function get_new_note_down(key, octave, duration) {
+function get_new_note_down(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
     clef: 'treble',
     keys: [key + "/" + octave],
     duration: duration,
     auto_stem: true,
-    //align_center: true
+    align_center: position
   })
   //obj.setAttribute('id', 'test555');
 
@@ -62,7 +62,7 @@ function get_new_note_down(key, octave, duration) {
 function draw_notes() {
   VF = Vex.Flow;
   var div = document.getElementById("page")
-  var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+  renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
   renderer.resize(500, 500);
 
@@ -88,13 +88,13 @@ function draw_notes() {
 
 
   notes = [
-    new VF.StaveNote({ keys: ["r/4"], duration: "qr" }),
-    
+    get_new_note('b', 4, "wr", true),
+
 
   ];
 
   notes_2 = [
-    get_new_note_down('b', 4, "wr"),
+    get_new_note_down('b', 4, "wr", true),
 
   ];
 
@@ -119,7 +119,7 @@ function draw_notes() {
   arrindex();
   arrline();
   room_create();
-  
+
 
 
 }
@@ -132,10 +132,10 @@ class FixedStaveNote extends VF.StaveNote {
 
 
 function redraw_notes() {
- 
- 
+
+
   console.log(notes[0].context);
-  
+
   sum_array();
 
   renderer.ctx.clear();
@@ -451,9 +451,9 @@ function add_measure_after() {
   let shift = notes.length + 1;
   let shift1 = notes_2.length + 1;
   notes[shift - 1] = new VF.BarNote();
-  notes[shift] = get_new_note('b', 4, "wr");
+  notes[shift] = get_new_note('b', 4, "wr", true);
   notes_2[shift1 - 1] = new VF.BarNote();
-  notes_2[shift1] = get_new_note('b', 4, "wr");
+  notes_2[shift1] = get_new_note('b', 4, "wr", true);
   redraw_notes();
 }
 
@@ -465,14 +465,14 @@ function add_measure_before() {
   for (i = end; i > 1; i--) {
     notes[i] = notes[i - 2];
   }
-  notes[0] = get_new_note('b', 4, "wr");
+  notes[0] = get_new_note('b', 4, "wr", true);
   notes[1] = new VF.BarNote();
 
   for (u = end1; u > 1; u--) {
     notes_2[u] = notes_2[u - 2];
   }
 
-  notes_2[0] = get_new_note('b', 4, "wr");
+  notes_2[0] = get_new_note('b', 4, "wr", true);
   notes_2[1] = new VF.BarNote();
 
   redraw_notes();
