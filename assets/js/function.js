@@ -32,9 +32,11 @@ function get_new_note(key, octave, duration, position) {
     clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
-    align_center: position
-  })
-  //obj.setAttribute('id', 'test555');
+   // align_center: position,
+    
+  });
+ 
+  
 
 
 
@@ -42,17 +44,17 @@ function get_new_note(key, octave, duration, position) {
 }
 
 
-function get_new_note_down(key, octave, duration, position) {
+function get_new_note_down(key, octave, duration, position,bbt_y) {
 
   let obj = new VF.StaveNote({
     clef: 'treble',
     keys: [key + "/" + octave],
     duration: duration,
     auto_stem: true,
-    align_center: position
-  })
-  //obj.setAttribute('id', 'test555');
-
+    //align_center: position,
+    //displaced: bbt_y,
+  });
+ 
 
 
   return obj;
@@ -88,13 +90,13 @@ function draw_notes() {
 
 
   notes = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "wr"),
+   
+  ]; 
 
-
-  ];
 
   notes_2 = [
-    get_new_note_down('b', 4, "wr", true),
+    get_new_note_down('b', 4, "wr"),
 
   ];
 
@@ -121,7 +123,7 @@ function draw_notes() {
   room_create();
 
 
-
+//console.log(notes);
 }
 /*
 class FixedStaveNote extends VF.StaveNote {
@@ -133,8 +135,8 @@ class FixedStaveNote extends VF.StaveNote {
 
 function redraw_notes() {
 
-
-  console.log(notes[0].context);
+ // notes[0].center_x_shift = 300.2254;
+ // console.log(notes[0].center_x_shift);
 
   sum_array();
 
@@ -251,6 +253,7 @@ function mouseDown(_e) {
   $(".vf-stavenote")
     .mousedown(function (_e) {
       arr_index = $(this).attr("arr-index");
+      arr_ = $(this).attr("id");
       idex_click = arr_index;
 
 

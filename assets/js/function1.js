@@ -9,9 +9,8 @@ function get_new_note(key, octave, duration, position) {
     clef: "treble",
     keys: [key + "/" + octave],
     duration: duration,
-    align_center: position
-
-    //auto_stem: true,
+    align_center: position,
+    auto_stem: true,
     //clef: "treble"
   })
   //obj.setAttribute('id', 'test555');

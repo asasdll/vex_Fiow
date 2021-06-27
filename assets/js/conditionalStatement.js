@@ -16,7 +16,7 @@ var notes = [];
 function fillTheRest(button, version) {
     sum_array();
     let note = arr_sum[arr_index].duration;
-
+console.log(note,arr_index,arr_);
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
     let spaceVal = noteVal - (buttonVal * 2);
