@@ -1,8 +1,9 @@
 var width = 500;
 var height = 100;
 var height2 = 200;
-
-
+var type_array = [];
+var numbet_clik = [];
+var i_c;
 function get_new_note(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
@@ -83,7 +84,7 @@ function draw_notes() {
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
 
-  array_type();
+  array_type("notesMeasure1", "notes_2Measure1");
 
 
 }
@@ -100,6 +101,7 @@ function add_measure_after() {
     this["staveMeasure" + (measure + 1)] = new VF.Stave(PreviousStave.width + PreviousStave.x, height, 100);
     this["notesMeasure" + (measure + 1)] = [
       get_new_note('b', 4, "1r", true),
+
 
     ];
     this["staveMeasure" + (measure + 1)].setContext(context).draw();
@@ -120,6 +122,11 @@ function add_measure_after() {
 
     measure++;
     width -= 100;
+    clik_note(measure);
+    // let notes_1 =  notesMeasure" + measure;
+    console.log("up",i_c);
+    array_type("notesMeasure" + i_c, "notes_2Measure" + i_c);
+    
 
   }
   else {
@@ -158,7 +165,8 @@ function add_measure_after() {
     width = 500;
     measure++;
   }
-
+ // array_type("notesMeasure" + measure, "notes_2Measure" + measure);
+//console.log("ssssaaa");
 }
 
 u = 1;
@@ -185,12 +193,12 @@ function add_measure_before() {
         widthM = 150;
         yM = CurrentStave.y += 200;
         yM2 = CurrentStave2.y += 200;
-        console.log('jaja');
+        //console.log('jaja');
       }
 
       this["staveMeasure" + i] = new VF.Stave(xM, yM, widthM);
       this["stave_2Measure" + i] = new VF.Stave(xM, yM2, widthM);
-      console.log(xM, yM, widthM);
+      //console.log(xM, yM, widthM);
 
       if (CurrentStave.x == 380) {
         this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
@@ -214,6 +222,8 @@ function add_measure_before() {
         brace.setContext(context).draw();
         lineLeft.setContext(context).draw()
       }
+     
+     // array_type("notesMeasure" + i_click, "notes_2Measure" + i_click);
 
     }
   }
@@ -323,18 +333,28 @@ function add_measure_before() {
   width -= 100;
   u++;
 
+  clik_note(u);
+  console.log("down",i_c);
+  array_type("notesMeasure" + i_c, "notes_2Measure" + i_c);
+  //console.log(measure);
 
 
+}
+var i_click = 1;
+function clik_note() {
+
+ i_c = i_click++;
+  
 }
 
 
 
 
-function array_type() {  // new arr-index and id
-
-
-    let type_array = ["type_01" , "type_02"];
-    let i = 0;
+function array_type(type_a, type_b) {  // new arr-index and id
+  
+  type_array.push(type_a, type_b);
+  //console.log(type_array);
+  let i = 0;
   $('.vf-stavenote').each(function (e) {
     $(this).attr("array-type", type_array[i])
     i++;
