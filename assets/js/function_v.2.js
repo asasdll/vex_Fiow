@@ -4,6 +4,9 @@ var height2 = 200;
 var type_array = [];
 var numbet_clik = [];
 var i_c;
+var array_a = 1;
+
+
 function get_new_note(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
@@ -64,6 +67,8 @@ function draw_notes() {
 
   notesMeasure1 = [
     get_new_note('b', 4, "w"),
+    get_new_note('b', 4, "w"),
+    
   ];
 
   notes_2Measure1 = [
@@ -124,9 +129,9 @@ function add_measure_after() {
     width -= 100;
     clik_note(measure);
     // let notes_1 =  notesMeasure" + measure;
-    console.log("up",i_c);
+    console.log("up", i_c);
     array_type("notesMeasure" + i_c, "notes_2Measure" + i_c);
-    
+
 
   }
   else {
@@ -165,8 +170,8 @@ function add_measure_after() {
     width = 500;
     measure++;
   }
- // array_type("notesMeasure" + measure, "notes_2Measure" + measure);
-//console.log("ssssaaa");
+  // array_type("notesMeasure" + measure, "notes_2Measure" + measure);
+  //console.log("ssssaaa");
 }
 
 u = 1;
@@ -222,8 +227,8 @@ function add_measure_before() {
         brace.setContext(context).draw();
         lineLeft.setContext(context).draw()
       }
-     
-     // array_type("notesMeasure" + i_click, "notes_2Measure" + i_click);
+
+      // array_type("notesMeasure" + i_click, "notes_2Measure" + i_click);
 
     }
   }
@@ -334,7 +339,7 @@ function add_measure_before() {
   u++;
 
   clik_note(u);
-  console.log("down",i_c);
+  console.log("down", i_c);
   array_type("notesMeasure" + i_c, "notes_2Measure" + i_c);
   //console.log(measure);
 
@@ -343,15 +348,157 @@ function add_measure_before() {
 var i_click = 1;
 function clik_note() {
 
- i_c = i_click++;
-  
+  i_c = i_click++;
+
 }
 
 
 
 
+
+function mouseDown(_e) {
+
+
+  $(".vf-stavenote")
+    .mousedown(function (_e) {
+      arr_type = $(this).attr("array-type");
+      obj = eval(arr_type);  // เปลี่ยน  String เป็น obj
+      note_ = obj[0].keys;
+      nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
+
+      e_Click = event.clientY;//413
+      group_notes();  // เรียกใช้งาน arr_notes 
+    
+      const members = [ 
+        {name: "Eve", age: 24}, 
+        {name: "Adam", age: 48}, 
+        {name: "Chris", age: 18}, 
+        {name: "Chris", age: 18}, 
+        {name: "Danny", age: 30}
+     ]
+
+     let result
+for ( let i = 0; i < members.length; i++) {
+  if (members[i].age == 30) {
+     result = i;
+     break
+  }
+}
+console.log(result)
+   
+    
+      $(document).bind('mousemove', function (e) {
+
+        //$( this ).addClass('mousemove', function (e) {
+        var ev_move = e.clientY;//434  เลื่อน เม้า
+        var pixels = $("p").html(ev_move);
+        sum_pixels = e_Click + 10;//443 เลื่อน เม้า
+        del_pix = e_Click - 10;  //  424  เลื่อน เม้า 
+
+        if (ev_move >= sum_pixels) {//443 note_down
+          move_pixel = ev_move;
+          e_Click = sum_pixels;//433
+
+          if (ev_move == move_pixel) {
+
+            search_array = search_array - array_a;
+
+          }
+          // console.log("down",search_array);
+          substr_notes();
+          notes_down();
+
+
+
+        } else if (ev_move <= del_pix) { //note_up
+
+          move_pixel = ev_move;
+          e_Click = del_pix;//433
+
+          if (ev_move == move_pixel) {  //note_up
+            search_array = search_array + array_a;
+
+
+          }
+
+          //   console.log("down",search_array);
+          substr_notes();
+          notes_up();
+
+
+
+
+
+        }
+      });
+
+
+    });
+
+}
+
+
+function notes_up() {
+
+
+  // var idx = arr_index;
+  var key = note_te_k;
+  var octave = note_num_k;
+  var duration = "q";
+  console.log(key, octave, duration);
+
+
+
+
+}
+
+function notes_down() {
+
+
+  //var idx = arr_index;
+  var key = note_te_k;
+  var octave = note_num_k;
+  var duration = "q";
+  console.log(key, octave, duration);
+
+
+
+
+
+}
+
+function substr_notes() {
+
+
+  if (search_array <= arr_notes.length) {
+
+    note_sea = arr_notes[search_array];
+    note_te_k = note_sea.substr(0, 1);  // เเยก note  a-g
+    note_num_k = note_sea.substr(-1); // เเยก ตัวเลข จาก note 0-8
+
+  }
+
+
+}
+
+
+$('html') // unbind mousemove all html
+  .mouseup(function (e) {
+    unBind();
+
+    mouseDown(e); //function mouseDown(e) ใหม่
+
+  });
+
+function unBind() { // unbind mousemove
+  $(document).unbind("mousemove");
+
+}
+
+
+
 function array_type(type_a, type_b) {  // new arr-index and id
-  
+
   type_array.push(type_a, type_b);
   //console.log(type_array);
   let i = 0;
@@ -378,6 +525,7 @@ function group_notes() {
   ];
 
 }
+
 
 
 

@@ -268,14 +268,8 @@ function mouseDown(_e) {
       //console.log(search_array);
 
       //   console.log(search_array,note_key);
-      let previous = Number(arr_index) - 1;
-
-      if (Number(arr_index) != 0) {
-        if (checkIndex == previous) {
-          let button = notes[previous].duration;
-          fillTheRest(button, 'b');
-        }
-      }
+ 
+      //console.log(previous);
 
       $(document).bind('mousemove', function (e) {
 
