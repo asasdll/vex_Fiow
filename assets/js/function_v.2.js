@@ -357,14 +357,15 @@ function add_measure_before() {
 
 
 
-function mouseDown(_e) {
+function mouseDown(e) {
 
-
+//console.log('in');
   $(".vf-stavenote")
-    .mousedown(function (_e) {
+    .mousedown(function (e) {
+      //console.log('in');
       arr_type = $(this).attr("array-type");
       id_ = $(this).attr("id");
-      //console.log(arr_type);
+     // console.log(arr_type);
       obj_note = eval(arr_type);  // เปลี่ยน  String เป็น obj
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
@@ -445,7 +446,7 @@ function notes_up() {
   var octave = note_num_k;
   var duration = "q";
  // console.log(arr_type,obj_note,id_index);
- notesMeasure1[id_index] = get_new_note(key, octave, duration);
+ obj_note[id_index] = get_new_note(key, octave, duration);
  redraw_notes();
 
 
@@ -459,7 +460,7 @@ function notes_down() {
   var octave = note_num_k;
   var duration = "q";
   //console.log(obj_note);
-  notesMeasure1[id_index] = get_new_note(key, octave, duration);
+  obj_note[id_index] = get_new_note(key, octave, duration);
   redraw_notes();
 
 
@@ -489,8 +490,7 @@ $('html') // unbind mousemove all html
   .mouseup(function (e) {
     unBind();
 
-    draw_notes(); //function mouseDown(e) ใหม่
-    console.log("aaaaaa");
+    //mouseDown(e);
 
   });
 
