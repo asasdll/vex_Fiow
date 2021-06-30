@@ -8,6 +8,8 @@ var bok_number = 1;
 var note_sea;
 var note_num_k;
 var id_index;
+var type_v; 
+var type_g;
 
 
 
@@ -365,7 +367,7 @@ function mouseDown(e) {
       //console.log('in');
       arr_type = $(this).attr("array-type");
       id_ = $(this).attr("id");
-     // console.log(arr_type);
+     //console.log(arr_type,id_);
       obj_note = eval(arr_type);  // เปลี่ยน  String เป็น obj
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
@@ -447,7 +449,7 @@ function notes_up() {
   var duration = "q";
  // console.log(arr_type,obj_note,id_index);
  obj_note[id_index] = get_new_note(key, octave, duration);
- redraw_notes();
+ notes_measure_after();
 
 
 
@@ -461,7 +463,7 @@ function notes_down() {
   var duration = "q";
   //console.log(obj_note);
   obj_note[id_index] = get_new_note(key, octave, duration);
-  redraw_notes();
+  notes_measure_after();
 
 
 
@@ -504,8 +506,9 @@ function unBind() { // unbind mousemove
 function array_type(type_a, type_b) {  // new arr-index and id
 
   type_array.push(type_a, type_b);
-  //console.log(type_a, type_b);
-  // console.log(type_array);
+  console.log(type_a,type_b);
+  type_v= type_a; 
+  type_g = type_b;
   let i = 0;
   $('.vf-stavenote').each(function (e) {
     $(this).attr("array-type", type_array[i])
@@ -514,27 +517,15 @@ function array_type(type_a, type_b) {  // new arr-index and id
 
 }
 
-function redraw_notes() {
+function notes_measure_after() {
+ console.log("TEST");
 
- 
-  renderer.ctx.clear();
-  var brace = new Vex.Flow.StaveConnector(staveMeasure1, stave_2Measure1).setType(3);
-  var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1, stave_2Measure1).setType(1);
-  
-
-  staveMeasure1.setContext(context).draw();
-  stave_2Measure1.setContext(context).draw();
-  brace.setContext(context).draw();
-  lineLeft.setContext(context).draw();
-
-  var voice = VF.Beam.generateBeams(notesMeasure1);
-  var voice_2 = VF.Beam.generateBeams(notes_2Measure1); //note เส้นหาย
-  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure1, notesMeasure1);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave_2Measure1, notes_2Measure1);//note เส้นหาย
-  voice.forEach(function (b) { b.setContext(context).draw() });
-  voice_2.forEach(function (b) { b.setContext(context).draw() });
- 
  }
+
+ function notes_measure_before() {
+
+
+}
  
 
 
