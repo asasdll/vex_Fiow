@@ -268,23 +268,7 @@ function add_measure_before() {
       this["staveMeasure" + i] = new VF.Stave(xM, yM, widthM);
       this["stave_2Measure" + i] = new VF.Stave(xM, yM2, widthM);
       //console.log(xM, yM, widthM);
-
-      if (CurrentStave.x == 380) {
-        this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
-        this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
-      }
-
-      if (CurrentStave.x == 380) {
-        var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + i],
-          this["stave_2Measure" + i]).setType(3);
-        var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + i],
-          this["stave_2Measure" + i]).setType(1);
-        brace.setContext(context).draw();
-        lineLeft.setContext(context).draw()
-      }
-
       // array_type("notesMeasure" + i_click, "notes_2Measure" + i_click);
-
     }
   }
 
@@ -308,28 +292,14 @@ function add_measure_before() {
   this["staveMeasure" + 1] = new VF.Stave(xN, yN, widthN);
   this["stave_2Measure" + 1] = new VF.Stave(xN, yN2, widthN);
 
-  if (CurrentStave.x == 380) {
-    this["staveMeasure" + 1].addClef("treble").addTimeSignature("4/4");
-    this["stave_2Measure" + 1].addClef("bass").addTimeSignature("4/4");
-  }
+  this["notesMeasure" + (1 - u)] = [
+    get_new_note('b', 4, "1r", true),
 
-  this["staveMeasure" + 1].setContext(context).draw();
-  Vex.Flow.Formatter.FormatAndDraw(context,
-    this["staveMeasure" + 1],
-    this["notesMeasure" + 1]);
-  this["stave_2Measure" + 1].setContext(context).draw();
-  Vex.Flow.Formatter.FormatAndDraw(context,
-    this["stave_2Measure" + 1],
-    this["notes_2Measure" + 1]);
+  ];
+  this["notes_2Measure" + (1 - u)] = [
+    get_new_note('b', 4, "1r", true),
 
-  if (CurrentStave.x == 380) {
-    var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + 1],
-      this["stave_2Measure" + 1]).setType(3);
-    var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + 1],
-      this["stave_2Measure" + 1]).setType(1);
-    brace.setContext(context).draw();
-    lineLeft.setContext(context).draw()
-  }
+  ];
 
   j = u;
   for (i = 1; i <= j; i++) {
@@ -343,32 +313,8 @@ function add_measure_before() {
 
     bok_number = 1 - i; // เลขห้องหข้างหน้า
     this["staveMeasure" + (1 - i)] = new VF.Stave(xS, yS, widthS); /// ขึ้นบันทัดใหม่
-    this["notesMeasure" + (1 - i)] = [
-      get_new_note('b', 4, "1r", true),
-
-    ];
-
-
     this["stave_2Measure" + (1 - i)] = new VF.Stave(xS, yS2, widthS);
-    this["notes_2Measure" + (1 - i)] = [
-      get_new_note('b', 4, "1r", true),
 
-    ];
-
-    if (i == j || i == j - 4 || i == j - 8) {
-      this["staveMeasure" + (1 - i)].addClef("treble").addTimeSignature("4/4");
-      this["stave_2Measure" + (1 - i)].addClef("bass").addTimeSignature("4/4");
-
-    }
-
-    if (i == j || i == j - 4 || i == j - 8) {
-      var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
-        this["stave_2Measure" + (1 - i)]).setType(3);
-      var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
-        this["stave_2Measure" + (1 - i)]).setType(1);
-      brace.setContext(context).draw();
-      lineLeft.setContext(context).draw()
-    }
     if (i + 1 == j || i == j - 5 || i == j - 9) {
       xS -= 150;
     } else {
@@ -393,8 +339,6 @@ function add_measure_before() {
 
 
 }
-
-
 
 
 
