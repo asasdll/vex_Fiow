@@ -120,21 +120,24 @@ function redraw_notes() {
     }
   }
 
+
   j = u;
-  for (i = 0; i <= j; i++) {
-    this["staveMeasure" + (1 - i)].setContext(context).draw();
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["staveMeasure" + (1 - i)],
-      this["notesMeasure" + (1 - i)]);
+  if (u >= 1) {
+    for (i = 0; i < j; i++) {
+      console.log("staveMeasure" + (1 - i));
+      this["staveMeasure" + (1 - i)].setContext(context).draw();
+      Vex.Flow.Formatter.FormatAndDraw(context,
+        this["staveMeasure" + (1 - i)],
+        this["notesMeasure" + (1 - i)]);
 
-    this["stave_2Measure" + (1 - i)].setContext(context).draw();
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["stave_2Measure" + (1 - i)],
-      this["notes_2Measure" + (1 - i)]);
+      this["stave_2Measure" + (1 - i)].setContext(context).draw();
+      Vex.Flow.Formatter.FormatAndDraw(context,
+        this["stave_2Measure" + (1 - i)],
+        this["notes_2Measure" + (1 - i)]);
+    }
+
+
   }
-
-
-
 }
 
 
@@ -393,6 +396,8 @@ function mouseDown(e) {
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
+      console.log('jaja');
+
       e_Click = event.clientY;//413
       group_notes();  // เรียกใช้งาน arr_notes 
 
@@ -466,7 +471,7 @@ function mouseDown(e) {
 
 function notes_up() {
 
-
+  console.log('jaja1');
   var key = note_te_k;
   var octave = note_num_k;
   var duration = "q";
@@ -482,7 +487,7 @@ function notes_up() {
 
 function notes_down() {
 
-
+  console.log('jaja2');
   var key = note_te_k;
   var octave = note_num_k;
   var duration = "q";
@@ -547,13 +552,13 @@ function array_type(type_a, type_b) {  // new arr-index and id
 }
 
 function setStyle() {
- 
+
   obj_note[id_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-  
+
 }
 
 
-function click_style(){
+function click_style() {
   setStyle();
   redraw_notes();
 
