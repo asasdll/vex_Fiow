@@ -99,7 +99,40 @@ function draw_notes() {
 
   //array_type("notesMeasure1", "notesMeasure1", "notes_2Measure1"); //test 2 array
   array_type("notesMeasure1", "notes_2Measure1");
- 
+
+
+
+}
+
+function redraw_notes() {
+  renderer.ctx.clear();
+
+  if (measure > 1) {
+    for (i = measure; i > 1; i--) {
+      this["staveMeasure" + i].setContext(context).draw();
+      Vex.Flow.Formatter.FormatAndDraw(context,
+        this["staveMeasure" + i],
+        this["notesMeasure" + i]);
+      this["stave_2Measure" + i].setContext(context).draw();
+      Vex.Flow.Formatter.FormatAndDraw(context,
+        this["stave_2Measure" + i],
+        this["notes_2Measure" + i]);
+    }
+  }
+
+  j = u;
+  for (i = 0; i <= j; i++) {
+    this["staveMeasure" + (1 - i)].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["staveMeasure" + (1 - i)],
+      this["notesMeasure" + (1 - i)]);
+
+    this["stave_2Measure" + (1 - i)].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["stave_2Measure" + (1 - i)],
+      this["notes_2Measure" + (1 - i)]);
+  }
+
 
 
 }
@@ -138,7 +171,7 @@ function add_measure_after() {
     measure++;
     width -= 100;
 
-//console.log("ox");
+    //console.log("ox");
 
 
   }
@@ -178,9 +211,9 @@ function add_measure_after() {
     height2 += 200;
     width = 500;
     measure++;
-   // console.log("pp");
+    // console.log("pp");
   }
- 
+
   redraw.push(measure);
   array_type("notesMeasure" + measure, "notes_2Measure" + measure);
 }
@@ -220,15 +253,6 @@ function add_measure_before() {
         this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
         this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
       }
-
-      this["staveMeasure" + i].setContext(context).draw();
-      Vex.Flow.Formatter.FormatAndDraw(context,
-        this["staveMeasure" + i],
-        this["notesMeasure" + i]);
-      this["stave_2Measure" + i].setContext(context).draw();
-      Vex.Flow.Formatter.FormatAndDraw(context,
-        this["stave_2Measure" + i],
-        this["notes_2Measure" + i]);
 
       if (CurrentStave.x == 380) {
         var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + i],
@@ -317,16 +341,6 @@ function add_measure_before() {
 
     }
 
-    this["staveMeasure" + (1 - i)].setContext(context).draw();
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["staveMeasure" + (1 - i)],
-      this["notesMeasure" + (1 - i)]);
-
-    this["stave_2Measure" + (1 - i)].setContext(context).draw();
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["stave_2Measure" + (1 - i)],
-      this["notes_2Measure" + (1 - i)]);
-
     if (i == j || i == j - 4 || i == j - 8) {
       var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + (1 - i)],
         this["stave_2Measure" + (1 - i)]).setType(3);
@@ -350,6 +364,7 @@ function add_measure_before() {
   width -= 100;
   u++;
 
+  redraw_notes();
   //console.log('เพิ่มข้างหน้า',bok_number);
   redraw.unshift(bok_number);
   array_type("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
@@ -374,17 +389,17 @@ function mouseDown(e) {
       id_ = $(this).attr("id");
       //console.log(arr_type,id_);
       obj_note = eval(arr_type);  // เปลี่ยน  String เป็น obj
-    //console.log(obj_note,arr_type); 
+      //console.log(obj_note,arr_type); 
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
       e_Click = event.clientY;//413
       group_notes();  // เรียกใช้งาน arr_notes 
 
- 
+
       //redraw.sort();
-     // console.log(redraw);
-   
+      // console.log(redraw);
+
       let note_id = [];
       for (let i = 0; i < obj_note.length; i++) {
 
@@ -501,12 +516,12 @@ $('html') // unbind mousemove all html
   .mouseup(function (e) {
     unBind();
 
-   
-    
+
+
   });
 
- 
-  
+
+
 function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
 
@@ -528,15 +543,7 @@ function array_type(type_a, type_b) {  // new arr-index and id
 
 }
 
-function notes_measure_after() {
- // renderer.ctx.clear();
-  
- //a = [1,2,3,4,5]
- console.log(redraw); //  redraw =  [-3,-2,-1,0,1,2,3];
- 
 
-
-}
 
 
 
