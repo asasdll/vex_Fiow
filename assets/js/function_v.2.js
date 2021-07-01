@@ -96,8 +96,8 @@ function draw_notes() {
   Vex.Flow.Formatter.FormatAndDraw(context, stave_2Measure1, notes_2Measure1);//note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
-
-  //array_type("notesMeasure1", "notesMeasure1", "notes_2Measure1"); //test 2 array
+  
+  
   array_type("notesMeasure1", "notes_2Measure1");
 
 
@@ -124,7 +124,7 @@ function redraw_notes() {
   j = u;
   if (u >= 1) {
     for (i = 0; i < j; i++) {
-      console.log("staveMeasure" + (1 - i));
+      //console.log("staveMeasure" + (1 - i));
       this["staveMeasure" + (1 - i)].setContext(context).draw();
       Vex.Flow.Formatter.FormatAndDraw(context,
         this["staveMeasure" + (1 - i)],
@@ -138,6 +138,8 @@ function redraw_notes() {
 
 
   }
+ console.log(type_array);
+  //array_type(type_a, type_b);
 }
 
 
@@ -381,13 +383,12 @@ function add_measure_before() {
 
 
 
-
 function mouseDown(e) {
 
   //console.log('in');
   $(".vf-stavenote")
     .mousedown(function (e) {
-      //console.log('in');
+  
       arr_type = $(this).attr("array-type");
       id_ = $(this).attr("id");
       //console.log(arr_type,id_);
@@ -396,7 +397,7 @@ function mouseDown(e) {
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
-      console.log('jaja');
+      
 
       e_Click = event.clientY;//413
       group_notes();  // เรียกใช้งาน arr_notes 
@@ -471,14 +472,12 @@ function mouseDown(e) {
 
 function notes_up() {
 
-  console.log('jaja1');
   var key = note_te_k;
   var octave = note_num_k;
   var duration = "q";
-  console.log('jaja1');
-  onsole.log(key,octave);
+
   obj_note[id_index] = get_new_note(key, octave, duration);
-  //notesMeasure1[0] = get_new_note(key, octave, duration);
+
   setStyle();
   redraw_notes();
 
@@ -492,10 +491,8 @@ function notes_down() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = "q";
-  console.log(key,octave);
-  console.log('jaja2');
+
   obj_note[id_index] = get_new_note(key, octave, duration);
-  //notesMeasure1[0] = get_new_note(key, octave, duration);
   setStyle();
   redraw_notes();
 
@@ -508,7 +505,7 @@ function notes_down() {
 function substr_notes(value) {
 
   if (value <= arr_notes.length) {
-    // console.log(value);
+
     note_sea = arr_notes[value];
     note_te_k = note_sea.substr(0, 1);  // เเยก note  a-g
     note_num_k = note_sea.substr(-1); // เเยก ตัวเลข จาก note 0-8*/
@@ -524,10 +521,9 @@ function substr_notes(value) {
 
 $('html') // unbind mousemove all html
   .mouseup(function (e) {
-   // unBind();
-
-
-
+   unBind();
+   mouseDown(e);
+  // array_type();
   });
 
 
@@ -540,9 +536,10 @@ function unBind() { // unbind mousemove
 
 
 function array_type(type_a, type_b) {  // new arr-index and id
+//console.log("55",type_a, type_b);
 
   type_array.push(type_a, type_b);
-  //console.log(type_a,type_b);
+  //console.log(type_array);
   type_v = type_a;
   type_g = type_b;
   let i = 0;
@@ -551,7 +548,10 @@ function array_type(type_a, type_b) {  // new arr-index and id
     i++;
   });
 
+
+
 }
+
 
 function setStyle() {
 
@@ -595,4 +595,5 @@ function group_notes() {
 
 
 
-window.addEventListener('load', draw_notes);
+
+window.addEventListener('load', draw_notes,mouseDown);
