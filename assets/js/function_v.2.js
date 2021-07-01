@@ -118,7 +118,7 @@ function redraw_notes() {
         this["stave_2Measure" + i],
         this["notes_2Measure" + i]);
     }
-    type_note();
+   
   }
 
 
@@ -136,9 +136,10 @@ function redraw_notes() {
         this["stave_2Measure" + (1 - i)],
         this["notes_2Measure" + (1 - i)]);
     }
-    type_note();
+   
 
   }
+  
 
 }
 
@@ -373,7 +374,7 @@ function add_measure_before() {
   redraw_notes();
   //console.log('เพิ่มข้างหน้า',bok_number);
   redraw.unshift(bok_number);
-  array_type("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
+  array_type_2("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
 
 
 
@@ -385,7 +386,7 @@ function add_measure_before() {
 
 
 function mouseDown(e) {
-
+ 
   //console.log('in');
   $(".vf-stavenote")
     .mousedown(function (e) {
@@ -393,10 +394,10 @@ function mouseDown(e) {
       arr_type = $(this).attr("array-type");
       id_ = $(this).attr("id");
 
-      console.log("test Error");
+      console.log(arr_type,id_);
 
       obj_note = eval(arr_type);  // เปลี่ยน  String เป็น obj
-      //console.log(obj_note,arr_type); 
+       
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
@@ -419,7 +420,7 @@ function mouseDown(e) {
       var id_res = id_.substr(3);
       id_index = note_id.indexOf(id_res);// id
       var search_array = arr_notes.indexOf(nots_str); // หา index note 29
-     click_style();
+      click_style();
 
       $(document).bind('mousemove', function (e) {
 
@@ -479,9 +480,10 @@ function notes_up() {
   var octave = note_num_k;
   var duration = "q";
     console.log(key,octave);
+    console.log(type_array);
   obj_note[id_index] = get_new_note(key, octave, duration);
 
- // setStyle();
+  setStyle();
   redraw_notes();
 
 
@@ -495,9 +497,9 @@ function notes_down() {
   var octave = note_num_k;
   var duration = "q";
   console.log(key,octave);
-  console.log(obj_note,obj_note);
-  obj_note[obj_note] = get_new_note(key, octave, duration);
-  //setStyle();
+  console.log(type_array);
+  obj_note[id_index] = get_new_note(key, octave, duration);
+  setStyle();
   redraw_notes();
 
 
@@ -544,10 +546,16 @@ function array_type(type_a, type_b) {  // new arr-index and id
   type_g = type_b;
   type_array.push(type_v, type_g);
 
-  type_note();
-
-
 }
+
+function array_type_2(type_a, type_b) {
+
+  type_v = type_a;
+  type_g = type_b;
+  type_array.unshift(type_v, type_g);
+  
+}
+
 
 function type_note() {
   let i = 0;
@@ -555,9 +563,10 @@ function type_note() {
   $(".vf-stavenote").each(function (e) {
     $(this).attr("array-type", type_array[i])
     i++;
-    //console.log(type_array[i]);
+    
 
   });
+  
 }
 
 
@@ -570,7 +579,7 @@ function setStyle() {
 
 
 function click_style() {
- // setStyle();
+  setStyle();
   redraw_notes();
 
 };
