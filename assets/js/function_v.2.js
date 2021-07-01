@@ -117,7 +117,14 @@ function redraw_notes() {
       Vex.Flow.Formatter.FormatAndDraw(context,
         this["stave_2Measure" + i],
         this["notes_2Measure" + i]);
+
+      var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
+      var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
+
+      voice.forEach(function (b) { b.setContext(context).draw() });
+      voice_2.forEach(function (b) { b.setContext(context).draw() });
     }
+
 
   }
 
@@ -135,6 +142,12 @@ function redraw_notes() {
       Vex.Flow.Formatter.FormatAndDraw(context,
         this["stave_2Measure" + (1 - i)],
         this["notes_2Measure" + (1 - i)]);
+
+      var voice = VF.Beam.generateBeams(this["notesMeasure" + (1 - i)]);
+      var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + (1 - i)]);
+
+      voice.forEach(function (b) { b.setContext(context).draw() });
+      voice_2.forEach(function (b) { b.setContext(context).draw() });
     }
 
 
