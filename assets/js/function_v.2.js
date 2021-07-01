@@ -96,8 +96,8 @@ function draw_notes() {
   Vex.Flow.Formatter.FormatAndDraw(context, stave_2Measure1, notes_2Measure1);//note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
-  
-  
+
+
   array_type("notesMeasure1", "notes_2Measure1");
 
 
@@ -118,6 +118,7 @@ function redraw_notes() {
         this["stave_2Measure" + i],
         this["notes_2Measure" + i]);
     }
+    type_note();
   }
 
 
@@ -135,11 +136,10 @@ function redraw_notes() {
         this["stave_2Measure" + (1 - i)],
         this["notes_2Measure" + (1 - i)]);
     }
-
+    type_note();
 
   }
- console.log(type_array);
-  //array_type(type_a, type_b);
+
 }
 
 
@@ -218,9 +218,10 @@ function add_measure_after() {
     measure++;
     // console.log("pp");
   }
+  let m = measure;
+  redraw.push(m);
 
-  redraw.push(measure);
-  array_type("notesMeasure" + measure, "notes_2Measure" + measure);
+  array_type("notesMeasure" + m, "notes_2Measure" + m);
 }
 
 u = 1;
@@ -388,16 +389,18 @@ function mouseDown(e) {
   //console.log('in');
   $(".vf-stavenote")
     .mousedown(function (e) {
-  
+      type_note();
       arr_type = $(this).attr("array-type");
       id_ = $(this).attr("id");
-      //console.log(arr_type,id_);
+
+      console.log("test Error");
+
       obj_note = eval(arr_type);  // เปลี่ยน  String เป็น obj
       //console.log(obj_note,arr_type); 
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
-      
+
 
       e_Click = event.clientY;//413
       group_notes();  // เรียกใช้งาน arr_notes 
@@ -416,13 +419,13 @@ function mouseDown(e) {
       var id_res = id_.substr(3);
       id_index = note_id.indexOf(id_res);// id
       var search_array = arr_notes.indexOf(nots_str); // หา index note 29
-      click_style();
+     click_style();
 
       $(document).bind('mousemove', function (e) {
 
         //$( this ).addClass('mousemove', function (e) {
         var ev_move = e.clientY;//434  เลื่อน เม้า
-        var pixels = $("p").html(ev_move);
+
         sum_pixels = e_Click + 10;//443 เลื่อน เม้า
         del_pix = e_Click - 10;  //  424  เลื่อน เม้า 
         var array_a = 1;
@@ -475,10 +478,10 @@ function notes_up() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = "q";
-
+    console.log(key,octave);
   obj_note[id_index] = get_new_note(key, octave, duration);
 
-  setStyle();
+ // setStyle();
   redraw_notes();
 
 
@@ -491,9 +494,10 @@ function notes_down() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = "q";
-
-  obj_note[id_index] = get_new_note(key, octave, duration);
-  setStyle();
+  console.log(key,octave);
+  console.log(obj_note,obj_note);
+  obj_note[obj_note] = get_new_note(key, octave, duration);
+  //setStyle();
   redraw_notes();
 
 
@@ -521,9 +525,8 @@ function substr_notes(value) {
 
 $('html') // unbind mousemove all html
   .mouseup(function (e) {
-   unBind();
-   mouseDown(e);
-  // array_type();
+    unBind();
+    mouseDown();
   });
 
 
@@ -536,21 +539,27 @@ function unBind() { // unbind mousemove
 
 
 function array_type(type_a, type_b) {  // new arr-index and id
-//console.log("55",type_a, type_b);
 
-  type_array.push(type_a, type_b);
-  //console.log(type_array);
   type_v = type_a;
   type_g = type_b;
-  let i = 0;
-  $('.vf-stavenote').each(function (e) {
-    $(this).attr("array-type", type_array[i])
-    i++;
-  });
+  type_array.push(type_v, type_g);
 
+  type_note();
 
 
 }
+
+function type_note() {
+  let i = 0;
+
+  $(".vf-stavenote").each(function (e) {
+    $(this).attr("array-type", type_array[i])
+    i++;
+    //console.log(type_array[i]);
+
+  });
+}
+
 
 
 function setStyle() {
@@ -561,7 +570,7 @@ function setStyle() {
 
 
 function click_style() {
-  setStyle();
+ // setStyle();
   redraw_notes();
 
 };
@@ -596,4 +605,4 @@ function group_notes() {
 
 
 
-window.addEventListener('load', draw_notes,mouseDown);
+window.addEventListener('load', draw_notes, mouseDown);
