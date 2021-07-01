@@ -471,7 +471,8 @@ function notes_up() {
   var octave = note_num_k;
   var duration = "q";
   // console.log(arr_type,obj_note,id_index);
-  obj_note[id_index] = get_new_note(key, octave, duration);
+  //obj_note[id_index] = get_new_note(key, octave, duration);
+  staveMeasure1[0] = get_new_note(key, octave, duration);
   setStyle();
   redraw_notes();
 
@@ -486,7 +487,8 @@ function notes_down() {
   var octave = note_num_k;
   var duration = "q";
   //console.log(obj_note);
-  obj_note[id_index] = get_new_note(key, octave, duration);
+  //obj_note[id_index] = get_new_note(key, octave, duration);
+  staveMeasure1[0] = get_new_note(key, octave, duration);
   setStyle();
   redraw_notes();
 
