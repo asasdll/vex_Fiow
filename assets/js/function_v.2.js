@@ -409,9 +409,8 @@ function mouseDown(e) {
 
       var id_res = id_.substr(3);
       id_index = note_id.indexOf(id_res);// id
-
       var search_array = arr_notes.indexOf(nots_str); // หา index note 29
-      //console.log(nots_str,id_index,search_array);
+      click_style();
 
       $(document).bind('mousemove', function (e) {
 
@@ -473,7 +472,8 @@ function notes_up() {
   var duration = "q";
   // console.log(arr_type,obj_note,id_index);
   obj_note[id_index] = get_new_note(key, octave, duration);
-  notes_measure_after();
+  setStyle();
+  redraw_notes();
 
 
 
@@ -487,7 +487,8 @@ function notes_down() {
   var duration = "q";
   //console.log(obj_note);
   obj_note[id_index] = get_new_note(key, octave, duration);
-  notes_measure_after();
+  setStyle();
+  redraw_notes();
 
 
 
@@ -542,6 +543,19 @@ function array_type(type_a, type_b) {  // new arr-index and id
   });
 
 }
+
+function setStyle() {
+ 
+  obj_note[id_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+  
+}
+
+
+function click_style(){
+  setStyle();
+  redraw_notes();
+
+};
 
 
 

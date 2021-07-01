@@ -73,30 +73,57 @@ function draw_notes() {
 
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
-   // measure 1
-   var staveMeasure1 = new Vex.Flow.Stave(10, 0, 250);
-   staveMeasure1.addClef("treble").setContext(context).draw();
- 
-   var notesMeasure1 = [
-    new Vex.Flow.StaveNote({ keys: ["c/4"], duration: "q" }),
+  stave = new VF.Stave(40, 100, 400);
+  stave_2 = new VF.Stave(40, 200, 400);
+
+
+  stave.addClef("treble").addTimeSignature("4/4");
+  stave_2.addClef("bass").addTimeSignature("4/4");
+
+
+  var brace = new Vex.Flow.StaveConnector(stave, stave_2).setType(3);
+  var lineLeft = new Vex.Flow.StaveConnector(stave, stave_2).setType(1);
+  var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(0);
+
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+
+
+
+  notes = [
+    get_new_note('b', 4, "wr"),
    
+  ]; 
+
+
+  notes_2 = [
+    get_new_note_down('b', 4, "wr"),
+
   ];
 
-  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure1, notesMeasure1);
-  
-  var staveMeasure2 = new Vex.Flow.Stave(
-    staveMeasure1.width + staveMeasure1.x,
-    0,
-    200,
-  );
-  staveMeasure2.setContext(context).draw();
- 
-   var notesMeasure2 = [
-    new Vex.Flow.StaveNote({ keys: ["c/4"], duration: "q" }),
-    
-  ];
+  sum_array();
 
-  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure2, notesMeasure2);
+  //voice.addIterables(notes);
+  var children = notes.concat(notes_2);
+
+
+  window.renderer = renderer;
+  stave.setContext(context).draw();
+  stave_2.setContext(context).draw();
+  brace.setContext(context).draw();
+  lineLeft.setContext(context).draw();
+  lineRight.setContext(context).draw();
+  var voice = VF.Beam.generateBeams(notes);
+  var voice_2 = VF.Beam.generateBeams(notes_2); //note เส้นหาย
+  Vex.Flow.Formatter.FormatAndDraw(context, stave, notes);
+  Vex.Flow.Formatter.FormatAndDraw(context, stave_2, notes_2);//note เส้นหาย
+  voice.forEach(function (b) { b.setContext(context).draw() });
+  voice_2.forEach(function (b) { b.setContext(context).draw() });
+  arrindex();
+  arrline();
+  room_create();
+
+
+//console.log(notes);
 }
 /*
 class FixedStaveNote extends VF.StaveNote {
@@ -265,7 +292,7 @@ function mouseDown(_e) {
           }
 
           substr_notes();
-          notes_down();
+          //notes_down();
 
 
 
@@ -281,7 +308,7 @@ function mouseDown(_e) {
           }
 
           substr_notes();
-          notes_up();
+         // notes_up();
 
 
 
@@ -539,10 +566,7 @@ function index_array() {
 
   }
 
-  function box_note() {
-
-  }
-
+ 
 
 
 
