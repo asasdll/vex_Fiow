@@ -118,7 +118,7 @@ function redraw_notes() {
         this["stave_2Measure" + i],
         this["notes_2Measure" + i]);
     }
-   
+
   }
 
 
@@ -136,10 +136,10 @@ function redraw_notes() {
         this["stave_2Measure" + (1 - i)],
         this["notes_2Measure" + (1 - i)]);
     }
-   
+
 
   }
-  
+
 
 }
 
@@ -386,18 +386,17 @@ function add_measure_before() {
 
 
 function mouseDown(e) {
- 
+
   //console.log('in');
   $(".vf-stavenote")
     .mousedown(function (e) {
       type_note();
       arr_type = $(this).attr("array-type");
       id_ = $(this).attr("id");
-
-      console.log(arr_type,id_);
+      note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
       obj_note = eval(arr_type);  // เปลี่ยน  String เป็น obj
-       
+
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
@@ -479,10 +478,12 @@ function notes_up() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = "q";
-    console.log(key,octave);
-    console.log(type_array);
-  obj_note[id_index] = get_new_note(key, octave, duration);
 
+  if (note_substr == "notesMeasure") {
+    obj_note[id_index] = get_new_note(key, octave, duration);
+  } else {
+    obj_note[id_index] = get_new_note_down(key, octave, duration);
+  }
   setStyle();
   redraw_notes();
 
@@ -492,13 +493,15 @@ function notes_up() {
 
 function notes_down() {
 
-
   var key = note_te_k;
   var octave = note_num_k;
   var duration = "q";
-  console.log(key,octave);
-  console.log(type_array);
-  obj_note[id_index] = get_new_note(key, octave, duration);
+  if (note_substr == "notesMeasure") {
+    obj_note[id_index] = get_new_note(key, octave, duration);
+  } else {
+    obj_note[id_index] = get_new_note_down(key, octave, duration);
+  }
+
   setStyle();
   redraw_notes();
 
@@ -553,7 +556,7 @@ function array_type_2(type_a, type_b) {
   type_v = type_a;
   type_g = type_b;
   type_array.unshift(type_v, type_g);
-  
+
 }
 
 
@@ -563,10 +566,10 @@ function type_note() {
   $(".vf-stavenote").each(function (e) {
     $(this).attr("array-type", type_array[i])
     i++;
-    
+
 
   });
-  
+
 }
 
 
