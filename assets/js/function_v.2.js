@@ -125,7 +125,7 @@ function redraw_notes() {
       voice_2.forEach(function (b) { b.setContext(context).draw() });
     }
 
-
+   // type_note();
   }
 
 
@@ -152,6 +152,7 @@ function redraw_notes() {
 
 
   }
+  //type_note();
 
 
 }
@@ -190,8 +191,8 @@ function add_measure_after() {
     measure++;
     width -= 100;
 
-    //console.log("ox");
-
+   // console.log("ox");
+   // type_note();
 
   }
   else {
@@ -230,12 +231,13 @@ function add_measure_after() {
     height2 += 200;
     width = 500;
     measure++;
-    // console.log("pp");
+    
   }
   let m = measure;
   redraw.push(m);
-
+ 
   array_type("notesMeasure" + m, "notes_2Measure" + m);
+  
 }
 
 u = 1;
@@ -347,7 +349,7 @@ function mouseDown(e) {
   //console.log('in');
   $(".vf-stavenote")
     .mousedown(function (e) {
-      type_note();
+    //  
       arr_type = $(this).attr("array-type");
       id_ = $(this).attr("id");
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
@@ -438,11 +440,14 @@ function notes_up() {
 
   if (note_substr == "notesMeasure") {
     obj_note[id_index] = get_new_note(key, octave, duration);
+    setStyle();
+    redraw_notes();
   } else {
     obj_note[id_index] = get_new_note_down(key, octave, duration);
+    setStyle();
+    redraw_notes();
   }
-  setStyle();
-  redraw_notes();
+
 
 
 
@@ -455,12 +460,14 @@ function notes_down() {
   var duration = "q";
   if (note_substr == "notesMeasure") {
     obj_note[id_index] = get_new_note(key, octave, duration);
+    setStyle();
+    redraw_notes();
   } else {
     obj_note[id_index] = get_new_note_down(key, octave, duration);
+    setStyle();
+    redraw_notes();
   }
 
-  setStyle();
-  redraw_notes();
 
 
 
@@ -489,6 +496,7 @@ $('html') // unbind mousemove all html
   .mouseup(function (e) {
     unBind();
     mouseDown();
+    type_note();
   });
 
 
@@ -505,6 +513,8 @@ function array_type(type_a, type_b) {  // new arr-index and id
   type_v = type_a;
   type_g = type_b;
   type_array.push(type_v, type_g);
+ 
+ 
 
 }
 
@@ -519,9 +529,12 @@ function array_type_2(type_a, type_b) {
 
 function type_note() {
   let i = 0;
-
-  $(".vf-stavenote").each(function (e) {
-    $(this).attr("array-type", type_array[i])
+ let type_a =  type_array;
+  //let type_a = ["A_1","B_1","A_2","B_2","A_3","B_3","A_4","B_4"];
+ console.log(type_a);
+  $('.vf-stavenote').each(function (e) {
+    //$(this).attr("array-type", type_array[i]),
+    $(this).attr("array-id", type_a[i]);
     i++;
 
 
