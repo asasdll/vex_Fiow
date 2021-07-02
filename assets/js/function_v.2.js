@@ -75,7 +75,9 @@ function draw_notes() {
 
   notesMeasure1 = [
     get_new_note('b', 4, "q"),
-    //get_new_note('b', 4, "q"),
+    // get_new_note('b', 4, "q"),
+    // get_new_note('b', 4, "q"),
+    // get_new_note('b', 4, "q"),
 
   ];
 
@@ -350,13 +352,13 @@ function mouseDown(e) {
       type_note();
       arr_type = $(this).attr("array-type");
       id_ = $(this).attr("id");
+      console.log(arr_type);
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
       obj_note = eval(arr_type);  // เปลี่ยน  String เป็น obj
 
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
-
 
 
       e_Click = event.clientY;//413
@@ -375,6 +377,7 @@ function mouseDown(e) {
 
       var id_res = id_.substr(3);
       id_index = note_id.indexOf(id_res);// id
+      console.log(id_index);
       var search_array = arr_notes.indexOf(nots_str); // หา index note 29
       click_style();
 
@@ -436,6 +439,7 @@ function notes_up() {
   var octave = note_num_k;
   var duration = "q";
 
+  console.log(obj_note[id_index])
   if (note_substr == "notesMeasure") {
     obj_note[id_index] = get_new_note(key, octave, duration);
   } else {
@@ -458,6 +462,8 @@ function notes_down() {
   } else {
     obj_note[id_index] = get_new_note_down(key, octave, duration);
   }
+
+  console.log(obj_note[id_index])
 
   setStyle();
   redraw_notes();
@@ -501,7 +507,6 @@ function unBind() { // unbind mousemove
 
 
 function array_type(type_a, type_b) {  // new arr-index and id
-
   type_v = type_a;
   type_g = type_b;
   type_array.push(type_v, type_g);
