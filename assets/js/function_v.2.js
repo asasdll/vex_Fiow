@@ -237,9 +237,7 @@ function add_measure_after() {
   }
   let m = measure;
   redraw.push(m);
-console.log(m);
   array_type("notesMeasure" + m, "notes_2Measure" + m);
-  
 
 }
 
@@ -341,6 +339,7 @@ function add_measure_before() {
   array_type_2("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
  // array_type_2();
 
+
 }
 
 
@@ -352,7 +351,7 @@ function mouseDown(e) {
     .mousedown(function (e) {
       
       //  
-      arr_type = $(this).attr("array-type");
+      arr_type = $(this).attr("type");
       id_ = $(this).attr("id");
       //console.log(arr_type);
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
@@ -516,8 +515,8 @@ function unBind() { // unbind mousemove
 function array_type(type_a, type_b) {  // new arr-index and id
   const type_v = type_a;
   const type_g = type_b;
-  type_array.push(type_v, type_g);
-  //type_array.unshift(type_v, type_g);
+  //type_array.push(type_v, type_g);
+  type_array.unshift(type_v, type_g);
   type_note();
 
 
@@ -528,8 +527,8 @@ function array_type_2(type_a, type_b) {
 
   const  type_v = type_a;
   const type_g = type_b;
- type_array.unshift(type_v, type_g);
-  //type_array.push(type_v, type_g);
+ //type_array.unshift(type_v, type_g);
+  type_array.push(type_v, type_g);
   type_note();
 
 }
