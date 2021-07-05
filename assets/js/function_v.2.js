@@ -21,7 +21,7 @@ function get_new_note(key, octave, duration, position) {
         keys: [key + "/" + octave],
         duration: duration,
         align_center: position,
-        // auto_stem: true,
+        auto_stem: true,
         //clef: "treble"
     });
     //obj.setAttribute('id', 'test555');
@@ -73,15 +73,15 @@ function draw_notes() {
     voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
     notesMeasure1001 = [
-        get_new_note('b', 4, "w"),
-        // get_new_note('b', 4, "q"),
+        get_new_note('b', 4, "1r", true),
+        //get_new_note('a', 4, "q"),
         // get_new_note('b', 4, "q"),
         // get_new_note('b', 4, "q"),
 
     ];
 
     notes_2Measure1001 = [
-        get_new_note_down('b', 4, "w"),
+        get_new_note_down('b', 4, "1r", true),
     ];
 
     //voice.addTickables(notes);
@@ -269,7 +269,7 @@ function add_measure_before() {
                 widthM = 150;
                 yM = CurrentStave.y += 200;
                 yM2 = CurrentStave2.y += 200;
-                //console.log('jaja');
+
             }
 
             this["staveMeasure" + i] = new VF.Stave(xM, yM, widthM);
@@ -342,30 +342,28 @@ function add_measure_before() {
     u++;
 
     array_type_2("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
-    //type_note();
-    // console.log(bok_number);
     redraw_notes();
 }
 
 
 
 function mouseDown() {
-    //console.log('in');
     $(".vf-stavenote")
         .mousedown(function(e) {
 
-            // console.log('b');
             type_note();
 
             let arr_type = $(this).attr("type");
             id_ = $(this).attr("id");
-            console.log(arr_type, id_);
 
+            console.log(notesMeasure1001);
             note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
             obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
 
             note_ = obj_note[0].keys;
+            note_duration = obj_note[0].duration;
+            console.log(note_duration);
             nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
 
@@ -375,20 +373,23 @@ function mouseDown() {
 
             let note_id = [];
             for (let i = 0; i < obj_note.length; i++) {
-                console.log('bab');
+
                 note_id.push(obj_note[i].attrs.id);
 
             }
 
             var id_res = id_.substr(3);
             id_index = note_id.indexOf(id_res); // id
-            //  console.log(id_index);
             var search_array = arr_notes.indexOf(nots_str); // หา index note 29
             click_style();
 
-            $(document).bind('mousemove', function(e) {
 
-                //$( this ).addClass('mousemove', function (e) {
+
+
+
+
+
+            $(document).bind('mousemove', function(e) {
                 var ev_move = e.clientY; //434  เลื่อน เม้า
 
                 sum_pixels = e_Click + 10; //443 เลื่อน เม้า
@@ -500,10 +501,8 @@ function unBind() { // unbind mousemove
 
 
 function array_type(type_a, type_b) { // new arr-index and id
-    //console.log('jaja');
     const type_v = type_a;
     const type_g = type_b;
-    // type_array.push(type_v, type_g);
     type_array.unshift(type_v, type_g);
     type_note();
 
@@ -514,7 +513,6 @@ function array_type_2(type_a, type_b) {
     const type_v = type_a;
     const type_g = type_b;
     type_array.push(type_v, type_g);
-    //type_array.push(type_v, type_g);
 
 
 
@@ -524,13 +522,11 @@ function array_type_2(type_a, type_b) {
 function type_note() {
     let i = 0;
     const type_a = type_array;
-    //let ty = ["A_-2","B_-2","A_-1","B_-1","A_1","B_1","A_2","B_2","A_3","B_3","A_4","B_4","A_5","B_5"];
-    //console.log(type_a);
+
     $('.vf-stavenote').each(function() {
 
         $(this).attr("type", type_a[i]);
         id_ = $(this).attr("id");
-        console.log(id_, type_a[i]);
         i++;
 
 
@@ -575,11 +571,5 @@ function group_notes() {
 
 }
 
-
-
-// $(document).ready(function () {
-//   console.log('a');
-//   type_note();
-// });
 
 window.addEventListener('load', draw_notes);
