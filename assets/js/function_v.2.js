@@ -21,7 +21,7 @@ function get_new_note(key, octave, duration, position) {
         keys: [key + "/" + octave],
         duration: duration,
         align_center: position,
-        auto_stem: true,
+        // auto_stem: true,
         //clef: "treble"
     });
     //obj.setAttribute('id', 'test555');
@@ -35,11 +35,11 @@ function get_new_note(key, octave, duration, position) {
 function get_new_note_down(key, octave, duration, position) {
 
     let obj = new VF.StaveNote({
-            //clef: 'treble',
+            clef: 'treble',
             keys: [key + "/" + octave],
             duration: duration,
             auto_stem: true,
-            clef: "treble",
+            // clef: "treble",
             align_center: position
 
         })
@@ -542,7 +542,7 @@ function type_note() {
 
 function setStyle() {
 
-    //obj_note[id_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+    obj_note[id_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 
 }
 
