@@ -350,7 +350,6 @@ function add_measure_before() {
 
 function mouseDown() {
   //console.log('in');
-
   $(".vf-stavenote")
     .mousedown(function (e) {
       $(document).ready(function () {
@@ -362,7 +361,7 @@ function mouseDown() {
 
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
       obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
-      console.log(obj_note);
+
 
       note_ = obj_note[0].keys;
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
@@ -502,8 +501,8 @@ function array_type(type_a, type_b) { // new arr-index and id
   console.log('jaja');
   const type_v = type_a;
   const type_g = type_b;
-  type_array.push(type_v, type_g);
-  // type_array.unshift(type_v, type_g);
+  // type_array.push(type_v, type_g);
+  type_array.unshift(type_v, type_g);
   type_note();
 
 
@@ -512,7 +511,7 @@ function array_type(type_a, type_b) { // new arr-index and id
 function array_type_2(type_a, type_b) {
   const type_v = type_a;
   const type_g = type_b;
-  type_array.unshift(type_v, type_g);
+  type_array.push(type_v, type_g);
   //type_array.push(type_v, type_g);
 
 
@@ -525,11 +524,11 @@ function type_note() {
   const type_a = type_array;
   //let ty = ["A_-2","B_-2","A_-1","B_-1","A_1","B_1","A_2","B_2","A_3","B_3","A_4","B_4","A_5","B_5"];
   //console.log(type_a);
-  $('.-stavfvenote').each(function () {
+  $('.vf-stavenote').each(function () {
 
     $(this).attr("type", type_a[i]);
     id_ = $(this).attr("id");
-    console.log(id_, type_array[i]);
+    console.log(id_, type_a[i]);
     i++;
 
 
