@@ -7,7 +7,7 @@ var i_c;
 var bok_number = 1;
 var note_sea;
 var note_num_k;
-var id_index;
+var index_array;
 var type_v;
 var type_g;
 
@@ -379,7 +379,7 @@ function mouseDown() {
             }
 
             var id_res = id_.substr(3);
-            id_index = note_id.indexOf(id_res); // id
+            index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
             var search_array = arr_notes.indexOf(nots_str); // หา index note 29
             click_style();
 
@@ -434,11 +434,11 @@ function notes_up() {
     var octave = note_num_k;
     var duration = "q";
     if (note_substr === "notesMeasure") {
-        obj_note[id_index] = get_new_note(key, octave, duration);
+        obj_note[index_array] = get_new_note(key, octave, duration);
         setStyle();
         redraw_notes();
     } else {
-        obj_note[id_index] = get_new_note_down(key, octave, duration);
+        obj_note[index_array] = get_new_note_down(key, octave, duration);
         setStyle();
         redraw_notes();
     }
@@ -454,11 +454,11 @@ function notes_down() {
     var octave = note_num_k;
     var duration = "q";
     if (note_substr == "notesMeasure") {
-        obj_note[id_index] = get_new_note(key, octave, duration);
+        obj_note[index_array] = get_new_note(key, octave, duration);
         setStyle();
         redraw_notes();
     } else {
-        obj_note[id_index] = get_new_note_down(key, octave, duration);
+        obj_note[index_array] = get_new_note_down(key, octave, duration);
         setStyle();
         redraw_notes();
     }
@@ -538,7 +538,7 @@ function type_note() {
 
 function setStyle() {
 
-    obj_note[id_index].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+    obj_note[index_array].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 
 }
 
