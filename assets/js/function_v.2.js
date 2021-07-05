@@ -1,7 +1,7 @@
 var width = 500;
 var height = 100;
 var height2 = 200;
-var type_array = ["notesMeasure1", "notes_2Measure1"];
+var type_array = ["notesMeasure1001", "notes_2Measure1001"];
 var numbet_clik = [];
 var i_c;
 var bok_number = 1;
@@ -62,17 +62,17 @@ function draw_notes() {
 
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
-  staveMeasure1 = new VF.Stave(30, 100, 150);
-  stave_2Measure1 = new VF.Stave(30, 200, 150);
-  staveMeasure1.addClef("treble").addTimeSignature("4/4");
-  stave_2Measure1.addClef("bass").addTimeSignature("4/4");
-  var brace = new Vex.Flow.StaveConnector(staveMeasure1, stave_2Measure1).setType(3);
-  var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1, stave_2Measure1).setType(1);
+  staveMeasure1001 = new VF.Stave(30, 100, 150);
+  stave_2Measure1001 = new VF.Stave(30, 200, 150);
+  staveMeasure1001.addClef("treble").addTimeSignature("4/4");
+  stave_2Measure1001.addClef("bass").addTimeSignature("4/4");
+  var brace = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(3);
+  var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(1);
   // var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
-  notesMeasure1 = [
+  notesMeasure1001 = [
     get_new_note('b', 4, "w"),
     // get_new_note('b', 4, "q"),
     // get_new_note('b', 4, "q"),
@@ -80,26 +80,26 @@ function draw_notes() {
 
   ];
 
-  notes_2Measure1 = [
+  notes_2Measure1001 = [
     get_new_note_down('b', 4, "w"),
   ];
 
   //voice.addTickables(notes);
   window.renderer = renderer;
-  staveMeasure1.setContext(context).draw();
-  stave_2Measure1.setContext(context).draw();
+  staveMeasure1001.setContext(context).draw();
+  stave_2Measure1001.setContext(context).draw();
   brace.setContext(context).draw();
   lineLeft.setContext(context).draw();
 
-  var voice = VF.Beam.generateBeams(notesMeasure1);
-  var voice_2 = VF.Beam.generateBeams(notes_2Measure1); //note เส้นหาย
-  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure1, notesMeasure1);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave_2Measure1, notes_2Measure1); //note เส้นหาย
+  var voice = VF.Beam.generateBeams(notesMeasure1001);
+  var voice_2 = VF.Beam.generateBeams(notes_2Measure1001); //note เส้นหาย
+  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure1001, notesMeasure1001);
+  Vex.Flow.Formatter.FormatAndDraw(context, stave_2Measure1001, notes_2Measure1001); //note เส้นหาย
   voice.forEach(function (b) { b.setContext(context).draw() });
   voice_2.forEach(function (b) { b.setContext(context).draw() });
   //console.log(type_array);
 
-  // type_note();
+  type_note();
 
 
 }
@@ -107,8 +107,8 @@ function draw_notes() {
 function redraw_notes() {
   renderer.ctx.clear();
 
-  if (measure > 1) {
-    for (i = measure; i > 1; i--) {
+  if (measure > 1001) {
+    for (i = measure; i > 1001; i--) {
       this["staveMeasure" + i].setContext(context).draw();
       Vex.Flow.Formatter.FormatAndDraw(context,
         this["staveMeasure" + i],
@@ -135,18 +135,18 @@ function redraw_notes() {
   if (u >= 1) {
     for (i = 0; i < j; i++) {
       //console.log("staveMeasure" + (1 - i));
-      this["staveMeasure" + (1 - i)].setContext(context).draw();
+      this["staveMeasure" + (1001 - i)].setContext(context).draw();
       Vex.Flow.Formatter.FormatAndDraw(context,
-        this["staveMeasure" + (1 - i)],
-        this["notesMeasure" + (1 - i)]);
+        this["staveMeasure" + (1001 - i)],
+        this["notesMeasure" + (1001 - i)]);
 
-      this["stave_2Measure" + (1 - i)].setContext(context).draw();
+      this["stave_2Measure" + (1001 - i)].setContext(context).draw();
       Vex.Flow.Formatter.FormatAndDraw(context,
-        this["stave_2Measure" + (1 - i)],
-        this["notes_2Measure" + (1 - i)]);
+        this["stave_2Measure" + (1001 - i)],
+        this["notes_2Measure" + (1001 - i)]);
 
-      var voice = VF.Beam.generateBeams(this["notesMeasure" + (1 - i)]);
-      var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + (1 - i)]);
+      var voice = VF.Beam.generateBeams(this["notesMeasure" + (1001 - i)]);
+      var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + (1001 - i)]);
 
       voice.forEach(function (b) { b.setContext(context).draw() });
       voice_2.forEach(function (b) { b.setContext(context).draw() });
@@ -162,7 +162,7 @@ function redraw_notes() {
 
 
 
-let measure = 1;
+let measure = 1001;
 
 function add_measure_after() {
 
@@ -252,8 +252,8 @@ function add_measure_before() {
 
   // if (width > 250) {
 
-  if (measure > 1) {
-    for (i = measure; i > 1; i--) {
+  if (measure > 1001) {
+    for (i = measure; i > 1001; i--) {
 
       CurrentStave = this["staveMeasure" + i];
       CurrentStave2 = this["stave_2Measure" + i];
@@ -280,8 +280,8 @@ function add_measure_before() {
     }
   }
 
-  CurrentStave = this["staveMeasure" + 1];
-  CurrentStave2 = this["stave_2Measure" + 1];
+  CurrentStave = this["staveMeasure" + 1001];
+  CurrentStave2 = this["stave_2Measure" + 1001];
   let xS = CurrentStave.x;
   let yS = CurrentStave.y;
   let yS2 = CurrentStave2.y;
@@ -297,19 +297,19 @@ function add_measure_before() {
     yN2 = CurrentStave2.y += 200;
   }
 
-  this["staveMeasure" + 1] = new VF.Stave(xN, yN, widthN);
-  this["stave_2Measure" + 1] = new VF.Stave(xN, yN2, widthN);
+  this["staveMeasure" + 1001] = new VF.Stave(xN, yN, widthN);
+  this["stave_2Measure" + 1001] = new VF.Stave(xN, yN2, widthN);
 
-  this["notesMeasure" + (1 - u)] = [
+  this["notesMeasure" + (1001 - u)] = [
     get_new_note('b', 4, "1r", true),
 
   ];
-  this["notes_2Measure" + (1 - u)] = [
+  this["notes_2Measure" + (1001 - u)] = [
     get_new_note('b', 4, "1r", true),
 
   ];
 
-  console.log(this["notes_2Measure" + (1 - u)])
+  console.log(this["notes_2Measure" + (1001 - u)])
 
   j = u;
   for (i = 1; i <= j; i++) {
@@ -321,9 +321,9 @@ function add_measure_before() {
       widthS = 100;
     }
 
-    bok_number = 1 - i; // เลขห้องหข้างหน้า
-    this["staveMeasure" + (1 - i)] = new VF.Stave(xS, yS, widthS); /// ขึ้นบันทัดใหม่
-    this["stave_2Measure" + (1 - i)] = new VF.Stave(xS, yS2, widthS);
+    bok_number = 1001 - i; // เลขห้องหข้างหน้า
+    this["staveMeasure" + (1001 - i)] = new VF.Stave(xS, yS, widthS); /// ขึ้นบันทัดใหม่
+    this["stave_2Measure" + (1001 - i)] = new VF.Stave(xS, yS2, widthS);
 
     if (i + 1 == j || i == j - 5 || i == j - 9) {
       xS -= 150;
@@ -352,12 +352,13 @@ function mouseDown() {
   //console.log('in');
   $(".vf-stavenote")
     .mousedown(function (e) {
-      $(document).ready(function () {
-        type_note();
-      });
+
+      console.log('b');
+      type_note();
+
       let arr_type = $(this).attr("type");
       id_ = $(this).attr("id");
-      console.log(arr_type);
+      console.log(arr_type, id_);
 
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
       obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
@@ -373,7 +374,7 @@ function mouseDown() {
 
       let note_id = [];
       for (let i = 0; i < obj_note.length; i++) {
-
+        console.log('bab');
         note_id.push(obj_note[i].attrs.id);
 
       }
@@ -575,8 +576,9 @@ function group_notes() {
 
 
 
-$(document).ready(function () {
-  type_note();
-});
+// $(document).ready(function () {
+//   console.log('a');
+//   type_note();
+// });
 
 window.addEventListener('load', draw_notes);
