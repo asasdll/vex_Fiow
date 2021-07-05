@@ -434,13 +434,14 @@ function notes_up() {
     var key = note_te_k;
     var octave = note_num_k;
     var duration = "q";
+    console.log(key, octave);
     if (note_substr === "notesMeasure") {
         obj_note[index_array] = get_new_note(key, octave, duration);
-        setStyle();
+        setStyle_OrangeRed()
         redraw_notes();
     } else {
         obj_note[index_array] = get_new_note_down(key, octave, duration);
-        setStyle();
+        setStyle_OrangeRed()
         redraw_notes();
     }
 
@@ -454,13 +455,14 @@ function notes_down() {
     var key = note_te_k;
     var octave = note_num_k;
     var duration = "q";
+    console.log(key, octave);
     if (note_substr == "notesMeasure") {
         obj_note[index_array] = get_new_note(key, octave, duration);
-        setStyle();
+        setStyle_OrangeRed();
         redraw_notes();
     } else {
         obj_note[index_array] = get_new_note_down(key, octave, duration);
-        setStyle();
+        setStyle_OrangeRed();
         redraw_notes();
     }
 
@@ -468,8 +470,8 @@ function notes_down() {
 }
 
 function substr_notes(value) {
-
-    if (value <= arr_notes.length) {
+    let i = 0;
+    if (value < arr_notes.length && value >= 0) {
 
         note_sea = arr_notes[value];
         note_te_k = note_sea.substr(0, 1); // เเยก note  a-g
@@ -487,7 +489,7 @@ function substr_notes(value) {
 $('html') // unbind mousemove all html
     .mouseup(function() {
         unBind();
-        //type_note();
+        setStyle_Black();
         mouseDown();
 
     });
@@ -537,22 +539,24 @@ function type_note() {
 
 
 
-function setStyle() {
+function setStyle_OrangeRed() {
 
     obj_note[index_array].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 
 }
 
+function setStyle_Black() {
+    //console.log(obj_note, index_array);
+    obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+
+}
+
 
 function click_style() {
-    setStyle();
+    setStyle_OrangeRed();
     redraw_notes();
 
 };
-
-
-
-
 
 
 
