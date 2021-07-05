@@ -1,15 +1,13 @@
 var width = 500;
 var height = 100;
 var height2 = 200;
-var type_array = ["notesMeasure1001", "notesMeasure1001", "notesMeasure1001", "notes_2Measure1001"];
-var numbet_clik = [];
-var i_c;
+var type_array = ["notesMeasure1001", "notes_2Measure1001"];
 var bok_number = 1;
-var note_sea;
 var note_num_k;
 var index_array;
 var type_v;
 var type_g;
+var arr_type = "";
 
 
 
@@ -74,8 +72,7 @@ function draw_notes() {
 
     notesMeasure1001 = [
         get_new_note('a', 4, "q", true),
-        get_new_note('b', 6, "q", true),
-        get_new_note('c', 6, "q", true),
+
 
 
     ];
@@ -171,8 +168,6 @@ function add_measure_after() {
         this["staveMeasure" + (measure + 1)] = new VF.Stave(PreviousStave.width + PreviousStave.x, height, 100);
         this["notesMeasure" + (measure + 1)] = [
             get_new_note('a', 4, "q", true),
-            get_new_note('b', 6, "q", true),
-            get_new_note('c', 6, "q", true),
 
 
         ];
@@ -355,7 +350,7 @@ function mouseDown() {
 
             type_note();
 
-            var arr_type = $(this).attr("type");
+            arr_type = $(this).attr("type");
             id_ = $(this).attr("id");
 
             // console.log(notesMeasure1001);
@@ -471,7 +466,7 @@ function substr_notes(value) {
     let i = 0;
     if (value < arr_notes.length && value >= 0) {
 
-        note_sea = arr_notes[value];
+        let note_sea = arr_notes[value];
         note_te_k = note_sea.substr(0, 1); // เเยก note  a-g
         note_num_k = note_sea.substr(-1); // เเยก ตัวเลข จาก note 0-8*/
 
@@ -523,15 +518,18 @@ function array_type_2(type_a, type_b) {
 }
 
 function add_type_array(ids) { // add array
-    console.log("A", type_array);
-    const array = ["notesMeasure1002", "notesMeasure1002"];
+    //console.log("A", arr_type);
+    let arr_num = 5; // จำนวน array ที่จะใส่
+    const array = arr_type; //  รับ  type มา
     let c = ids; //   index 0 ที่ รับมา +1 หมายถึงเพิ่ม หลัง index
-    let type_d = "";
-    for (let index = 0; index < array.length; index++) {
-        type_d = array[index];
+    //let type_d = "";
+    for (let index = 0; index < arr_num; index++) {
+        type_d = array;
+        //console.log("B", type_d);
         type_array.splice(c, 0, type_d);
     }
 
+    //console.log("B");
     console.log("B", type_array);
 
 
