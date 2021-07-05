@@ -71,7 +71,10 @@ function draw_notes() {
     voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
     notesMeasure1001 = [
-        get_new_note('a', 4, "q", true),
+        get_new_note('a', 4, "q", false),
+        get_new_note('b', 4, "q", false),
+        get_new_note('c', 4, "q", false),
+        get_new_note('d', 4, "q", false),
 
 
 
@@ -167,7 +170,10 @@ function add_measure_after() {
         PreviousStave = this["staveMeasure" + measure];
         this["staveMeasure" + (measure + 1)] = new VF.Stave(PreviousStave.width + PreviousStave.x, height, 100);
         this["notesMeasure" + (measure + 1)] = [
-            get_new_note('a', 4, "q", true),
+            get_new_note('a', 4, "q", false),
+            get_new_note('b', 4, "q", false),
+            get_new_note('c', 4, "q", false),
+            get_new_note('d', 4, "q", false),
 
 
         ];
@@ -379,7 +385,7 @@ function mouseDown() {
             index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
             var search_array = arr_notes.indexOf(nots_str); // หา index note 29
             click_style();
-
+            add_type_array();
 
 
 
@@ -501,6 +507,7 @@ function array_type(type_a, type_b) { // new arr-index and id
     const type_v = type_a;
     const type_g = type_b;
     type_array.unshift(type_v, type_g);
+    // add_type_array();
     type_note();
 
 
@@ -517,20 +524,21 @@ function array_type_2(type_a, type_b) {
 
 }
 
-function add_type_array(ids) { // add array
-    //console.log("A", arr_type);
-    let arr_num = 5; // จำนวน array ที่จะใส่
-    const array = arr_type; //  รับ  type มา
-    let c = ids; //   index 0 ที่ รับมา +1 หมายถึงเพิ่ม หลัง index
-    //let type_d = "";
+function add_type_array() { // add array
+    //console.log("A", type_array);
+    let arr_num = 3; // จำนวน array ที่จะใส่
+    let array = arr_type;
+    let A = type_array.indexOf("notesMeasure1001");
+    let c = A - 2; //   index 0 ที่ รับมา +1 หมายถึงเพิ่ม หลัง index
+
     for (let index = 0; index < arr_num; index++) {
         type_d = array;
         //console.log("B", type_d);
         type_array.splice(c, 0, type_d);
     }
-
+    //redraw_notes();
     //console.log("B");
-    console.log("B", type_array);
+    console.log(type_array);
 
 
 }
@@ -548,6 +556,7 @@ function type_note() {
 
 
     });
+    //console.log(type_array);
 
 }
 
@@ -591,10 +600,8 @@ function group_notes() {
 
 function sound() {
 
-    $(".verticalLine")
-        .mousedown(function(e) {
-            $(this).attr("x", "900px");
-        })
+    type_note();
+    console.log(type_array);
 }
 
 
