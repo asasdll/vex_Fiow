@@ -491,6 +491,7 @@ $('html') // unbind mousemove all html
         unBind();
         setStyle_Black();
         mouseDown();
+        index_array = null;
 
     });
 
@@ -546,8 +547,9 @@ function setStyle_OrangeRed() {
 }
 
 function setStyle_Black() {
-    //console.log(obj_note, index_array);
-    obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    if (index_array != undefined) {
+        obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    }
 
 }
 
@@ -557,8 +559,6 @@ function click_style() {
     redraw_notes();
 
 };
-
-
 
 
 function group_notes() {
@@ -574,6 +574,10 @@ function group_notes() {
         "a/7", "b/7", "c/8", "d/8", "e/8", "f/8", "g/8"
     ];
 
+}
+
+function sound() {
+    console.log("aaa");
 }
 
 
