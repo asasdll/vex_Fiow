@@ -1,7 +1,7 @@
 var width = 500;
 var height = 100;
 var height2 = 200;
-var type_array = ["notesMeasure1001", "notes_2Measure1001"];
+var type_array = ["notesMeasure1001", "notesMeasure1001", "notes_2Measure1001"];
 var numbet_clik = [];
 var i_c;
 var bok_number = 1;
@@ -74,7 +74,7 @@ function draw_notes() {
 
     notesMeasure1001 = [
         get_new_note('b', 4, "1r", true),
-        //get_new_note('a', 4, "q"),
+        get_new_note('a', 4, "q"),
         // get_new_note('b', 4, "q"),
         // get_new_note('b', 4, "q"),
 
@@ -382,6 +382,7 @@ function mouseDown() {
             index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
             var search_array = arr_notes.indexOf(nots_str); // หา index note 29
             click_style();
+            console.log(index_array);
 
 
 
