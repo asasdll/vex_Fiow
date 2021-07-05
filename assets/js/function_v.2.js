@@ -127,7 +127,7 @@ function redraw_notes() {
 
         }
 
-        /// type_note();
+        add_type_array();
     }
 
 
@@ -528,15 +528,16 @@ function add_type_array() { // add array
     //console.log("A", type_array);
     let arr_num = 3; // จำนวน array ที่จะใส่
     let array = arr_type;
-    let A = type_array.indexOf("notesMeasure1001");
-    let c = A - 2; //   index 0 ที่ รับมา +1 หมายถึงเพิ่ม หลัง index
+    //console.log(array);
+    let A = type_array.indexOf(array);
+    let c = A; //   index 0 ที่ รับมา +1 หมายถึงเพิ่ม หลัง index
 
     for (let index = 0; index < arr_num; index++) {
         type_d = array;
         //console.log("B", type_d);
         type_array.splice(c, 0, type_d);
     }
-    //redraw_notes();
+
     //console.log("B");
     console.log(type_array);
 
