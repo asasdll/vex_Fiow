@@ -13,24 +13,33 @@ var notes = [];
 
 // console.log(arr_index);
 
+
 function fillTheRest(button, version) {
-    sum_array();
-    let note = arr_sum[arr_index].duration;
-console.log(note,arr_index,arr_);
+
+    let note_id = [];
+    for (let i = 0; i < obj_note.length; i++) {
+
+        note_id.push(obj_note[i].attrs.id);
+
+    }
+
+    var id_res = id_.substr(3);
+    index_array = note_id.indexOf(id_res);
+
+    let note = obj_note[index_array].duration;
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
     let spaceVal = noteVal - (buttonVal * 2);
 
-
     let array = ['64', '32', '16', '8', 'q', 'h', 'w'];
     let i = array.indexOf(button) + 1;
-    let u = Number(arr_index) + 2;
-    let next = Number(arr_index) + 1;
+    let u = Number(index_array) + 2;
+    let next = Number(index_array) + 1;
     let rope = array.indexOf(button);
     let anchor = array.indexOf(note);
     let between = anchor - rope;
-    let equalizer = Number(arr_index) - (notes.length + 1);
-    let equalizer_u = equalizer + 2;
+    // let equalizer = Number(arr_index) - (notes.length + 1);
+    // let equalizer_u = equalizer + 2;
 
     if (rope > anchor || rope === anchor) {
         return;
@@ -38,61 +47,52 @@ console.log(note,arr_index,arr_);
 
     //console.log(notes[Number(arr_index)]);
     let lastElement;
-    if (arr_sum[next] != null) {
-        if (Number(arr_index) > notes.length - 1) {
-            lastElement = notes_2.length - 1;
-            for (idx = lastElement; idx > equalizer; idx--) {
-                notes_2[idx + between] = notes_2[idx];
-            }
-        } else if (arr_sum[next] != null && Number(arr_index) < notes.length - 1) {
-            lastElement = notes.length - 1
-            for (idx = lastElement; idx > Number(arr_index); idx--) {
-                notes[idx + between] = notes[idx];
-            }
+    if (obj_note[next] != null) {
+        lastElement = obj_note.length - 1;
+        for (idx = lastElement; idx > index_array; idx--) {
+            obj_note[idx + between] = obj_note[idx];
         }
 
+        // } else if (arr_sum[next] != null && Number(arr_index) < notes.length - 1) {
+        //     lastElement = notes.length - 1
+        //     for (idx = lastElement; idx > Number(arr_index); idx--) {
+        //         notes[idx + between] = notes[idx];
+        //     }
+        // }
+
 
     }
 
-    if (version === 'b' && Number(arr_index) > notes.length - 1) {
-        notes_2[equalizer] = get_new_note('b', 4, `${button}`);
-    } else if (version === 'b' && Number(arr_index) <= notes.length - 1) {
-        notes[arr_index] = get_new_note('b', 4, `${button}`);
-    } else if (Number(arr_index) > notes.length - 1) {
-        notes_2[equalizer] = get_new_note('b', 4, `${button}r`);
+    if (version === 'b') {
+        obj_note[index_array] = get_new_note('b', 4, `${button}`);
     } else {
-        notes[arr_index] = get_new_note('b', 4, `${button}r`);
+        obj_note[index_array] = get_new_note('b', 4, `${button}r`);
     }
 
+    obj_note[Number(index_array) + 1] = get_new_note('b', 4, `${button}r`);
 
-    if (Number(arr_index) > notes.length - 1) {
-        notes_2[equalizer + 1] = get_new_note('b', 4, `${button}r`);
-        console.log('aha');
-    } else {
-        notes[Number(arr_index) + 1] = get_new_note('b', 4, `${button}r`);
-    }
 
 
 
     while (spaceVal > 0) {
         let val = findValue(array[i]);
-        if (Number(arr_index) < notes.length - 1) {
-            notes[u] = get_new_note('b', 4, `${array[i]}r`);
-            spaceVal = spaceVal - val;
-            i++;
-            u++;
-        } else {
-            notes_2[equalizer_u] = get_new_note('b', 4, `${array[i]}r`);
-            spaceVal = spaceVal - val;
-            i++;
-            equalizer_u++;
-        }
+        obj_note[u] = get_new_note('b', 4, `${array[i]}r`);
+        spaceVal = spaceVal - val;
+        i++;
+        u++;
+        // } else {
+        //     notes_2[equalizer_u] = get_new_note('b', 4, `${array[i]}r`);
+        //     spaceVal = spaceVal - val;
+        //     i++;
+        //     equalizer_u++;
+        // }
     }
     //console.log(arr_sum);
-
+    num_shift = between;
     arr_index = "";
     index_in = "";
     redraw_notes();
+    add_type_array();
 
 }
 
