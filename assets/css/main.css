@@ -36,19 +36,12 @@ body {
     width: 90%;
 }
 
-.tses {
-    width: 115px;
-    height: 115px;
-    color: rgb(252, 0, 0);
-    background-color: blue;
-}
-
 .verticalLine {
-    border-left: thick solid #ff0000;
+    border-left: thick solid #FF4500;
     height: 350px;
     position: absolute;
-    left: 500px;
-    top: 450px;
+    left: 650px;
+    top: 480px;
 }
 
 #panel {

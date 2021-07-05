@@ -1,7 +1,7 @@
 var width = 500;
 var height = 100;
 var height2 = 200;
-var type_array = ["notesMeasure1001", "notesMeasure1001", "notes_2Measure1001"];
+var type_array = ["notesMeasure1001", "notesMeasure1001", "notesMeasure1001", "notes_2Measure1001"];
 var numbet_clik = [];
 var i_c;
 var bok_number = 1;
@@ -73,10 +73,10 @@ function draw_notes() {
     voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
     notesMeasure1001 = [
-        get_new_note('b', 4, "1r", true),
-        get_new_note('a', 4, "q"),
-        // get_new_note('b', 4, "q"),
-        // get_new_note('b', 4, "q"),
+        get_new_note('a', 4, "q", true),
+        get_new_note('b', 6, "q", true),
+        get_new_note('c', 6, "q", true),
+
 
     ];
 
@@ -170,7 +170,9 @@ function add_measure_after() {
         PreviousStave = this["staveMeasure" + measure];
         this["staveMeasure" + (measure + 1)] = new VF.Stave(PreviousStave.width + PreviousStave.x, height, 100);
         this["notesMeasure" + (measure + 1)] = [
-            get_new_note('b', 4, "1r", true),
+            get_new_note('a', 4, "q", true),
+            get_new_note('b', 6, "q", true),
+            get_new_note('c', 6, "q", true),
 
 
         ];
@@ -353,17 +355,17 @@ function mouseDown() {
 
             type_note();
 
-            let arr_type = $(this).attr("type");
+            var arr_type = $(this).attr("type");
             id_ = $(this).attr("id");
 
-            console.log(notesMeasure1001);
+            // console.log(notesMeasure1001);
             note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
             obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
 
             note_ = obj_note[0].keys;
             note_duration = obj_note[0].duration;
-            console.log(note_duration);
+            //console.log(note_duration);
             nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
 
@@ -382,10 +384,6 @@ function mouseDown() {
             index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
             var search_array = arr_notes.indexOf(nots_str); // หา index note 29
             click_style();
-            console.log(index_array);
-
-
-
 
 
 
@@ -511,6 +509,8 @@ function array_type(type_a, type_b) { // new arr-index and id
     type_note();
 
 
+
+
 }
 
 function array_type_2(type_a, type_b) {
@@ -518,6 +518,21 @@ function array_type_2(type_a, type_b) {
     const type_g = type_b;
     type_array.push(type_v, type_g);
 
+
+
+}
+
+function add_type_array(ids) { // add array
+    console.log("A", type_array);
+    const array = ["notesMeasure1002", "notesMeasure1002"];
+    let c = ids; //   index 0 ที่ รับมา +1 หมายถึงเพิ่ม หลัง index
+    let type_d = "";
+    for (let index = 0; index < array.length; index++) {
+        type_d = array[index];
+        type_array.splice(c, 0, type_d);
+    }
+
+    console.log("B", type_array);
 
 
 }
@@ -577,7 +592,11 @@ function group_notes() {
 }
 
 function sound() {
-    console.log("aaa");
+
+    $(".verticalLine")
+        .mousedown(function(e) {
+            $(this).attr("x", "900px");
+        })
 }
 
 

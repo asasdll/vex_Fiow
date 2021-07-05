@@ -16,38 +16,37 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://unpkg.com/vexflow/releases/vexflow-debug.js"></script>
     <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
-
-
-    <link rel="stylesheet" href="assets/css/main.css">
-    <div class="headText">
-        <div class="paletteElement paletteButton note3 selected advanced" data-bind="visible: visible, css: css, click: clicked, tip: {title: title, shortcut: shortcut}, attr: {id: controlId}" id="control-thirtysecond">
-            <span data-bind="resource: title" data-resource="palette.thirtysecond">32nd Note</span>
-            <!-- ko if: shortcut -->
-            <!-- /ko -->
-            <select>
+    < <link rel="stylesheet" href="assets/css/main.css">
+        <div class="headText">
+            <div class="paletteElement paletteButton note3 selected advanced" data-bind="visible: visible, css: css, click: clicked, tip: {title: title, shortcut: shortcut}, attr: {id: controlId}" id="control-thirtysecond">
+                <span data-bind="resource: title" data-resource="palette.thirtysecond">32nd Note</span>
+                <!-- ko if: shortcut -->
+                <!-- /ko -->
+                <select>
         <option>-select-</option>
         <option>duration</option>
       </select>
-            <button type="button" onclick="fillTheRest('w','a')">&#119133;</button>
-            <button type="button" onclick="fillTheRest('h','a')">&#119134;</button>
-            <button type="button" onclick="fillTheRest('q','a')">&#119135;</button>
-            <button type="button" onclick="fillTheRest('8','a')">&#119136;</button>
-            <button type="button" onclick="fillTheRest('16','a')">&#119137;</button>
-            <button type="button" onclick="fillTheRest('32','a')">&#119138;</button>
-            <button type="button" onclick="fillTheRest('64','a')">&#119138;</button>
-            <button type="button" onclick="add_measure_after()">Measure After</button>
-            <button type="button" onclick="add_measure_before()">Measure Before</button>
-            <button type="button" onclick="redraw_notes()">Draw Note</button>
-            <button type="button" onclick="sound()"> sound play</button>
+                <button type="button" onclick="fillTheRest('w','a')">&#119133;</button>
+                <button type="button" onclick="fillTheRest('h','a')">&#119134;</button>
+                <button type="button" onclick="fillTheRest('q','a')">&#119135;</button>
+                <button type="button" onclick="fillTheRest('8','a')">&#119136;</button>
+                <button type="button" onclick="fillTheRest('16','a')">&#119137;</button>
+                <button type="button" onclick="fillTheRest('32','a')">&#119138;</button>
+                <button type="button" onclick="fillTheRest('64','a')">&#119138;</button>
+                <button type="button" onclick="add_measure_after()">Measure After</button>
+                <button type="button" onclick="add_measure_before()">Measure Before</button>
+                <button type="button" onclick="redraw_notes()">Draw Note</button>
+                <button type="button" onclick="sound()"> sound play</button>
+                <button type="button" onclick="add_type_array()">add array</button>
+            </div>
         </div>
-    </div>
 </head>
 
 <body>
+
     <div class="vexbox">
         <br>
-        <div class="verticalLine">
-        </div>
+        <div class="verticalLine"></div>
         <div id="page" class="divzoom" onmouseover="mouseDown()"></div>
 
     </div>
