@@ -1,9 +1,8 @@
 body {
-        background-color: rgb(148, 148, 148);
-    }
+    background-color: rgb(148, 148, 148);
+}
 
 .headText {
-
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -13,21 +12,15 @@ body {
     top: 0;
     width: 100%;
     height: 170px;
-    }
-    
-    .keyboard {
+}
 
-        background-color: rgb(236, 0, 0);
-        margin-left: auto;
-        margin-right: auto;
-        width: auto;
-        text-align: center;
-
- 
-    }
-
-
-
+.keyboard {
+    background-color: rgb(236, 0, 0);
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    text-align: center;
+}
 
 .vexbox {
     margin: 0;
@@ -41,45 +34,43 @@ body {
     min-height: 1500px;
     max-width: 1500px;
     width: 90%;
-   
-    }
-  .tses {
-   
-      width: 115px;
-      height: 115px;   
-      color: rgb(252, 0, 0);
-     background-color: blue;     
-    }
+}
 
+.tses {
+    width: 115px;
+    height: 115px;
+    color: rgb(252, 0, 0);
+    background-color: blue;
+}
 
-      
+.verticalLine {
+    border-left: thick solid #ff0000;
+    height: 350px;
+    position: absolute;
+    left: 500px;
+    top: 450px;
+}
 
 #panel {
-        display: none;
-        text-align: center;
-        position: fixed;
-        top:70%;
-        width: 100%;
-        height: 100%;        
-      }
+    display: none;
+    text-align: center;
+    position: fixed;
+    top: 70%;
+    width: 100%;
+    height: 100%;
+}
 
-    .divzoom {
-        top: 12pc;
-        zoom: 200%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-      }
-      #div { 
-        width:500px;
-        height:500px;
-        background-color:#e0e0e0;
-        cursor:ns-resize;
-      }
+.divzoom {
+    top: 12pc;
+    zoom: 200%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
 
-
-      
-
-
-
-      
+#div {
+    width: 500px;
+    height: 500px;
+    background-color: #e0e0e0;
+    cursor: ns-resize;
+}
