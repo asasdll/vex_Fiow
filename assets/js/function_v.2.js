@@ -9,7 +9,7 @@ var type_v;
 var type_g;
 var arr_type = "";
 var num_shift;
-
+var note_duration;
 
 
 function get_new_note(key, octave, duration, position) {
@@ -364,7 +364,6 @@ function mouseDown() {
       console.log(arr_type);
 
       note_ = obj_note[0].keys;
-      note_duration = obj_note[0].duration;
       //console.log(note_duration);
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
@@ -383,7 +382,11 @@ function mouseDown() {
       var id_res = id_.substr(3);
       index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
       var search_array = arr_notes.indexOf(nots_str); // หา index note 29
-      // click_style();
+
+      console.log(obj_note[index_array].duration);
+      note_duration = obj_note[index_array].duration;
+
+      click_style();
       // add_type_array();
       console.log(index_array);
 
@@ -431,7 +434,7 @@ function notes_up() {
 
   var key = note_te_k;
   var octave = note_num_k;
-  var duration = "q";
+  var duration = note_duration;
   console.log(key, octave);
   if (note_substr === "notesMeasure") {
     obj_note[index_array] = get_new_note(key, octave, duration);
@@ -452,15 +455,15 @@ function notes_down() {
 
   var key = note_te_k;
   var octave = note_num_k;
-  var duration = "q";
+  var duration = note_duration;
   console.log(key, octave);
   if (note_substr == "notesMeasure") {
     obj_note[index_array] = get_new_note(key, octave, duration);
-    // setStyle_OrangeRed();
+    setStyle_OrangeRed();
     redraw_notes();
   } else {
     obj_note[index_array] = get_new_note_down(key, octave, duration);
-    // setStyle_OrangeRed();
+    setStyle_OrangeRed();
     redraw_notes();
   }
 
@@ -487,7 +490,7 @@ function substr_notes(value) {
 $('html') // unbind mousemove all html
   .mouseup(function () {
     unBind();
-    // setStyle_Black();
+    setStyle_Black();
     mouseDown();
     index_array = null;
 
@@ -565,25 +568,25 @@ function type_note() {
 
 
 
-// function setStyle_OrangeRed() {
+function setStyle_OrangeRed() {
 
-//   obj_note[index_array].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
+  obj_note[index_array].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 
-// }
+}
 
-// function setStyle_Black() {
-//   if (index_array != undefined) {
-//     obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-//   }
+function setStyle_Black() {
+  if (index_array != undefined) {
+    obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+  }
 
-// }
+}
 
 
-// function click_style() {
-//   setStyle_OrangeRed();
-//   redraw_notes();
+function click_style() {
+  setStyle_OrangeRed();
+  redraw_notes();
 
-// };
+};
 
 
 function group_notes() {
