@@ -10,6 +10,7 @@ var type_g;
 var arr_type = "";
 var num_shift;
 var note_duration;
+var checkIndex;
 
 
 function get_new_note(key, octave, duration, position) {
@@ -388,8 +389,19 @@ function mouseDown() {
 
       click_style();
       // add_type_array();
-      console.log(index_array);
 
+      let previous = Number(index_array) - 1;
+      console.log(previous);
+      console.log(checkIndex);
+      if (Number(index_array) != 0) {
+        if (checkIndex == previous) {
+          let button = obj_note[previous].duration;
+          fillTheRest(button, 'b');
+        }
+      }
+
+
+      checkIndex = index_array;
       $(document).bind('mousemove', function (e) {
         var ev_move = e.clientY; //434  เลื่อน เม้า
 
@@ -435,7 +447,6 @@ function notes_up() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-  console.log(key, octave);
   if (note_substr === "notesMeasure") {
     obj_note[index_array] = get_new_note(key, octave, duration);
     setStyle_OrangeRed()
@@ -530,7 +541,6 @@ function add_type_array() { // add array
   //console.log("A", type_array);
 
   let arr_num = num_shift; // จำนวน array ที่จะใส่
-  console.log(arr_num);
   let array = arr_type;
 
   // console.log(array);
