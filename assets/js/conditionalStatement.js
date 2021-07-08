@@ -92,8 +92,9 @@ function fillTheRest(button, version) {
     arr_index = "";
     index_in = "";
     computeStave();
-    redraw_notes();
     add_type_array();
+    redraw_notes();
+
 
 }
 

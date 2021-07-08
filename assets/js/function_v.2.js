@@ -68,7 +68,7 @@ function draw_notes() {
   stave_2Measure1001.addClef("bass").addTimeSignature("4/4");
   var brace = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(3);
   var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(1);
-  var lineRight = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(7);
+  var lineRight = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(0);
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
@@ -112,14 +112,24 @@ function redraw_notes() {
   let index = 1001 - (u - 1);
 
   for (i = index; i <= measure; i++) {
-    this["staveMeasure" + i].setContext(context).draw();
+
+    if (this["staveMeasure" + i].x == 70) {
+      this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
+      this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
+    }
+
     Vex.Flow.Formatter.FormatAndDraw(context,
       this["staveMeasure" + i],
       this["notesMeasure" + i]);
-    this["stave_2Measure" + i].setContext(context).draw();
     Vex.Flow.Formatter.FormatAndDraw(context,
       this["stave_2Measure" + i],
       this["notes_2Measure" + i]);
+    this["staveMeasure" + i].setContext(context).draw();
+    this["stave_2Measure" + i].setContext(context).draw();
+
+
+    var lineRight = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(0);
+    lineRight.setContext(context).draw();
 
     var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
     var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
@@ -127,8 +137,13 @@ function redraw_notes() {
     voice.forEach(function (b) { b.setContext(context).draw() });
     voice_2.forEach(function (b) { b.setContext(context).draw() });
 
-    console.log('jaja' + i);
+    if (this["staveMeasure" + i].x == 70) {
+      var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(3);
+      var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(1);
 
+      brace.setContext(context).draw();
+      lineLeft.setContext(context).draw();
+    }
   }
 }
 
