@@ -11,6 +11,7 @@ var arr_type = "";
 var num_shift;
 var note_duration;
 var checkIndex;
+var measureHead = [];
 
 
 function get_new_note(key, octave, duration, position) {
@@ -61,13 +62,13 @@ function draw_notes() {
 
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
-  staveMeasure1001 = new VF.Stave(70, 100, 550);
-  stave_2Measure1001 = new VF.Stave(70, 200, 550);
+  staveMeasure1001 = new VF.Stave(70, 0, 550);
+  stave_2Measure1001 = new VF.Stave(70, 100, 550);
   staveMeasure1001.addClef("treble").addTimeSignature("4/4");
   stave_2Measure1001.addClef("bass").addTimeSignature("4/4");
   var brace = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(3);
   var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(1);
-  // var lineRight = new Vex.Flow.StaveConnector(stave, stave_2).setType(6);
+  var lineRight = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(7);
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
@@ -91,6 +92,7 @@ function draw_notes() {
   stave_2Measure1001.setContext(context).draw();
   brace.setContext(context).draw();
   lineLeft.setContext(context).draw();
+  lineRight.setContext(context).draw();
 
   var voice = VF.Beam.generateBeams(notesMeasure1001);
   var voice_2 = VF.Beam.generateBeams(notes_2Measure1001); //note เส้นหาย
@@ -201,15 +203,17 @@ function add_measure_before() {
   redraw_notes();
 }
 
+let trackHead = 0;
 
 function computeStave() {
   renderer.ctx.clear();
   console.log('in');
   j = 1001 - (u - 1);  // ตำแหน่งเริ่ม loop
   pointer2 = 1001 - (u - 1); // pointer ตัวที่สอง
-  level = 100; // ความสูงเส้นแรก
-  level2 = 200; // ความสูงเส้นสอง
+  level = 0; // ความสูงเส้นแรก
+  level2 = 100; // ความสูงเส้นสอง
   let vit = 480; // ความยาว
+  let trackHead = 0;
 
   for (i = j; i <= measure; i++) { // ลูปจากห้องติดลบ ไปห้องสุดท้าย
     console.log(i);
@@ -255,6 +259,8 @@ function computeStave() {
       this["staveMeasure" + i].width = fillWidth;
       vit = 0;
     }
+
+    console.log(measureHead);
 
     if (vit == 0) { // ให้ pointer วิ่งตาม
       let head = 1; // เช็คหัวแรกของ pointer
@@ -306,7 +312,7 @@ function computeStave() {
             level += 200;
             level2 += 200;
             rest = 0;
-            pointerMeasure.width = 480;
+            pointerMeasure.width = 550;
           }
 
           pointerMeasure.width += rest;
@@ -322,6 +328,7 @@ function computeStave() {
       }
     }
   }
+  console.log(measureHead);
 }
 
 
