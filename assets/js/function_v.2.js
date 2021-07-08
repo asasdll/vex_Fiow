@@ -109,33 +109,23 @@ function draw_notes() {
 function redraw_notes() {
   renderer.ctx.clear();
 
-  let index = 1001 - (u - 1);
+  let marker = 1002 - u;
 
-  for (i = index; i <= measure; i++) {
+  for (i = measure; measure >= marker; i--) {
 
-    if (this["staveMeasure" + i].x == 70) {
-      this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
-      this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
-    }
+    console.log(i);
+    // if (this["staveMeasure" + i].x == 70) {
+    //   this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
+    //   this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
+    // }
 
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["staveMeasure" + i],
-      this["notesMeasure" + i]);
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["stave_2Measure" + i],
-      this["notes_2Measure" + i]);
     this["staveMeasure" + i].setContext(context).draw();
     this["stave_2Measure" + i].setContext(context).draw();
 
-
-    var lineRight = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(0);
-    lineRight.setContext(context).draw();
-
-    var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
-    var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
-
-    voice.forEach(function (b) { b.setContext(context).draw() });
-    voice_2.forEach(function (b) { b.setContext(context).draw() });
+    // if (this["staveMeasure" + i].x == 70) {
+    //   this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
+    //   this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
+    // }
 
     if (this["staveMeasure" + i].x == 70) {
       var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(3);
@@ -145,16 +135,34 @@ function redraw_notes() {
       lineLeft.setContext(context).draw();
     }
 
+    var lineRight = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(0);
+    lineRight.setContext(context).draw();
+
     if (i == measure) {
       var lineRight = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(6);
       lineRight.setContext(context).draw();
     }
+
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["staveMeasure" + i],
+      this["notesMeasure" + i]);
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["stave_2Measure" + i],
+      this["notes_2Measure" + i]);
+
+    var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
+    var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
+
+    voice.forEach(function (b) { b.setContext(context).draw() });
+    voice_2.forEach(function (b) { b.setContext(context).draw() });
+
   }
 }
 
 let measure = 1001;
 
 function add_measure_after() {
+  renderer.ctx.clear();
 
   this["notesMeasure" + (measure + 1)] = [
     get_new_note('b', 4, "wr", true),
@@ -193,6 +201,8 @@ function add_measure_before() {
   computeStave();
   redraw_notes();
 }
+
+let trackHead = 0;
 
 function computeStave() {
   renderer.ctx.clear();
@@ -249,9 +259,10 @@ function computeStave() {
       vit = 0;
     }
 
+    console.log(measureHead);
+
     if (vit == 0) { // ให้ pointer วิ่งตาม
       let head = 1; // เช็คหัวแรกของ pointer
-      let tracer = 0;
 
       if (i != measure) { // ถ้าไม่ใช่ห้องสุดท้าย
         while (pointer2 < i) {
@@ -263,7 +274,6 @@ function computeStave() {
           if (head == 1) { // เป็นหัวของ pointer หรือไม่
             xpos = 70;
             pointerMeasure.width += 70;
-            trackHead++;
           } else {
             xpos = previousMeasure.x + previousMeasure.width;
           }
@@ -367,8 +377,6 @@ function mouseDown() {
       // add_type_array();
 
       let previous = Number(index_array) - 1;
-      console.log(previous);
-      console.log(checkIndex);
       if (Number(index_array) != 0) {
         if (checkIndex == previous) {
           let button = obj_note[previous].duration;
@@ -509,7 +517,7 @@ function array_type_2(type_a, type_b) {
   const type_g = type_b;
   type_array.push(type_v, type_g);
 
-
+  type_note();
 
 }
 
@@ -544,6 +552,7 @@ function type_note() {
 
     $(this).attr("type", type_a[i]);
     id_ = $(this).attr("id");
+    console.log(type_a[i], id_);
     i++;
 
 
