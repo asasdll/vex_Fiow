@@ -26,7 +26,7 @@ function fillTheRest(button, version) {
     var id_res = id_.substr(3);
     index_array = note_id.indexOf(id_res);
 
-    let note = obj_note[index_array].duration;
+    let note = note_duration; //obj_note[index_array].duration;
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
     let spaceVal = noteVal - (buttonVal * 2);
@@ -101,21 +101,29 @@ function findValue(note) {
     let returnValue;
 
     switch (value) {
-        case 'w': returnValue = 4;
+        case 'w':
+            returnValue = 4;
             break;
-        case 'h': returnValue = 2;
+        case 'h':
+            returnValue = 2;
             break;
-        case 'q': returnValue = 1;
+        case 'q':
+            returnValue = 1;
             break;
-        case '8': returnValue = 0.5;
+        case '8':
+            returnValue = 0.5;
             break;
-        case '16': returnValue = 0.25;
+        case '16':
+            returnValue = 0.25;
             break;
-        case '32': returnValue = 0.125;
+        case '32':
+            returnValue = 0.125;
             break;
-        case '64': returnValue = 0.0625;
+        case '64':
+            returnValue = 0.0625;
             break;
-        default: console.log("Don't have this value");
+        default:
+            console.log("Don't have this value");
     }
     return returnValue;
 
