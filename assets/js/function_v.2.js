@@ -68,7 +68,7 @@ function draw_notes() {
   stave_2Measure1001.addClef("bass").addTimeSignature("4/4");
   var brace = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(3);
   var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(1);
-  var lineRight = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(0);
+  var lineRight = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(6);
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
@@ -143,6 +143,11 @@ function redraw_notes() {
 
       brace.setContext(context).draw();
       lineLeft.setContext(context).draw();
+    }
+
+    if (i == measure) {
+      var lineRight = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(6);
+      lineRight.setContext(context).draw();
     }
   }
 }
