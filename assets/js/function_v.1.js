@@ -1,4 +1,4 @@
-//var VF = null;
+var VF = null;
 var context = null;
 var stave = null;
 var voice = null;
