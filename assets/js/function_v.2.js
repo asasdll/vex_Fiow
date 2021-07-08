@@ -109,56 +109,27 @@ function draw_notes() {
 function redraw_notes() {
   renderer.ctx.clear();
 
-  if (measure > 1001) {
-    for (i = measure; i > 1001; i--) {
-      this["staveMeasure" + i].setContext(context).draw();
-      Vex.Flow.Formatter.FormatAndDraw(context,
-        this["staveMeasure" + i],
-        this["notesMeasure" + i]);
-      this["stave_2Measure" + i].setContext(context).draw();
-      Vex.Flow.Formatter.FormatAndDraw(context,
-        this["stave_2Measure" + i],
-        this["notes_2Measure" + i]);
+  let index = 1001 - (u - 1);
 
-      var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
-      var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
+  for (i = index; i <= measure; i++) {
+    this["staveMeasure" + i].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["staveMeasure" + i],
+      this["notesMeasure" + i]);
+    this["stave_2Measure" + i].setContext(context).draw();
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["stave_2Measure" + i],
+      this["notes_2Measure" + i]);
 
-      voice.forEach(function (b) { b.setContext(context).draw() });
-      voice_2.forEach(function (b) { b.setContext(context).draw() });
+    var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
+    var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
 
+    voice.forEach(function (b) { b.setContext(context).draw() });
+    voice_2.forEach(function (b) { b.setContext(context).draw() });
 
-    }
-
-    // add_type_array();
-  }
-
-
-  j = u;
-  if (u >= 1) {
-    for (i = 0; i < j; i++) {
-      //console.log("staveMeasure" + (1 - i));
-      this["staveMeasure" + (1001 - i)].setContext(context).draw();
-      Vex.Flow.Formatter.FormatAndDraw(context,
-        this["staveMeasure" + (1001 - i)],
-        this["notesMeasure" + (1001 - i)]);
-
-      this["stave_2Measure" + (1001 - i)].setContext(context).draw();
-      Vex.Flow.Formatter.FormatAndDraw(context,
-        this["stave_2Measure" + (1001 - i)],
-        this["notes_2Measure" + (1001 - i)]);
-
-      var voice = VF.Beam.generateBeams(this["notesMeasure" + (1001 - i)]);
-      var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + (1001 - i)]);
-
-      voice.forEach(function (b) { b.setContext(context).draw() });
-      voice_2.forEach(function (b) { b.setContext(context).draw() });
-    }
-
+    console.log('jaja' + i);
 
   }
-
-
-
 }
 
 let measure = 1001;
@@ -202,8 +173,6 @@ function add_measure_before() {
   computeStave();
   redraw_notes();
 }
-
-let trackHead = 0;
 
 function computeStave() {
   renderer.ctx.clear();
@@ -260,10 +229,9 @@ function computeStave() {
       vit = 0;
     }
 
-    console.log(measureHead);
-
     if (vit == 0) { // ให้ pointer วิ่งตาม
       let head = 1; // เช็คหัวแรกของ pointer
+      let tracer = 0;
 
       if (i != measure) { // ถ้าไม่ใช่ห้องสุดท้าย
         while (pointer2 < i) {
@@ -275,6 +243,7 @@ function computeStave() {
           if (head == 1) { // เป็นหัวของ pointer หรือไม่
             xpos = 70;
             pointerMeasure.width += 70;
+            trackHead++;
           } else {
             xpos = previousMeasure.x + previousMeasure.width;
           }
