@@ -327,7 +327,12 @@ function computeStave() {
       }
     }
   }
-  console.log(measureHead);
+  for (i = j; i <= measure; i++) {
+    if (this["staveMeasure" + i].x == 70) {
+      this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
+      this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
+    }
+  }
 }
 
 
