@@ -111,9 +111,12 @@ function redraw_notes() {
 
   let marker = 1002 - u;
 
-  for (i = measure; measure >= marker; i--) {
-
+  for (i = measure; i >= marker; i--) {
     console.log(i);
+    console.log(i >= marker);
+    console.log(measure + 'measure');
+    console.log(marker + 'marker');
+
     // if (this["staveMeasure" + i].x == 70) {
     //   this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
     //   this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
@@ -459,8 +462,8 @@ function notes_down() {
   console.log(key, octave);
   if (note_substr == "notesMeasure") {
     obj_note[index_array] = get_new_note(key, octave, duration);
-    setStyle_OrangeRed();
     redraw_notes();
+    setStyle_OrangeRed();
   } else {
     obj_note[index_array] = get_new_note_down(key, octave, duration);
     setStyle_OrangeRed();
@@ -557,7 +560,7 @@ function type_note() {
 
     $(this).attr("type", type_a[i]);
     id_ = $(this).attr("id");
-    console.log(type_a[i], id_);
+    // console.log(type_a[i], id_);
     i++;
 
 
@@ -607,7 +610,7 @@ function group_notes() {
 function sound() {
 
   type_note();
-  console.log(type_array);
+  // console.log(type_array);
 }
 
 
