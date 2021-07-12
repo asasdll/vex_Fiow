@@ -514,6 +514,10 @@ function notes_Click() {
 $('html') // unbind mousemove all html
   .mouseup(function () {
     unBind();
+  });
+
+$('html') // unbind mousemove all html
+  .click(function () {
     setStyle_Black();
     index_array = null;
     redraw_notes();
