@@ -26,10 +26,11 @@ function fillTheRest(button, version) {
     var id_res = id_.substr(3);
     index_array = note_id.indexOf(id_res);
 
-    let note = note_duration; //obj_note[index_array].duration;
+    let note = obj_note[index_array].duration;
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
     let spaceVal = noteVal - (buttonVal * 2);
+
 
     let array = ['64', '32', '16', '8', 'q', 'h', 'w'];
     let i = array.indexOf(button) + 1;
@@ -64,7 +65,7 @@ function fillTheRest(button, version) {
     }
 
     if (version === 'b') {
-        obj_note[index_array] = get_new_note('b', 4, `${button}r`);
+        obj_note[index_array] = get_new_note('b', 4, `${button}`);
     } else {
         obj_note[index_array] = get_new_note('b', 4, `${button}r`);
     }

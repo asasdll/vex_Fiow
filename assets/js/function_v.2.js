@@ -4,6 +4,7 @@ var height2 = 200;
 var type_array = ["notesMeasure1001", "notes_2Measure1001"];
 var bok_number = 1;
 var note_num_k;
+var index_array;
 var type_v;
 var type_g;
 var arr_type = "";
@@ -107,14 +108,13 @@ function draw_notes() {
 
 function redraw_notes() {
   renderer.ctx.clear();
-
   let marker = 1002 - u;
 
   for (i = measure; i >= marker; i--) {
-    /*console.log(i);
-    console.log(i >= marker);
-    console.log(measure + 'measure');
-    console.log(marker + 'marker');*/
+    // console.log(i);
+    // console.log(i >= marker);
+    // console.log(measure + 'measure');
+    // console.log(marker + 'marker');
 
     // if (this["staveMeasure" + i].x == 70) {
     //   this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
@@ -145,6 +145,7 @@ function redraw_notes() {
       lineRight.setContext(context).draw();
     }
 
+
     Vex.Flow.Formatter.FormatAndDraw(context,
       this["staveMeasure" + i],
       this["notesMeasure" + i]);
@@ -159,8 +160,7 @@ function redraw_notes() {
     voice_2.forEach(function (b) { b.setContext(context).draw() });
 
   }
-
-  type_note();
+  // type_note();
 }
 
 let measure = 1001;
@@ -210,7 +210,7 @@ let trackHead = 0;
 
 function computeStave() {
   renderer.ctx.clear();
- // console.log('in');
+  // console.log('in');
   j = 1001 - (u - 1);  // ตำแหน่งเริ่ม loop
   pointer2 = 1001 - (u - 1); // pointer ตัวที่สอง
   level = 0; // ความสูงเส้นแรก
@@ -219,7 +219,7 @@ function computeStave() {
   let trackHead = 0;
 
   for (i = j; i <= measure; i++) { // ลูปจากห้องติดลบ ไปห้องสุดท้าย
-   // console.log(i);
+    // console.log(i);
     let high = this["notesMeasure" + i].length;
     let lower = this["notes_2Measure" + i].length;
     let lengthHL = high > lower ? high : lower; // เทียบความยาวบนล่าง
@@ -263,7 +263,7 @@ function computeStave() {
       vit = 0;
     }
 
-    //console.log(measureHead);
+    // console.log(measureHead);
 
     if (vit == 0) { // ให้ pointer วิ่งตาม
       let head = 1; // เช็คหัวแรกของ pointer
@@ -350,15 +350,22 @@ function mouseDown() {
   $(".vf-stavenote")
     .mousedown(function (e) {
 
-     type_note();
+      type_note();
 
       arr_type = $(this).attr("type");
       id_ = $(this).attr("id");
-       console.log("id_",id_);
-       console.log("NBot",notesMeasure1001);
+      // console.log(notesMeasure1001);
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
       obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
-      //console.log(arr_type);
+
+      let note_id = [];
+      for (let i = 0; i < obj_note.length; i++) {
+
+        note_id.push(obj_note[i].attrs.id);
+
+      }
+      var id_res = id_.substr(3);
+      index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
 
       note_ = obj_note[0].keys;
       //console.log(note_duration);
@@ -367,24 +374,12 @@ function mouseDown() {
 
       e_Click = event.clientY; //413
       group_notes(); // เรียกใช้งาน arr_notes 
-
-
-      let note_id = [];
-      for (let i = 0; i < obj_note.length; i++) {
-
-        note_id.push(obj_note[i].attrs.id);
-
-      }
-
-      var id_res = id_.substr(3);
-      console.log("nn",id_res,note_id);
-      var index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
       var search_array = arr_notes.indexOf(nots_str); // หา index note 29
-      console.log("cAQA",index_array);
-    console.log(obj_note[index_array].duration);
+
+      // console.log(obj_note[index_array].duration);
       note_duration = obj_note[index_array].duration;
-   
-     
+
+      click_style();
       // add_type_array();
 
       let previous = Number(index_array) - 1;
@@ -395,15 +390,19 @@ function mouseDown() {
         }
       }
 
-      
+      substr_notes(search_array);
       checkIndex = index_array;
 
-      substr_notes(search_array); // เปลี่ยน notes
-      click_style();
+      if (obj_note[index_array].customTypes == 'r') {
+        notes_Click();
+      }
+
+
+
 
       $(document).bind('mousemove', function (e) {
         var ev_move = e.clientY; //434  เลื่อน เม้า
-        
+
         sum_pixels = e_Click + 10; //443 เลื่อน เม้า
         del_pix = e_Click - 10; //  424  เลื่อน เม้า 
         var array_a = 1;
@@ -416,7 +415,6 @@ function mouseDown() {
 
             search_array = search_array - array_a;
           }
-
           substr_notes(search_array);
           notes_down();
 
@@ -437,68 +435,49 @@ function mouseDown() {
 
 
     });
-
 }
 
 
 
 function notes_up() {
-  type_note();
-  //console.log(index_array);
+
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-
   if (note_substr === "notesMeasure") {
+    obj_note[index_array] = get_new_note(key, octave, duration);
+    setStyle_OrangeRed()
+    redraw_notes();
 
-    get_note_up(key, octave , duration);
- 
   } else {
-
-    get_note_down(key, octave , duration);
+    obj_note[index_array] = get_new_note_down(key, octave, duration);
+    setStyle_OrangeRed()
+    redraw_notes();
 
   }
-  setStyle_OrangeRed()
-  redraw_notes();
+
 
 
 
 }
 
 function notes_down() {
+
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
+  // console.log(key, octave);
   if (note_substr == "notesMeasure") {
-
-    get_note_up(key, octave , duration);
-  
-
+    obj_note[index_array] = get_new_note(key, octave, duration);
+    setStyle_OrangeRed();
+    redraw_notes();
   } else {
-
-    get_note_down(key, octave , duration);
-
+    obj_note[index_array] = get_new_note_down(key, octave, duration);
+    setStyle_OrangeRed();
+    redraw_notes();
   }
 
-  setStyle_OrangeRed();
-  redraw_notes();
 
-
-}
-
-function get_note_up(key, octave ,duration) {
- console.log("UP",index_array,type_array);
- 
-  obj_note[index_array] = get_new_note(key, octave, duration);
-
-}
-
-function get_note_down(key, octave ,duration) {
- 
- 
-  console.log("UP",index_array,type_array);
-  obj_note[index_array] = get_new_note_down(key, octave, duration);
-  
 }
 
 function substr_notes(value) {
@@ -517,14 +496,27 @@ function substr_notes(value) {
 
 }
 
+function notes_Click() {
+
+  let key = note_te_k;
+  let octave = note_num_k;
+  let duration = note_duration;
+  if (note_substr == "notesMeasure") {
+    obj_note[index_array] = get_new_note(key, octave, duration, false);
+  } else {
+    obj_note[index_array] = get_new_note_down(key, octave, duration, false);
+  }
+  setStyle_Black()
+  redraw_notes();
+
+}
 
 $('html') // unbind mousemove all html
   .mouseup(function () {
     unBind();
     setStyle_Black();
-    mouseDown();
-   
-
+    index_array = null;
+    redraw_notes();
   });
 
 
@@ -574,7 +566,8 @@ function add_type_array() { // add array
   }
 
   //console.log("B");
- // console.log(type_array);
+  // console.log(type_array);
+  type_note();
 
 
 }
@@ -584,13 +577,13 @@ function type_note() {
   let i = 0;
   const type_a = type_array;
 
- 
-
   $('.vf-stavenote').each(function () {
 
     $(this).attr("type", type_a[i]);
-
+    id_ = $(this).attr("id");
+    // console.log(type_a[i], id_);
     i++;
+
 
   });
   //console.log(type_array);
@@ -600,6 +593,7 @@ function type_note() {
 
 
 function setStyle_OrangeRed() {
+
   obj_note[index_array].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
 
 }
@@ -608,28 +602,14 @@ function setStyle_Black() {
   if (index_array != undefined) {
     obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
   }
-
 }
 
 
 function click_style() {
-  var key = note_te_k;
-  var octave = note_num_k;
-  var duration = note_duration;
-  if (note_substr == "notesMeasure") {
-
-    get_note_up(key, octave , duration);
-  
-
-  } else {
-
-    get_note_down(key, octave , duration);
-
-  }
 
   setStyle_OrangeRed();
   redraw_notes();
- 
+
 };
 
 
@@ -650,7 +630,7 @@ function group_notes() {
 
 function sound() {
 
-  //type_note();
+  type_note();
   // console.log(type_array);
 }
 
