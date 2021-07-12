@@ -448,10 +448,12 @@ function notes_up() {
     obj_note[index_array] = get_new_note(key, octave, duration);
     setStyle_OrangeRed()
     redraw_notes();
+    redraw_notes();
 
   } else {
     obj_note[index_array] = get_new_note_down(key, octave, duration);
     setStyle_OrangeRed()
+    redraw_notes();
     redraw_notes();
 
   }
@@ -471,9 +473,11 @@ function notes_down() {
     obj_note[index_array] = get_new_note(key, octave, duration);
     setStyle_OrangeRed();
     redraw_notes();
+    redraw_notes();
   } else {
     obj_note[index_array] = get_new_note_down(key, octave, duration);
     setStyle_OrangeRed();
+    redraw_notes();
     redraw_notes();
   }
 
