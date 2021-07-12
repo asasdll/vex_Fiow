@@ -64,7 +64,7 @@ function fillTheRest(button, version) {
     }
 
     if (version === 'b') {
-        obj_note[index_array] = get_new_note('b', 4, `${button}`);
+        obj_note[index_array] = get_new_note('b', 4, `${button}r`);
     } else {
         obj_note[index_array] = get_new_note('b', 4, `${button}r`);
     }
