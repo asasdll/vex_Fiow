@@ -32,25 +32,6 @@ function get_new_note(key, octave, duration, position) {
 }
 
 
-function get_new_note_down(key, octave, duration, position) {
-
-  let obj = new VF.StaveNote({
-    clef: 'treble',
-    keys: [key + "/" + octave],
-    duration: duration,
-    auto_stem: true,
-    // clef: "treble",
-    align_center: position
-
-  })
-  //obj.setAttribute('id', 'test555');
-
-
-
-  return obj;
-}
-
-
 function draw_notes() {
   VF = Vex.Flow;
   var div = document.getElementById("page")
@@ -83,7 +64,7 @@ function draw_notes() {
   ];
 
   notes_2Measure1001 = [
-    get_new_note_down('b', 4, "wr", true),
+    get_new_note('b', 4, "wr", true),
   ];
 
   //voice.addTickables(notes);
@@ -444,23 +425,11 @@ function notes_up() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-  if (note_substr === "notesMeasure") {
-    obj_note[index_array] = get_new_note(key, octave, duration);
-    setStyle_OrangeRed()
-    redraw_notes();
-    redraw_notes();
 
-  } else {
-    obj_note[index_array] = get_new_note_down(key, octave, duration);
-    setStyle_OrangeRed()
-    redraw_notes();
-    redraw_notes();
-
-  }
-
-
-
-
+  obj_note[index_array] = get_new_note(key, octave, duration);
+  setStyle_OrangeRed()
+  redraw_notes();
+  redraw_notes();
 }
 
 function notes_down() {
@@ -469,19 +438,10 @@ function notes_down() {
   var octave = note_num_k;
   var duration = note_duration;
   // console.log(key, octave);
-  if (note_substr == "notesMeasure") {
-    obj_note[index_array] = get_new_note(key, octave, duration);
-    setStyle_OrangeRed();
-    redraw_notes();
-    redraw_notes();
-  } else {
-    obj_note[index_array] = get_new_note_down(key, octave, duration);
-    setStyle_OrangeRed();
-    redraw_notes();
-    redraw_notes();
-  }
-
-
+  obj_note[index_array] = get_new_note(key, octave, duration);
+  setStyle_OrangeRed();
+  redraw_notes();
+  redraw_notes();
 }
 
 function substr_notes(value) {
@@ -505,11 +465,9 @@ function notes_Click() {
   let key = note_te_k;
   let octave = note_num_k;
   let duration = note_duration;
-  if (note_substr == "notesMeasure") {
-    obj_note[index_array] = get_new_note(key, octave, duration, false);
-  } else {
-    obj_note[index_array] = get_new_note_down(key, octave, duration, false);
-  }
+
+  obj_note[index_array] = get_new_note(key, octave, duration, false);
+
   setStyle_Black()
   redraw_notes();
   redraw_notes();
