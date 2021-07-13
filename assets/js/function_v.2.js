@@ -512,6 +512,7 @@ function notes_Click() {
   }
   setStyle_Black()
   redraw_notes();
+  redraw_notes();
 
 }
 
