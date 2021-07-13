@@ -594,7 +594,7 @@ function type_note() {
 
 
   });
-  //console.log(type_array);
+  //console.log(typesadas_array);
 
 }
 
