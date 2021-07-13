@@ -378,6 +378,8 @@ function mouseDown() {
 
       // console.log(obj_note[index_array].duration);
       note_duration = obj_note[index_array].duration;
+
+      click_style();
       // add_type_array();
 
       let previous = Number(index_array) - 1;
@@ -391,10 +393,9 @@ function mouseDown() {
       substr_notes(search_array);
       checkIndex = index_array;
 
-      //console.log(obj_note[index_array]);
       if (obj_note[index_array].customTypes == 'r') {
         notes_Click();
-     }
+      }
 
 
 
@@ -444,17 +445,18 @@ function notes_up() {
   var octave = note_num_k;
   var duration = note_duration;
   if (note_substr === "notesMeasure") {
-    obj_note[index_array] = get_new_note(key, octave, duration, false);
+    obj_note[index_array] = get_new_note(key, octave, duration);
+    setStyle_OrangeRed()
+    redraw_notes();
+    redraw_notes();
 
   } else {
-    obj_note[index_array] = get_new_note_down(key, octave, duration, false);
-   
+    obj_note[index_array] = get_new_note_down(key, octave, duration);
+    setStyle_OrangeRed()
+    redraw_notes();
+    redraw_notes();
 
   }
-
-  setStyle_OrangeRed()
-  redraw_notes();
-
 
 
 
@@ -468,14 +470,16 @@ function notes_down() {
   var duration = note_duration;
   // console.log(key, octave);
   if (note_substr == "notesMeasure") {
-    obj_note[index_array] = get_new_note(key, octave, duration, false);
+    obj_note[index_array] = get_new_note(key, octave, duration);
+    setStyle_OrangeRed();
+    redraw_notes();
+    redraw_notes();
   } else {
-    obj_note[index_array] = get_new_note_down(key, octave, duration, false);
-   
-
+    obj_note[index_array] = get_new_note_down(key, octave, duration);
+    setStyle_OrangeRed();
+    redraw_notes();
+    redraw_notes();
   }
-  setStyle_OrangeRed();
-  redraw_notes();
 
 
 }
@@ -505,14 +509,11 @@ function notes_Click() {
     obj_note[index_array] = get_new_note(key, octave, duration, false);
   } else {
     obj_note[index_array] = get_new_note_down(key, octave, duration, false);
-   
   }
-  setStyle_OrangeRed();
+  setStyle_Black()
   redraw_notes();
 
 }
-
-
 
 $('html') // unbind mousemove all html
   .mouseup(function () {
@@ -593,7 +594,7 @@ function type_note() {
 
 
   });
-  //console.log(typesadas_array);
+  //console.log(type_array);
 
 }
 
@@ -612,6 +613,12 @@ function setStyle_Black() {
 }
 
 
+function click_style() {
+
+  setStyle_OrangeRed();
+  redraw_notes();
+
+};
 
 
 function group_notes() {
