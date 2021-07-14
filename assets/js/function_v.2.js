@@ -43,12 +43,6 @@ function draw_notes() {
 
   context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
 
-  staveMeasure1001 = new VF.Stave(70, 0, 550);
-  stave_2Measure1001 = new VF.Stave(70, 100, 550);
-  var brace = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(3);
-  var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(1);
-  var lineRight = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(6);
-
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
   notesMeasure1001 = [
@@ -66,25 +60,8 @@ function draw_notes() {
   ];
 
   computeStave();
-  //voice.addTickables(notes);
-  window.renderer = renderer;
-  staveMeasure1001.setContext(context).draw();
-  stave_2Measure1001.setContext(context).draw();
-  brace.setContext(context).draw();
-  lineLeft.setContext(context).draw();
-  lineRight.setContext(context).draw();
-
-  var voice = VF.Beam.generateBeams(notesMeasure1001);
-  var voice_2 = VF.Beam.generateBeams(notes_2Measure1001); //note เส้นหาย
-  Vex.Flow.Formatter.FormatAndDraw(context, staveMeasure1001, notesMeasure1001);
-  Vex.Flow.Formatter.FormatAndDraw(context, stave_2Measure1001, notes_2Measure1001); //note เส้นหาย
-  voice.forEach(function (b) { b.setContext(context).draw() });
-  voice_2.forEach(function (b) { b.setContext(context).draw() });
-  //console.log(type_array);
-
+  redraw_notes();
   type_note();
-
-
 }
 
 function redraw_notes() {
@@ -92,23 +69,9 @@ function redraw_notes() {
   let marker = 1002 - u;
 
   for (i = measure; i >= marker; i--) {
-    // console.log(i);
-    // console.log(i >= marker);
-    // console.log(measure + 'measure');
-    // console.log(marker + 'marker');
-
-    // if (this["staveMeasure" + i].x == 70) {
-    //   this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
-    //   this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
-    // }
 
     this["staveMeasure" + i].setContext(context).draw();
     this["stave_2Measure" + i].setContext(context).draw();
-
-    // if (this["staveMeasure" + i].x == 70) {
-    //   this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
-    //   this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
-    // }
 
     if (this["staveMeasure" + i].x == 70) {
       var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(3);
@@ -318,9 +281,8 @@ function computeStave() {
 function modifyStave() {
   for (i = j; i <= measure; i++) {
     if (this["staveMeasure" + i].x == 70) {
-      this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
-      this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
-      this["staveMeasure" + i].addKeySignature('Cb');
+      this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4").addKeySignature('Cb');
+      this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4").addKeySignature('Cb');
     }
   }
 }
