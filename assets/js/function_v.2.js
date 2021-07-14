@@ -14,6 +14,7 @@ var checkIndex;
 var measureHead = [];
 
 
+
 function get_new_note(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
@@ -62,7 +63,7 @@ function draw_notes() {
   computeStave();
   redraw_notes();
   type_note();
-
+  time_Signature();
 
 
 
@@ -109,6 +110,7 @@ function redraw_notes() {
 
   }
   // type_note();
+  time_Signature();
 }
 
 let measure = 1001;
@@ -398,7 +400,14 @@ function mouseDown() {
 
     $("path")
     .mousedown(function (e) {
-      time_Signature();
+      
+  
+      let time_id = $(this).attr("time_id");
+      //console.log("time_id",time_id);
+    
+
+    
+      
     });
 
 
@@ -568,6 +577,8 @@ function click_style() {
 };
 
 
+
+
 function group_notes() {
 
   arr_notes = [
@@ -585,24 +596,56 @@ function group_notes() {
 
 function sound() {
 
-  type_note();
-  // console.log(type_array);
+  
 }
 
 function time_Signature() {
   
   let i = 0;
+  
+  $("path").each(function () {
 
-  $('.vf-stavenote').each(function () {
-/*
-    $(this).attr("type", type_a[i]);
-    id_ = $(this).attr("id");
-    // console.log(type_a[i], id_);
+    $(this).attr("id","time_" + i);
+   
     i++;
-    */
-   console.log("id",i++);
 
   });
+}
+
+function frame_Ts() {
+
+
+}
+
+
+
+  
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+//var btn = document.querySelectorAll("path");
+var btn = document.querySelectorAll("path.time_6");
+//var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
 
 
