@@ -85,6 +85,9 @@ function draw_notes() {
 
   type_note();
 
+
+
+
 }
 
 function redraw_notes() {
@@ -185,6 +188,8 @@ function add_measure_before() {
   array_type_2("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
   computeStave();
   redraw_notes();
+ 
+
 }
 
 let trackHead = 0;
@@ -381,6 +386,8 @@ function mouseDown() {
 
 
 
+
+
       $(document).bind('mousemove', function (e) {
         var ev_move = e.clientY; //434  เลื่อน เม้า
 
@@ -416,6 +423,13 @@ function mouseDown() {
 
 
     });
+
+    $("path")
+    .mousedown(function (e) {
+      time_Signature();
+    });
+
+
 }
 
 
@@ -441,7 +455,7 @@ function notes_down() {
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
   redraw_notes();
-  redraw_notes();
+ redraw_notes();
 }
 
 function substr_notes(value) {
@@ -485,6 +499,8 @@ $('html') // unbind mousemove all html
     index_array = null;
     redraw_notes();
   });
+
+
 
 
 
@@ -599,6 +615,22 @@ function sound() {
 
   type_note();
   // console.log(type_array);
+}
+
+function time_Signature() {
+  
+  let i = 0;
+
+  $('.vf-stavenote').each(function () {
+/*
+    $(this).attr("type", type_a[i]);
+    id_ = $(this).attr("id");
+    // console.log(type_a[i], id_);
+    i++;
+    */
+   console.log("id",i++);
+
+  });
 }
 
 

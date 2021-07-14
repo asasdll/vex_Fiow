@@ -95,7 +95,7 @@ function fillTheRest(button, version) {
     add_type_array();
     computeStave();
     redraw_notes();
-
+    redraw_notes(); // เเก้หาง
 
 }
 
