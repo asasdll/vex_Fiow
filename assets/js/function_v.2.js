@@ -401,18 +401,21 @@ function mouseDown() {
     $("path")
     .mousedown(function (e) {
       
-  
-      let time_id = $(this).attr("time_id");
-      //console.log("time_id",time_id);
-    
 
-    
+      $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+      })
       
     });
 
 
 }
-
 
 
 function notes_up() {
@@ -614,18 +617,11 @@ function time_Signature() {
 
 function frame_Ts() {
 
-
-}
-
-
-
-  
-// Get the modal
-var modal = document.getElementById("myModal");
+  var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
 //var btn = document.querySelectorAll("path");
-var btn = document.querySelectorAll("path.time_6");
+//var btn = document.querySelectorAll($(this).attr("id"));
 //var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
@@ -647,6 +643,15 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
+}
+
+
+
+  
+// Get the modal
+
 
 
 window.addEventListener('load', draw_notes);
