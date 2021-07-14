@@ -45,8 +45,6 @@ function draw_notes() {
 
   staveMeasure1001 = new VF.Stave(70, 0, 550);
   stave_2Measure1001 = new VF.Stave(70, 100, 550);
-  staveMeasure1001.addClef("treble").addTimeSignature("4/4");
-  stave_2Measure1001.addClef("bass").addTimeSignature("4/4");
   var brace = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(3);
   var lineLeft = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(1);
   var lineRight = new Vex.Flow.StaveConnector(staveMeasure1001, stave_2Measure1001).setType(6);
@@ -67,6 +65,7 @@ function draw_notes() {
     get_new_note('b', 4, "wr", true),
   ];
 
+  computeStave();
   //voice.addTickables(notes);
   window.renderer = renderer;
   staveMeasure1001.setContext(context).draw();
@@ -84,6 +83,7 @@ function draw_notes() {
   //console.log(type_array);
 
   type_note();
+
 
 }
 
@@ -312,15 +312,18 @@ function computeStave() {
       }
     }
   }
+  modifyStave();
+}
+
+function modifyStave() {
   for (i = j; i <= measure; i++) {
     if (this["staveMeasure" + i].x == 70) {
       this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4");
       this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4");
+      this["staveMeasure" + i].addKeySignature('Cb');
     }
   }
 }
-
-
 
 
 
