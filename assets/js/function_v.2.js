@@ -278,11 +278,17 @@ function computeStave() {
   modifyStave();
 }
 
+keySig = 'Cb';
+timeSig = '2/4';
+clef = 'french';
+lowerClef = 'alto';
+
+
 function modifyStave() {
   for (i = j; i <= measure; i++) {
     if (this["staveMeasure" + i].x == 70) {
-      this["staveMeasure" + i].addClef("treble").addTimeSignature("4/4").addKeySignature('Cb');
-      this["stave_2Measure" + i].addClef("bass").addTimeSignature("4/4").addKeySignature('Cb');
+      this["staveMeasure" + i].addClef(clef).addTimeSignature(timeSig).addKeySignature(keySig);
+      this["stave_2Measure" + i].addClef(lowerClef).addTimeSignature(timeSig).addKeySignature(keySig);
     }
   }
 }
