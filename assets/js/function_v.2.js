@@ -307,10 +307,10 @@ function modifyStave() {
 
 
 function mouseDown() {
-  console.log("222");
+ // console.log("222");
   $(".vf-stavenote")
     .mousedown(function (e) {
-
+console.log("555");
       type_note();
 
       arr_type = $(this).attr("type");
@@ -401,17 +401,9 @@ function mouseDown() {
 
     $("path")
     .mousedown(function (e) {
-      var myModal = document.getElementById('exampleModal')
-     /* var myInput = document.getElementById('myInput')
       
-      myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-      })*/
-      if (myModal != null) {
-        console.log("sdsad");
-      }
- 
 
+     $('#exampleModal').modal("toggle");
 
     });
 
