@@ -6,5 +6,6 @@
         "notehead",
         "stavenote",
         "typeidex"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
