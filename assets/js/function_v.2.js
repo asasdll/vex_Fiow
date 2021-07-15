@@ -66,9 +66,13 @@ function draw_notes() {
 
 function redraw_notes() {
   renderer.ctx.clear();
+  console.log('jaja0');
   let marker = 1002 - u;
 
   for (i = measure; i >= marker; i--) {
+
+    this["group" + i] = context.openGroup();
+
 
     this["staveMeasure" + i].setContext(context).draw();
     this["stave_2Measure" + i].setContext(context).draw();
@@ -103,6 +107,9 @@ function redraw_notes() {
     voice.forEach(function (b) { b.setContext(context).draw() });
     voice_2.forEach(function (b) { b.setContext(context).draw() });
 
+
+    context.closeGroup();
+
   }
   // type_note();
 }
@@ -110,7 +117,6 @@ function redraw_notes() {
 let measure = 1001;
 
 function add_measure_after() {
-  renderer.ctx.clear();
 
   this["notesMeasure" + (measure + 1)] = [
     get_new_note('b', 4, "wr", true),
@@ -131,7 +137,6 @@ function add_measure_after() {
 u = 1;
 
 function add_measure_before() {
-  renderer.ctx.clear();
 
   this["notesMeasure" + (1001 - u)] = [
     get_new_note('b', 4, "wr", true),
@@ -319,6 +324,8 @@ function mouseDown() {
       var id_res = id_.substr(3);
       index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
 
+      num_group = arr_type.substr(12, 4);
+
       note_ = obj_note[0].keys;
       //console.log(note_duration);
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
@@ -399,8 +406,10 @@ function notes_up() {
 
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed()
-  redraw_notes();
-  redraw_notes();
+
+  redraw_measure();
+  redraw_measure();
+
 }
 
 function notes_down() {
@@ -411,8 +420,9 @@ function notes_down() {
   // console.log(key, octave);
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
-  redraw_notes();
-  redraw_notes();
+
+  redraw_measure();
+  redraw_measure();
 }
 
 function substr_notes(value) {
@@ -424,11 +434,47 @@ function substr_notes(value) {
     note_num_k = note_sea.substr(-1); // เเยก ตัวเลข จาก note 0-8*/
 
   }
+}
 
+function redraw_measure() {
+  const group = this['group' + num_group]
+  context.svg.removeChild(group);
 
+  this["group" + num_group] = context.openGroup();
 
+  this["staveMeasure" + num_group].setContext(context).draw();
+  this["stave_2Measure" + num_group].setContext(context).draw();
 
+  if (this["staveMeasure" + num_group].x == 70) {
+    var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + num_group], this["stave_2Measure" + num_group]).setType(3);
+    var lineLeft = new Vex.Flow.StaveConnector(this["staveMeasure" + num_group], this["stave_2Measure" + num_group]).setType(1);
 
+    brace.setContext(context).draw();
+    lineLeft.setContext(context).draw();
+  }
+
+  var lineRight = new Vex.Flow.StaveConnector(this["staveMeasure" + num_group], this["stave_2Measure" + num_group]).setType(0);
+  lineRight.setContext(context).draw();
+
+  if (num_group == measure) {
+    var lineRight = new Vex.Flow.StaveConnector(this["staveMeasure" + num_group], this["stave_2Measure" + num_group]).setType(6);
+    lineRight.setContext(context).draw();
+  }
+
+  Vex.Flow.Formatter.FormatAndDraw(context,
+    this["staveMeasure" + num_group],
+    this["notesMeasure" + num_group]);
+  Vex.Flow.Formatter.FormatAndDraw(context,
+    this["stave_2Measure" + num_group],
+    this["notes_2Measure" + num_group]);
+
+  var voice = VF.Beam.generateBeams(this["notesMeasure" + num_group]);
+  var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + num_group]);
+
+  voice.forEach(function (b) { b.setContext(context).draw() });
+  voice_2.forEach(function (b) { b.setContext(context).draw() });
+
+  context.closeGroup();
 }
 
 function notes_Click() {
@@ -440,8 +486,8 @@ function notes_Click() {
   obj_note[index_array] = get_new_note(key, octave, duration, false);
 
   setStyle_Black()
-  redraw_notes();
-  redraw_notes();
+  redraw_measure();
+  redraw_measure();
 
 }
 
@@ -551,7 +597,7 @@ function setStyle_Black_clear() {
 function click_style() {
 
   setStyle_OrangeRed();
-  redraw_notes();
+  redraw_measure();
 
 };
 
