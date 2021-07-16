@@ -83,13 +83,14 @@
                       <div class="container">
                         <div class="row">
                           <div class="col-12 col-md-1">
-                           <p>4 <br> 5</p>
+                           <p id="time_cut">4 <br> 4</p>
                           </div>
                           <div class="col-12  col-md-5">
-                            <input type="number" id="quantity" name="quantity" min="1" max="100">
+                            <input type="number" id="time_cut_2" name="quantity" value="" min="1" max="100">
                           </div>
                           <div class="col-12  col-md-5" >
                             <select class="form-select form-select-sm" onclick="pop_time_Signature()" aria-label=".form-select-sm example">
+                              <option id="time_cut_1" ></option>
                               <option value="2" >2</option>
                               <option value="4">4</option>
                               <option value="4">8</option>
@@ -97,6 +98,7 @@
                               <option value="32">32</option>
                               <option value="64">64</option>
                               <option value="128">128</option>
+                             
                             </select>
                           </div>
                         </div>

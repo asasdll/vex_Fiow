@@ -620,8 +620,15 @@ function time_Signature() {
 }
 
 function pop_time_Signature(e) {
-
-  console.log(e);
+  let text ="";  
+    if (e == "1") {
+      text = 4;
+      } else {
+        text = 2;
+      }
+  document.getElementById("time_cut").innerHTML = text + "<br>"+ text;
+  document.getElementById("time_cut_1").innerHTML = text;
+  document.getElementById("time_cut_2").innerHTML = text ;
 }
 
 
