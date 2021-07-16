@@ -400,13 +400,18 @@ function mouseDown() {
 
     });
 
-  // $("path")
-  // .mousedown(function (e) {
+  $("path")
+    .mousedown(function (e) {
+      let id = $(this).attr("id");
+
+      if (id == "time_6" || id == "time_7") {
+        $('#exampleModal').modal("toggle");
+      }
 
 
-  //  $('#exampleModal').modal("toggle");
 
-  // });
+
+    });
 
 
 }
