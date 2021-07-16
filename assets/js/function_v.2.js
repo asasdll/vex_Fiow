@@ -154,7 +154,7 @@ function add_measure_before() {
   array_type_2("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
   computeStave();
   redraw_notes();
- 
+
 
 }
 
@@ -307,10 +307,10 @@ function modifyStave() {
 
 
 function mouseDown() {
- // console.log("222");
+  // console.log("222");
   $(".vf-stavenote")
     .mousedown(function (e) {
-console.log("555");
+      console.log("555");
       setStyle_Black_clear();
       type_note();
 
@@ -400,13 +400,13 @@ console.log("555");
 
     });
 
-    $("path")
-    .mousedown(function (e) {
-      
+  // $("path")
+  // .mousedown(function (e) {
 
-     $('#exampleModal').modal("toggle");
 
-    });
+  //  $('#exampleModal').modal("toggle");
+
+  // });
 
 
 }
@@ -433,7 +433,7 @@ function notes_down() {
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
   redraw_notes();
- redraw_notes();
+  redraw_notes();
 }
 
 function substr_notes(value) {
@@ -598,31 +598,31 @@ function group_notes() {
 
 function sound() {
 
-  
+
 }
 
 function time_Signature() {
-  
+
   let i = 0;
-  
+
   $("path").each(function () {
 
-    $(this).attr("id","time_" + i);
-   
+    $(this).attr("id", "time_" + i);
+
     i++;
 
   });
 }
 
-function  pop_time_Signature(e) {
-  
+function pop_time_Signature(e) {
+
   console.log(e);
 }
 
 
 
 
-  
+
 // Get the modal
 
 
