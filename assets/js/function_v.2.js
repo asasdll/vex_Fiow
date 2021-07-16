@@ -311,6 +311,7 @@ function mouseDown() {
   $(".vf-stavenote")
     .mousedown(function (e) {
 console.log("555");
+      setStyle_Black_clear();
       type_note();
 
       arr_type = $(this).attr("type");
@@ -465,12 +466,12 @@ function notes_Click() {
 
 }
 
-$('html') // unbind mousemove all html
+$('html') // unbind mousemove 
   .mouseup(function () {
     unBind();
   });
 
-$('html') // unbind mousemove all html
+$('html')
   .click(function () {
     setStyle_Black();
     index_array = null;
@@ -564,6 +565,11 @@ function setStyle_Black() {
   }
 }
 
+function setStyle_Black_clear() {
+  if (checkIndex != undefined) {
+    obj_note[checkIndex].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+  }
+}
 
 function click_style() {
 
