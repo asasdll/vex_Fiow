@@ -42,3 +42,8 @@ body {
     margin-block-end: 1em;
     
 }
+.text-number {
+    position: absolute;
+    top: 2em;
+
+}

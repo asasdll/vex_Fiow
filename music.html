@@ -78,22 +78,21 @@
               
               <div class="col-12">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                     <label class="form-check-label" for="flexRadioDefault1">
                       <div class="container">
                         <div class="row">
-                          <div class="col-12 col-md-1">
-                           <p id="time_cut">4 <br> 4</p>
+                          <div class="col-12 col-md-1 ">
+                           <p class="text-number" id="time_cut">4 <br> 4</p>
                           </div>
                           <div class="col-12  col-md-5">
-                            <input type="number" id="time_cut_2" name="quantity" value="" min="1" max="100">
+                            <input type="number" id="time_cut_1" name="time_cut_1"  min="1" max="100" onclick="pop_time_Signature('0')">
                           </div>
                           <div class="col-12  col-md-5" >
-                            <select class="form-select form-select-sm" onclick="pop_time_Signature()" aria-label=".form-select-sm example">
-                              <option id="time_cut_1" ></option>
-                              <option value="2" >2</option>
-                              <option value="4">4</option>
-                              <option value="4">8</option>
+                            <select class="form-select form-select-sm"  id="id_time_cut_2" onclick="pop_time_Signature('0')" aria-label=".form-select-sm example">
+                              <option  id="time_cut_2">2</option>
+                              <option  value="4">4</option>
+                              <option value="8">8</option>
                               <option value="16">16</option>
                               <option value="32">32</option>
                               <option value="64">64</option>
@@ -106,7 +105,7 @@
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="pop_time_Signature('1')" id="flexRadioDefault2" checked>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="pop_time_Signature('4')" id="flexRadioDefault2" >
                     <label class="form-check-label" for="flexRadioDefault2">
                        &nbsp;
                       <img src="../assets/image/common-time.png" width="20px" alt="...">
@@ -114,7 +113,7 @@
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault"  onclick="pop_time_Signature('2')" id="flexRadioDefault2" checked>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault"  onclick="pop_time_Signature('2')" id="flexRadioDefault2" >
                     <label class="form-check-label" for="flexRadioDefault2">
                       &nbsp;
                       <img src="../assets/image/cut-time.png" width="17px" alt="...">
@@ -146,7 +145,7 @@
           </div>
         </div>
         <div class="footer-ml">
-          <button type="button" class="btn btn-" style="background-color: OrangeRed; color: AliceBlue;">OK</button>
+          <button type="submit" onclick="pop_time_Signature()"  data-bs-dismiss="modal" class="btn btn-" style="background-color: OrangeRed; color: AliceBlue;">OK</button>
         </div>
       </div>
     </div>
