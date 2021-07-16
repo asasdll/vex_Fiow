@@ -402,9 +402,14 @@ console.log("555");
 
     $("path")
     .mousedown(function (e) {
-      
-
-     $('#exampleModal').modal("toggle");
+      let id_Common  = $(this).attr("id");
+ 
+      if (id_Common == "time_6" || id_Common == "time_7" ) {
+ 
+        $('#exampleModal').modal("toggle");
+     
+      }
+     
 
     });
 
