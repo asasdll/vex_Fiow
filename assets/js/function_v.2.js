@@ -401,7 +401,7 @@ console.log("555");
     });
 
     $("path")
-    .mousedown(function (e) {
+    .mousedown(function (e) { // test
       let id_Common  = $(this).attr("id");
  
       if (id_Common == "time_6" || id_Common == "time_7" ) {
