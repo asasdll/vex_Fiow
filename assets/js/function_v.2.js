@@ -14,6 +14,7 @@ var checkIndex;
 var measureHead = [];
 
 
+
 function get_new_note(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
@@ -62,6 +63,10 @@ function draw_notes() {
   computeStave();
   redraw_notes();
   type_note();
+  time_Signature();
+
+
+
 }
 
 function redraw_notes() {
@@ -105,6 +110,7 @@ function redraw_notes() {
 
   }
   // type_note();
+  time_Signature();
 }
 
 let measure = 1001;
@@ -148,6 +154,8 @@ function add_measure_before() {
   array_type_2("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
   computeStave();
   redraw_notes();
+ 
+
 }
 
 let trackHead = 0;
@@ -299,8 +307,10 @@ function modifyStave() {
 
 
 function mouseDown() {
+ // console.log("222");
   $(".vf-stavenote")
     .mousedown(function (e) {
+console.log("555");
       setStyle_Black_clear();
       type_note();
 
@@ -352,6 +362,8 @@ function mouseDown() {
 
 
 
+
+
       $(document).bind('mousemove', function (e) {
         var ev_move = e.clientY; //434  เลื่อน เม้า
 
@@ -387,8 +399,17 @@ function mouseDown() {
 
 
     });
-}
 
+    $("path")
+    .mousedown(function (e) {
+      
+
+     $('#exampleModal').modal("toggle");
+
+    });
+
+
+}
 
 
 function notes_up() {
@@ -412,7 +433,7 @@ function notes_down() {
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
   redraw_notes();
-  redraw_notes();
+ redraw_notes();
 }
 
 function substr_notes(value) {
@@ -456,6 +477,8 @@ $('html')
     index_array = null;
     redraw_notes();
   });
+
+
 
 
 
@@ -556,6 +579,8 @@ function click_style() {
 };
 
 
+
+
 function group_notes() {
 
   arr_notes = [
@@ -573,9 +598,33 @@ function group_notes() {
 
 function sound() {
 
-  type_note();
-  // console.log(type_array);
+  
 }
+
+function time_Signature() {
+  
+  let i = 0;
+  
+  $("path").each(function () {
+
+    $(this).attr("id","time_" + i);
+   
+    i++;
+
+  });
+}
+
+function  pop_time_Signature(e) {
+  
+  console.log(e);
+}
+
+
+
+
+  
+// Get the modal
+
 
 
 window.addEventListener('load', draw_notes);
