@@ -25,7 +25,7 @@ function get_new_note(key, octave, duration, position) {
     auto_stem: true,
     //clef: "treble"
   });
-  //obj.setAttribute('id', 'test555');
+  obj.type_A = 'test555';
 
 
 
@@ -314,6 +314,8 @@ function mouseDown() {
       setStyle_Black_clear();
       type_note();
 
+
+      console.log("notes:" ,notesMeasure1001);
       arr_type = $(this).attr("type");
       id_ = $(this).attr("id");
       // console.log(notesMeasure1001);
@@ -406,6 +408,7 @@ function mouseDown() {
 
       if (id == "time_6" || id == "time_7") {
         $('#exampleModal').modal("toggle");
+         pop_time_Signature('4');
       }
 
 
@@ -621,14 +624,30 @@ function time_Signature() {
 
 function pop_time_Signature(e) {
 
-  console.log(e);
+  const element_1 = document.getElementById("time_cut_1").value;
+  const element_2 = document.getElementById("id_time_cut_2").value;
+console.log("element_1=" , element_1,"element_2=",element_2 , e);
+  if (e == "4") {
+    let text = 4;
+    document.getElementById("time_cut").innerHTML = text + "<br>" + text;
+    document.getElementById("time_cut_2").innerHTML = text;
+    document.getElementById("time_cut_1").value = text;
+  } else if (e == "2") {
+    let text = 2;
+    document.getElementById("time_cut").innerHTML = text + "<br>" + text;
+    document.getElementById("time_cut_2").innerHTML = text;
+    document.getElementById("time_cut_1").value = text;
+  } else if (e == "0") {
+    let text = 2;
+    document.getElementById("time_cut").innerHTML = element_1 + "<br>" + element_2;
+    document.getElementById("time_cut_2").innerHTML = text;
+  }
+
+ 
 }
 
 
 
-
-
-// Get the modal
 
 
 
