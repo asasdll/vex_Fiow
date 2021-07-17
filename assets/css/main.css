@@ -19,7 +19,7 @@ body {
 .vexbox {
     position: static;
     background-color: rgb(255, 255, 255);
-    margin-top: 12pc;
+    margin-top: 1pc;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
@@ -34,7 +34,7 @@ body {
     zoom: 200%;
     margin-left: auto;
     margin-right: auto;
-   width:100%;
+    width:100%;
 
 }
 
@@ -186,7 +186,7 @@ body {
 .footer-select-key{
     position: relative;
     width: 150px;
-    top: 0rem;
+    top: -1.5rem;
     left: 6rem;
   
 
@@ -198,4 +198,96 @@ body {
     top: 1.7rem;
     left: -3.5rem;
   
+}
+
+.key-Signature-text-top1 {
+    top: 6em;
+    left:8.5em;
+    position: absolute;
+
+}
+
+.key-Signature-text-top2 {
+    top: 6em;
+    left:10.7em;
+    position: absolute;
+}
+
+.key-Signature-text-top3 {
+    top: 6em;
+    left:13.6em;
+    position: absolute;
+}
+
+.key-Signature-text-top4 {
+    top: 6em;
+    left:17em;
+    position: absolute;
+}
+
+.key-Signature-text-top5 {
+    top: 6em;
+    left:21em;
+    position: absolute;
+}
+
+.key-Signature-text-top6 {
+    top: 6em;
+    left:26.5em;
+    position: absolute;
+}
+
+.key-Signature-text-top7 {
+    top: 6em;
+    left:33em;
+    position: absolute;
+}
+
+.key-Signature-text-end1 {
+    top: 12em;
+    left:8.5em;
+    position: absolute;
+   
+}
+
+.key-Signature-text-end2{
+    top: 12em;
+    left:10.7em;
+    position: absolute;
+   
+}
+
+.key-Signature-text-end3 {
+    top: 12em;
+    left:13.6em;
+    position: absolute;
+   
+}
+
+.key-Signature-text-end4 {
+    top: 12em;
+    left:17em;
+    position: absolute;
+   
+}
+
+.key-Signature-text-end5 {
+    top: 12em;
+    left:21em;
+    position: absolute;
+   
+}
+
+.key-Signature-text-end6 {
+    top: 12em;
+    left:26.5em;
+    position: absolute;
+   
+}
+
+.key-Signature-text-end7 {
+    top: 12em;
+    left:33em;
+    position: absolute;
+   
 }
