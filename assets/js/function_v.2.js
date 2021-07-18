@@ -60,7 +60,7 @@ function draw_notes() {
   computeStave();
   redraw_notes();
   type_note();
-  // time_Signature();
+  click_time_Signature();
 
 
 
@@ -109,6 +109,7 @@ function redraw_notes() {
 
   }
   // type_note();
+  click_time_Signature();
   // time_Signature();
 }
 
@@ -325,6 +326,8 @@ function mouseDown() {
       setStyle_Black_clear();
       type_note();
 
+
+      console.log("notes:", notesMeasure1001);
       arr_type = $(this).attr("type");
       id_ = $(this).attr("id");
       // console.log(notesMeasure1001);
@@ -417,7 +420,7 @@ function mouseDown() {
 
       if (id == "time_6" || id == "time_7") {
         $('#exampleModal').modal("toggle");
-        pop_time_Signature('4');
+        time_Signature('4');
       }
 
 
@@ -618,20 +621,20 @@ function sound() {
 
 }
 
-// function time_Signature() {
+function click_time_Signature() {
 
-//   let i = 0;
+   let i = 0;
 
-//   $("path").each(function () {
+   $("path").each(function () {
 
-//     $(this).attr("id", "time_" + i);
+    $(this).attr("id", "time_" + i);
 
-//     i++;
+     i++;
 
-//   });
-// }
+   });
+}
 
-function pop_time_Signature(e) {
+function time_Signature(e) {
 
   const element_1 = document.getElementById("time_cut_1").value;
   const element_2 = document.getElementById("id_time_cut_2").value;
@@ -651,6 +654,161 @@ function pop_time_Signature(e) {
     document.getElementById("time_cut").innerHTML = element_1 + "<br>" + element_2;
     document.getElementById("time_cut_2").innerHTML = text;
   }
+
+
+}
+
+
+function key_Signature() {
+
+  console.log("5555555");
+
+}
+
+function text_key_Signature(e) {
+  console.log("log", e);
+
+  let keySignature = ""
+  if (e == 0) {
+   keySignature = document.getElementById("keyModel").value;
+
+  }else{
+   keySignature = document.getElementById("keyModel").value;
+  }
+
+  
+
+  let textTop_1 = ""; let textTop_2 = ""; let textTop_3 = ""; let textTop_4 = "";
+  let textTop_5 = ""; let textTop_6 = ""; let textTop_7 = ""; let textTop_8 = "";
+
+  let textEnd_1 = ""; let textEnd_2 = ""; let textEnd_3 = ""; let textEnd_4 = "";
+  let textEnd_5 = ""; let textEnd_6 = ""; let textEnd_7 = "";
+
+  if (keySignature == 'Major') {
+    //Major
+    //top : C G D A E B F# C#
+    //end : -- F Bb Eb Ab Db Gb Cb
+
+    textTop_1 = "C"; textTop_2 = "G"; textTop_3 = "D"; textTop_4 = "A";
+    textTop_5 = "E"; textTop_6 = "B"; textTop_7 = "F#"; textTop_8 = "C#";
+
+    textEnd_1 = "F"; textEnd_2 = "Bb"; textEnd_3 = "Eb"; textEnd_4 = "Ab";
+    textEnd_5 = "Db"; textEnd_6 = "Gb"; textEnd_7 = "Cb";
+
+  } else if (keySignature == 'Minor') {
+    //Minor
+    //top : A E B F# C# G# D# A#
+    //end : -- D G C F Bb Eb Ab
+    textTop_1 = "A"; textTop_2 = "E"; textTop_3 = "B"; textTop_4 = "F#";
+    textTop_5 = "C#"; textTop_6 = "G#"; textTop_7 = "D#"; textTop_8 = "A#";
+
+    textEnd_1 = "D"; textEnd_2 = "G"; textEnd_3 = "C"; textEnd_4 = "F";
+    textEnd_5 = "Bb"; textEnd_6 = "Eb"; textEnd_7 = "Ab";
+
+  } else if (keySignature == 'Ionian') {
+    //Ionian
+    //top :C G D A E B F# C#
+    //end : -- F Bb Eb Ab Db Gb Cb
+    textTop_1 = "C"; textTop_2 = "G"; textTop_3 = "D"; textTop_4 = "A";
+    textTop_5 = "E"; textTop_6 = "B"; textTop_7 = "F#"; textTop_8 = "C#";
+
+    textEnd_1 = "F"; textEnd_2 = "Bb"; textEnd_3 = "Eb"; textEnd_4 = "Ab";
+    textEnd_5 = "Db"; textEnd_6 = "Gb"; textEnd_7 = "Cb";
+
+  }
+  else if (keySignature == 'Dorian') {
+    //Dorian
+    //top :D A E B F# C# G# D#
+    //end : -- G C F Bb Eb Ab Db
+    textTop_1 = "D"; textTop_2 = "A"; textTop_3 = "E"; textTop_4 = "B";
+    textTop_5 = "F#"; textTop_6 = "C#"; textTop_7 = "G#"; textTop_8 = "D#";
+
+    textEnd_1 = "G"; textEnd_2 = "C"; textEnd_3 = "F"; textEnd_4 = "Bb";
+    textEnd_5 = "Eb"; textEnd_6 = "Ab"; textEnd_7 = "Db";
+  }
+  else if (keySignature == 'Phrygian') {
+    //Phrygian
+    //top :E B F# C# G# D# A# E#
+    //end : -- A D G C F Bb Eb
+    textTop_1 = "E"; textTop_2 = "B"; textTop_3 = "F#"; textTop_4 = "C#";
+    textTop_5 = "G#"; textTop_6 = "D#"; textTop_7 = "A#"; textTop_8 = "E#";
+
+    textEnd_1 = "A"; textEnd_2 = "D"; textEnd_3 = "G"; textEnd_4 = "C";
+    textEnd_5 = "F"; textEnd_6 = "Bb"; textEnd_7 = "Eb";
+
+  }
+  else if (keySignature == 'Lydian') {
+    //Lydian
+    //top :F C G D A E B F#
+    //end : -- Bb EB Ab Db Gb Cb Fb
+
+    textTop_1 = "F"; textTop_2 = "C"; textTop_3 = "G"; textTop_4 = "D";
+    textTop_5 = "A"; textTop_6 = "E"; textTop_7 = "B"; textTop_8 = "F#";
+
+    textEnd_1 = "Bb"; textEnd_2 = "Eb"; textEnd_3 = "Ab"; textEnd_4 = "Db";
+    textEnd_5 = "Gb"; textEnd_6 = "Cb"; textEnd_7 = "Fb";
+
+  }
+  else if (keySignature == 'Mixolydian') {
+    //Mixolydian
+    //top :G D A E B F# C# G#
+    //end : -- C F Bb Eb Ab Db Gb
+    textTop_1 = "G"; textTop_2 = "D"; textTop_3 = "A"; textTop_4 = "E";
+    textTop_5 = "B"; textTop_6 = "F#"; textTop_7 = "C#"; textTop_8 = "G#";
+
+    textEnd_1 = "C"; textEnd_2 = "F"; textEnd_3 = "Bb"; textEnd_4 = "Eb";
+    textEnd_5 = "Ab"; textEnd_6 = "Db"; textEnd_7 = "Gb";
+
+  } else if (keySignature == 'Aeolian') {
+    //Aeolian
+    //top :A E B F# C# G# D# A#
+    //end : -- D G C F Bb Eb Ab
+    textTop_1 = "A"; textTop_2 = "E"; textTop_3 = "B"; textTop_4 = "F#";
+    textTop_5 = "C#"; textTop_6 = "G#"; textTop_7 = "D#"; textTop_8 = "A#";
+
+    textEnd_1 = "D"; textEnd_2 = "G"; textEnd_3 = "C"; textEnd_4 = "F";
+    textEnd_5 = "Bb"; textEnd_6 = "Eb"; textEnd_7 = "Ab";
+
+  } else if (keySignature == 'Locrian') {
+    //Locrian
+    //top :B F# C# G# D# A# E# B#
+    //end : -- E A D G C F Bb
+    textTop_1 = "B"; textTop_2 = "F#"; textTop_3 = "C#"; textTop_4 = "G#";
+    textTop_5 = "D#"; textTop_6 = "A#"; textTop_7 = "E#"; textTop_8 = "B#";
+
+    textEnd_1 = "E"; textEnd_2 = "A"; textEnd_3 = "D"; textEnd_4 = "G";
+    textEnd_5 = "C"; textEnd_6 = "F"; textEnd_7 = "Bb";
+
+  } else {
+    //Unknown
+    //top : C G D A E B F# C#
+    //end : -- F Bb Eb Ab Db Gb Cb
+
+    textTop_1 = "C"; textTop_2 = "G"; textTop_3 = "D"; textTop_4 = "A";
+    textTop_5 = "E"; textTop_6 = "B"; textTop_7 = "F#"; textTop_8 = "C#";
+
+    textEnd_1 = "F"; textEnd_2 = "Bb"; textEnd_3 = "Eb"; textEnd_4 = "Ab";
+    textEnd_5 = "Db"; textEnd_6 = "Gb"; textEnd_7 = "Cb";
+  }
+
+
+  document.getElementById("textTop_1").innerHTML = textTop_1;
+  document.getElementById("textTop_2").innerHTML = textTop_2;
+  document.getElementById("textTop_3").innerHTML = textTop_3;
+  document.getElementById("textTop_4").innerHTML = textTop_4;
+  document.getElementById("textTop_5").innerHTML = textTop_5;
+  document.getElementById("textTop_6").innerHTML = textTop_6;
+  document.getElementById("textTop_7").innerHTML = textTop_7;
+  document.getElementById("textTop_8").innerHTML = textTop_8;
+
+  document.getElementById("textEnd_1").innerHTML = textEnd_1;
+  document.getElementById("textEnd_2").innerHTML = textEnd_2;
+  document.getElementById("textEnd_3").innerHTML = textEnd_3;
+  document.getElementById("textEnd_4").innerHTML = textEnd_4;
+  document.getElementById("textEnd_5").innerHTML = textEnd_5;
+  document.getElementById("textEnd_6").innerHTML = textEnd_6;
+  document.getElementById("textEnd_7").innerHTML = textEnd_7;
+
 
 
 }
