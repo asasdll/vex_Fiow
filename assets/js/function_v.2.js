@@ -25,9 +25,6 @@ function get_new_note(key, octave, duration, position) {
     auto_stem: true,
     //clef: "treble"
   });
-  obj.type_A = 'test555';
-
-
 
   return obj;
 }
@@ -75,6 +72,8 @@ function redraw_notes() {
 
   for (i = measure; i >= marker; i--) {
 
+    addType(i);
+
     this["staveMeasure" + i].setContext(context).draw();
     this["stave_2Measure" + i].setContext(context).draw();
 
@@ -111,6 +110,20 @@ function redraw_notes() {
   }
   // type_note();
   click_time_Signature();
+  // time_Signature();
+}
+
+function addType(array) {
+  notesArray1 = this["notesMeasure" + array];
+  notesArray2 = this["notes_2Measure" + array];
+
+  for (j = 0; j < notesArray1.length; j++) {
+    notesArray1[j].type = `notesMeasure${array}`
+  }
+
+  for (j = 0; j < notesArray2.length; j++) {
+    notesArray2[j].type = `notes_2Measure${array}`
+  }
 }
 
 let measure = 1001;
@@ -310,7 +323,6 @@ function mouseDown() {
   // console.log("222");
   $(".vf-stavenote")
     .mousedown(function (e) {
-      console.log("555");
       setStyle_Black_clear();
       type_note();
 
@@ -611,15 +623,15 @@ function sound() {
 
 function click_time_Signature() {
 
-  let i = 0;
+//   let i = 0;
 
-  $("path").each(function () {
+//   $("path").each(function () {
 
-    $(this).attr("id", "time_" + i);
+//     $(this).attr("id", "time_" + i);
 
-    i++;
+//     i++;
 
-  });
+//   });
 }
 
 function time_Signature(e) {
