@@ -29,12 +29,13 @@ body {
 
 
 
-.divzoom {
-    top: 12pc;
-    zoom: 200%;
-    margin-left: auto;
+.zoom-lineNote {
+    margin-left: 30rem;
     margin-right: auto;
-    max-width: 900px;
+    margin-top: 25rem;
+    -ms-transform: scale(3.5);
+    /*IE9*/-webkit-transform: scale(3.5);
+    /*Safari3-8*/transform: scale(2);
 }
 
 .footer-time-Signature {
@@ -242,6 +243,12 @@ body {
     position: absolute;
 }
 
+.key-Signature-text-top8 {
+    top: 6em;
+    left:38em;
+    position: absolute;
+}
+
 .key-Signature-text-end1 {
     top: 12em;
     left:8.5em;
@@ -287,6 +294,14 @@ body {
 .key-Signature-text-end7 {
     top: 12em;
     left:33em;
+    position: absolute;
+   
+}
+
+
+.key-Signature-text-end8 {
+    top: 12em;
+    left:38em;
     position: absolute;
    
 }

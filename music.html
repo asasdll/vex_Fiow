@@ -43,7 +43,7 @@
         <button type="button" onclick="add_measure_after()">Measure After</button>
         <button type="button" onclick="add_measure_before()">Measure Before</button>
         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Time Signature</button>
-        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Key Signature</button>
+        <button type="button" data-bs-toggle="modal" onclick="text_key_Signature('0')" data-bs-target="#staticBackdrop">Key Signature</button>
         <button type="button" onclick="sound()"> sound play</button>
 
         <button type="button"> sound play</button>
@@ -92,11 +92,11 @@
                           </div>
                           <div class="col-12 col-md-5">
                             <input type="number" id="time_cut_1" name="time_cut_1" min="1" max="100"
-                              onclick="pop_time_Signature('0')">
+                              onclick="time_Signature('0')">
                           </div>
                           <div class="col-12 col-md-5">
                             <select class="form-select form-select-sm" id="id_time_cut_2"
-                              onclick="pop_time_Signature('0')" aria-label=".form-select-sm example">
+                              onclick="time_Signature('0')" aria-label=".form-select-sm example">
                               <option id="time_cut_2">2</option>
                               <option value="4">4</option>
                               <option value="8">8</option>
@@ -113,7 +113,7 @@
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault"
-                      onclick="pop_time_Signature('4')" id="flexRadioDefault2">
+                      onclick="time_Signature('4')" id="flexRadioDefault2">
                     <label class="form-check-label" for="flexRadioDefault2">
                       &nbsp;
                       <img src="../assets/image/common-time.png" width="20px" alt="...">
@@ -122,7 +122,7 @@
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault"
-                      onclick="pop_time_Signature('2')" id="flexRadioDefault2">
+                      onclick="time_Signature('2')" id="flexRadioDefault2">
                     <label class="form-check-label" for="flexRadioDefault2">
                       &nbsp;
                       <img src="../assets/image/cut-time.png" width="21px" alt="...">
@@ -156,7 +156,7 @@
 
 
           <div class="footer-time-Signature">
-            <button type="submit" onclick="pop_time_Signature()" data-bs-dismiss="modal" class="btn btn-"
+            <button type="submit" onclick="time_Signature()" data-bs-dismiss="modal" class="btn btn-"
               style="background-color: OrangeRed; color: AliceBlue;">OK</button>
           </div>
         </div>
@@ -190,9 +190,9 @@
                   <img src="../assets/image/keySignature-top/keySignature-top1.9.png" class="key-Signature-top-9"  alt="...">
                 </div>
                <div class="col-12">
-                 <h6 class="key-Signature-text-top1">C</h6> <h6 class="key-Signature-text-top2">G</h6> <h6 class="key-Signature-text-top3">D</h6> 
-                 <h6 class="key-Signature-text-top4">A</h6> <h6 class="key-Signature-text-top5">B</h6> <h6 class="key-Signature-text-top6">F#</h6> 
-                 <h6 class="key-Signature-text-top7">C#</h6> 
+                 <h6 id="textTop_1" class="key-Signature-text-top1"></h6> <h6 id="textTop_2" class="key-Signature-text-top2"></h6> <h6  id="textTop_3" class="key-Signature-text-top3"></h6> 
+                 <h6   id="textTop_4" class="key-Signature-text-top4"></h6> <h6  id="textTop_5" class="key-Signature-text-top5"></h6> <h6   id="textTop_6" class="key-Signature-text-top6"></h6> 
+                 <h6   id="textTop_7" class="key-Signature-text-top7"></h6> <h6  id="textTop_8" class="key-Signature-text-top8"></h6> 
                </div>
               
                
@@ -208,16 +208,16 @@
                   <img src="../assets/image/keySignature-end/keySignature-end-1.9.png"  class="key-Signature-end-9" alt="...">
                 </div>
                 <div class="col-12">
-                  <h6 class="key-Signature-text-end1">--</h6> <h6 class="key-Signature-text-end2">F</h6> <h6 class="key-Signature-text-end3">Bb</h6>
-                  <h6 class="key-Signature-text-end4">Eb</h6> <h6 class="key-Signature-text-end5">Ab</h6> <h6 class="key-Signature-text-end6">Gb</h6> 
-                  <h6 class="key-Signature-text-end7">Cb</h6> 
+                  <h6 class="key-Signature-text-end1">--</h6> <h6  id="textEnd_1" class="key-Signature-text-end2"></h6> <h6 id="textEnd_2" class="key-Signature-text-end3"></h6>
+                  <h6 id="textEnd_3" class="key-Signature-text-end4"></h6> <h6  id="textEnd_4" class="key-Signature-text-end5"></h6> <h6 id="textEnd_5" class="key-Signature-text-end6"></h6> 
+                  <h6 id="textEnd_6" class="key-Signature-text-end7"></h6>  <h6  id="textEnd_7" class="key-Signature-text-end8"></h6> 
                 </div>
               </div>
             </div>
           </div>
         <div class="footer-select-key">
           <label class="mode-label">Mode :</label>
-          <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+          <select class="form-select form-select-sm" id="keyModel" onclick="text_key_Signature()" aria-label=".form-select-sm example">
             <option value="Unknown" selected>(Unknown)</option>
             <option value="Major">Major</option>
             <option value="Minor">Minor</option>
@@ -243,7 +243,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 ">
-          <div id="page" class="divzoom" onmouseover="mouseDown()"></div>
+          <div id="page" class="zoom-lineNote" onmouseover="mouseDown()"></div>
         </div>
        
       </div>
