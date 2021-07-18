@@ -25,9 +25,6 @@ function get_new_note(key, octave, duration, position) {
     auto_stem: true,
     //clef: "treble"
   });
-  obj.type_A = 'test555';
-
-
 
   return obj;
 }
@@ -63,7 +60,7 @@ function draw_notes() {
   computeStave();
   redraw_notes();
   type_note();
-  time_Signature();
+  // time_Signature();
 
 
 
@@ -74,6 +71,8 @@ function redraw_notes() {
   let marker = 1002 - u;
 
   for (i = measure; i >= marker; i--) {
+
+    addType(i);
 
     this["staveMeasure" + i].setContext(context).draw();
     this["stave_2Measure" + i].setContext(context).draw();
@@ -110,7 +109,20 @@ function redraw_notes() {
 
   }
   // type_note();
-  time_Signature();
+  // time_Signature();
+}
+
+function addType(array) {
+  notesArray1 = this["notesMeasure" + array];
+  notesArray2 = this["notes_2Measure" + array];
+
+  for (j = 0; j < notesArray1.length; j++) {
+    notesArray1[j].type = `notesMeasure${array}`
+  }
+
+  for (j = 0; j < notesArray2.length; j++) {
+    notesArray2[j].type = `notes_2Measure${array}`
+  }
 }
 
 let measure = 1001;
@@ -310,12 +322,9 @@ function mouseDown() {
   // console.log("222");
   $(".vf-stavenote")
     .mousedown(function (e) {
-      console.log("555");
       setStyle_Black_clear();
       type_note();
 
-
-      console.log("notes:" ,notesMeasure1001);
       arr_type = $(this).attr("type");
       id_ = $(this).attr("id");
       // console.log(notesMeasure1001);
@@ -408,7 +417,7 @@ function mouseDown() {
 
       if (id == "time_6" || id == "time_7") {
         $('#exampleModal').modal("toggle");
-         pop_time_Signature('4');
+        pop_time_Signature('4');
       }
 
 
@@ -609,24 +618,24 @@ function sound() {
 
 }
 
-function time_Signature() {
+// function time_Signature() {
 
-  let i = 0;
+//   let i = 0;
 
-  $("path").each(function () {
+//   $("path").each(function () {
 
-    $(this).attr("id", "time_" + i);
+//     $(this).attr("id", "time_" + i);
 
-    i++;
+//     i++;
 
-  });
-}
+//   });
+// }
 
 function pop_time_Signature(e) {
 
   const element_1 = document.getElementById("time_cut_1").value;
   const element_2 = document.getElementById("id_time_cut_2").value;
-console.log("element_1=" , element_1,"element_2=",element_2 , e);
+  console.log("element_1=", element_1, "element_2=", element_2, e);
   if (e == "4") {
     let text = 4;
     document.getElementById("time_cut").innerHTML = text + "<br>" + text;
@@ -643,7 +652,7 @@ console.log("element_1=" , element_1,"element_2=",element_2 , e);
     document.getElementById("time_cut_2").innerHTML = text;
   }
 
- 
+
 }
 
 

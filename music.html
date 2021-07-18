@@ -2,102 +2,105 @@
 <html>
 
 <head>
-    <title>VexTab - Javascript Guitar Tablature</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description"
-        content="Vextab is a JavaScript library for rendering standard music notation and guitar tab.">
-    <meta charset="UTF-8" />
+  <title>VexTab - Javascript Guitar Tablature</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Vextab is a JavaScript library for rendering standard music notation and guitar tab.">
+  <meta charset="UTF-8" />
 
-    <!-- Support Sources -->
-    <!-- CSS only -->
-    <!-- CSS only -->
+  <!-- Support Sources -->
   <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://unpkg.com/vexflow/releases/vexflow-debug.js"></script>
-    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
-    < <link rel="stylesheet" href="assets/css/main.css">
-        <div class="headText">
-            <div class="paletteElement paletteButton note3 selected advanced"
-                data-bind="visible: visible, css: css, click: clicked, tip: {title: title, shortcut: shortcut}, attr: {id: controlId}"
-                id="control-thirtysecond">
-                <span data-bind="resource: title" data-resource="palette.thirtysecond">32nd Note</span>
-                <!-- ko if: shortcut -->
-                <!-- /ko -->
-                <select>
-                    <option>-select-</option>
-                    <option>duration</option>
-                </select>
-                <button type="button" onclick="fillTheRest('w','a')">&#119133;</button>
-                <button type="button" onclick="fillTheRest('h','a')">&#119134;</button>
-                <button type="button" onclick="fillTheRest('q','a')">&#119135;</button>
-                <button type="button" onclick="fillTheRest('8','a')">&#119136;</button>
-                <button type="button" onclick="fillTheRest('16','a')">&#119137;</button>
-                <button type="button" onclick="fillTheRest('32','a')">&#119138;</button>
-                <button type="button" onclick="fillTheRest('64','a')">&#119138;</button>
-                <button type="button" onclick="add_measure_after()">Measure After</button>
-                <button type="button" onclick="add_measure_before()">Measure Before</button>
-                <button type="button" id="timeBtn">Time Signature</button>
-                <button type="button" id="keyBtn">Key Signature</button>
-                <button type="button" onclick="sound()"> sound play</button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
-                  </button>
-                <button type="button"> sound play</button>
+  <!-- CSS only -->
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://unpkg.com/vexflow/releases/vexflow-debug.js"></script>
+  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+  < <link rel="stylesheet" href="assets/css/main.css">
+    <div class="headText">
+      <div class="paletteElement paletteButton note3 selected advanced"
+        data-bind="visible: visible, css: css, click: clicked, tip: {title: title, shortcut: shortcut}, attr: {id: controlId}"
+        id="control-thirtysecond">
+        <span data-bind="resource: title" data-resource="palette.thirtysecond">32nd Note</span>
+        <!-- ko if: shortcut -->
+        <!-- /ko -->
+        <select>
+          <option>-select-</option>
+          <option>duration</option>
+        </select>
+        <button type="button" onclick="fillTheRest('w','a')">&#119133;</button>
+        <button type="button" onclick="fillTheRest('h','a')">&#119134;</button>
+        <button type="button" onclick="fillTheRest('q','a')">&#119135;</button>
+        <button type="button" onclick="fillTheRest('8','a')">&#119136;</button>
+        <button type="button" onclick="fillTheRest('16','a')">&#119137;</button>
+        <button type="button" onclick="fillTheRest('32','a')">&#119138;</button>
+        <button type="button" onclick="fillTheRest('64','a')">&#119138;</button>
+        <button type="button" onclick="add_measure_after()">Measure After</button>
+        <button type="button" onclick="add_measure_before()">Measure Before</button>
+        <button type="button" id="timeBtn">Time Signature</button>
+        <button type="button" id="keyBtn">Key Signature</button>
+        <button type="button" onclick="sound()"> sound play</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Launch demo modal
+        </button>
+        <button type="button"> sound play</button>
 
 
-            </div>
-        </div>
+      </div>
+    </div>
 
-    
-        </div>
+
+    </div>
 </head>
 
 <body>
 
-    <div class="vexbox">
+  <div class="vexbox">
 
-   <!-- Button trigger modal -->
+    <!-- Button trigger modal -->
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"  aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h6 class="modal-title" id="exampleModalLabel" style="color: black;">Change Time Signature</h6>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h6>Time</h6>
-          <div class="container">
-            <div class="row">
-              
-              <div class="col-12">
-                <div class="form-check">
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="exampleModalLabel" style="color: black;">Change Time Signature</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h6>Time</h6>
+            <div class="container">
+              <div class="row">
+
+                <div class="col-12">
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                     <label class="form-check-label" for="flexRadioDefault1">
                       <div class="container">
                         <div class="row">
                           <div class="col-12 col-md-1 ">
-                           <p class="text-number" id="time_cut">4 <br> 4</p>
+                            <p class="text-number" id="time_cut">4 <br> 4</p>
                           </div>
                           <div class="col-12  col-md-5">
-                            <input type="number" id="time_cut_1" name="time_cut_1"  min="1" max="100" onclick="pop_time_Signature('0')">
+                            <input type="number" id="time_cut_1" name="time_cut_1" min="1" max="100"
+                              onclick="pop_time_Signature('0')">
                           </div>
-                          <div class="col-12  col-md-5" >
-                            <select class="form-select form-select-sm"  id="id_time_cut_2" onclick="pop_time_Signature('0')" aria-label=".form-select-sm example">
-                              <option  id="time_cut_2">2</option>
-                              <option  value="4">4</option>
+                          <div class="col-12  col-md-5">
+                            <select class="form-select form-select-sm" id="id_time_cut_2"
+                              onclick="pop_time_Signature('0')" aria-label=".form-select-sm example">
+                              <option id="time_cut_2">2</option>
+                              <option value="4">4</option>
                               <option value="8">8</option>
                               <option value="16">16</option>
                               <option value="32">32</option>
                               <option value="64">64</option>
                               <option value="128">128</option>
-                             
+
                             </select>
                           </div>
                         </div>
@@ -105,90 +108,93 @@
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="pop_time_Signature('4')" id="flexRadioDefault2" >
+                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                      onclick="pop_time_Signature('4')" id="flexRadioDefault2">
                     <label class="form-check-label" for="flexRadioDefault2">
-                       &nbsp;
+                      &nbsp;
                       <img src="../assets/image/common-time.png" width="20px" alt="...">
                       Common time
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault"  onclick="pop_time_Signature('2')" id="flexRadioDefault2" >
+                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                      onclick="pop_time_Signature('2')" id="flexRadioDefault2">
                     <label class="form-check-label" for="flexRadioDefault2">
                       &nbsp;
                       <img src="../assets/image/cut-time.png" width="17px" alt="...">
                       &nbsp;Cut time
                     </label>
                   </div>
-              </div>
-             
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Type</label>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="Normal" selected>Normal</option>
-                  <option value="Pickup">Pickup</option>
-                </select>
-              </div>
-              <div class="col-6">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Visibility</label>
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                  <option value="Default" selected>Default</option>
-                  <option value="Shown">Shown</option>
-                  <option value="Hidden">Hidden</option>
+                </div>
 
-                </select>
               </div>
-             
+              <div class="row">
+                <div class="col-6">
+                  <label for="staticEmail" class="col-sm-2 col-form-label">Type</label>
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option value="Normal" selected>Normal</option>
+                    <option value="Pickup">Pickup</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <label for="staticEmail" class="col-sm-2 col-form-label">Visibility</label>
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option value="Default" selected>Default</option>
+                    <option value="Shown">Shown</option>
+                    <option value="Hidden">Hidden</option>
+
+                  </select>
+                </div>
+
+              </div>
             </div>
           </div>
-        </div>
-        <div class="footer-ml">
-          <button type="submit" onclick="pop_time_Signature()"  data-bs-dismiss="modal" class="btn btn-" style="background-color: OrangeRed; color: AliceBlue;">OK</button>
+          <div class="footer-ml">
+            <button type="submit" onclick="pop_time_Signature()" data-bs-dismiss="modal" class="btn btn-"
+              style="background-color: OrangeRed; color: AliceBlue;">OK</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
 
     <div class="buttonBar">
 
-       
-    <div id="page" class="divzoom" onmouseover="mouseDown()"></div>
- 
-    
+
+      <div id="page" class="divzoom" onmouseover="mouseDown()"></div>
+
+
     </div>
 
     <div id="keyModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <span>
-                <form>
-                    <input type="radio" id="C" name="C" value="C">
-                    <label for="C">C</label><br>
-                    <input type="radio" id="G" name="G" value="G">
-                    <label for="G">G</label><br>
-                    <input type="radio" id="D" name="D" value="D">
-                    <label for="D">D</label><br>
-                    <input type="radio" id="A" name="A" value="A">
-                    <label for="A">A</label><br>
-                    <input type="radio" id="E" name="E" value="E">
-                    <label for="E">E</label><br>
-                    <input type="radio" id="B" name="B" value="B">
-                    <label for="B">B</label><br>
-                    <input type="radio" id="F#" name="F#" value="F#">
-                    <label for="F#">F#</label><br>
-                    <input type="radio" id="C#" name="C#" value="C#">
-                    <label for="C#">C#</label><br>
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <span>
+          <form>
+            <input type="radio" id="C" name="C" value="C">
+            <label for="C">C</label><br>
+            <input type="radio" id="G" name="G" value="G">
+            <label for="G">G</label><br>
+            <input type="radio" id="D" name="D" value="D">
+            <label for="D">D</label><br>
+            <input type="radio" id="A" name="A" value="A">
+            <label for="A">A</label><br>
+            <input type="radio" id="E" name="E" value="E">
+            <label for="E">E</label><br>
+            <input type="radio" id="B" name="B" value="B">
+            <label for="B">B</label><br>
+            <input type="radio" id="F#" name="F#" value="F#">
+            <label for="F#">F#</label><br>
+            <input type="radio" id="C#" name="C#" value="C#">
+            <label for="C#">C#</label><br>
 
-                    <input type="submit" value="Submit">
-                </form>
-            </span>
-        </div>
+            <input type="submit" value="Submit">
+          </form>
+        </span>
+      </div>
 
-        <!-- 
+      <!-- 
         <div id="timeModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -221,7 +227,8 @@
 
 <!-- JavaScript Bundle with Popper -->
 <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
 </html>
