@@ -623,15 +623,15 @@ function sound() {
 
 function click_time_Signature() {
 
-//   let i = 0;
+   let i = 0;
 
-//   $("path").each(function () {
+   $("path").each(function () {
 
-//     $(this).attr("id", "time_" + i);
+    $(this).attr("id", "time_" + i);
 
-//     i++;
+     i++;
 
-//   });
+   });
 }
 
 function time_Signature(e) {
