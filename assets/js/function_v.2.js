@@ -661,7 +661,10 @@ function time_Signature() {
 function commit_time() {
   upperTime = firstElement;
   lowerTime = secondElement;
-  console.log(upperTime, lowerTime);
+  console.log(upperTime + '/' + lowerTime);
+  timeSig = (upperTime + '/' + lowerTime);
+  computeStave();
+  redraw_notes();
 }
 
 
