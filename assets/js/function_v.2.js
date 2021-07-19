@@ -302,8 +302,8 @@ function computeStave() {
   modifyStave();
 }
 
-keySig = 'Cb';
-timeSig = '2/4';
+keySig = 'D';
+timeSig = '8/8';
 clef = 'french';
 lowerClef = 'alto';
 
@@ -311,8 +311,8 @@ lowerClef = 'alto';
 function modifyStave() {
   for (i = j; i <= measure; i++) {
     if (this["staveMeasure" + i].x == 70) {
-      this["staveMeasure" + i].addClef(clef).addTimeSignature(timeSig).addKeySignature(keySig);
-      this["stave_2Measure" + i].addClef(lowerClef).addTimeSignature(timeSig).addKeySignature(keySig);
+      this["staveMeasure" + i].addClef(clef).addKeySignature(keySig).addTimeSignature(timeSig);
+      this["stave_2Measure" + i].addClef(lowerClef).addKeySignature(keySig).addTimeSignature(timeSig);
     }
   }
 }
@@ -626,39 +626,48 @@ function sound() {
 
 function click_time_Signature() {
 
-   let i = 0;
+  let i = 0;
 
-   $("path").each(function () {
+  $("path").each(function () {
 
     $(this).attr("id", "time_" + i);
 
-     i++;
+    i++;
 
-   });
+  });
 }
 
-function time_Signature(e) {
-
-  const element_1 = document.getElementById("time_cut_1").value;
-  const element_2 = document.getElementById("id_time_cut_2").value;
-  console.log("element_1=", element_1, "element_2=", element_2, e);
-  if (e == "4") {
-    let text = 4;
-    document.getElementById("time_cut").innerHTML = text + "<br>" + text;
-    document.getElementById("time_cut_2").innerHTML = text;
-    document.getElementById("time_cut_1").value = text;
-  } else if (e == "2") {
-    let text = 2;
-    document.getElementById("time_cut").innerHTML = text + "<br>" + text;
-    document.getElementById("time_cut_2").innerHTML = text;
-    document.getElementById("time_cut_1").value = text;
-  } else if (e == "0") {
-    let text = 2;
-    document.getElementById("time_cut").innerHTML = element_1 + "<br>" + element_2;
-    document.getElementById("time_cut_2").innerHTML = text;
-  }
 
 
+let upperTime = 4;
+let lowerTime = 4;
+
+function time_Signature_Popup() {
+
+  id_option = String(lowerTime);
+  document.getElementById(id_option + 'o').selected = true;
+
+  document.getElementById("time_cut_1").value = upperTime;
+  document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
+
+}
+
+function time_Signature() {
+
+  firstElement = document.getElementById("time_cut_1").value;
+  secondElement = document.getElementById("id_time_cut_2").value;
+
+  document.getElementById("time_cut").innerHTML = firstElement + "<br>" + secondElement;
+  document.getElementById("time_cut_1").value = firstElement;
+}
+
+function commit_time() {
+  upperTime = firstElement;
+  lowerTime = secondElement;
+  console.log(upperTime + '/' + lowerTime);
+  timeSig = (upperTime + '/' + lowerTime);
+  computeStave();
+  redraw_notes();
 }
 
 
@@ -673,13 +682,13 @@ function text_key_Signature(e) {
 
   let keySignature = ""
   if (e == 0) {
-   keySignature = document.getElementById("keyModel").value;
+    keySignature = document.getElementById("keyModel").value;
 
-  }else{
-   keySignature = document.getElementById("keyModel").value;
+  } else {
+    keySignature = document.getElementById("keyModel").value;
   }
 
-  
+
 
   let textTop_1 = ""; let textTop_2 = ""; let textTop_3 = ""; let textTop_4 = "";
   let textTop_5 = ""; let textTop_6 = ""; let textTop_7 = ""; let textTop_8 = "";
