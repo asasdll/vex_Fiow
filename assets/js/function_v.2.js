@@ -634,16 +634,28 @@ function click_time_Signature() {
   });
 }
 
+
+
+upperTime = 6;
+lowerTime = 2;
+
 function time_Signature() {
+
+  document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
+  document.getElementById("time_cut_2").innerHTML = lowerTime;
+  document.getElementById("time_cut_1").value = upperTime;
 
   const firstElement = document.getElementById("time_cut_1").value;
   const secondElement = document.getElementById("id_time_cut_2").value;
   console.log("upperTime", firstElement, "lowerTime", secondElement);
-  // if (e == "4") {
-  let text = 4;
-  document.getElementById("time_cut").innerHTML = text + "<br>" + text;
-  document.getElementById("time_cut_2").innerHTML = text;
-  document.getElementById("time_cut_1").value = text;
+
+  upperTime = firstElement;
+  lowerTime = secondElement;
+
+  document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
+  document.getElementById("time_cut_2").innerHTML = lowerTime;
+  document.getElementById("time_cut_1").value = upperTime;
+
 
   // } else if (e == "2") {
   //   let text = 2;
