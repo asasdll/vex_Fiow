@@ -641,9 +641,9 @@ let lowerTime = 4;
 
 function time_Signature_Popup() {
 
-  document.getElementById("time_cut_2").selected = true;
+  id_option = String(lowerTime);
+  document.getElementById(id_option + 'o').selected = true;
 
-  document.getElementById("time_cut_2").innerHTML = lowerTime;
   document.getElementById("time_cut_1").value = upperTime;
   document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
 
@@ -655,7 +655,6 @@ function time_Signature() {
   secondElement = document.getElementById("id_time_cut_2").value;
 
   document.getElementById("time_cut").innerHTML = firstElement + "<br>" + secondElement;
-  document.getElementById("time_cut_2").innerHTML = secondElement;
   document.getElementById("time_cut_1").value = firstElement;
 }
 
