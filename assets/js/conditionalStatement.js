@@ -16,16 +16,6 @@ var notes = [];
 
 function fillTheRest(button, version) {
 
-    let note_id = [];
-    for (let i = 0; i < obj_note.length; i++) {
-
-        note_id.push(obj_note[i].attrs.id);
-
-    }
-
-    var id_res = id_.substr(3);
-    index_array = note_id.indexOf(id_res);
-
     let note = obj_note[index_array].duration;
     let noteVal = findValue(note);
     let buttonVal = findValue(button);

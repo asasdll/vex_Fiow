@@ -300,7 +300,7 @@ function computeStave() {
 }
 
 keySig = 'D';
-timeSig = '8/8';
+timeSig = '4/4';
 clef = 'french';
 lowerClef = 'alto';
 
@@ -326,8 +326,6 @@ function mouseDown() {
       setStyle_Black_clear();
       type_note();
 
-
-      console.log("notes:", notesMeasure1001);
       arr_type = $(this).attr("type");
       id_ = $(this).attr("id");
       // console.log(notesMeasure1001);
@@ -336,7 +334,7 @@ function mouseDown() {
 
       let note_id = [];
       for (let i = 0; i < obj_note.length; i++) {
-
+        console.log(obj_note[i].attrs.id);
         note_id.push(obj_note[i].attrs.id);
 
       }
@@ -420,7 +418,7 @@ function mouseDown() {
 
       if (id == "time_6" || id == "time_7") {
         $('#exampleModal').modal("toggle");
-        time_Signature('4');
+        time_Signature_Popup();
       }
 
 
@@ -440,6 +438,7 @@ function notes_up() {
 
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed()
+  type_note();
   redraw_notes();
   redraw_notes();
 }
@@ -452,6 +451,7 @@ function notes_down() {
   // console.log(key, octave);
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
+  type_note();
   redraw_notes();
   redraw_notes();
 }
@@ -494,7 +494,6 @@ $('html') // unbind mousemove
 $('html')
   .click(function () {
     setStyle_Black();
-    index_array = null;
     redraw_notes();
   });
 
