@@ -641,9 +641,11 @@ let lowerTime = 4;
 
 function time_Signature_Popup() {
 
-  document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
+  document.getElementById("time_cut_2").selected = true;
+
   document.getElementById("time_cut_2").innerHTML = lowerTime;
   document.getElementById("time_cut_1").value = upperTime;
+  document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
 
 }
 
