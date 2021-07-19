@@ -636,39 +636,31 @@ function click_time_Signature() {
 
 
 
-upperTime = 6;
-lowerTime = 2;
+let upperTime = 4;
+let lowerTime = 4;
+
+function time_Signature_Popup() {
+
+  document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
+  document.getElementById("time_cut_2").innerHTML = lowerTime;
+  document.getElementById("time_cut_1").value = upperTime;
+
+}
 
 function time_Signature() {
 
-  document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
-  document.getElementById("time_cut_2").innerHTML = lowerTime;
-  document.getElementById("time_cut_1").value = upperTime;
+  firstElement = document.getElementById("time_cut_1").value;
+  secondElement = document.getElementById("id_time_cut_2").value;
 
-  const firstElement = document.getElementById("time_cut_1").value;
-  const secondElement = document.getElementById("id_time_cut_2").value;
-  console.log("upperTime", firstElement, "lowerTime", secondElement);
+  document.getElementById("time_cut").innerHTML = firstElement + "<br>" + secondElement;
+  document.getElementById("time_cut_2").innerHTML = secondElement;
+  document.getElementById("time_cut_1").value = firstElement;
+}
 
+function commit_time() {
   upperTime = firstElement;
   lowerTime = secondElement;
-
-  document.getElementById("time_cut").innerHTML = upperTime + "<br>" + lowerTime;
-  document.getElementById("time_cut_2").innerHTML = lowerTime;
-  document.getElementById("time_cut_1").value = upperTime;
-
-
-  // } else if (e == "2") {
-  //   let text = 2;
-  //   document.getElementById("time_cut").innerHTML = text + "<br>" + text;
-  //   document.getElementById("time_cut_2").innerHTML = text;
-  //   document.getElementById("time_cut_1").value = text;
-  // } else if (e == "0") {
-  //   let text = 2;
-  //   document.getElementById("time_cut").innerHTML = element_1 + "<br>" + element_2;
-  //   document.getElementById("time_cut_2").innerHTML = text;
-  // }
-
-
+  console.log(upperTime, lowerTime);
 }
 
 
