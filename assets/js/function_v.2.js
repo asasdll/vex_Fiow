@@ -59,7 +59,6 @@ function draw_notes() {
 
   computeStave();
   redraw_notes();
-  type_note();
   click_time_Signature();
 
 
@@ -126,7 +125,6 @@ function redraw_notes() {
     }
     addType(i);
   }
-  // type_note();
   click_time_Signature();
   // time_Signature();
 }
@@ -348,7 +346,6 @@ function mouseDown() {
   $(".vf-stavenote")
     .mousedown(function (e) {
       setStyle_Black_clear();
-      type_note();
 
       arr_type = $(this).attr("arr");
       id_ = $(this).attr("id");
@@ -465,7 +462,6 @@ function notes_up() {
 
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed()
-  type_note();
   redraw_notes();
   redraw_notes();
 }
@@ -478,7 +474,6 @@ function notes_down() {
   // console.log(key, octave);
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
-  type_note();
   redraw_notes();
   redraw_notes();
 }
@@ -540,7 +535,7 @@ function array_type(type_a, type_b) { // new arr-index and id
   const type_g = type_b;
   type_array.unshift(type_v, type_g);
   // add_type_array();
-  type_note();
+
 
 
 
@@ -552,7 +547,7 @@ function array_type_2(type_a, type_b) {
   const type_g = type_b;
   type_array.push(type_v, type_g);
 
-  type_note();
+
 
 }
 
@@ -574,29 +569,9 @@ function add_type_array() { // add array
 
   //console.log("B");
   // console.log(type_array);
-  type_note();
 
 
 }
-
-
-function type_note() {
-  let i = 0;
-  const type_a = type_array;
-
-  $('.vf-stavenote').each(function () {
-
-    $(this).attr("type", type_a[i]);
-    id_ = $(this).attr("id");
-    // console.log(type_a[i], id_);
-    i++;
-
-
-  });
-  //console.log(type_array);
-
-}
-
 
 
 function setStyle_OrangeRed() {
