@@ -343,112 +343,101 @@ function modifyStave() {
 
 
 
-async function mouseDown() {
+function mouseDown() {
   // console.log("222");
-
-  $("g")
+  $(".vf-stavenote")
     .mousedown(function (e) {
+      setStyle_Black_clear();
+      type_note();
 
-      if ($(this).attr("arr") != undefined) {
-        arr_type = $(this).attr("arr");
-        console.log(arr_type);
+      arr_type = $(this).attr("arr");
+      id_ = $(this).attr("id");
+
+      note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
+
+      obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
+
+      let note_id = [];
+      for (let i = 0; i < obj_note.length; i++) {
+        // console.log(obj_note[i].attrs.id);
+        note_id.push(obj_note[i].attrs.id);
+
+      }
+      var id_res = id_.substr(3);
+      index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
+
+      note_ = obj_note[0].keys;
+      //console.log(note_duration);
+      nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
+
+
+      e_Click = event.clientY; //413
+      group_notes(); // เรียกใช้งาน arr_notes 
+      var search_array = arr_notes.indexOf(nots_str); // หา index note 29
+
+      // console.log(obj_note[index_array].duration);
+      note_duration = obj_note[index_array].duration;
+
+      click_style();
+      // add_type_array();
+
+      let previous = Number(index_array) - 1;
+      if (Number(index_array) != 0) {
+        if (checkIndex == previous) {
+          let button = obj_note[previous].duration;
+          fillTheRest(button, 'b');
+        }
+      }
+
+      substr_notes(search_array);
+      checkIndex = index_array;
+
+      if (obj_note[index_array].customTypes == 'r') {
+        notes_Click();
       }
 
 
-      $(".vf-stavenote")
-        .mousedown(function (e) {
-          setStyle_Black_clear();
-          type_note();
 
-          // console.log(arr_type);
-          // arr_type = $(this).attr("type");
-          id_ = $(this).attr("id");
-          // console.log(notesMeasure1001);
-          note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
-          obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
-          let note_id = [];
-          for (let i = 0; i < obj_note.length; i++) {
-            // console.log(obj_note[i].attrs.id);
-            note_id.push(obj_note[i].attrs.id);
 
+      $(document).bind('mousemove', function (e) {
+        var ev_move = e.clientY; //434  เลื่อน เม้า
+
+        sum_pixels = e_Click + 10; //443 เลื่อน เม้า
+        del_pix = e_Click - 10; //  424  เลื่อน เม้า 
+        var array_a = 1;
+        if (ev_move >= sum_pixels) { //443 note_down
+          move_pixel = ev_move;
+          e_Click = sum_pixels; //433
+
+
+          if (ev_move == move_pixel) {
+
+            search_array = search_array - array_a;
           }
-          var id_res = id_.substr(3);
-          index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
-
-          note_ = obj_note[0].keys;
-          //console.log(note_duration);
-          nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
-
-
-          e_Click = event.clientY; //413
-          group_notes(); // เรียกใช้งาน arr_notes 
-          var search_array = arr_notes.indexOf(nots_str); // หา index note 29
-
-          // console.log(obj_note[index_array].duration);
-          note_duration = obj_note[index_array].duration;
-
-          click_style();
-          // add_type_array();
-
-          let previous = Number(index_array) - 1;
-          if (Number(index_array) != 0) {
-            if (checkIndex == previous) {
-              let button = obj_note[previous].duration;
-              fillTheRest(button, 'b');
-            }
-          }
-
           substr_notes(search_array);
-          checkIndex = index_array;
+          notes_down();
 
-          if (obj_note[index_array].customTypes == 'r') {
-            notes_Click();
+        } else if (ev_move <= del_pix) { //note_up
+
+          move_pixel = ev_move;
+          e_Click = del_pix; //433
+
+          if (ev_move == move_pixel) { //note_up
+            search_array = search_array + array_a;
+
           }
+          substr_notes(search_array);
+          notes_up();
+
+        }
+      });
 
 
+    });
 
 
-
-
-          $(document).bind('mousemove', function (e) {
-            var ev_move = e.clientY; //434  เลื่อน เม้า
-
-            sum_pixels = e_Click + 10; //443 เลื่อน เม้า
-            del_pix = e_Click - 10; //  424  เลื่อน เม้า 
-            var array_a = 1;
-            if (ev_move >= sum_pixels) { //443 note_down
-              move_pixel = ev_move;
-              e_Click = sum_pixels; //433
-
-
-              if (ev_move == move_pixel) {
-
-                search_array = search_array - array_a;
-              }
-              substr_notes(search_array);
-              notes_down();
-
-            } else if (ev_move <= del_pix) { //note_up
-
-              move_pixel = ev_move;
-              e_Click = del_pix; //433
-
-              if (ev_move == move_pixel) { //note_up
-                search_array = search_array + array_a;
-
-              }
-              substr_notes(search_array);
-              notes_up();
-
-            }
-          });
-
-
-        });
-
-    })
 
   $("path")
     .mousedown(function (e) {
