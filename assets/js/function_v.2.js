@@ -72,12 +72,15 @@ function redraw_notes() {
 
   for (i = measure; i >= marker; i--) {
 
-    addType(i);
 
-    this["group" + i] = context.openGroup();
-    this["group" + i].setAttribute("arr", "notesMeasure" + i);
 
     this["staveMeasure" + i].setContext(context).draw();
+
+    this["group" + i] = context.openGroup(); // open
+    this["group" + i].setAttribute("name", "group" + i);
+    this["group" + i].setAttribute("arr", "notesMeasure" + i);
+
+
 
 
 
@@ -88,14 +91,13 @@ function redraw_notes() {
     voice.forEach(function (b) { b.setContext(context).draw() });
 
 
-    context.closeGroup();
-
-
-    this["group2" + i] = context.openGroup();
-    this["group2" + i].setAttribute("arr", "notes_2Measure" + i)
+    context.closeGroup(); // close
 
     this["stave_2Measure" + i].setContext(context).draw();
 
+    this["groupt" + i] = context.openGroup(); // open
+    this["groupt" + i].setAttribute("name", "groupt" + i)
+    this["groupt" + i].setAttribute("arr", "notes_2Measure" + i);
 
     Vex.Flow.Formatter.FormatAndDraw(context,
       this["stave_2Measure" + i],
@@ -103,7 +105,7 @@ function redraw_notes() {
     var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
     voice_2.forEach(function (b) { b.setContext(context).draw() });
 
-    context.closeGroup();
+    context.closeGroup(); // close
 
     if (this["staveMeasure" + i].x == 70) {
       var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(3);
@@ -122,6 +124,7 @@ function redraw_notes() {
 
 
     }
+    addType(i);
   }
   // type_note();
   click_time_Signature();
@@ -129,15 +132,21 @@ function redraw_notes() {
 }
 
 function addType(array) {
-  notesArray1 = this["notesMeasure" + array];
-  notesArray2 = this["notes_2Measure" + array];
+  ele1 = document.getElementsByName("group" + array);
+  ele2 = document.getElementsByName("groupt" + array);
 
-  for (j = 0; j < notesArray1.length; j++) {
-    notesArray1[j].type = `notesMeasure${array}`
+  group1 = ele1[0].children;
+  group2 = ele2[0].children;
+  // console.log(group1);
+  // console.log(group2);
+
+
+  for (j = 0; j < group1.length; j++) {
+    group1[j].setAttribute("arr", `notesMeasure${array}`);
   }
 
-  for (j = 0; j < notesArray2.length; j++) {
-    notesArray2[j].type = `notes_2Measure${array}`
+  for (j = 0; j < group2.length; j++) {
+    group2[j].setAttribute("arr", `notes_2Measure${array}`);
   }
 }
 
