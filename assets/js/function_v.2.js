@@ -531,8 +531,9 @@ function notes_Click() {
   obj_note[index_array] = get_new_note(key, octave, duration, false);
 
   setStyle_Black()
-  redraw_notes();
-  redraw_notes();
+  redraw_measure();
+  redraw_measure();
+  addType(mea_);
 
 }
 
