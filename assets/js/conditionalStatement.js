@@ -1,30 +1,6 @@
 var notes = [];
 
-// let previous = Number(arr_index) - 1;
-// let checkIndex = 0;
-
-// if (Number(arr_index) != 0) {
-//     if (checkIndex === previous) {
-//         let button = notes[previous].duration;
-//         fillTheRest(button);
-//     }
-// }
-// checkIndex = arr_index;
-
-// console.log(arr_index);
-
-
 function fillTheRest(button, version) {
-
-    let note_id = [];
-    for (let i = 0; i < obj_note.length; i++) {
-
-        note_id.push(obj_note[i].attrs.id);
-
-    }
-
-    var id_res = id_.substr(3);
-    index_array = note_id.indexOf(id_res);
 
     let note = obj_note[index_array].duration;
     let noteVal = findValue(note);
@@ -39,8 +15,7 @@ function fillTheRest(button, version) {
     let rope = array.indexOf(button);
     let anchor = array.indexOf(note);
     let between = anchor - rope;
-    // let equalizer = Number(arr_index) - (notes.length + 1);
-    // let equalizer_u = equalizer + 2;
+
 
     if (rope > anchor || rope === anchor) {
         return;
@@ -53,14 +28,6 @@ function fillTheRest(button, version) {
         for (idx = lastElement; idx > index_array; idx--) {
             obj_note[idx + between] = obj_note[idx];
         }
-
-        // } else if (arr_sum[next] != null && Number(arr_index) < notes.length - 1) {
-        //     lastElement = notes.length - 1
-        //     for (idx = lastElement; idx > Number(arr_index); idx--) {
-        //         notes[idx + between] = notes[idx];
-        //     }
-        // }
-
 
     }
 
@@ -81,20 +48,13 @@ function fillTheRest(button, version) {
         spaceVal = spaceVal - val;
         i++;
         u++;
-        // } else {
-        //     notes_2[equalizer_u] = get_new_note('b', 4, `${array[i]}r`);
-        //     spaceVal = spaceVal - val;
-        //     i++;
-        //     equalizer_u++;
-        // }
+
     }
     //console.log(arr_sum);
-    num_shift = between;
     arr_index = "";
     index_in = "";
-    add_type_array();
+
     computeStave();
-    redraw_notes();
     redraw_notes(); // เเก้หาง
     redraw_notes();
 

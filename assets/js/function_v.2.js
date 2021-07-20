@@ -1,13 +1,8 @@
 var width = 500;
 var height = 100;
 var height2 = 200;
-var type_array = ["notesMeasure1001", "notes_2Measure1001"];
-var bok_number = 1;
 var note_num_k;
 var index_array;
-var type_v;
-var type_g;
-var arr_type = "";
 var num_shift;
 var note_duration;
 var checkIndex;
@@ -62,7 +57,6 @@ function draw_notes() {
 
   computeStave();
   redraw_notes();
-  type_note();
   click_time_Signature();
 console.log(notesMeasure1001);
 
@@ -75,10 +69,40 @@ function redraw_notes() {
 
   for (i = measure; i >= marker; i--) {
 
-    addType(i);
+
 
     this["staveMeasure" + i].setContext(context).draw();
+
+    this["group" + i] = context.openGroup(); // open
+    this["group" + i].setAttribute("name", "group" + i);
+    this["group" + i].setAttribute("arr", "notesMeasure" + i);
+
+
+
+
+
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["staveMeasure" + i],
+      this["notesMeasure" + i]);
+    var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
+    voice.forEach(function (b) { b.setContext(context).draw() });
+
+
+    context.closeGroup(); // close
+
     this["stave_2Measure" + i].setContext(context).draw();
+
+    this["groupt" + i] = context.openGroup(); // open
+    this["groupt" + i].setAttribute("name", "groupt" + i)
+    this["groupt" + i].setAttribute("arr", "notes_2Measure" + i);
+
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["stave_2Measure" + i],
+      this["notes_2Measure" + i]);
+    var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
+    voice_2.forEach(function (b) { b.setContext(context).draw() });
+
+    context.closeGroup(); // close
 
     if (this["staveMeasure" + i].x == 70) {
       var brace = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(3);
@@ -94,38 +118,31 @@ function redraw_notes() {
     if (i == measure) {
       var lineRight = new Vex.Flow.StaveConnector(this["staveMeasure" + i], this["stave_2Measure" + i]).setType(6);
       lineRight.setContext(context).draw();
+
+
     }
-
-
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["staveMeasure" + i],
-      this["notesMeasure" + i]);
-    Vex.Flow.Formatter.FormatAndDraw(context,
-      this["stave_2Measure" + i],
-      this["notes_2Measure" + i]);
-
-    var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
-    var voice_2 = VF.Beam.generateBeams(this["notes_2Measure" + i]);
-
-    voice.forEach(function (b) { b.setContext(context).draw() });
-    voice_2.forEach(function (b) { b.setContext(context).draw() });
-
+    addType(i);
   }
-  // type_note();
   click_time_Signature();
   // time_Signature();
 }
 
 function addType(array) {
-  notesArray1 = this["notesMeasure" + array];
-  notesArray2 = this["notes_2Measure" + array];
+  ele1 = document.getElementsByName("group" + array);
+  ele2 = document.getElementsByName("groupt" + array);
 
-  for (j = 0; j < notesArray1.length; j++) {
-    notesArray1[j].type = `notesMeasure${array}`
+  group1 = ele1[0].children;
+  group2 = ele2[0].children;
+  // console.log(group1);
+  // console.log(group2);
+
+
+  for (j = 0; j < group1.length; j++) {
+    group1[j].setAttribute("arr", `notesMeasure${array}`);
   }
 
-  for (j = 0; j < notesArray2.length; j++) {
-    notesArray2[j].type = `notes_2Measure${array}`
+  for (j = 0; j < group2.length; j++) {
+    group2[j].setAttribute("arr", `notes_2Measure${array}`);
   }
 }
 
@@ -144,7 +161,6 @@ function add_measure_after() {
   ];
 
   measure++;
-  array_type("notesMeasure" + measure, "notes_2Measure" + measure);
   computeStave();
   redraw_notes();
 
@@ -164,10 +180,8 @@ function add_measure_before() {
 
   ];
 
-  bok_number = 1001 - u;
   u++;
 
-  array_type_2("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
   computeStave();
   redraw_notes();
 
@@ -303,7 +317,7 @@ function computeStave() {
 }
 
 keySig = 'D';
-timeSig = '8/8';
+timeSig = '4/4';
 clef = 'french';
 lowerClef = 'alto';
 
@@ -327,19 +341,17 @@ function mouseDown() {
   $(".vf-stavenote")
     .mousedown(function (e) {
       setStyle_Black_clear();
-      type_note();
 
-
-      console.log("notes:", notesMeasure1001);
-      arr_type = $(this).attr("type");
+      arr_type = $(this).attr("arr");
       id_ = $(this).attr("id");
-      // console.log(notesMeasure1001);
+
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
+
       obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
       let note_id = [];
       for (let i = 0; i < obj_note.length; i++) {
-
+        // console.log(obj_note[i].attrs.id);
         note_id.push(obj_note[i].attrs.id);
 
       }
@@ -359,7 +371,6 @@ function mouseDown() {
       note_duration = obj_note[index_array].duration;
 
       click_style();
-      // add_type_array();
 
       let previous = Number(index_array) - 1;
       if (Number(index_array) != 0) {
@@ -417,13 +428,15 @@ function mouseDown() {
 
     });
 
+
+
   $("path")
     .mousedown(function (e) {
       let id = $(this).attr("id");
 
       if (id == "time_6" || id == "time_7") {
         $('#exampleModal').modal("toggle");
-        time_Signature('4');
+        time_Signature_Popup();
       }
 
 
@@ -497,7 +510,6 @@ $('html') // unbind mousemove
 $('html')
   .click(function () {
     setStyle_Black();
-    index_array = null;
     redraw_notes();
   });
 
@@ -509,71 +521,6 @@ function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
 
 }
-
-
-
-function array_type(type_a, type_b) { // new arr-index and id
-  const type_v = type_a;
-  const type_g = type_b;
-  type_array.unshift(type_v, type_g);
-  // add_type_array();
-  type_note();
-
-
-
-
-}
-
-function array_type_2(type_a, type_b) {
-  const type_v = type_a;
-  const type_g = type_b;
-  type_array.push(type_v, type_g);
-
-  type_note();
-
-}
-
-function add_type_array() { // add array
-  //console.log("A", type_array);
-
-  let arr_num = num_shift; // จำนวน array ที่จะใส่
-  let array = arr_type;
-
-  // console.log(array);
-  let A = type_array.indexOf(array);
-  let c = A; //   index 0 ที่ รับมา +1 หมายถึงเพิ่ม หลัง index
-
-  for (let index = 0; index < arr_num; index++) {
-    type_d = array;
-    //console.log("B", type_d);
-    type_array.splice(c, 0, type_d);
-  }
-
-  //console.log("B");
-  // console.log(type_array);
-  type_note();
-
-
-}
-
-
-function type_note() {
-  let i = 0;
-  const type_a = type_array;
-
-  $('.vf-stavenote').each(function () {
-
-    $(this).attr("type", type_a[i]);
-    id_ = $(this).attr("id");
-    // console.log(type_a[i], id_);
-    i++;
-
-
-  });
-  //console.log(type_array);
-
-}
-
 
 
 function setStyle_OrangeRed() {
