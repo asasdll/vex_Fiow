@@ -457,6 +457,7 @@ function notes_up() {
   setStyle_OrangeRed()
   redraw_measure();
   redraw_measure();
+  addType(mea_);
 }
 
 function notes_down() {
@@ -469,6 +470,7 @@ function notes_down() {
   setStyle_OrangeRed();
   redraw_measure();
   redraw_measure();
+  addType(mea_);
 }
 
 function redraw_measure() {
@@ -515,11 +517,6 @@ function substr_notes(value) {
     note_num_k = note_sea.substr(-1); // เเยก ตัวเลข จาก note 0-8*/
 
   }
-
-
-
-
-
 }
 
 function notes_Click() {
@@ -545,7 +542,8 @@ $('html') // unbind mousemove
 $('html')
   .click(function () {
     setStyle_Black();
-    redraw_notes();
+    redraw_measure();
+    addType(mea_);
   });
 
 
