@@ -376,7 +376,6 @@ function mouseDown() {
       note_duration = obj_note[index_array].duration;
 
       click_style();
-      // add_type_array();
 
       let previous = Number(index_array) - 1;
       if (Number(index_array) != 0) {
@@ -534,7 +533,6 @@ function array_type(type_a, type_b) { // new arr-index and id
   const type_v = type_a;
   const type_g = type_b;
   type_array.unshift(type_v, type_g);
-  // add_type_array();
 
 
 
@@ -547,28 +545,6 @@ function array_type_2(type_a, type_b) {
   const type_g = type_b;
   type_array.push(type_v, type_g);
 
-
-
-}
-
-function add_type_array() { // add array
-  //console.log("A", type_array);
-
-  let arr_num = num_shift; // จำนวน array ที่จะใส่
-  let array = arr_type;
-
-  // console.log(array);
-  let A = type_array.indexOf(array);
-  let c = A; //   index 0 ที่ รับมา +1 หมายถึงเพิ่ม หลัง index
-
-  for (let index = 0; index < arr_num; index++) {
-    type_d = array;
-    //console.log("B", type_d);
-    type_array.splice(c, 0, type_d);
-  }
-
-  //console.log("B");
-  // console.log(type_array);
 
 
 }
