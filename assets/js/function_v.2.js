@@ -20,7 +20,7 @@ function get_new_note(key, octave, duration, position) {
     auto_stem: true,
     //clef: "treble"
   });
-
+  
   return obj;
 }
 
@@ -45,17 +45,20 @@ function draw_notes() {
     // get_new_note('d', 4, "q", false),
 
 
-
   ];
+  notesMeasure1001.type_A ="notesMeasure";
+  
 
   notes_2Measure1001 = [
     get_new_note('b', 4, "wr", true),
+
   ];
+  notes_2Measure1001.type_A ="notes_2Measure";
 
   computeStave();
   redraw_notes();
   click_time_Signature();
-
+console.log(notesMeasure1001);
 
 
 }
