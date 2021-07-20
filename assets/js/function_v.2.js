@@ -1,13 +1,8 @@
 var width = 500;
 var height = 100;
 var height2 = 200;
-var type_array = ["notesMeasure1001", "notes_2Measure1001"];
-var bok_number = 1;
 var note_num_k;
 var index_array;
-var type_v;
-var type_g;
-// var arr_type = "";
 var num_shift;
 var note_duration;
 var checkIndex;
@@ -163,7 +158,6 @@ function add_measure_after() {
   ];
 
   measure++;
-  array_type("notesMeasure" + measure, "notes_2Measure" + measure);
   computeStave();
   redraw_notes();
 
@@ -183,10 +177,8 @@ function add_measure_before() {
 
   ];
 
-  bok_number = 1001 - u;
   u++;
 
-  array_type_2("notesMeasure" + bok_number, "notes_2Measure" + bok_number);
   computeStave();
   redraw_notes();
 
@@ -524,28 +516,6 @@ $('html')
 
 function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
-
-}
-
-
-
-function array_type(type_a, type_b) { // new arr-index and id
-  const type_v = type_a;
-  const type_g = type_b;
-  type_array.unshift(type_v, type_g);
-
-
-
-
-
-}
-
-function array_type_2(type_a, type_b) {
-  const type_v = type_a;
-  const type_g = type_b;
-  type_array.push(type_v, type_g);
-
-
 
 }
 
