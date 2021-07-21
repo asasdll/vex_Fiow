@@ -9,17 +9,17 @@ body {
     overflow: hidden;
     background-color: #333;
     height: 170px;
-    min-width: 1800px;
+    min-width: 1300px;
 }
 
 
 
 .vexbox {
     background-color: white;
-    margin-top: 5em;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    min-width: 1300px;
+    margin-top: 2em;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    min-width: 1100px;
 
 }
 
@@ -28,13 +28,9 @@ body {
 
 
 .zoom-lineNote {
-    margin-left: 20em;
-    margin-top: 20em;
-    transform: scale(1.5);
-    -webkit-transform: scale(1.5);
-    -moz-transform: scale(1.5);
-    -ms-transform: scale(1.5);
-    -o-transform: scale(1.5);
+    margin-left: 2em;
+    margin-top: 5em;
+   
 }
 
 .footer-time-Signature {

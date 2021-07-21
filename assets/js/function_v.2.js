@@ -34,7 +34,7 @@ function draw_notes() {
 
   context = renderer.getContext();
 
-  context.setFont("Arial", 50, "").setBackgroundFillStyle("#eed");
+  context.setFont("Arial", 50, 700).setBackgroundFillStyle("#eed");
 
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
