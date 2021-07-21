@@ -133,12 +133,14 @@ function addType(array) {
     group1[j].setAttribute("arr", `notesMeasure${array}`);
     group1[j].setAttribute("measure", `${array}`);
     group1[j].setAttribute("level", `upper`);
+    group1[j].setAttribute("idx", String(j));
   }
 
   for (j = 0; j < group2.length; j++) {
     group2[j].setAttribute("arr", `notes_2Measure${array}`);
     group2[j].setAttribute("measure", `${array}`);
     group2[j].setAttribute("level", `lower`);
+    group2[j].setAttribute("idx", String(j));
   }
 }
 
@@ -339,23 +341,14 @@ function mouseDown() {
       setStyle_Black_clear();
 
       arr_type = $(this).attr("arr");
-      id_ = $(this).attr("id");
       mea_ = $(this).attr("measure");
       level_ = $(this).attr("level");
-      console.log(level_);
 
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
       obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
-      let note_id = [];
-      for (let i = 0; i < obj_note.length; i++) {
-        // console.log(obj_note[i].attrs.id);
-        note_id.push(obj_note[i].attrs.id);
-
-      }
-      var id_res = id_.substr(3);
-      index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
+      index_array = $(this).attr("idx");
 
       note_ = obj_note[0].keys;
       //console.log(note_duration);
