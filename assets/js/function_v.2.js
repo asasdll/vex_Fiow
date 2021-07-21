@@ -6,6 +6,7 @@ var index_array;
 var num_shift;
 var note_duration;
 var checkIndex;
+var checkObj;
 var measureHead = [];
 
 
@@ -373,7 +374,10 @@ function mouseDown() {
       }
 
       substr_notes(search_array);
+
+
       checkIndex = index_array;
+      checkObj = obj_note;
 
       if (obj_note[index_array].customTypes == 'r') {
         notes_Click();
@@ -520,7 +524,6 @@ function notes_Click() {
 
   obj_note[index_array] = get_new_note(key, octave, duration, false);
 
-  setStyle_Black()
   redraw_measure();
   redraw_measure();
   addType(mea_);
@@ -563,14 +566,15 @@ function setStyle_Black() {
 
 function setStyle_Black_clear() {
   if (checkIndex != undefined) {
-    obj_note[checkIndex].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    checkObj[checkIndex].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    redraw_measure();
   }
 }
 
 function click_style() {
-
   setStyle_OrangeRed();
   redraw_measure();
+  addType(mea_);
 
 };
 
