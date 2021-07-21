@@ -20,7 +20,7 @@ function get_new_note(key, octave, duration, position) {
     auto_stem: true,
     //clef: "treble"
   });
-  
+
   return obj;
 }
 
@@ -46,19 +46,19 @@ function draw_notes() {
 
 
   ];
-  notesMeasure1001.type_A ="notesMeasure";
-  
+
+
 
   notes_2Measure1001 = [
     get_new_note('b', 4, "wr", true),
 
   ];
-  notes_2Measure1001.type_A ="notes_2Measure";
+
 
   computeStave();
   redraw_notes();
   click_time_Signature();
-console.log(notesMeasure1001);
+
 
 
 }
@@ -69,17 +69,12 @@ function redraw_notes() {
 
   for (i = measure; i >= marker; i--) {
 
-
-
     this["staveMeasure" + i].setContext(context).draw();
+    this["stave_2Measure" + i].setContext(context).draw();
+
 
     this["group" + i] = context.openGroup(); // open
     this["group" + i].setAttribute("name", "group" + i);
-    this["group" + i].setAttribute("arr", "notesMeasure" + i);
-
-
-
-
 
     Vex.Flow.Formatter.FormatAndDraw(context,
       this["staveMeasure" + i],
@@ -90,11 +85,8 @@ function redraw_notes() {
 
     context.closeGroup(); // close
 
-    this["stave_2Measure" + i].setContext(context).draw();
-
     this["groupt" + i] = context.openGroup(); // open
     this["groupt" + i].setAttribute("name", "groupt" + i)
-    this["groupt" + i].setAttribute("arr", "notes_2Measure" + i);
 
     Vex.Flow.Formatter.FormatAndDraw(context,
       this["stave_2Measure" + i],
@@ -139,10 +131,14 @@ function addType(array) {
 
   for (j = 0; j < group1.length; j++) {
     group1[j].setAttribute("arr", `notesMeasure${array}`);
+    group1[j].setAttribute("measure", `${array}`);
+    group1[j].setAttribute("level", `upper`);
   }
 
   for (j = 0; j < group2.length; j++) {
     group2[j].setAttribute("arr", `notes_2Measure${array}`);
+    group2[j].setAttribute("measure", `${array}`);
+    group2[j].setAttribute("level", `lower`);
   }
 }
 
@@ -344,6 +340,9 @@ function mouseDown() {
 
       arr_type = $(this).attr("arr");
       id_ = $(this).attr("id");
+      mea_ = $(this).attr("measure");
+      level_ = $(this).attr("level");
+      console.log(level_);
 
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
@@ -456,8 +455,9 @@ function notes_up() {
 
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed()
-  redraw_notes();
-  redraw_notes();
+  redraw_measure();
+  redraw_measure();
+  addType(mea_);
 }
 
 function notes_down() {
@@ -468,8 +468,44 @@ function notes_down() {
   // console.log(key, octave);
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
-  redraw_notes();
-  redraw_notes();
+  redraw_measure();
+  redraw_measure();
+  addType(mea_);
+}
+
+function redraw_measure() {
+
+  let i = mea_
+
+  if (level_ == "upper") {
+    let gt = this['group' + i];
+    context.svg.removeChild(gt);
+
+    this["group" + i] = context.openGroup(); // open
+    this["group" + i].setAttribute("name", "group" + i);
+
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["staveMeasure" + i],
+      this["notesMeasure" + i]);
+    var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
+    voice.forEach(function (b) { b.setContext(context).draw() });
+
+    context.closeGroup(); // close 
+  } else {
+    let gt = this['groupt' + i];
+    context.svg.removeChild(gt);
+
+    this["groupt" + i] = context.openGroup(); // open
+    this["groupt" + i].setAttribute("name", "groupt" + i);
+
+    Vex.Flow.Formatter.FormatAndDraw(context,
+      this["stave_2Measure" + i],
+      this["notes_2Measure" + i]);
+    var voice = VF.Beam.generateBeams(this["notes_2Measure" + i]);
+    voice.forEach(function (b) { b.setContext(context).draw() });
+
+    context.closeGroup(); // close
+  }
 }
 
 function substr_notes(value) {
@@ -481,11 +517,6 @@ function substr_notes(value) {
     note_num_k = note_sea.substr(-1); // เเยก ตัวเลข จาก note 0-8*/
 
   }
-
-
-
-
-
 }
 
 function notes_Click() {
@@ -497,8 +528,9 @@ function notes_Click() {
   obj_note[index_array] = get_new_note(key, octave, duration, false);
 
   setStyle_Black()
-  redraw_notes();
-  redraw_notes();
+  redraw_measure();
+  redraw_measure();
+  addType(mea_);
 
 }
 
@@ -510,7 +542,8 @@ $('html') // unbind mousemove
 $('html')
   .click(function () {
     setStyle_Black();
-    redraw_notes();
+    redraw_measure();
+    addType(mea_);
   });
 
 
