@@ -33,6 +33,7 @@ function fillTheRest(button, version) {
 
     if (version === 'b') {
         obj_note[index_array] = get_new_note('b', 4, `${button}`);
+        setStyle_OrangeRed();
     } else {
         obj_note[index_array] = get_new_note('b', 4, `${button}r`);
     }

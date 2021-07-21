@@ -4,7 +4,7 @@ var height2 = 200;
 var note_num_k;
 var index_array;
 var num_shift;
-var note_duration;
+var note_duration = "w";
 var checkIndex;
 var measureHead = [];
 
@@ -342,7 +342,7 @@ function mouseDown() {
       id_ = $(this).attr("id");
       mea_ = $(this).attr("measure");
       level_ = $(this).attr("level");
-      console.log(level_);
+      console.log(id_);
 
       note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
@@ -354,6 +354,7 @@ function mouseDown() {
         note_id.push(obj_note[i].attrs.id);
 
       }
+      
       var id_res = id_.substr(3);
       index_array = note_id.indexOf(id_res); // id ของ เเต่ละ array
 
@@ -369,6 +370,7 @@ function mouseDown() {
       // console.log(obj_note[index_array].duration);
       note_duration = obj_note[index_array].duration;
 
+      console.log(note_duration);
       click_style();
 
       let previous = Number(index_array) - 1;
@@ -527,7 +529,8 @@ function notes_Click() {
 
   obj_note[index_array] = get_new_note(key, octave, duration, false);
 
-  setStyle_Black()
+  //setStyle_Black()
+  setStyle_OrangeRed();
   redraw_measure();
   redraw_measure();
   addType(mea_);
@@ -541,7 +544,7 @@ $('html') // unbind mousemove
 
 $('html')
   .click(function () {
-    setStyle_Black();
+    //setStyle_Black();
     redraw_measure();
     addType(mea_);
   });
@@ -562,11 +565,7 @@ function setStyle_OrangeRed() {
 
 }
 
-function setStyle_Black() {
-  if (index_array != undefined) {
-    obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-  }
-}
+
 
 function setStyle_Black_clear() {
   if (checkIndex != undefined) {
