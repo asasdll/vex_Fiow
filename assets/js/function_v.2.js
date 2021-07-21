@@ -570,7 +570,7 @@ function setStyle_Black_clear() {
 function click_style() {
 
   setStyle_OrangeRed();
-  redraw_notes();
+  redraw_measure();
 
 };
 
