@@ -37,7 +37,7 @@ function draw_notes() {
 
   context.setFont("Arial", 50, 700).setBackgroundFillStyle("#eed");
 
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 6, beat_value: 4 });
 
   notesMeasure1001 = [
     get_new_note('b', 4, "1r", true),
@@ -354,7 +354,7 @@ function mouseDown() {
 
       index_array = $(this).attr("idx");
 
-      console.log(obj_note[index_array].duration);
+      console.log(obj_note[index_array].duration + 'duration');
 
       note_ = obj_note[0].keys;
       //console.log(note_duration);
