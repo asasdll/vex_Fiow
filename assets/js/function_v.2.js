@@ -523,15 +523,17 @@ function notes_Click() {
   let octave = note_num_k;
   let duration = note_duration;
 
+  let btn = computeDuration(String(lowerTime));
 
   if (duration != '1') {
     obj_note[index_array] = get_new_note(key, octave, duration, false);
+  } else {
+    fillTheRest(btn, 'a')
   }
 
   redraw_measure();
   redraw_measure();
   addType(mea_);
-
 }
 
 $('html') // unbind mousemove 
@@ -617,10 +619,33 @@ function click_time_Signature() {
   });
 }
 
-
-
 let upperTime = 4;
 let lowerTime = 4;
+
+function computeDuration(lowerT) {
+  let computedD;
+
+  switch (lowerT) {
+    case '2':
+      computedD = 'h';
+      break;
+    case '4':
+      computedD = 'q';
+      break;
+    case '8':
+      computedD = '8';
+      break;
+    case '16':
+      computedD = '16';
+      break;
+    case '32':
+      computedD = '32';
+      break;
+    default:
+      console.log("Don't have this value");
+  }
+  return computedD;
+}
 
 function computeT2(lowerT) {
   let computedT2;
