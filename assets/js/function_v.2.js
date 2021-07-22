@@ -622,7 +622,7 @@ function click_time_Signature() {
   });
 }
 
-function computeDuration(lowerT) {
+function computeDuration(lowerT) { // เปลี่ยน lowerTime เป็นโน๊ท
   let computedD;
 
   switch (lowerT) {
@@ -682,7 +682,20 @@ function computeSpace(time1, time2) { // หา space ของห้อง
 }
 
 function provideSpace() {
+  if (cpTime > oldCpTime) {
+    fillArray();
+  } else {
+    arrangeSpace();
+  }
+}
 
+function fillArray() {
+  blankSpace = cpTime - oldCpTime;
+  console.log(blankSpace);
+}
+
+function arrangeSpace() {
+  console.log('arrange');
 }
 
 function time_Signature_Popup() {
@@ -711,8 +724,11 @@ function commit_time() {
 
   // console.log(upperTime + '/' + lowerTime);
   timeSig = (upperTime + '/' + lowerTime);
+  oldCpTime = cpTime;
   cpTime = computeSpace(upperTime, lowerTime);
+  console.log(oldCpTime + 'old');
   console.log(cpTime + 'upCp');
+  provideSpace();
   computeStave();
   redraw_notes();
 }
