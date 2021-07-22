@@ -110,6 +110,10 @@ function breakR(button) {
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
 
+    if (buttonVal > noteVal) {
+        return;
+    }
+
     obj_note[index_array] = get_new_note('b', 4, `${button}r`);
 
     noteVal = noteVal - buttonVal; // ค่าที่เหลือ

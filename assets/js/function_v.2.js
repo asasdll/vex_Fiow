@@ -151,11 +151,11 @@ function add_measure_after() {
   renderer.ctx.clear();
 
   this["notesMeasure" + (measure + 1)] = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
   ];
 
   this["notes_2Measure" + (measure + 1)] = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
 
   ];
 
@@ -171,11 +171,11 @@ function add_measure_before() {
   renderer.ctx.clear();
 
   this["notesMeasure" + (1001 - u)] = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
 
   ];
   this["notes_2Measure" + (1001 - u)] = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
 
   ];
 
@@ -315,7 +315,7 @@ function computeStave() {
   modifyStave();
 }
 
-let upperTime = 6;
+let upperTime = 4;
 let lowerTime = 4;
 
 keySig = 'D';
