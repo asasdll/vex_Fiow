@@ -691,7 +691,32 @@ function provideSpace() {
 
 function fillArray() {
   blankSpace = cpTime - oldCpTime;
-  console.log(blankSpace);
+
+  let array = ['w', 'h', 'q', '8', '16', '32', '64'];
+  let next = Number(index_array) + 1;
+
+
+  let marker = 1002 - u;
+  for (let j = marker; j <= measure; j++) {
+    if (this["notesMeasure" + j][0].duration == '1') {
+
+    }
+
+  }
+
+
+  let i = 0;
+  // while (noteVal > 0) {
+  //     let val = findValue(array[i]);
+
+  //     if (val > noteVal) {
+  //         i++;
+  //     } else {
+  //         obj_note[next] = get_new_note('b', 4, `${array[i]}r`);
+  //         noteVal = noteVal - val;
+  //         next++;
+  //     }
+  // }
 }
 
 function arrangeSpace() {
