@@ -380,7 +380,7 @@ function mouseDown() {
       checkIndex = index_array;
       checkObj = obj_note;
 
-      if (obj_note[index_array].customTypes == 'r') {
+      if (obj_note[index_array].customTypes == 'r' && note_duration != '1') {
         notes_Click();
       }
 
@@ -518,18 +518,20 @@ function substr_notes(value) {
 }
 
 function notes_Click() {
-
+  console.log('in');
   let key = note_te_k;
   let octave = note_num_k;
   let duration = note_duration;
 
-  let btn = computeDuration(String(lowerTime));
+  let btn = computeDuration(String(lowerTime))
 
-  if (duration != '1') {
-    obj_note[index_array] = get_new_note(key, octave, duration, false);
-  } else {
-    fillTheRest(btn, 'a')
-  }
+  // if (duration != '1') {
+  obj_note[index_array] = get_new_note(key, octave, duration, false);
+  // }
+
+  // else {
+  //   fillTheRest(btn, 'a')
+  // }
 
   redraw_measure();
   redraw_measure();
@@ -546,9 +548,6 @@ $('html')
     setStyle_Black();
     redraw_notes();
   });
-
-
-
 
 
 function unBind() { // unbind mousemove
