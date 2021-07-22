@@ -619,6 +619,41 @@ function click_time_Signature() {
 let upperTime = 4;
 let lowerTime = 4;
 
+function computeSpace(time1, time2) {
+  let timeT2 = time2;
+  let timeT1 = time1;
+  let computedT2;
+  let returnValue;
+
+  switch (timeT2) {
+    case '2':
+      computedT2 = 2;
+      break;
+    case '4':
+      computedT2 = 1;
+      break;
+    case '8':
+      computedT2 = 0.5;
+      break;
+    case '16':
+      computedT2 = 0.25;
+      break;
+    case '32':
+      computedT2 = 0.125;
+      break;
+    default:
+      console.log("Don't have this value");
+  }
+  returnValue = computedT2 * timeT1;
+
+  return returnValue;
+
+}
+
+function provideSpace() {
+
+}
+
 function time_Signature_Popup() {
 
   id_option = String(lowerTime);
@@ -643,6 +678,8 @@ function commit_time() {
   lowerTime = secondElement;
   console.log(upperTime + '/' + lowerTime);
   timeSig = (upperTime + '/' + lowerTime);
+  cpTime = computeSpace(upperTime, lowerTime);
+  console.log(cpTime);
   computeStave();
   redraw_notes();
 }
