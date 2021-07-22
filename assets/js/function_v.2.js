@@ -527,9 +527,6 @@ function notes_Click() {
   if (duration != '1') {
     obj_note[index_array] = get_new_note(key, octave, duration, false);
   }
-  //  } else {
-  //   fillTheRest('q')
-  // }
 
   redraw_measure();
   redraw_measure();
@@ -625,14 +622,9 @@ function click_time_Signature() {
 let upperTime = 4;
 let lowerTime = 4;
 
-function computeSpace(time1, time2) {
-  let timeT2 = time2;
-  let timeT1 = time1;
+function computeT2(lowerT) {
   let computedT2;
-  let returnValue;
-  console.log(timeT2);
-
-  switch (timeT2) {
+  switch (lowerT) {
     case '2':
       computedT2 = 2;
       break;
@@ -651,6 +643,16 @@ function computeSpace(time1, time2) {
     default:
       console.log("Don't have this value");
   }
+  return computedT2;
+}
+
+function computeSpace(time1, time2) {
+  let timeT2 = time2;
+  let timeT1 = time1;
+  let computedT2 = computeT2(time2);
+  let returnValue;
+  console.log(timeT2);
+
   returnValue = computedT2 * timeT1;
 
   return returnValue;
