@@ -2,7 +2,7 @@ var width = 500;
 var height = 100;
 var height2 = 200;
 var note_num_k;
-var index_array;
+var index_array = "";
 var num_shift;
 var note_duration;
 var checkIndex;
@@ -58,6 +58,7 @@ function draw_notes() {
   computeStave();
   redraw_notes();
   click_time_Signature();
+  onclick();
 
 
 
@@ -117,6 +118,7 @@ function redraw_notes() {
   }
   click_time_Signature();
   // time_Signature();
+  onclick();
 }
 
 function addType(array) {
@@ -333,25 +335,40 @@ function modifyStave() {
 
 
 
+function onclick() {
+  
+    $(".vf-stavenote").each(function () {
+  
+      $(this).attr("onmousedown", "mousedown($(this))" );
+  
+  
+    });
+  
 
-function mouseDown() {
-  // console.log("222");
-  $(".vf-stavenote")
-    .mousedown(function (e) {
-      setStyle_Black_clear();
+    
+  }
 
-      arr_type = $(this).attr("arr");
-      mea_ = $(this).attr("measure");
-      level_ = $(this).attr("level");
+var arr_type= "";
+var mea_= "";
+var level_= "";
 
-      note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
+
+  function mousedown(e) {
+    
+    var arr_type = e.attr('arr');
+    var mea_ = e.attr('measure');
+    var level_ = e.attr('level');
+
+     console.log(arr_type,mea_,level_);
+
+     note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
       obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
-      index_array = $(this).attr("idx");
-
+      index_array = e.attr("idx");
+  
       note_ = obj_note[0].keys;
-      //console.log(note_duration);
+      
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
 
@@ -375,15 +392,13 @@ function mouseDown() {
       substr_notes(search_array);
       checkIndex = index_array;
 
-      if (obj_note[index_array].customTypes == 'r') {
-        notes_Click();
-      }
+       
+      //if (obj_note[index_array].customTypes == 'r') {
+       // notes_Click();
 
+      //}
 
-
-
-
-
+      
       $(document).bind('mousemove', function (e) {
         var ev_move = e.clientY; //434  เลื่อน เม้า
 
@@ -395,6 +410,7 @@ function mouseDown() {
           e_Click = sum_pixels; //433
 
 
+          
           if (ev_move == move_pixel) {
 
             search_array = search_array - array_a;
@@ -402,7 +418,8 @@ function mouseDown() {
           substr_notes(search_array);
           notes_down();
 
-        } else if (ev_move <= del_pix) { //note_up
+        }
+        else if (ev_move <= del_pix) { //note_up
 
           move_pixel = ev_move;
           e_Click = del_pix; //433
@@ -416,28 +433,14 @@ function mouseDown() {
 
         }
       });
-
-
-    });
-
-
-
-  $("path")
-    .mousedown(function (e) {
-      let id = $(this).attr("id");
-
-      if (id == "time_6" || id == "time_7") {
-        $('#exampleModal').modal("toggle");
-        time_Signature_Popup();
-      }
+     
+  }
 
 
 
 
-    });
 
 
-}
 
 
 function notes_up() {
@@ -445,12 +448,14 @@ function notes_up() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-
+console.log("notes_up",key,octave,duration,index_array);
   obj_note[index_array] = get_new_note(key, octave, duration);
-  setStyle_OrangeRed()
+  setStyle_OrangeRed();
   redraw_measure();
   redraw_measure();
-  addType(mea_);
+ // redraw_measure();
+  //redraw_measure();
+  //(mea_);
 }
 
 function notes_down() {
@@ -458,7 +463,7 @@ function notes_down() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-  // console.log(key, octave);
+  console.log("notes_down",key,octave,duration,index_array);
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
   redraw_measure();
@@ -472,7 +477,7 @@ function redraw_measure() {
 
   if (level_ == "upper") {
     let gt = this['group' + i];
-    context.svg.removeChild(gt);
+    //context.svg.removeChild(gt);
 
     this["group" + i] = context.openGroup(); // open
     this["group" + i].setAttribute("name", "group" + i);
@@ -530,15 +535,22 @@ function notes_Click() {
 $('html') // unbind mousemove 
   .mouseup(function () {
     unBind();
+   // mousedown();
+   setStyle_Black();
+   redraw_measure();
+   redraw_measure();
+    //addType(mea_);
   });
 
+
+/*
 $('html')
   .click(function () {
     setStyle_Black();
     redraw_measure();
     addType(mea_);
   });
-
+*/
 
 
 
