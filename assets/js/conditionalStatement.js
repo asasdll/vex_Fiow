@@ -65,6 +65,8 @@ function findValue(note) {
     let returnValue;
 
     switch (value) {
+        case '1':
+            returnValue = cpTime;
         case 'w':
             returnValue = 4;
             break;

@@ -40,7 +40,7 @@ function draw_notes() {
   voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
 
   notesMeasure1001 = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
     // get_new_note('b', 4, "q", false),
     // get_new_note('c', 4, "q", false),
     // get_new_note('d', 4, "q", false),
@@ -51,17 +51,15 @@ function draw_notes() {
 
 
   notes_2Measure1001 = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
 
   ];
 
+  cpTime = computeSpace(String(upperTime), String(lowerTime));
 
   computeStave();
   redraw_notes();
   click_time_Signature();
-
-  cpTime = computeSpace(String(upperTime), String(lowerTime));
-
 
 }
 
@@ -352,6 +350,8 @@ function mouseDown() {
 
       index_array = $(this).attr("idx");
 
+      console.log(obj_note[index_array].duration);
+
       note_ = obj_note[0].keys;
       //console.log(note_duration);
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
@@ -523,7 +523,13 @@ function notes_Click() {
   let octave = note_num_k;
   let duration = note_duration;
 
-  obj_note[index_array] = get_new_note(key, octave, duration, false);
+
+  if (duration != '1') {
+    obj_note[index_array] = get_new_note(key, octave, duration, false);
+  }
+  //  } else {
+  //   fillTheRest('q')
+  // }
 
   redraw_measure();
   redraw_measure();
