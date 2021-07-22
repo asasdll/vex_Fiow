@@ -56,6 +56,7 @@ function draw_notes() {
   ];
 
   cpTime = computeSpace(String(upperTime), String(lowerTime));
+  console.log(cpTime + 'draw');
 
   computeStave();
   redraw_notes();
@@ -314,8 +315,11 @@ function computeStave() {
   modifyStave();
 }
 
+let upperTime = 6;
+let lowerTime = 4;
+
 keySig = 'D';
-timeSig = '4/4';
+timeSig = upperTime + '/' + lowerTime;
 clef = 'french';
 lowerClef = 'alto';
 
@@ -618,9 +622,6 @@ function click_time_Signature() {
   });
 }
 
-let upperTime = 4;
-let lowerTime = 4;
-
 function computeDuration(lowerT) {
   let computedD;
 
@@ -646,7 +647,7 @@ function computeDuration(lowerT) {
   return computedD;
 }
 
-function computeT2(lowerT) {
+function computeT2(lowerT) { // เปลี่ยน lowerTime เป็น beat
   let computedT2;
   switch (lowerT) {
     case '2':
@@ -670,17 +671,14 @@ function computeT2(lowerT) {
   return computedT2;
 }
 
-function computeSpace(time1, time2) {
-  let timeT2 = time2;
+function computeSpace(time1, time2) { // หา space ของห้อง
   let timeT1 = time1;
   let computedT2 = computeT2(time2);
-  let returnValue;
-  console.log(timeT2);
+  let returnSpace;
 
-  returnValue = computedT2 * timeT1;
+  returnSpace = computedT2 * timeT1;
 
-  return returnValue;
-
+  return returnSpace;
 }
 
 function provideSpace() {
@@ -711,10 +709,10 @@ function commit_time() {
   upperTime = firstElement;
   lowerTime = secondElement;
 
-  console.log(upperTime + '/' + lowerTime);
+  // console.log(upperTime + '/' + lowerTime);
   timeSig = (upperTime + '/' + lowerTime);
   cpTime = computeSpace(upperTime, lowerTime);
-  console.log(cpTime);
+  console.log(cpTime + 'upCp');
   computeStave();
   redraw_notes();
 }

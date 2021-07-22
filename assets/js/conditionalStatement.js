@@ -5,9 +5,19 @@ function fillTheRest(button, version) {
     let note = obj_note[index_array].duration;
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
+
+
+    if (note == '1') {
+        obj_note[index_array] = get_new_note('b', 4, `${button}r`);
+        noteVal = noteVal - buttonVal; // ค่าที่เหลือ
+        let btn = computeDuration(String(lowerTime));
+        buttonVal = findValue(btn);
+        console.log(noteVal, buttonVal);
+    }
+
+
+
     let spaceVal = noteVal - (buttonVal * 2);
-
-
     let array = ['64', '32', '16', '8', 'q', 'h', 'w'];
     let i = array.indexOf(button) + 1;
     let u = Number(index_array) + 2;
@@ -37,7 +47,7 @@ function fillTheRest(button, version) {
         obj_note[index_array] = get_new_note('b', 4, `${button}r`);
     }
 
-    obj_note[Number(index_array) + 1] = get_new_note('b', 4, `${button}r`);
+    obj_note[Number(index_array) + 1] = get_new_note('b', 4, `${button}r`); // ใส่ next
 
 
 
@@ -87,6 +97,37 @@ function findValue(note) {
             break;
         case '64':
             returnValue = 0.0625;
+            break;
+        default:
+            console.log("Don't have this value");
+    }
+
+    return returnValue;
+
+}
+
+function reverseFindValue(noteVal) {
+    let value = noteVal;
+    let returnValue;
+
+    switch (value) {
+        case '4':
+            returnValue = 'w';
+            break;
+        case '2':
+            returnValue = 'h';
+            break;
+        case '1':
+            returnValue = 'q';
+            break;
+        case '0.5':
+            returnValue = '8';
+            break;
+        case '0.25':
+            returnValue = '16';
+            break;
+        case '0.125':
+            returnValue = '32';
             break;
         default:
             console.log("Don't have this value");
