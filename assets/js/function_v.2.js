@@ -60,6 +60,7 @@ function draw_notes() {
   redraw_notes();
   click_time_Signature();
 
+  cpTime = computeSpace(String(upperTime), String(lowerTime));
 
 
 }
@@ -538,8 +539,7 @@ $('html') // unbind mousemove
 $('html')
   .click(function () {
     setStyle_Black();
-    redraw_measure();
-    addType(mea_);
+    redraw_notes();
   });
 
 
@@ -624,6 +624,7 @@ function computeSpace(time1, time2) {
   let timeT1 = time1;
   let computedT2;
   let returnValue;
+  console.log(timeT2);
 
   switch (timeT2) {
     case '2':
@@ -674,8 +675,10 @@ function time_Signature() {
 }
 
 function commit_time() {
+
   upperTime = firstElement;
   lowerTime = secondElement;
+
   console.log(upperTime + '/' + lowerTime);
   timeSig = (upperTime + '/' + lowerTime);
   cpTime = computeSpace(upperTime, lowerTime);
