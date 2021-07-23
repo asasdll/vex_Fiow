@@ -44,8 +44,6 @@ function draw_notes() {
     // get_new_note('b', 4, "q", false),
     // get_new_note('c', 4, "q", false),
     // get_new_note('d', 4, "q", false),
-
-
   ];
 
 
@@ -65,6 +63,8 @@ function draw_notes() {
 }
 
 function redraw_notes() {
+  console.log('redraw');
+
   renderer.ctx.clear();
   let marker = 1002 - u;
 
@@ -492,6 +492,7 @@ function notes_down() {
 
 
 function redraw_measure() {
+  console.log('measure');
 
   let i = mea_
 
@@ -768,8 +769,18 @@ function arrangeSpace() { // ถ้า beat ตก
     }
   }
 
+  let time = cpTime;
   for (let k = 0; k < temAr.length; k++) {
 
+    let cut = findValue(temAr[k].duration);
+
+    if (time > cut) {
+      time = time - cut;
+    } else {
+
+
+      console.log('end');
+    }
   }
 }
 
