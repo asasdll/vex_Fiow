@@ -24,8 +24,7 @@ function fillTheRest(button, version) {
     if (rope > anchor || rope === anchor) {
         console.log('rope')
 
-       
-        //return;
+        return;
     }
 
     //console.log(notes[Number(arr_index)]);
@@ -37,9 +36,6 @@ function fillTheRest(button, version) {
         }
 
     }
-        if (button === 'w') {
-             console.log("4445");
-        }
 
     if (version === 'b') {
         console.log("version 555" ,version);
