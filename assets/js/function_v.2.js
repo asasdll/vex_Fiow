@@ -535,15 +535,9 @@ function notes_Click() {
 
 //console.log("duration : ",duration);
 
-  if (duration == "1") {
+  obj_note[index_array] = get_new_note(key, octave, duration, true);
 
-    let duration = "wr";   
-    obj_note[index_array] = get_new_note(key, octave, duration, true);
-
-  } else {
-    console.log("DD : ",duration);
-    obj_note[index_array] = get_new_note(key, octave, duration, false);
-  }
+  
   
 
   setStyle_OrangeRed();
@@ -557,20 +551,20 @@ $('html') // unbind mousemove
   .mouseup(function () {
     unBind();
    // mousedown();
-   setStyle_Black();
+  // setStyle_Black();
   // redraw_measure();
    //redraw_measure();
     //addType(mea_);
   });
 
 
-/*
+
 $('html')
   .click(function () {
     setStyle_Black();
     redraw_notes();
   });
-*/
+
 
 function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
