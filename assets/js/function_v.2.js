@@ -58,7 +58,7 @@ function draw_notes() {
   computeStave();
   redraw_notes();
   click_time_Signature();
-  onclick();
+  ///onclick();
 
 
 
@@ -118,7 +118,9 @@ function redraw_notes() {
   }
   click_time_Signature();
   // time_Signature();
-  onclick();
+  //onclick();
+
+  console.log("5559");
 }
 
 function addType(array) {
@@ -136,6 +138,8 @@ function addType(array) {
     group1[j].setAttribute("measure", `${array}`);
     group1[j].setAttribute("level", `upper`);
     group1[j].setAttribute("idx", String(j));
+    group1[j].setAttribute("onmousedown", "mousedown($(this))");
+
   }
 
   for (j = 0; j < group2.length; j++) {
@@ -143,6 +147,8 @@ function addType(array) {
     group2[j].setAttribute("measure", `${array}`);
     group2[j].setAttribute("level", `lower`);
     group2[j].setAttribute("idx", String(j));
+    group2[j].setAttribute("onmousedown", "mousedown($(this))");
+
   }
 }
 
@@ -333,7 +339,7 @@ function modifyStave() {
 
 
 
-
+/*
 
 function onclick() {
   
@@ -347,6 +353,7 @@ function onclick() {
 
     
   }
+  */
 
 var arr_type= "";
 var mea_= "";
@@ -451,8 +458,8 @@ function notes_up() {
 console.log("notes_up",key,octave,duration,index_array);
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
-  redraw_measure();
-  redraw_measure();
+  //redraw_measure();
+  //redraw_measure();
  // redraw_measure();
   //redraw_measure();
   //(mea_);
@@ -466,8 +473,8 @@ function notes_down() {
   console.log("notes_down",key,octave,duration,index_array);
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
-  redraw_measure();
-  redraw_measure();
+ /// redraw_measure();
+  //redraw_measure();
   addType(mea_);
 }
 
