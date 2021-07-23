@@ -318,10 +318,10 @@ function computeStave() {
 let upperTime = 4;
 let lowerTime = 4;
 
-keySig = 'D';
+keySig = 'C';
 timeSig = upperTime + '/' + lowerTime;
-clef = 'french';
-lowerClef = 'alto';
+clef = 'bass';
+lowerClef = 'bass';
 
 
 function modifyStave() {
@@ -353,8 +353,6 @@ function mouseDown() {
       obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
       index_array = $(this).attr("idx");
-
-      console.log(obj_note[index_array].duration + 'duration');
 
       note_ = obj_note[0].keys;
       //console.log(note_duration);
@@ -714,7 +712,17 @@ function fillArray() { // ถ้า beat เพิ่มขึ้น
 }
 
 function arrangeSpace() {
-  console.log('arrange');
+  let marker = 1002 - u;
+  let temAr = [];
+  for (let j = marker; j <= measure; j++) {
+    for (let i = 0; i < this["notesMeasure" + j].length; i++) {
+      let du = this["notesMeasure" + j][i].duration
+      temAr.push(du);
+    }
+  }
+
+
+  console.log(temAr);
 }
 
 function time_Signature_Popup() {
@@ -760,7 +768,7 @@ function key_Signature() {
 }
 
 function text_key_Signature(e) {
-  console.log("log", e);
+  // console.log("log", e);
 
   let keySignature = ""
   if (e == 0) {

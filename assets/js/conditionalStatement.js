@@ -21,7 +21,6 @@ function fillTheRest(button, version) {
     let anchor = array.indexOf(note); // ใน array หาตำแหน่ง
     let between = anchor - rope; // ช่องว่าง
 
-    console.log(anchor, rope);
     if (rope > anchor || rope === anchor) {
         console.log('rope')
         return;
@@ -67,7 +66,6 @@ function fillTheRest(button, version) {
 }
 
 function findValue(note) {
-    console.log(note + 'n')
     let value = note;
     let returnValue;
 
