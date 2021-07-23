@@ -688,13 +688,14 @@ function provideSpace() {
 }
 
 function fillArray() { // ถ้า beat เพิ่มขึ้น
-  blankSpace = cpTime - oldCpTime;
+
 
   let array = ['w', 'h', 'q', '8', '16', '32', '64'];
 
   let marker = 1002 - u;
   for (let j = marker; j <= measure; j++) {
     if (this["notesMeasure" + j][0].duration != '1') {
+      blankSpace = cpTime - oldCpTime;
       let i = 0;
       let next = this["notesMeasure" + j].length;
       while (blankSpace > 0) {
@@ -702,12 +703,29 @@ function fillArray() { // ถ้า beat เพิ่มขึ้น
         if (val > blankSpace) {
           i++;
         } else {
-          obj_note[next] = get_new_note('b', 4, `${array[i]}r`);
+          this["notesMeasure" + j][next] = get_new_note('b', 4, `${array[i]}r`);
           blankSpace = blankSpace - val;
           next++;
         }
       }
     }
+
+    if (this["notes_2Measure" + j][0].duration != '1') {
+      blankSpace = cpTime - oldCpTime;
+      let i = 0;
+      let next = this["notes_2Measure" + j].length;
+      while (blankSpace > 0) {
+        let val = findValue(array[i]);
+        if (val > blankSpace) {
+          i++;
+        } else {
+          this["notes_2Measure" + j][next] = get_new_note('b', 4, `${array[i]}r`);
+          blankSpace = blankSpace - val;
+          next++;
+        }
+      }
+    }
+    addType(j);
   }
 }
 
@@ -716,21 +734,29 @@ function arrangeSpace() {
   let temAr = [];
   for (let j = marker; j <= measure; j++) {
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
-      let beat = cpTime;
-      if (this["notesMeasure" + j][i].duration != '1') {
-        console.log('yes');
-      }
-
+      let du = this["notesMeasure" + j][i]
+      temAr.push(du);
     }
+  }
 
-    // let du = this["notesMeasure" + j][i]
-    // temAr.push(du);
+  for (let k = 0; k < temAr.length; k++) {
+
   }
 }
 
 // for (let k = 0; k < temAr.length; k++) {
 //   let time = cpTime;
-
+// let beat = cpTime;
+// if (this["notesMeasure" + j][i].duration != '1') {
+//   let cut = findValue(this["notesMeasure" + j][i].duration);
+//   if (cut < beat) {
+//     beat = beat - cut;
+//   } else {
+//     let rest = cut - beat;
+//     let restNote = computeDuration(rest);
+//     console.log(restNote);
+//   }
+// }
 
 
 // }
