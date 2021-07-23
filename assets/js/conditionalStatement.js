@@ -37,16 +37,12 @@ function fillTheRest(button, version) {
     }
 
     if (version === 'b') {
-        obj_note[index_array] = get_new_note('b', 4, `${button}`);
-        setStyle_OrangeRed();
-       
+        obj_note[index] = get_new_note('b', 4, `${button}`);
     } else {
-        obj_note[index_array] = get_new_note('b', 4, `${button}r`);
-    
+        obj_note[index] = get_new_note('b', 4, `${button}r`);
     }
 
-    obj_note[Number(index_array) + 1] = get_new_note('b', 4, `${button}r`);
-    
+    obj_note[Number(index) + 1] = get_new_note('b', 4, `${button}r`); // ใส่ next
 
 
 
@@ -66,7 +62,7 @@ function fillTheRest(button, version) {
     computeStave();
     redraw_notes(); // เเก้หาง
     redraw_notes();
-   
+
 }
 
 function findValue(note) {

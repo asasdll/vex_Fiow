@@ -2,7 +2,7 @@ var width = 500;
 var height = 100;
 var height2 = 200;
 var note_num_k;
-var index_array = "";
+var index_array;
 var num_shift;
 var note_duration;
 var checkIndex;
@@ -117,7 +117,7 @@ function redraw_notes() {
     addType(i);
   }
   click_time_Signature();
- // onclick();
+  // time_Signature();
 }
 
 function addType(array) {
@@ -126,32 +126,30 @@ function addType(array) {
 
   group1 = ele1[0].children;
   group2 = ele2[0].children;
+  // console.log(group1);
+  // console.log(group2);
+
   let i = 0;
   let k = 0;
-  for (j = 0; j < group1.length; j++ ) {
+  for (j = 0; j < group1.length; j++) {
     if (group1[j].tagName == 'g') {
-        group1[j].setAttribute("arr", `notesMeasure${array}`);
-        group1[j].setAttribute("measure", `${array}`);
-        group1[j].setAttribute("level", `upper`);
-        group1[j].setAttribute("idx", String(i));
-        i++;
-        group1[j].setAttribute("onmousedown", "mousedown($(this))");
+      group1[j].setAttribute("arr", `notesMeasure${array}`);
+      group1[j].setAttribute("measure", `${array}`);
+      group1[j].setAttribute("level", `upper`);
+      group1[j].setAttribute("idx", String(i));
+      i++;
     }
-    
-
   }
 
-  for (j = 0; j < group2.length; j++ ) {
+  for (j = 0; j < group2.length; j++) {
+
     if (group2[j].tagName == 'g') {
       group2[j].setAttribute("arr", `notes_2Measure${array}`);
       group2[j].setAttribute("measure", `${array}`);
       group2[j].setAttribute("level", `lower`);
       group2[j].setAttribute("idx", String(k));
       k++;
-      group2[j].setAttribute("onmousedown", "mousedown($(this))");
-    
     }
-
   }
 }
 
@@ -346,42 +344,26 @@ function modifyStave() {
 
 
 
-/*
-function onclick() {
-  
-    $(".vf-stavenote").each(function () {
-  
-      $(this).attr("onmousedown", "mousedown($(this))" );
-  
-  
-    });
-  
-
-    
-  }
-  
-*/
-var arr_type= "";
-var mea_= "";
-var level_= "";
 
 
-  function mousedown(e) {
-    
-     arr_type = e.attr('arr');
-     mea_ = e.attr('measure');
-     level_ = e.attr('level');
+function mouseDown() {
+  // console.log("222");
+  $(".vf-stavenote")
+    .mousedown(function (e) {
+      setStyle_Black_clear();
 
-   //  console.log(arr_type,mea_,level_);
+      arr_type = $(this).attr("arr");
+      mea_ = $(this).attr("measure");
+      level_ = $(this).attr("level");
 
-     note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
+      note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
       obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
-      index_array = e.attr("idx");
-  
+      index_array = $(this).attr("idx");
+
       note_ = obj_note[0].keys;
-      
+      //console.log(note_duration);
       nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
 
 
@@ -408,13 +390,15 @@ var level_= "";
       checkIndex = index_array;
       checkObj = obj_note;
 
-       
-  if (obj_note[index_array].customTypes == 'r'||  note_duration != '1') {
-    notes_Click();
-    }
+      if (obj_note[index_array].customTypes == 'r' && note_duration != '1') {
+        notes_Click();
+      }
 
 
-      
+
+
+
+
       $(document).bind('mousemove', function (e) {
         var ev_move = e.clientY; //434  เลื่อน เม้า
 
@@ -424,9 +408,8 @@ var level_= "";
         if (ev_move >= sum_pixels) { //443 note_down
           move_pixel = ev_move;
           e_Click = sum_pixels; //433
-        console.log("note_down",e_Click);
 
-          
+
           if (ev_move == move_pixel) {
 
             search_array = search_array - array_a;
@@ -434,12 +417,10 @@ var level_= "";
           substr_notes(search_array);
           notes_down();
 
-        }
-        else if (ev_move <= del_pix) { //note_up
+        } else if (ev_move <= del_pix) { //note_up
 
           move_pixel = ev_move;
           e_Click = del_pix; //433
-          console.log("note_up",e_Click);
 
           if (ev_move == move_pixel) { //note_up
             search_array = search_array + array_a;
@@ -450,14 +431,28 @@ var level_= "";
 
         }
       });
-     
-  }
+
+
+    });
+
+
+
+  $("path")
+    .mousedown(function (e) {
+      let id = $(this).attr("id");
+
+      if (id == "time_6" || id == "time_7") {
+        $('#exampleModal').modal("toggle");
+        time_Signature_Popup();
+      }
 
 
 
 
+    });
 
 
+}
 
 
 function notes_up() {
@@ -465,14 +460,12 @@ function notes_up() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-  console.log("notes_up",key,octave,duration,index_array);
+
   obj_note[index_array] = get_new_note(key, octave, duration);
-  setStyle_OrangeRed();
-  //redraw_notes();
+  setStyle_OrangeRed()
   redraw_measure();
   redraw_measure();
-  (mea_);
-  
+  addType(mea_);
 }
 
 function notes_down() {
@@ -480,16 +473,13 @@ function notes_down() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-  console.log("notes_down",key,octave,duration,index_array);
+  // console.log(key, octave);
   obj_note[index_array] = get_new_note(key, octave, duration);
-  ///redraw_notes();
   setStyle_OrangeRed();
   redraw_measure();
   redraw_measure();
   addType(mea_);
- 
 }
-
 
 function redraw_measure() {
   console.log('measure');
@@ -510,7 +500,6 @@ function redraw_measure() {
     voice.forEach(function (b) { b.setContext(context).draw() });
 
     context.closeGroup(); // close 
-    console.log("redraw_measure : 1");
   } else {
     let gt = this['groupt' + i];
     context.svg.removeChild(gt);
@@ -525,7 +514,6 @@ function redraw_measure() {
     voice.forEach(function (b) { b.setContext(context).draw() });
 
     context.closeGroup(); // close
-    console.log("redraw_measure : 2");
   }
 }
 
@@ -556,8 +544,6 @@ function notes_Click() {
   //   fillTheRest(btn, 'a')
   // }
 
-  setStyle_OrangeRed();
-  
   redraw_measure();
   redraw_measure();
   addType(mea_);
@@ -566,21 +552,14 @@ function notes_Click() {
 $('html') // unbind mousemove 
   .mouseup(function () {
     unBind();
-   // mousedown();
-   setStyle_Black();
-  // redraw_measure();
-   //redraw_measure();
-    addType(mea_);
   });
 
-
-/*
 $('html')
   .click(function () {
     setStyle_Black();
     redraw_notes();
   });
-*/
+
 
 function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
