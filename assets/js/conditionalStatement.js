@@ -1,8 +1,8 @@
 var notes = [];
 
 function fillTheRest(button, version) {
-
-    let note = obj_note[index_array].duration;
+//console.log(button,version);
+    let note =  obj_note[index_array].duration;
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
     let index = index_array;
@@ -23,7 +23,9 @@ function fillTheRest(button, version) {
 
     if (rope > anchor || rope === anchor) {
         console.log('rope')
-        return;
+
+       
+        //return;
     }
 
     //console.log(notes[Number(arr_index)]);
@@ -35,16 +37,21 @@ function fillTheRest(button, version) {
         }
 
     }
+        if (button === 'w') {
+             console.log("4445");
+        }
 
     if (version === 'b') {
+        console.log("version 555" ,version);
         obj_note[index_array] = get_new_note('b', 4, `${button}`);
         setStyle_OrangeRed();
        
     } else {
+        console.log("version" ,version);
         obj_note[index_array] = get_new_note('b', 4, `${button}r`);
     
     }
-
+    console.log("version" ,version);
     obj_note[Number(index_array) + 1] = get_new_note('b', 4, `${button}r`);
     
 

@@ -54,7 +54,6 @@ function draw_notes() {
   ];
 
   cpTime = computeSpace(String(upperTime), String(lowerTime));
-  console.log(cpTime + 'draw');
 
   computeStave();
   redraw_notes();
@@ -63,7 +62,6 @@ function draw_notes() {
 }
 
 function redraw_notes() {
-  console.log('redraw');
 
   renderer.ctx.clear();
   let marker = 1002 - u;
@@ -126,6 +124,8 @@ function addType(array) {
 
   group1 = ele1[0].children;
   group2 = ele2[0].children;
+
+
   let i = 0;
   let k = 0;
   for (j = 0; j < group1.length; j++ ) {
@@ -345,22 +345,6 @@ function modifyStave() {
 
 
 
-
-/*
-function onclick() {
-  
-    $(".vf-stavenote").each(function () {
-  
-      $(this).attr("onmousedown", "mousedown($(this))" );
-  
-  
-    });
-  
-
-    
-  }
-  
-*/
 var arr_type= "";
 var mea_= "";
 var level_= "";
@@ -408,10 +392,11 @@ var level_= "";
       checkIndex = index_array;
       checkObj = obj_note;
 
-       
-  if (obj_note[index_array].customTypes == 'r'||  note_duration != '1') {
+  
+  
+      //if (obj_note[index_array].customTypes == 'r'||  note_duration != '1') {
     notes_Click();
-    }
+    //}
 
 
       
@@ -492,7 +477,7 @@ function notes_down() {
 
 
 function redraw_measure() {
-  console.log('measure');
+ // console.log('measure');
 
   let i = mea_
 
@@ -510,7 +495,7 @@ function redraw_measure() {
     voice.forEach(function (b) { b.setContext(context).draw() });
 
     context.closeGroup(); // close 
-    console.log("redraw_measure : 1");
+   // console.log("redraw_measure : 1");
   } else {
     let gt = this['groupt' + i];
     context.svg.removeChild(gt);
@@ -541,20 +526,25 @@ function substr_notes(value) {
 }
 
 function notes_Click() {
-  console.log('in');
+
   let key = note_te_k;
   let octave = note_num_k;
   let duration = note_duration;
 
   let btn = computeDuration(String(lowerTime))
 
-  // if (duration != '1') {
-  obj_note[index_array] = get_new_note(key, octave, duration, false);
-  // }
+//console.log("duration : ",duration);
 
-  // else {
-  //   fillTheRest(btn, 'a')
-  // }
+  if (duration == "1") {
+
+    let duration = "wr";   
+    obj_note[index_array] = get_new_note(key, octave, duration, true);
+
+  } else {
+    console.log("DD : ",duration);
+    obj_note[index_array] = get_new_note(key, octave, duration, false);
+  }
+  
 
   setStyle_OrangeRed();
   
@@ -570,7 +560,7 @@ $('html') // unbind mousemove
    setStyle_Black();
   // redraw_measure();
    //redraw_measure();
-    addType(mea_);
+    //addType(mea_);
   });
 
 
@@ -595,7 +585,8 @@ function setStyle_OrangeRed() {
 }
 
 function setStyle_Black() {
-  if (index_array != undefined) {
+
+  if (index_array != undefined && index_array != "") {
     obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
   }
 }
