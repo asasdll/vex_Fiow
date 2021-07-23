@@ -9,8 +9,6 @@ var checkIndex;
 var checkObj;
 var measureHead = [];
 
-
-
 function get_new_note(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
@@ -392,10 +390,10 @@ var level_= "";
       checkIndex = index_array;
       checkObj = obj_note;
 
+     let customTypes = obj_note[index_array].customTypes;
   
-  
-      if (obj_note[index_array].customTypes == 'r' &&  note_duration != '1') {
-        
+      if (customTypes == 'r'  &&  note_duration != '1') {
+    
         notes_Click();
     
       }
@@ -411,7 +409,7 @@ var level_= "";
         if (ev_move >= sum_pixels) { //443 note_down
           move_pixel = ev_move;
           e_Click = sum_pixels; //433
-        console.log("note_down",e_Click);
+       // console.log("note_down",e_Click);
 
           
           if (ev_move == move_pixel) {
@@ -452,10 +450,20 @@ function notes_up() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-  console.log("notes_up",key,octave,duration,index_array);
-  obj_note[index_array] = get_new_note(key, octave, duration);
+
+
+  if (duration == '1') {
+    let duration = "1r";
+    obj_note[index_array] = get_new_note(key, octave, duration ,true);
+   
+  
+  } else {
+    console.log("Up_2 :" ,duration);
+    obj_note[index_array] = get_new_note(key, octave, duration,);
+ 
+  }
+
   setStyle_OrangeRed();
-  //redraw_notes();
   redraw_measure();
   redraw_measure();
   (mea_);
@@ -463,12 +471,20 @@ function notes_up() {
 }
 
 function notes_down() {
-
+ 
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-  console.log("notes_down",key,octave,duration,index_array);
-  obj_note[index_array] = get_new_note(key, octave, duration);
+
+  if (duration == '1') {
+
+   let duration = "1r";
+    obj_note[index_array] = get_new_note(key, octave, duration ,true);
+  } else {
+    console.log("down _2",duration);
+    obj_note[index_array] = get_new_note(key, octave, duration,false);
+  }
+
   ///redraw_notes();
   setStyle_OrangeRed();
   redraw_measure();
@@ -529,20 +545,15 @@ function substr_notes(value) {
 
 function notes_Click() {
 
-  console.log('in');
+  
   let key = note_te_k;
   let octave = note_num_k;
   let duration = note_duration;
 
   let btn = computeDuration(String(lowerTime))
+  console.log("test Click");
+  obj_note[index_array] = get_new_note(key, octave, duration);
 
-  // if (duration != '1') {
-  obj_note[index_array] = get_new_note(key, octave, duration, true);
-  // }
-
-  // else {
-  //   fillTheRest(btn, 'a')
-  // }
 
   redraw_measure();
   redraw_measure();
@@ -552,8 +563,7 @@ function notes_Click() {
 $('html') // unbind mousemove 
   .mouseup(function () {
     unBind();
-   // mousedown();
-  // setStyle_Black();
+   
  
   });
 
@@ -765,27 +775,12 @@ function arrangeSpace() { // ถ้า beat ตก
     } else {
 
 
-      console.log('end');
+    
     }
   }
 }
 
-// for (let k = 0; k < temAr.length; k++) {
-//   let time = cpTime;
-// let beat = cpTime;
-// if (this["notesMeasure" + j][i].duration != '1') {
-//   let cut = findValue(this["notesMeasure" + j][i].duration);
-//   if (cut < beat) {
-//     beat = beat - cut;
-//   } else {
-//     let rest = cut - beat;
-//     let restNote = computeDuration(rest);
-//     console.log(restNote);
-//   }
-// }
 
-
-// }
 
 
 function time_Signature_Popup() {
