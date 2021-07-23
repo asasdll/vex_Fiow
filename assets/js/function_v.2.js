@@ -58,7 +58,6 @@ function draw_notes() {
   computeStave();
   redraw_notes();
   click_time_Signature();
-  ///onclick();
 
 
 
@@ -117,10 +116,7 @@ function redraw_notes() {
     addType(i);
   }
   click_time_Signature();
-  // time_Signature();
-  //onclick();
-
-  console.log("5559");
+ // onclick();
 }
 
 function addType(array) {
@@ -129,25 +125,31 @@ function addType(array) {
 
   group1 = ele1[0].children;
   group2 = ele2[0].children;
-  // console.log(group1);
-  // console.log(group2);
-
-
-  for (j = 0; j < group1.length; j++) {
-    group1[j].setAttribute("arr", `notesMeasure${array}`);
-    group1[j].setAttribute("measure", `${array}`);
-    group1[j].setAttribute("level", `upper`);
-    group1[j].setAttribute("idx", String(j));
-    group1[j].setAttribute("onmousedown", "mousedown($(this))");
+  let i = 0;
+  let k = 0;
+  for (j = 0; j < group1.length; j++ ) {
+    if (group1[j].tagName == 'g') {
+        group1[j].setAttribute("arr", `notesMeasure${array}`);
+        group1[j].setAttribute("measure", `${array}`);
+        group1[j].setAttribute("level", `upper`);
+        group1[j].setAttribute("idx", String(i));
+        i++;
+        group1[j].setAttribute("onmousedown", "mousedown($(this))");
+    }
+    
 
   }
 
-  for (j = 0; j < group2.length; j++) {
-    group2[j].setAttribute("arr", `notes_2Measure${array}`);
-    group2[j].setAttribute("measure", `${array}`);
-    group2[j].setAttribute("level", `lower`);
-    group2[j].setAttribute("idx", String(j));
-    group2[j].setAttribute("onmousedown", "mousedown($(this))");
+  for (j = 0; j < group2.length; j++ ) {
+    if (group2[j].tagName == 'g') {
+      group2[j].setAttribute("arr", `notes_2Measure${array}`);
+      group2[j].setAttribute("measure", `${array}`);
+      group2[j].setAttribute("level", `lower`);
+      group2[j].setAttribute("idx", String(k));
+      k++;
+      group2[j].setAttribute("onmousedown", "mousedown($(this))");
+    
+    }
 
   }
 }
@@ -339,8 +341,8 @@ function modifyStave() {
 
 
 
-/*
 
+/*
 function onclick() {
   
     $(".vf-stavenote").each(function () {
@@ -353,8 +355,8 @@ function onclick() {
 
     
   }
-  */
-
+  
+*/
 var arr_type= "";
 var mea_= "";
 var level_= "";
@@ -362,11 +364,11 @@ var level_= "";
 
   function mousedown(e) {
     
-    var arr_type = e.attr('arr');
-    var mea_ = e.attr('measure');
-    var level_ = e.attr('level');
+     arr_type = e.attr('arr');
+     mea_ = e.attr('measure');
+     level_ = e.attr('level');
 
-     console.log(arr_type,mea_,level_);
+   //  console.log(arr_type,mea_,level_);
 
      note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
@@ -400,10 +402,10 @@ var level_= "";
       checkIndex = index_array;
 
        
-      //if (obj_note[index_array].customTypes == 'r') {
-       // notes_Click();
+  if (obj_note[index_array].customTypes == 'r'||  note_duration != '1') {
+    notes_Click();
+    }
 
-      //}
 
       
       $(document).bind('mousemove', function (e) {
@@ -415,7 +417,7 @@ var level_= "";
         if (ev_move >= sum_pixels) { //443 note_down
           move_pixel = ev_move;
           e_Click = sum_pixels; //433
-
+        console.log("note_down",e_Click);
 
           
           if (ev_move == move_pixel) {
@@ -430,6 +432,7 @@ var level_= "";
 
           move_pixel = ev_move;
           e_Click = del_pix; //433
+          console.log("note_up",e_Click);
 
           if (ev_move == move_pixel) { //note_up
             search_array = search_array + array_a;
@@ -455,14 +458,14 @@ function notes_up() {
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
-console.log("notes_up",key,octave,duration,index_array);
+  console.log("notes_up",key,octave,duration,index_array);
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
-  //redraw_measure();
-  //redraw_measure();
- // redraw_measure();
-  //redraw_measure();
-  //(mea_);
+  //redraw_notes();
+  redraw_measure();
+  redraw_measure();
+  (mea_);
+  
 }
 
 function notes_down() {
@@ -472,11 +475,14 @@ function notes_down() {
   var duration = note_duration;
   console.log("notes_down",key,octave,duration,index_array);
   obj_note[index_array] = get_new_note(key, octave, duration);
+  ///redraw_notes();
   setStyle_OrangeRed();
- /// redraw_measure();
-  //redraw_measure();
+  redraw_measure();
+  redraw_measure();
   addType(mea_);
+ 
 }
+
 
 function redraw_measure() {
 
@@ -484,7 +490,7 @@ function redraw_measure() {
 
   if (level_ == "upper") {
     let gt = this['group' + i];
-    //context.svg.removeChild(gt);
+    context.svg.removeChild(gt);
 
     this["group" + i] = context.openGroup(); // open
     this["group" + i].setAttribute("name", "group" + i);
@@ -496,6 +502,7 @@ function redraw_measure() {
     voice.forEach(function (b) { b.setContext(context).draw() });
 
     context.closeGroup(); // close 
+    console.log("redraw_measure : 1");
   } else {
     let gt = this['groupt' + i];
     context.svg.removeChild(gt);
@@ -510,6 +517,7 @@ function redraw_measure() {
     voice.forEach(function (b) { b.setContext(context).draw() });
 
     context.closeGroup(); // close
+    console.log("redraw_measure : 2");
   }
 }
 
@@ -532,7 +540,8 @@ function notes_Click() {
 
   obj_note[index_array] = get_new_note(key, octave, duration, false);
 
-  setStyle_Black()
+  setStyle_OrangeRed();
+  
   redraw_measure();
   redraw_measure();
   addType(mea_);
@@ -544,9 +553,9 @@ $('html') // unbind mousemove
     unBind();
    // mousedown();
    setStyle_Black();
-   redraw_measure();
-   redraw_measure();
-    //addType(mea_);
+  // redraw_measure();
+   //redraw_measure();
+    addType(mea_);
   });
 
 
