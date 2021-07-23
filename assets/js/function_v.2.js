@@ -44,8 +44,6 @@ function draw_notes() {
     // get_new_note('b', 4, "q", false),
     // get_new_note('c', 4, "q", false),
     // get_new_note('d', 4, "q", false),
-
-
   ];
 
 
@@ -65,6 +63,8 @@ function draw_notes() {
 }
 
 function redraw_notes() {
+  console.log('redraw');
+
   renderer.ctx.clear();
   let marker = 1002 - u;
 
@@ -129,19 +129,27 @@ function addType(array) {
   // console.log(group1);
   // console.log(group2);
 
-
+  let i = 0;
+  let k = 0;
   for (j = 0; j < group1.length; j++) {
-    group1[j].setAttribute("arr", `notesMeasure${array}`);
-    group1[j].setAttribute("measure", `${array}`);
-    group1[j].setAttribute("level", `upper`);
-    group1[j].setAttribute("idx", String(j));
+    if (group1[j].tagName == 'g') {
+      group1[j].setAttribute("arr", `notesMeasure${array}`);
+      group1[j].setAttribute("measure", `${array}`);
+      group1[j].setAttribute("level", `upper`);
+      group1[j].setAttribute("idx", String(i));
+      i++;
+    }
   }
 
   for (j = 0; j < group2.length; j++) {
-    group2[j].setAttribute("arr", `notes_2Measure${array}`);
-    group2[j].setAttribute("measure", `${array}`);
-    group2[j].setAttribute("level", `lower`);
-    group2[j].setAttribute("idx", String(j));
+
+    if (group2[j].tagName == 'g') {
+      group2[j].setAttribute("arr", `notes_2Measure${array}`);
+      group2[j].setAttribute("measure", `${array}`);
+      group2[j].setAttribute("level", `lower`);
+      group2[j].setAttribute("idx", String(k));
+      k++;
+    }
   }
 }
 
@@ -474,6 +482,7 @@ function notes_down() {
 }
 
 function redraw_measure() {
+  console.log('measure');
 
   let i = mea_
 
@@ -739,8 +748,18 @@ function arrangeSpace() { // ถ้า beat ตก
     }
   }
 
+  let time = cpTime;
   for (let k = 0; k < temAr.length; k++) {
 
+    let cut = findValue(temAr[k].duration);
+
+    if (time > cut) {
+      time = time - cut;
+    } else {
+
+
+      console.log('end');
+    }
   }
 }
 
