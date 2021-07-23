@@ -38,7 +38,7 @@ function fillTheRest(button, version) {
     }
 
     if (version === 'b') {
-        console.log("version 555" ,version);
+       
         obj_note[index_array] = get_new_note('b', 4, `${button}`);
         setStyle_OrangeRed();
        
