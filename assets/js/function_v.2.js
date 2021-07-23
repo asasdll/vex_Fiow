@@ -729,7 +729,7 @@ function fillArray() { // ถ้า beat เพิ่มขึ้น
   }
 }
 
-function arrangeSpace() {
+function arrangeSpace() { // ถ้า beat ตก
   let marker = 1002 - u;
   let temAr = [];
   for (let j = marker; j <= measure; j++) {
