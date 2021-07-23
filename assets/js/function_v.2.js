@@ -716,14 +716,25 @@ function arrangeSpace() {
   let temAr = [];
   for (let j = marker; j <= measure; j++) {
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
-      let du = this["notesMeasure" + j][i].duration
-      temAr.push(du);
+      let beat = cpTime;
+      if (this["notesMeasure" + j][i].duration != '1') {
+        console.log('yes');
+      }
+
     }
+
+    // let du = this["notesMeasure" + j][i]
+    // temAr.push(du);
   }
-
-
-  console.log(temAr);
 }
+
+// for (let k = 0; k < temAr.length; k++) {
+//   let time = cpTime;
+
+
+
+// }
+
 
 function time_Signature_Popup() {
 
