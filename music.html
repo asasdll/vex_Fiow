@@ -23,40 +23,39 @@
   <script src="https://unpkg.com/vexflow/releases/vexflow-debug.js"></script>
   <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <link rel="stylesheet" href="assets/css/main.css">
-    <div class="headText">
-      <div class="paletteElement paletteButton note3 selected advanced" data-bind="visible: visible, css: css, click: clicked, tip: {title:
+  <div class="headText">
+    <div class="paletteElement paletteButton note3 selected advanced" data-bind="visible: visible, css: css, click: clicked, tip: {title:
           title, shortcut: shortcut}, attr: {id: controlId}" id="control-thirtysecond">
-        <span data-bind="resource: title" data-resource="palette.thirtysecond">32nd Note</span>
-        <!-- ko if: shortcut -->
-        <!-- /ko -->
-        <select>
-          <option>-select-</option>
-          <option>duration</option>
-        </select>
-        <button type="button" onclick="fillTheRest('w','a')">&#119133;</button>
-        <button type="button" onclick="fillTheRest('h','a')">&#119134;</button>
-        <button type="button" onclick="fillTheRest('q','a')">&#119135;</button>
-        <button type="button" onclick="fillTheRest('8','a')">&#119136;</button>
-        <button type="button" onclick="fillTheRest('16','a')">&#119137;</button>
-        <button type="button" onclick="fillTheRest('32','a')">&#119138;</button>
-        <button type="button" onclick="fillTheRest('64','a')">&#119138;</button>
-        <button type="button" onclick="add_measure_after()">Measure After</button>
-        <button type="button" onclick="add_measure_before()">Measure Before</button>
-        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
-          onclick="time_Signature_Popup()">Time
-          Signature</button>
-        <button type="button" data-bs-toggle="modal" onclick="text_key_Signature('0')"
-          data-bs-target="#staticBackdrop">Key Signature</button>
-        <button type="button" onclick="sound()"> sound play</button>
+      <span data-bind="resource: title" data-resource="palette.thirtysecond">32nd Note</span>
+      <!-- ko if: shortcut -->
+      <!-- /ko -->
+      <select>
+        <option>-select-</option>
+        <option>duration</option>
+      </select>
+      <button type="button" onclick="fillTheRest('w','a')">&#119133;</button>
+      <button type="button" onclick="fillTheRest('h','a')">&#119134;</button>
+      <button type="button" onclick="fillTheRest('q','a')">&#119135;</button>
+      <button type="button" onclick="fillTheRest('8','a')">&#119136;</button>
+      <button type="button" onclick="fillTheRest('16','a')">&#119137;</button>
+      <button type="button" onclick="fillTheRest('32','a')">&#119138;</button>
+      <button type="button" onclick="fillTheRest('64','a')">&#119138;</button>
+      <button type="button" onclick="add_measure_after()">Measure After</button>
+      <button type="button" onclick="add_measure_before()">Measure Before</button>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="time_Signature_Popup()">Time
+        Signature</button>
+      <button type="button" data-bs-toggle="modal" onclick="text_key_Signature('0')"
+        data-bs-target="#staticBackdrop">Key Signature</button>
+      <button type="button" onclick="sound()"> sound play</button>
 
-        <button type="button"> sound play</button>
-
-
-      </div>
-    </div>
+      <button type="button"> sound play</button>
 
 
     </div>
+  </div>
+
+
+  </div>
 </head>
 
 <body>
@@ -95,7 +94,7 @@
                           </div>
                           <div class="col-12 col-md-5">
                             <input type="number" id="time_cut_1" name="time_cut_1" onclick="time_Signature()" min="1"
-                              max="100">
+                              max="32">
                           </div>
                           <div class="col-12 col-md-5">
                             <select class="form-select form-select-sm" id="id_time_cut_2" onclick="time_Signature()"
@@ -105,9 +104,6 @@
                               <option value="8" id="8o">8</option>
                               <option value="16" id="16o">16</option>
                               <option value="32" id="32o">32</option>
-                              <option value="64" id="64o">64</option>
-                              <option value="128" id="128o">128</option>
-
                             </select>
                           </div>
                         </div>
@@ -181,17 +177,26 @@
           <div class="modal-body">
             <div class="container-fluid key-Signature-centes">
               <div class="row ">
-                 
+
                 <div class="col-12">
-                  <img src="../assets/image/keySignature-top/keySignature-top1.1.png"    class="key-Signature-end-1" alt="">
-                  <img src="../assets/image/keySignature-end/keySignature-end-1.2.png"  id="imageEnd_1" class="key-Signature-end-2" alt="...">
-                  <img src="../assets/image/keySignature-end/keySignature-end-1.3.png"  id="imageEnd_2" class="key-Signature-end-3" alt="...">
-                  <img src="../assets/image/keySignature-end/keySignature-end-1.4.png"  id="imageEnd_3" class="key-Signature-end-4" alt="...">
-                  <img src="../assets/image/keySignature-end/keySignature-end-1.5.png"  id="imageEnd_4" class="key-Signature-end-5" alt="...">
-                  <img src="../assets/image/keySignature-end/keySignature-end-1.6.png"  id="imageEnd_5" class="key-Signature-end-6" alt="...">
-                  <img src="../assets/image/keySignature-end/keySignature-end-1.7.png"  id="imageEnd_6" class="key-Signature-end-7" alt="...">
-                  <img src="../assets/image/keySignature-end/keySignature-end-1.8.png"  id="imageEnd_7" class="key-Signature-end-8" alt="...">
-                  <img src="../assets/image/keySignature-end/keySignature-end-1.9.png"  id="imageEnd_8" class="key-Signature-end-9" alt="...">
+                  <img src="../assets/image/keySignature-top/keySignature-top1.1.png" class="key-Signature-end-1"
+                    alt="">
+                  <img src="../assets/image/keySignature-end/keySignature-end-1.2.png" id="imageEnd_1"
+                    class="key-Signature-end-2" alt="...">
+                  <img src="../assets/image/keySignature-end/keySignature-end-1.3.png" id="imageEnd_2"
+                    class="key-Signature-end-3" alt="...">
+                  <img src="../assets/image/keySignature-end/keySignature-end-1.4.png" id="imageEnd_3"
+                    class="key-Signature-end-4" alt="...">
+                  <img src="../assets/image/keySignature-end/keySignature-end-1.5.png" id="imageEnd_4"
+                    class="key-Signature-end-5" alt="...">
+                  <img src="../assets/image/keySignature-end/keySignature-end-1.6.png" id="imageEnd_5"
+                    class="key-Signature-end-6" alt="...">
+                  <img src="../assets/image/keySignature-end/keySignature-end-1.7.png" id="imageEnd_6"
+                    class="key-Signature-end-7" alt="...">
+                  <img src="../assets/image/keySignature-end/keySignature-end-1.8.png" id="imageEnd_7"
+                    class="key-Signature-end-8" alt="...">
+                  <img src="../assets/image/keySignature-end/keySignature-end-1.9.png" id="imageEnd_8"
+                    class="key-Signature-end-9" alt="...">
                   <h6 id="textTop_1" class="key-Signature-text-top1"></h6>
                   <h6 id="textTop_2" class="key-Signature-text-top2"></h6>
                   <h6 id="textTop_3" class="key-Signature-text-top3"></h6>
@@ -267,7 +272,7 @@
         <div class="col-12">
           <div id="page" class="zoom-lineNote" ></div>
         </div>
-      
+
       </div>
     </div>
     

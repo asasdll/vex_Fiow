@@ -6,6 +6,7 @@ var index_array = "";
 var num_shift;
 var note_duration;
 var checkIndex;
+var checkObj;
 var measureHead = [];
 
 
@@ -36,10 +37,10 @@ function draw_notes() {
 
   context.setFont("Arial", 50, 700).setBackgroundFillStyle("#eed");
 
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 6, beat_value: 4 });
 
   notesMeasure1001 = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
     // get_new_note('b', 4, "q", false),
     // get_new_note('c', 4, "q", false),
     // get_new_note('d', 4, "q", false),
@@ -50,16 +51,16 @@ function draw_notes() {
 
 
   notes_2Measure1001 = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
 
   ];
 
+  cpTime = computeSpace(String(upperTime), String(lowerTime));
+  console.log(cpTime + 'draw');
 
   computeStave();
   redraw_notes();
   click_time_Signature();
-
-
 
 }
 
@@ -160,11 +161,11 @@ function add_measure_after() {
   renderer.ctx.clear();
 
   this["notesMeasure" + (measure + 1)] = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
   ];
 
   this["notes_2Measure" + (measure + 1)] = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
 
   ];
 
@@ -180,11 +181,11 @@ function add_measure_before() {
   renderer.ctx.clear();
 
   this["notesMeasure" + (1001 - u)] = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
 
   ];
   this["notes_2Measure" + (1001 - u)] = [
-    get_new_note('b', 4, "wr", true),
+    get_new_note('b', 4, "1r", true),
 
   ];
 
@@ -324,10 +325,13 @@ function computeStave() {
   modifyStave();
 }
 
-keySig = 'D';
-timeSig = '4/4';
-clef = 'french';
-lowerClef = 'alto';
+let upperTime = 4;
+let lowerTime = 4;
+
+keySig = 'C';
+timeSig = upperTime + '/' + lowerTime;
+clef = 'bass';
+lowerClef = 'bass';
 
 
 function modifyStave() {
@@ -399,7 +403,10 @@ var level_= "";
       }
 
       substr_notes(search_array);
+
+
       checkIndex = index_array;
+      checkObj = obj_note;
 
        
   if (obj_note[index_array].customTypes == 'r'||  note_duration != '1') {
@@ -533,19 +540,26 @@ function substr_notes(value) {
 }
 
 function notes_Click() {
-
+  console.log('in');
   let key = note_te_k;
   let octave = note_num_k;
   let duration = note_duration;
 
+  let btn = computeDuration(String(lowerTime))
+
+  // if (duration != '1') {
   obj_note[index_array] = get_new_note(key, octave, duration, false);
+  // }
+
+  // else {
+  //   fillTheRest(btn, 'a')
+  // }
 
   setStyle_OrangeRed();
   
   redraw_measure();
   redraw_measure();
   addType(mea_);
-
 }
 
 $('html') // unbind mousemove 
@@ -563,13 +577,9 @@ $('html') // unbind mousemove
 $('html')
   .click(function () {
     setStyle_Black();
-    redraw_measure();
-    addType(mea_);
+    redraw_notes();
   });
 */
-
-
-
 
 function unBind() { // unbind mousemove
   $(document).unbind("mousemove");
@@ -591,14 +601,15 @@ function setStyle_Black() {
 
 function setStyle_Black_clear() {
   if (checkIndex != undefined) {
-    obj_note[checkIndex].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    checkObj[checkIndex].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+    redraw_measure();
   }
 }
 
 function click_style() {
-
   setStyle_OrangeRed();
-  redraw_notes();
+  redraw_measure();
+  addType(mea_);
 
 };
 
@@ -638,10 +649,147 @@ function click_time_Signature() {
   });
 }
 
+function computeDuration(lowerT) { // เปลี่ยน lowerTime เป็นโน๊ท
+  let computedD;
+
+  switch (lowerT) {
+    case '2':
+      computedD = 'h';
+      break;
+    case '4':
+      computedD = 'q';
+      break;
+    case '8':
+      computedD = '8';
+      break;
+    case '16':
+      computedD = '16';
+      break;
+    case '32':
+      computedD = '32';
+      break;
+    default:
+      console.log("Don't have this value");
+  }
+  return computedD;
+}
+
+function computeT2(lowerT) { // เปลี่ยน lowerTime เป็น beat
+  let computedT2;
+  switch (lowerT) {
+    case '2':
+      computedT2 = 2;
+      break;
+    case '4':
+      computedT2 = 1;
+      break;
+    case '8':
+      computedT2 = 0.5;
+      break;
+    case '16':
+      computedT2 = 0.25;
+      break;
+    case '32':
+      computedT2 = 0.125;
+      break;
+    default:
+      console.log("Don't have this value");
+  }
+  return computedT2;
+}
+
+function computeSpace(time1, time2) { // หา space ของห้อง
+  let timeT1 = time1;
+  let computedT2 = computeT2(time2);
+  let returnSpace;
+
+  returnSpace = computedT2 * timeT1;
+
+  return returnSpace;
+}
+
+function provideSpace() {
+  if (cpTime > oldCpTime) {
+    fillArray();
+  } else {
+    arrangeSpace();
+  }
+}
+
+function fillArray() { // ถ้า beat เพิ่มขึ้น
 
 
-let upperTime = 4;
-let lowerTime = 4;
+  let array = ['w', 'h', 'q', '8', '16', '32', '64'];
+
+  let marker = 1002 - u;
+  for (let j = marker; j <= measure; j++) {
+    if (this["notesMeasure" + j][0].duration != '1') {
+      blankSpace = cpTime - oldCpTime;
+      let i = 0;
+      let next = this["notesMeasure" + j].length;
+      while (blankSpace > 0) {
+        let val = findValue(array[i]);
+        if (val > blankSpace) {
+          i++;
+        } else {
+          this["notesMeasure" + j][next] = get_new_note('b', 4, `${array[i]}r`);
+          blankSpace = blankSpace - val;
+          next++;
+        }
+      }
+    }
+
+    if (this["notes_2Measure" + j][0].duration != '1') {
+      blankSpace = cpTime - oldCpTime;
+      let i = 0;
+      let next = this["notes_2Measure" + j].length;
+      while (blankSpace > 0) {
+        let val = findValue(array[i]);
+        if (val > blankSpace) {
+          i++;
+        } else {
+          this["notes_2Measure" + j][next] = get_new_note('b', 4, `${array[i]}r`);
+          blankSpace = blankSpace - val;
+          next++;
+        }
+      }
+    }
+    addType(j);
+  }
+}
+
+function arrangeSpace() { // ถ้า beat ตก
+  let marker = 1002 - u;
+  let temAr = [];
+  for (let j = marker; j <= measure; j++) {
+    for (let i = 0; i < this["notesMeasure" + j].length; i++) {
+      let du = this["notesMeasure" + j][i]
+      temAr.push(du);
+    }
+  }
+
+  for (let k = 0; k < temAr.length; k++) {
+
+  }
+}
+
+// for (let k = 0; k < temAr.length; k++) {
+//   let time = cpTime;
+// let beat = cpTime;
+// if (this["notesMeasure" + j][i].duration != '1') {
+//   let cut = findValue(this["notesMeasure" + j][i].duration);
+//   if (cut < beat) {
+//     beat = beat - cut;
+//   } else {
+//     let rest = cut - beat;
+//     let restNote = computeDuration(rest);
+//     console.log(restNote);
+//   }
+// }
+
+
+// }
+
 
 function time_Signature_Popup() {
 
@@ -663,10 +811,17 @@ function time_Signature() {
 }
 
 function commit_time() {
+
   upperTime = firstElement;
   lowerTime = secondElement;
-  console.log(upperTime + '/' + lowerTime);
+
+  // console.log(upperTime + '/' + lowerTime);
   timeSig = (upperTime + '/' + lowerTime);
+  oldCpTime = cpTime;
+  cpTime = computeSpace(upperTime, lowerTime);
+  console.log(oldCpTime + 'old');
+  console.log(cpTime + 'upCp');
+  provideSpace();
   computeStave();
   redraw_notes();
 }
@@ -679,7 +834,7 @@ function key_Signature() {
 }
 
 function text_key_Signature(e) {
-  console.log("log", e);
+  // console.log("log", e);
 
   let keySignature = ""
   if (e == 0) {
