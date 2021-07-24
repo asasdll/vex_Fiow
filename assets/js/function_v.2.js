@@ -746,10 +746,15 @@ function arrangeSpace() { // ถ้า beat ตก
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
       let du = this["notesMeasure" + j][i]
       temAr.push(du);
-      this["notesMeasure" + j].splice(du);
+      // this["notesMeasure" + j].splice(du);
 
     }
+    this["notesMeasure" + j] = [];
   }
+
+
+
+  console.log(temAr);
 
   let beat = cpTime;
 
@@ -760,7 +765,7 @@ function arrangeSpace() { // ถ้า beat ตก
   while (check < temAr.length) {
     console.log(temAr.length);
 
-    let cut = findValue(temAr[0].duration)
+    let cut = findValue(temAr[check].duration)
 
     if (beat >= cut) {
       console.log(count + 'ii');
@@ -774,7 +779,7 @@ function arrangeSpace() { // ถ้า beat ตก
     }
 
     if (beat == 0) {
-      console.log(count);
+      console.log(count + 'count');
       count++;
       beat = cpTime;
       idx = 0;
