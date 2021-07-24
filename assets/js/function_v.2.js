@@ -739,46 +739,92 @@ function fillArray() { // ถ้า beat เพิ่มขึ้น
 }
 
 function arrangeSpace() { // ถ้า beat ตก
+
   let marker = 1002 - u;
   let temAr = [];
   for (let j = marker; j <= measure; j++) {
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
       let du = this["notesMeasure" + j][i]
       temAr.push(du);
+      this["notesMeasure" + j].splice(du);
+
     }
   }
 
-  let time = cpTime;
-  for (let k = 0; k < temAr.length; k++) {
+  let beat = cpTime;
 
-    let cut = findValue(temAr[k].duration);
+  let idx = 0;
+  let check = 0;
+  let count = marker;
 
-    if (time > cut) {
-      time = time - cut;
+  while (check < temAr.length) {
+    console.log(temAr.length);
+
+    let cut = findValue(temAr[0].duration)
+
+    if (beat >= cut) {
+      console.log(count + 'ii');
+      beat = beat - cut;
+      this["notesMeasure" + count][idx] = temAr[check]
+      // temAr.splice(temAr[check]);
+      idx++;
     } else {
+      console.log('last')
 
-
-      console.log('end');
     }
+
+    if (beat == 0) {
+      console.log(count);
+      count++;
+      beat = cpTime;
+      idx = 0;
+    }
+
+    check++;
   }
 }
 
-// for (let k = 0; k < temAr.length; k++) {
-//   let time = cpTime;
-// let beat = cpTime;
-// if (this["notesMeasure" + j][i].duration != '1') {
-//   let cut = findValue(this["notesMeasure" + j][i].duration);
-//   if (cut < beat) {
-//     beat = beat - cut;
-//   } else {
-//     let rest = cut - beat;
-//     let restNote = computeDuration(rest);
-//     console.log(restNote);
+// this["notesMeasure" + 1001][i] = temAr[i]
+
+// let marker = 1002 - u;
+//   let count = 0;
+
+//   for (let i = marker; i <= measure; i++) {
+//     let time = cpTime;
+//     for (let u = 0; u < this["notesMeasure" + i].length; u++) {
+//       let cut = findValue(this["notesMeasure" + i][u].duration);
+
+//       if (cut > time) { // ความยาวมากกว่า beat หรือไม่
+
+//       } else if (cut == time) {
+//         time = 0;
+//       } else {
+//         console.log('cut');
+//       }
+
+
+//       if (time == 0) {
+//         console.log('zeo');
+//         if (this["notesMeasure" + i][u + 1] != undefined) {
+//           if (this["notesMeasure" + (i + 1)] == undefined) {
+//             this["notesMeasure" + (i + 1)] = [];
+//             this["notes_2Measure" + (i + 1)] = [];
+//           }
+
+//           let elem = this["notesMeasure" + i][u + 1];
+//           this["notesMeasure" + (i + 1)].unshift(elem);
+//           this["notesMeasure" + i].splice(u + 1);
+//         }
+
+//       }
+//     }
 //   }
-// }
 
 
-// }
+
+
+
+
 
 
 function time_Signature_Popup() {
@@ -809,8 +855,6 @@ function commit_time() {
   timeSig = (upperTime + '/' + lowerTime);
   oldCpTime = cpTime;
   cpTime = computeSpace(upperTime, lowerTime);
-  console.log(oldCpTime + 'old');
-  console.log(cpTime + 'upCp');
   provideSpace();
   computeStave();
   redraw_notes();
