@@ -776,9 +776,11 @@ function arrangeSpace() { // ถ้า beat ตก
 
     if (temAr[check].duration == '1') {
       cut += dif;
+      // temAr[check].customTypes = 'n';
+      console.log(cut + 'cutt');
     }
 
-    console.log(cut + 'cutt');
+
 
     if (beat >= cut) {
       console.log(count + 'ii');
@@ -786,14 +788,17 @@ function arrangeSpace() { // ถ้า beat ตก
       this["notesMeasure" + count][idx] = temAr[check]
       idx++;
     } else {
+      console.log('else');
 
       let noteCut = reverseFindValue(String(cut - beat));
       let valNote = reverseFindValue(String(beat));
 
-      if (temAr[check].customTypes = 'r') {
+      if (temAr[check].customTypes == 'r') {
+        console.log('rest');
         this["notesMeasure" + count][idx] = get_new_note('b', 4, `${valNote}r`);
         noteCutAct = get_new_note('b', 4, `${noteCut}r`);
       } else {
+        console.log('valnote');
         this["notesMeasure" + count][idx] = get_new_note('b', 4, valNote);
         noteCutAct = get_new_note('b', 4, noteCut);
       }
@@ -835,6 +840,7 @@ function arrangeSpace() { // ถ้า beat ตก
 
     if (temAr1[check1].duration == '1') {
       cut1 += dif;
+      // temAr1[check1].customTypes = 'n';
     }
 
     console.log(cut1 + 'cut1');
@@ -849,7 +855,7 @@ function arrangeSpace() { // ถ้า beat ตก
       let noteCut = reverseFindValue(String(cut1 - beat1));
       let valNote = reverseFindValue(String(beat1));
 
-      if (temAr1[check1].customTypes = 'r') {
+      if (temAr1[check1].customTypes == 'r') {
         this["notes_2Measure" + count1][idx1] = get_new_note('b', 4, `${valNote}r`);
         noteCutAct1 = get_new_note('b', 4, `${noteCut}r`);
       } else {
@@ -882,6 +888,8 @@ function arrangeSpace() { // ถ้า beat ตก
   temAr = [];
   temAr1 = [];
 }
+
+
 
 
 
