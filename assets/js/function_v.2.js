@@ -752,8 +752,6 @@ function arrangeSpace() { // ถ้า beat ตก
     this["notesMeasure" + j] = [];
   }
 
-  console.log(temAr);
-
   let beat = cpTime;
 
   let idx = 0;
@@ -761,7 +759,11 @@ function arrangeSpace() { // ถ้า beat ตก
   let count = marker;
 
   while (check < temAr.length) {
-    console.log(temAr.length);
+    if (count > measure) {
+      this["notesMeasure" + count] = []
+      this["notes_2Measure" + count] = [get_new_note('b', 4, '1r')] // hardcode
+      measure++;
+    }
 
     let cut = findValue(temAr[check].duration)
 
@@ -772,13 +774,28 @@ function arrangeSpace() { // ถ้า beat ตก
       // temAr.splice(temAr[check]);
       idx++;
     } else {
-      // let noteCut = cut - beat;
+
+      let noteCut = reverseFindValue(String(cut - beat));
+
       let valNote = reverseFindValue(String(beat));
       if (temAr[check].customTypes = 'r') {
         this["notesMeasure" + count][idx] = get_new_note('b', 4, `${valNote}r`);
+        noteCutAct = get_new_note('b', 4, `${noteCut}r`);
       } else {
         this["notesMeasure" + count][idx] = get_new_note('b', 4, valNote);
+        noteCutAct = get_new_note('b', 4, noteCut);
       }
+
+      temAr.splice(check + 1, 0, noteCutAct);
+      console.log(temAr);
+
+      beat = 0;
+    }
+
+    if (check == temAr.length - 1 && beat != 0) {
+      let valNote = reverseFindValue(String(beat));
+      noteCutAct = get_new_note('b', 4, `${valNote}r`);
+      temAr.splice(check + 1, 0, noteCutAct);
     }
 
     if (beat == 0) {
