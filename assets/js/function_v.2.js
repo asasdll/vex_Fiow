@@ -752,8 +752,6 @@ function arrangeSpace() { // ถ้า beat ตก
     this["notesMeasure" + j] = [];
   }
 
-
-
   console.log(temAr);
 
   let beat = cpTime;
@@ -774,8 +772,13 @@ function arrangeSpace() { // ถ้า beat ตก
       // temAr.splice(temAr[check]);
       idx++;
     } else {
-      console.log('last')
-
+      // let noteCut = cut - beat;
+      let valNote = reverseFindValue(String(beat));
+      if (temAr[check].customTypes = 'r') {
+        this["notesMeasure" + count][idx] = get_new_note('b', 4, `${valNote}r`);
+      } else {
+        this["notesMeasure" + count][idx] = get_new_note('b', 4, valNote);
+      }
     }
 
     if (beat == 0) {
