@@ -742,6 +742,7 @@ function arrangeSpace() { // ถ้า beat ตก
 
   let marker = 1002 - u;
   temAr = [];
+  temAr1 = [];
   for (let j = marker; j <= measure; j++) {
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
       let du = this["notesMeasure" + j][i]
@@ -749,11 +750,16 @@ function arrangeSpace() { // ถ้า beat ตก
       // this["notesMeasure" + j].splice(du);
 
     }
+    for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
+      let du1 = this["notes_2Measure" + j][i]
+      temAr1.push(du1);
+
+    }
     this["notesMeasure" + j] = [];
+    this["notes_2Measure" + j] = [];
   }
 
   let beat = cpTime;
-
   let idx = 0;
   let check = 0;
   let count = marker;
@@ -761,12 +767,11 @@ function arrangeSpace() { // ถ้า beat ตก
   while (check < temAr.length) {
     if (count > measure) {
       this["notesMeasure" + count] = []
-      this["notes_2Measure" + count] = [get_new_note('b', 4, '1r')] // hardcode
+      this["notes_2Measure" + count] = [];
       measure++;
     }
 
     let cut = findValue(temAr[check].duration)
-
 
     if (beat >= cut) {
       console.log(count + 'ii');
@@ -807,49 +812,62 @@ function arrangeSpace() { // ถ้า beat ตก
 
     check++;
   }
+
+  let beat1 = cpTime;
+  let idx1 = 0;
+  let check1 = 0;
+  let count1 = marker;
+
+  while (check1 < temAr1.length) {
+    // if (count1 > measure) {
+    //   this["notes_2Measure" + count1] = [];
+    // }
+
+    let cut1 = findValue(temAr1[check1].duration)
+
+    if (beat1 >= cut1) {
+      console.log(count + 'ii');
+      beat1 = beat1 - cut1;
+      this["notes_2Measure" + count1][idx1] = temAr1[check1]
+      idx1++;
+    } else {
+
+      let noteCut = reverseFindValue(String(cut1 - beat1));
+      let valNote = reverseFindValue(String(beat1));
+
+      if (temAr1[check1].customTypes = 'r') {
+        this["notes_2Measure" + count1][idx1] = get_new_note('b', 4, `${valNote}r`);
+        noteCutAct1 = get_new_note('b', 4, `${noteCut}r`);
+      } else {
+        this["notes_2Measure" + count1][idx1] = get_new_note('b', 4, valNote);
+        noteCutAct1 = get_new_note('b', 4, noteCut);
+      }
+
+      temAr1.splice(check1 + 1, 0, noteCutAct1);
+      console.log(temAr);
+
+      beat1 = 0;
+    }
+
+    if (check1 == temAr1.length - 1 && beat1 != 0) {
+      let valNote = reverseFindValue(String(beat1));
+      noteCutAct1 = get_new_note('b', 4, `${valNote}r`);
+      temAr1.splice(check1 + 1, 0, noteCutAct1);
+    }
+
+    if (beat1 == 0) {
+      console.log(count + 'count');
+      count1++;
+      beat1 = cpTime;
+      idx1 = 0;
+    }
+
+    check1++;
+  }
+
   temAr = [];
+  temAr1 = [];
 }
-
-// this["notesMeasure" + 1001][i] = temAr[i]
-
-// let marker = 1002 - u;
-//   let count = 0;
-
-//   for (let i = marker; i <= measure; i++) {
-//     let time = cpTime;
-//     for (let u = 0; u < this["notesMeasure" + i].length; u++) {
-//       let cut = findValue(this["notesMeasure" + i][u].duration);
-
-//       if (cut > time) { // ความยาวมากกว่า beat หรือไม่
-
-//       } else if (cut == time) {
-//         time = 0;
-//       } else {
-//         console.log('cut');
-//       }
-
-
-//       if (time == 0) {
-//         console.log('zeo');
-//         if (this["notesMeasure" + i][u + 1] != undefined) {
-//           if (this["notesMeasure" + (i + 1)] == undefined) {
-//             this["notesMeasure" + (i + 1)] = [];
-//             this["notes_2Measure" + (i + 1)] = [];
-//           }
-
-//           let elem = this["notesMeasure" + i][u + 1];
-//           this["notesMeasure" + (i + 1)].unshift(elem);
-//           this["notesMeasure" + i].splice(u + 1);
-//         }
-
-//       }
-//     }
-//   }
-
-
-
-
-
 
 
 
