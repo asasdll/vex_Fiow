@@ -54,7 +54,7 @@ function draw_notes() {
   ];
 
   cpTime = computeSpace(String(upperTime), String(lowerTime));
-  console.log(cpTime + 'draw');
+
 
   computeStave();
   redraw_notes();
@@ -63,7 +63,6 @@ function draw_notes() {
 }
 
 function redraw_notes() {
-  console.log('redraw');
 
   renderer.ctx.clear();
   let marker = 1002 - u;
@@ -482,7 +481,6 @@ function notes_down() {
 }
 
 function redraw_measure() {
-  console.log('measure');
 
   let i = mea_
 
@@ -529,7 +527,6 @@ function substr_notes(value) {
 }
 
 function notes_Click() {
-  console.log('in');
   let key = note_te_k;
   let octave = note_num_k;
   let duration = note_duration;
@@ -774,35 +771,32 @@ function arrangeSpace() { // ถ้า beat ตก
     let cut = findValue(temAr[check].duration)
     let dif = oldCpTime - cpTime;
 
-    if (temAr[check].duration == '1' && cpTime != 2) {
+    if (temAr[check].duration == '1') {
       cut = oldCpTime;
       // temAr[check].customTypes = 'n';
     }
 
 
     if (beat >= cut) {
-      console.log(count + 'ii');
       beat = beat - cut;
       this["notesMeasure" + count][idx] = temAr[check]
       idx++;
     } else {
-      console.log('else');
+
 
 
       let noteCut = reverseFindValue(String(cut - beat));
       let valNote = reverseFindValue(String(beat));
 
       if (temAr[check].customTypes == 'r') {
-        console.log('rest');
         this["notesMeasure" + count][idx] = get_new_note('b', 4, `${valNote}r`);
         noteCutAct = get_new_note('b', 4, `${noteCut}r`);
       } else {
-        console.log('valnote');
         this["notesMeasure" + count][idx] = get_new_note('b', 4, valNote);
         noteCutAct = get_new_note('b', 4, noteCut);
       }
       temAr.splice(check + 1, 0, noteCutAct);
-      console.log(temAr);
+
 
       if (beat == 3) {
         if (temAr[check].customTypes == 'r') {
@@ -830,7 +824,6 @@ function arrangeSpace() { // ถ้า beat ตก
     }
 
     if (beat == 0) {
-      console.log(count + 'count');
       count++;
       beat = cpTime;
       idx = 0;
@@ -852,15 +845,12 @@ function arrangeSpace() { // ถ้า beat ตก
     let cut1 = findValue(temAr1[check1].duration)
     let dif1 = oldCpTime - cpTime;
 
-    if (temAr1[check1].duration == '1' && cpTime != 2) {
+    if (temAr1[check1].duration == '1') {
       cut1 = oldCpTime;
       // temAr1[check1].customTypes = 'n';
     }
 
-    console.log(cut1 + 'cut1');
-
     if (beat1 >= cut1) {
-      console.log(count + 'ii');
       beat1 = beat1 - cut1;
       this["notes_2Measure" + count1][idx1] = temAr1[check1]
       idx1++;
@@ -878,7 +868,6 @@ function arrangeSpace() { // ถ้า beat ตก
       }
 
       temAr1.splice(check1 + 1, 0, noteCutAct1);
-      console.log(temAr);
 
       if (beat1 == 3) {
         if (temAr1[check1].customTypes == 'r') {
@@ -901,7 +890,6 @@ function arrangeSpace() { // ถ้า beat ตก
     }
 
     if (beat1 == 0) {
-      console.log(count + 'count');
       count1++;
       beat1 = cpTime;
       idx1 = 0;
