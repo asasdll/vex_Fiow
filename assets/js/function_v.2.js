@@ -741,7 +741,7 @@ function fillArray() { // ถ้า beat เพิ่มขึ้น
 function arrangeSpace() { // ถ้า beat ตก
 
   let marker = 1002 - u;
-  let temAr = [];
+  temAr = [];
   for (let j = marker; j <= measure; j++) {
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
       let du = this["notesMeasure" + j][i]
@@ -767,17 +767,17 @@ function arrangeSpace() { // ถ้า beat ตก
 
     let cut = findValue(temAr[check].duration)
 
+
     if (beat >= cut) {
       console.log(count + 'ii');
       beat = beat - cut;
       this["notesMeasure" + count][idx] = temAr[check]
-      // temAr.splice(temAr[check]);
       idx++;
     } else {
 
       let noteCut = reverseFindValue(String(cut - beat));
-
       let valNote = reverseFindValue(String(beat));
+
       if (temAr[check].customTypes = 'r') {
         this["notesMeasure" + count][idx] = get_new_note('b', 4, `${valNote}r`);
         noteCutAct = get_new_note('b', 4, `${noteCut}r`);
@@ -807,6 +807,7 @@ function arrangeSpace() { // ถ้า beat ตก
 
     check++;
   }
+  temAr = [];
 }
 
 // this["notesMeasure" + 1001][i] = temAr[i]

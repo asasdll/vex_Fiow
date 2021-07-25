@@ -141,6 +141,8 @@ function reverseFindValue(noteVal) {
     let returnValue;
 
     switch (value) {
+        case String(cpTime):
+            returnValue = '1';
         case '4':
             returnValue = 'w';
             break;
