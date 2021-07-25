@@ -772,6 +772,13 @@ function arrangeSpace() { // ถ้า beat ตก
     }
 
     let cut = findValue(temAr[check].duration)
+    let dif = oldCpTime - cpTime;
+
+    if (temAr[check].duration == '1') {
+      cut += dif;
+    }
+
+    console.log(cut + 'cutt');
 
     if (beat >= cut) {
       console.log(count + 'ii');
@@ -824,6 +831,13 @@ function arrangeSpace() { // ถ้า beat ตก
     // }
 
     let cut1 = findValue(temAr1[check1].duration)
+    let dif = oldCpTime - cpTime;
+
+    if (temAr1[check1].duration == '1') {
+      cut1 += dif;
+    }
+
+    console.log(cut1 + 'cut1');
 
     if (beat1 >= cut1) {
       console.log(count + 'ii');
