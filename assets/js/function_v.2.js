@@ -774,12 +774,10 @@ function arrangeSpace() { // ถ้า beat ตก
     let cut = findValue(temAr[check].duration)
     let dif = oldCpTime - cpTime;
 
-    if (temAr[check].duration == '1') {
-      cut += dif;
+    if (temAr[check].duration == '1' && cpTime != 2) {
+      cut = oldCpTime;
       // temAr[check].customTypes = 'n';
-      console.log(cut + 'cutt');
     }
-
 
 
     if (beat >= cut) {
@@ -789,6 +787,7 @@ function arrangeSpace() { // ถ้า beat ตก
       idx++;
     } else {
       console.log('else');
+
 
       let noteCut = reverseFindValue(String(cut - beat));
       let valNote = reverseFindValue(String(beat));
@@ -802,12 +801,27 @@ function arrangeSpace() { // ถ้า beat ตก
         this["notesMeasure" + count][idx] = get_new_note('b', 4, valNote);
         noteCutAct = get_new_note('b', 4, noteCut);
       }
-
       temAr.splice(check + 1, 0, noteCutAct);
       console.log(temAr);
 
-      beat = 0;
+      if (beat == 3) {
+        if (temAr[check].customTypes == 'r') {
+          rest = get_new_note('b', 4, 'qr');
+        } else {
+          rest = get_new_note('b', 4, 'q');
+        }
+        temAr.splice(check + 1, 0, rest);
+        beat = 1;
+        idx++;
+      } else {
+        beat = 0;
+      }
     }
+
+
+
+
+
 
     if (check == temAr.length - 1 && beat != 0) {
       let valNote = reverseFindValue(String(beat));
@@ -836,10 +850,10 @@ function arrangeSpace() { // ถ้า beat ตก
     // }
 
     let cut1 = findValue(temAr1[check1].duration)
-    let dif = oldCpTime - cpTime;
+    let dif1 = oldCpTime - cpTime;
 
-    if (temAr1[check1].duration == '1') {
-      cut1 += dif;
+    if (temAr1[check1].duration == '1' && cpTime != 2) {
+      cut1 = oldCpTime;
       // temAr1[check1].customTypes = 'n';
     }
 
@@ -866,7 +880,18 @@ function arrangeSpace() { // ถ้า beat ตก
       temAr1.splice(check1 + 1, 0, noteCutAct1);
       console.log(temAr);
 
-      beat1 = 0;
+      if (beat1 == 3) {
+        if (temAr1[check1].customTypes == 'r') {
+          rest = get_new_note('b', 4, 'qr');
+        } else {
+          rest = get_new_note('b', 4, 'q');
+        }
+        temAr1.splice(check1 + 1, 0, rest);
+        beat1 = 1;
+        idx1++;
+      } else {
+        beat1 = 0;
+      }
     }
 
     if (check1 == temAr1.length - 1 && beat1 != 0) {
