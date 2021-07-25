@@ -7,13 +7,14 @@ var num_shift;
 var note_duration;
 var checkIndex;
 var checkObj;
-var measureHead = [];
-
+//var note_key = ["b/4","c/4"];
 function get_new_note(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
     clef: "treble",
-    keys: [key + "/" + octave],
+    keys: [key + "/" + octave ],
+   // keys: [key + "/" + octave , "b" + "/"+ 3],
+    //keys: note_key,
     duration: duration,
     align_center: position,
     auto_stem: true,
@@ -38,7 +39,7 @@ function draw_notes() {
   voice = new VF.Voice({ num_beats: 6, beat_value: 4 });
 
   notesMeasure1001 = [
-    get_new_note('b', 4, "1r", true),
+    get_new_note('b', 4,  "1r", true),
     // get_new_note('b', 4, "q", false),
     // get_new_note('c', 4, "q", false),
     // get_new_note('d', 4, "q", false),
@@ -51,12 +52,14 @@ function draw_notes() {
 
   ];
 
+
+
   cpTime = computeSpace(String(upperTime), String(lowerTime));
 
   computeStave();
   redraw_notes();
   click_time_Signature();
-
+  //btnNote();
 }
 
 function redraw_notes() {
@@ -113,7 +116,7 @@ function redraw_notes() {
     addType(i);
   }
   click_time_Signature();
- // onclick();
+  btnNote();
 }
 
 function addType(array) {
@@ -122,24 +125,25 @@ function addType(array) {
 
   group1 = ele1[0].children;
   group2 = ele2[0].children;
-
-
+  group3 = ele1[0].children[0].children[0].children;
+  group4 = ele2[0].children[0].children[0].children;
+ // console.log(group3,group4);
   let i = 0;
   let k = 0;
-  for (j = 0; j < group1.length; j++ ) {
+  for (j = 0; j < group1.length; j++) {
     if (group1[j].tagName == 'g') {
-        group1[j].setAttribute("arr", `notesMeasure${array}`);
-        group1[j].setAttribute("measure", `${array}`);
-        group1[j].setAttribute("level", `upper`);
-        group1[j].setAttribute("idx", String(i));
-        i++;
-        group1[j].setAttribute("onmousedown", "mousedown($(this))");
+      group1[j].setAttribute("arr", `notesMeasure${array}`);
+      group1[j].setAttribute("measure", `${array}`);
+      group1[j].setAttribute("level", `upper`);
+      group1[j].setAttribute("idx", String(i));
+      i++;
+      group1[j].setAttribute("onmousedown", "mousedown($(this))");
     }
-    
+
 
   }
 
-  for (j = 0; j < group2.length; j++ ) {
+  for (j = 0; j < group2.length; j++) {
     if (group2[j].tagName == 'g') {
       group2[j].setAttribute("arr", `notes_2Measure${array}`);
       group2[j].setAttribute("measure", `${array}`);
@@ -147,9 +151,23 @@ function addType(array) {
       group2[j].setAttribute("idx", String(k));
       k++;
       group2[j].setAttribute("onmousedown", "mousedown($(this))");
-    
+
     }
 
+  }
+   let u_i = 0;
+   let v_i = 0;
+  for (let u = 0; u < group3.length; u++) {
+    group3[u].setAttribute("idu", "u_" + u_i);
+    u_i++;
+    group3[u].setAttribute("onmousedown", "increase_note($(this))");
+    
+  }
+  for (let v = 0; v < group4.length; v++) {
+    group4[v].setAttribute("idu", "u_" + v_i);
+    v_i++;
+    group4[v].setAttribute("onmousedown", "increase_note($(this))");
+    
   }
 }
 
@@ -342,101 +360,105 @@ function modifyStave() {
 }
 
 
+function increase_note(e) {
 
-var arr_type= "";
-var mea_= "";
-var level_= "";
-
-
-  function mousedown(e) {
-    
-     arr_type = e.attr('arr');
-     mea_ = e.attr('measure');
-     level_ = e.attr('level');
-
-   //  console.log(arr_type,mea_,level_);
-
-     note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
-
-      obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
-
-      index_array = e.attr("idx");
-  
-      note_ = obj_note[0].keys;
-      
-      nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
+  id_u = e.attr('idu');
+ //notesMeasure1001[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
+ //notes[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
+  console.log("id_u",id_u);
+}
 
 
-      e_Click = event.clientY; //413
-      group_notes(); // เรียกใช้งาน arr_notes 
-      var search_array = arr_notes.indexOf(nots_str); // หา index note 29
 
-      // console.log(obj_note[index_array].duration);
-      note_duration = obj_note[index_array].duration;
+var arr_type = "";
+var mea_ = "";
+var level_ = "";
 
-      click_style();
 
-      let previous = Number(index_array) - 1;
-      if (Number(index_array) != 0) {
-        if (checkIndex == previous) {
-          let button = obj_note[previous].duration;
-          fillTheRest(button, 'b');
-        }
+function mousedown(e) {
+
+  arr_type = e.attr('arr');
+  mea_ = e.attr('measure');
+  level_ = e.attr('level');
+  console.log("936699333",arr_type,mea_,level_);
+ 
+  note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
+
+  obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
+
+  index_array = e.attr("idx");
+
+  note_ = obj_note[0].keys;
+
+  nots_str = (note_).toString(); //เปลี่ยน  note เป็น String
+
+
+  e_Click = event.clientY; //413
+  group_notes(); // เรียกใช้งาน arr_notes 
+  var search_array = arr_notes.indexOf(nots_str); // หา index note 29
+
+  // console.log(obj_note[index_array].duration);
+  note_duration = obj_note[index_array].duration;
+
+  click_style();
+
+  let previous = Number(index_array) - 1;
+  if (Number(index_array) != 0) {
+    if (checkIndex == previous) {
+      let button = obj_note[previous].duration;
+      fillTheRest(button, 'b');
+    }
+  }
+
+  substr_notes(search_array);
+
+
+  checkIndex = index_array;
+  checkObj = obj_note;
+
+  let customTypes = obj_note[index_array].customTypes;
+
+  if (customTypes == 'r' && note_duration != '1') {
+
+    notes_Click();
+
+  }
+
+
+
+  $(document).bind('mousemove', function (e) {
+    var ev_move = e.clientY; //434  เลื่อน เม้า
+
+    sum_pixels = e_Click + 5; //443 เลื่อน เม้า
+    del_pix = e_Click - 5; //  424  เลื่อน เม้า 
+    var array_a = 1;
+    if (ev_move >= sum_pixels) { //443 note_down
+      move_pixel = ev_move;
+      e_Click = sum_pixels; //433
+
+      if (ev_move == move_pixel) {
+        search_array = search_array - array_a;
       }
 
       substr_notes(search_array);
+      notes_down();
 
+    }
+    else if (ev_move <= del_pix) { //note_up
+      move_pixel = ev_move;
+      e_Click = del_pix; //433
 
-      checkIndex = index_array;
-      checkObj = obj_note;
+      if (ev_move == move_pixel) { //note_up
+        search_array = search_array + array_a;
 
-     let customTypes = obj_note[index_array].customTypes;
-  
-      if (customTypes == 'r'  &&  note_duration != '1') {
-    
-        notes_Click();
-    
       }
+      substr_notes(search_array);
+      notes_up();
 
+    }
+  });
 
-      
-      $(document).bind('mousemove', function (e) {
-        var ev_move = e.clientY; //434  เลื่อน เม้า
-
-        sum_pixels = e_Click + 10; //443 เลื่อน เม้า
-        del_pix = e_Click - 10; //  424  เลื่อน เม้า 
-        var array_a = 1;
-        if (ev_move >= sum_pixels) { //443 note_down
-          move_pixel = ev_move;
-          e_Click = sum_pixels; //433
-       // console.log("note_down",e_Click);
-
-          
-          if (ev_move == move_pixel) {
-
-            search_array = search_array - array_a;
-          }
-          substr_notes(search_array);
-          notes_down();
-
-        }
-        else if (ev_move <= del_pix) { //note_up
-
-          move_pixel = ev_move;
-          e_Click = del_pix; //433
-          console.log("note_up",e_Click);
-
-          if (ev_move == move_pixel) { //note_up
-            search_array = search_array + array_a;
-
-          }
-          substr_notes(search_array);
-          notes_up();
-
-        }
-      });
-     
-  }
+}
 
 
 
@@ -454,35 +476,35 @@ function notes_up() {
 
   if (duration == '1') {
     let duration = "1r";
-    obj_note[index_array] = get_new_note(key, octave, duration ,true);
-   
-  
+    obj_note[index_array] = get_new_note(key, octave, duration, true);
+
+
   } else {
-    console.log("Up_2 :" ,duration);
+
     obj_note[index_array] = get_new_note(key, octave, duration,);
- 
+
   }
 
   setStyle_OrangeRed();
   redraw_measure();
   redraw_measure();
   (mea_);
-  
+
 }
 
 function notes_down() {
- 
+
   var key = note_te_k;
   var octave = note_num_k;
   var duration = note_duration;
 
   if (duration == '1') {
 
-   let duration = "1r";
-    obj_note[index_array] = get_new_note(key, octave, duration ,true);
+    let duration = "1r";
+    obj_note[index_array] = get_new_note(key, octave, duration, true);
   } else {
-    console.log("down _2",duration);
-    obj_note[index_array] = get_new_note(key, octave, duration,false);
+    console.log("down _2", duration);
+    obj_note[index_array] = get_new_note(key, octave, duration, false);
   }
 
   ///redraw_notes();
@@ -490,12 +512,12 @@ function notes_down() {
   redraw_measure();
   redraw_measure();
   addType(mea_);
- 
+
 }
 
 
 function redraw_measure() {
- // console.log('measure');
+  // console.log('measure');
 
   let i = mea_
 
@@ -513,7 +535,7 @@ function redraw_measure() {
     voice.forEach(function (b) { b.setContext(context).draw() });
 
     context.closeGroup(); // close 
-   // console.log("redraw_measure : 1");
+    // console.log("redraw_measure : 1");
   } else {
     let gt = this['groupt' + i];
     context.svg.removeChild(gt);
@@ -530,6 +552,7 @@ function redraw_measure() {
     context.closeGroup(); // close
     console.log("redraw_measure : 2");
   }
+  btnNote();
 }
 
 function substr_notes(value) {
@@ -545,7 +568,7 @@ function substr_notes(value) {
 
 function notes_Click() {
 
-  
+
   let key = note_te_k;
   let octave = note_num_k;
   let duration = note_duration;
@@ -553,7 +576,7 @@ function notes_Click() {
   let btn = computeDuration(String(lowerTime))
   console.log("test Click");
   obj_note[index_array] = get_new_note(key, octave, duration);
-
+  setStyle_OrangeRed();
 
   redraw_measure();
   redraw_measure();
@@ -563,17 +586,19 @@ function notes_Click() {
 $('html') // unbind mousemove 
   .mouseup(function () {
     unBind();
+    setStyle_Black();
    
- 
+    console.log("444");
   });
 
 
 
 $('html')
   .click(function () {
-    setStyle_Black();
+   // setStyle_Black_clear();
     redraw_notes();
-   
+    
+
   });
 
 
@@ -775,7 +800,7 @@ function arrangeSpace() { // ถ้า beat ตก
     } else {
 
 
-    
+
     }
   }
 }
@@ -973,6 +998,27 @@ function text_key_Signature(e) {
 
 }
 
+
+function btnNote() {
+ /* let va = document.getElementsByClassName("vf-notehead");
+
+  va[0].setAttribute("tys","555");
+ //$( ".vf-notehead" ).each(f
+ //va.attr("tt","555");
+
+  let i = 0;
+  $('.vf-notehead').each(function(){
+    // this.setAttribute("id_u","15");
+     this.setAttribute("onmousedown", "mousedown($(this))");
+   this.setAttribute("id_u","i"+ i);
+ //  this.setAttribute("id_i", "i"+ i);
+    i++;
+  });
+*/
+
+
+
+}
 
 
 
