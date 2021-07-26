@@ -224,7 +224,7 @@ function computeStave() {
     } else if (lengthHL > 8 && lengthHL <= 16) {
       fillWidth = 240;
     } else {
-      fillWidth = 480;
+      fillWidth = 479;
     }
 
     let lastMeasure;
