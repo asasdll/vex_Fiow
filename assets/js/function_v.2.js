@@ -959,15 +959,17 @@ function commit_time() {
 function vacuumAr() {
   let marker = 1002 - u;
   for (let j = marker; j <= measure; j++) {
+    restCheck1 = true;
+    restCheck = true;
+
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
-      restCheck = true;
       let restType = this["notesMeasure" + j][i].customTypes;
       if (restType == 'n') {
         restCheck = false;
       }
     }
     for (let it = 0; it < this["notes_2Measure" + j].length; it++) {
-      restCheck1 = true;
+
       let restType1 = this["notes_2Measure" + j][it].customTypes;
       if (restType1 == 'n') {
         restCheck1 = false;
