@@ -677,7 +677,7 @@ function computeT2(lowerT) { // เปลี่ยน lowerTime เป็น bea
 
 function computeSpace(time1, time2) { // หา space ของห้อง
   let timeT1 = time1;
-  let computedT2 = computeT2(time2);
+  let computedT2 = computeT2(String(time2));
   let returnSpace;
 
   returnSpace = computedT2 * timeT1;
@@ -916,10 +916,17 @@ function time_Signature_Popup() {
 
 }
 
-function time_Signature() {
-
-  firstElement = document.getElementById("time_cut_1").value;
-  secondElement = document.getElementById("id_time_cut_2").value;
+function time_Signature(meter) {
+  if (meter == 'cut') {
+    firstElement = 2;
+    secondElement = 2;
+    document.getElementById('2o').selected = true;
+    checkMT = meter;
+  } else {
+    firstElement = document.getElementById("time_cut_1").value;
+    secondElement = document.getElementById("id_time_cut_2").value;
+    checkMT = '';
+  }
 
   document.getElementById("time_cut").innerHTML = firstElement + "<br>" + secondElement;
   document.getElementById("time_cut_1").value = firstElement;
@@ -929,9 +936,12 @@ function commit_time() {
 
   upperTime = firstElement;
   lowerTime = secondElement;
-
-  // console.log(upperTime + '/' + lowerTime);
-  timeSig = (upperTime + '/' + lowerTime);
+  if (checkMT == 'cut') {
+    console.log('cutin');
+    timeSig = 'C|';
+  } else {
+    timeSig = (upperTime + '/' + lowerTime);
+  }
   oldCpTime = cpTime;
   cpTime = computeSpace(upperTime, lowerTime);
   provideSpace();
