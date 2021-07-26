@@ -604,6 +604,7 @@ $('html') // unbind mousemove
 
 $('html')
   .click(function () {
+    //setStyle_Black_clear();
     // setStyle_Black_clear();
     redraw_notes();
 
