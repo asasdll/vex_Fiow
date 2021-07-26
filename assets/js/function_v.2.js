@@ -922,6 +922,11 @@ function time_Signature(meter) {
     secondElement = 2;
     document.getElementById('2o').selected = true;
     checkMT = meter;
+  } else if (meter == 'common') {
+    firstElement = 4;
+    secondElement = 4;
+    document.getElementById('4o').selected = true;
+    checkMT = meter;
   } else {
     firstElement = document.getElementById("time_cut_1").value;
     secondElement = document.getElementById("id_time_cut_2").value;
@@ -937,8 +942,9 @@ function commit_time() {
   upperTime = firstElement;
   lowerTime = secondElement;
   if (checkMT == 'cut') {
-    console.log('cutin');
     timeSig = 'C|';
+  } else if (checkMT == 'common') {
+    timeSig = 'C';
   } else {
     timeSig = (upperTime + '/' + lowerTime);
   }
