@@ -2,7 +2,7 @@ var width = 500;
 var height = 100;
 var height2 = 200;
 var note_num_k;
-var index_array = "";
+var index_array;
 var num_shift;
 var note_duration;
 var checkIndex;
@@ -116,7 +116,7 @@ function redraw_notes() {
     addType(i);
   }
   click_time_Signature();
-  btnNote();
+  // time_Signature();
 }
 
 function addType(array) {
@@ -153,7 +153,6 @@ function addType(array) {
       group2[j].setAttribute("onmousedown", "mousedown($(this))");
 
     }
-
   }
    let u_i = 0;
    let v_i = 0;
@@ -243,7 +242,7 @@ function computeStave() {
     } else if (lengthHL > 8 && lengthHL <= 16) {
       fillWidth = 240;
     } else {
-      fillWidth = 480;
+      fillWidth = 479;
     }
 
     let lastMeasure;
@@ -369,7 +368,6 @@ function increase_note(e) {
 }
 
 
-
 var arr_type = "";
 var mea_ = "";
 var level_ = "";
@@ -462,6 +460,19 @@ function mousedown(e) {
 
 
 
+  $("path")
+    .mousedown(function (e) {
+      let id = $(this).attr("id");
+
+      if (id == "time_6" || id == "time_7") {
+        $('#exampleModal').modal("toggle");
+        time_Signature_Popup();
+      }
+
+
+
+
+    });
 
 
 
@@ -512,9 +523,7 @@ function notes_down() {
   redraw_measure();
   redraw_measure();
   addType(mea_);
-
 }
-
 
 function redraw_measure() {
   // console.log('measure');
@@ -550,7 +559,6 @@ function redraw_measure() {
     voice.forEach(function (b) { b.setContext(context).draw() });
 
     context.closeGroup(); // close
-    console.log("redraw_measure : 2");
   }
   btnNote();
 }
@@ -722,7 +730,7 @@ function computeT2(lowerT) { // เปลี่ยน lowerTime เป็น bea
 
 function computeSpace(time1, time2) { // หา space ของห้อง
   let timeT1 = time1;
-  let computedT2 = computeT2(time2);
+  let computedT2 = computeT2(String(time2));
   let returnSpace;
 
   returnSpace = computedT2 * timeT1;
@@ -736,6 +744,7 @@ function provideSpace() {
   } else {
     arrangeSpace();
   }
+  vacuumAr()
 }
 
 function fillArray() { // ถ้า beat เพิ่มขึ้น
@@ -781,28 +790,170 @@ function fillArray() { // ถ้า beat เพิ่มขึ้น
 }
 
 function arrangeSpace() { // ถ้า beat ตก
+
   let marker = 1002 - u;
-  let temAr = [];
+  temAr = [];
+  temAr1 = [];
   for (let j = marker; j <= measure; j++) {
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
       let du = this["notesMeasure" + j][i]
       temAr.push(du);
+      // this["notesMeasure" + j].splice(du);
+
     }
+    for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
+      let du1 = this["notes_2Measure" + j][i]
+      temAr1.push(du1);
+
+    }
+    this["notesMeasure" + j] = [];
+    this["notes_2Measure" + j] = [];
   }
 
-  let time = cpTime;
-  for (let k = 0; k < temAr.length; k++) {
+  let beat = cpTime;
+  let idx = 0;
+  let check = 0;
+  let count = marker;
 
-    let cut = findValue(temAr[k].duration);
+  while (check < temAr.length) {
+    if (count > measure) {
+      this["notesMeasure" + count] = []
+      this["notes_2Measure" + count] = [];
+      measure++;
+    }
 
-    if (time > cut) {
-      time = time - cut;
+    let cut = findValue(temAr[check].duration)
+    let dif = oldCpTime - cpTime;
+
+    if (temAr[check].duration == '1') {
+      cut = oldCpTime;
+      // temAr[check].customTypes = 'n';
+    }
+
+
+    if (beat >= cut) {
+      beat = beat - cut;
+      this["notesMeasure" + count][idx] = temAr[check]
+      idx++;
     } else {
 
 
 
+      let noteCut = reverseFindValue(String(cut - beat));
+      let valNote = reverseFindValue(String(beat));
+
+      if (temAr[check].customTypes == 'r') {
+        this["notesMeasure" + count][idx] = get_new_note('b', 4, `${valNote}r`);
+        noteCutAct = get_new_note('b', 4, `${noteCut}r`);
+      } else {
+        this["notesMeasure" + count][idx] = get_new_note('b', 4, valNote);
+        noteCutAct = get_new_note('b', 4, noteCut);
+      }
+      temAr.splice(check + 1, 0, noteCutAct);
+
+
+      if (beat == 3) {
+        if (temAr[check].customTypes == 'r') {
+          rest = get_new_note('b', 4, 'qr');
+        } else {
+          rest = get_new_note('b', 4, 'q');
+        }
+        temAr.splice(check + 1, 0, rest);
+        beat = 1;
+        idx++;
+      } else {
+        beat = 0;
+      }
     }
+
+
+
+
+
+
+    if (check == temAr.length - 1 && beat != 0) {
+      let valNote = reverseFindValue(String(beat));
+      noteCutAct = get_new_note('b', 4, `${valNote}r`);
+      temAr.splice(check + 1, 0, noteCutAct);
+    }
+
+    if (beat == 0) {
+      count++;
+      beat = cpTime;
+      idx = 0;
+    }
+
+    check++;
   }
+
+  let beat1 = cpTime;
+  let idx1 = 0;
+  let check1 = 0;
+  let count1 = marker;
+
+  while (check1 < temAr1.length) {
+    // if (count1 > measure) {
+    //   this["notes_2Measure" + count1] = [];
+    // }
+
+    let cut1 = findValue(temAr1[check1].duration)
+    let dif1 = oldCpTime - cpTime;
+
+    if (temAr1[check1].duration == '1') {
+      cut1 = oldCpTime;
+      // temAr1[check1].customTypes = 'n';
+    }
+
+    if (beat1 >= cut1) {
+      beat1 = beat1 - cut1;
+      this["notes_2Measure" + count1][idx1] = temAr1[check1]
+      idx1++;
+    } else {
+
+      let noteCut = reverseFindValue(String(cut1 - beat1));
+      let valNote = reverseFindValue(String(beat1));
+
+      if (temAr1[check1].customTypes == 'r') {
+        this["notes_2Measure" + count1][idx1] = get_new_note('b', 4, `${valNote}r`);
+        noteCutAct1 = get_new_note('b', 4, `${noteCut}r`);
+      } else {
+        this["notes_2Measure" + count1][idx1] = get_new_note('b', 4, valNote);
+        noteCutAct1 = get_new_note('b', 4, noteCut);
+      }
+
+      temAr1.splice(check1 + 1, 0, noteCutAct1);
+
+      if (beat1 == 3) {
+        if (temAr1[check1].customTypes == 'r') {
+          rest = get_new_note('b', 4, 'qr');
+        } else {
+          rest = get_new_note('b', 4, 'q');
+        }
+        temAr1.splice(check1 + 1, 0, rest);
+        beat1 = 1;
+        idx1++;
+      } else {
+        beat1 = 0;
+      }
+    }
+
+    if (check1 == temAr1.length - 1 && beat1 != 0) {
+      let valNote = reverseFindValue(String(beat1));
+      noteCutAct1 = get_new_note('b', 4, `${valNote}r`);
+      temAr1.splice(check1 + 1, 0, noteCutAct1);
+    }
+
+    if (beat1 == 0) {
+      count1++;
+      beat1 = cpTime;
+      idx1 = 0;
+    }
+
+    check1++;
+  }
+
+  temAr = [];
+  temAr1 = [];
 }
 
 
@@ -818,10 +969,22 @@ function time_Signature_Popup() {
 
 }
 
-function time_Signature() {
-
-  firstElement = document.getElementById("time_cut_1").value;
-  secondElement = document.getElementById("id_time_cut_2").value;
+function time_Signature(meter) {
+  if (meter == 'cut') {
+    firstElement = 2;
+    secondElement = 2;
+    document.getElementById('2o').selected = true;
+    checkMT = meter;
+  } else if (meter == 'common') {
+    firstElement = 4;
+    secondElement = 4;
+    document.getElementById('4o').selected = true;
+    checkMT = meter;
+  } else {
+    firstElement = document.getElementById("time_cut_1").value;
+    secondElement = document.getElementById("id_time_cut_2").value;
+    checkMT = '';
+  }
 
   document.getElementById("time_cut").innerHTML = firstElement + "<br>" + secondElement;
   document.getElementById("time_cut_1").value = firstElement;
@@ -831,16 +994,49 @@ function commit_time() {
 
   upperTime = firstElement;
   lowerTime = secondElement;
-
-  // console.log(upperTime + '/' + lowerTime);
-  timeSig = (upperTime + '/' + lowerTime);
+  if (checkMT == 'cut') {
+    timeSig = 'C|';
+  } else if (checkMT == 'common') {
+    timeSig = 'C';
+  } else {
+    timeSig = (upperTime + '/' + lowerTime);
+  }
   oldCpTime = cpTime;
   cpTime = computeSpace(upperTime, lowerTime);
-  console.log(oldCpTime + 'old');
-  console.log(cpTime + 'upCp');
   provideSpace();
   computeStave();
   redraw_notes();
+}
+
+function vacuumAr() {
+  let marker = 1002 - u;
+  for (let j = marker; j <= measure; j++) {
+    restCheck1 = true;
+    restCheck = true;
+
+    for (let i = 0; i < this["notesMeasure" + j].length; i++) {
+      let restType = this["notesMeasure" + j][i].customTypes;
+      if (restType == 'n') {
+        restCheck = false;
+      }
+    }
+    for (let it = 0; it < this["notes_2Measure" + j].length; it++) {
+
+      let restType1 = this["notes_2Measure" + j][it].customTypes;
+      if (restType1 == 'n') {
+        restCheck1 = false;
+      }
+    }
+
+    if (restCheck == true) {
+      this["notesMeasure" + j] = [];
+      this["notesMeasure" + j][0] = get_new_note('b', 4, '1r', true);
+    }
+    if (restCheck1 == true) {
+      this["notes_2Measure" + j] = [];
+      this["notes_2Measure" + j][0] = get_new_note('b', 4, '1r', true);
+    }
+  }
 }
 
 

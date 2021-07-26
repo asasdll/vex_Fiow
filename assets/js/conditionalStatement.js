@@ -43,11 +43,11 @@ function fillTheRest(button, version) {
         setStyle_OrangeRed();
        
     } else {
-        console.log("version" ,version);
+       
         obj_note[index_array] = get_new_note('b', 4, `${button}r`);
     
     }
-    console.log("version" ,version);
+ 
     obj_note[Number(index_array) + 1] = get_new_note('b', 4, `${button}r`);
     
 
@@ -69,7 +69,7 @@ function fillTheRest(button, version) {
     computeStave();
     redraw_notes(); // เเก้หาง
     redraw_notes();
-   
+
 }
 
 function findValue(note) {
@@ -150,6 +150,9 @@ function reverseFindValue(noteVal) {
     switch (value) {
         case '4':
             returnValue = 'w';
+            break;
+        case '3':
+            returnValue = 'h';
             break;
         case '2':
             returnValue = 'h';
