@@ -691,6 +691,7 @@ function provideSpace() {
   } else {
     arrangeSpace();
   }
+  vacuumAr()
 }
 
 function fillArray() { // ถ้า beat เพิ่มขึ้น
@@ -953,6 +954,35 @@ function commit_time() {
   provideSpace();
   computeStave();
   redraw_notes();
+}
+
+function vacuumAr() {
+  let marker = 1002 - u;
+  for (let j = marker; j <= measure; j++) {
+    for (let i = 0; i < this["notesMeasure" + j].length; i++) {
+      restCheck = true;
+      let restType = this["notesMeasure" + j][i].customTypes;
+      if (restType == 'n') {
+        restCheck = false;
+      }
+    }
+    for (let it = 0; it < this["notes_2Measure" + j].length; it++) {
+      restCheck1 = true;
+      let restType1 = this["notes_2Measure" + j][it].customTypes;
+      if (restType1 == 'n') {
+        restCheck1 = false;
+      }
+    }
+
+    if (restCheck == true) {
+      this["notesMeasure" + j] = [];
+      this["notesMeasure" + j][0] = get_new_note('b', 4, '1r', true);
+    }
+    if (restCheck1 == true) {
+      this["notes_2Measure" + j] = [];
+      this["notes_2Measure" + j][0] = get_new_note('b', 4, '1r', true);
+    }
+  }
 }
 
 
