@@ -515,7 +515,6 @@ function notes_down() {
     let duration = "1r";
     obj_note[index_array] = get_new_note(key, octave, duration, true);
   } else {
-    console.log("down _2", duration);
     obj_note[index_array] = get_new_note(key, octave, duration, false);
   }
 
@@ -596,10 +595,8 @@ $('html') // unbind mousemove
   .mouseup(function () {
     unBind();
     setStyle_Black();
-
     console.log("444");
   });
-
 
 
 $('html')
@@ -1043,9 +1040,18 @@ function vacuumAr() {
 }
 
 function addAccidental(Accidental) {
+  if (obj_note != ' ') {
+    if (obj_note[index_array].customTypes == 'n') {
+      if (obj_note[index_array].modifiers.length == 0) {
+        obj_note[index_array].addAccidental(0, new VF.Accidental("b"));
+      } else {
+        obj_note[index_array].modifiers == [];
+      }
+    }
+  }
 
 
-
+  redraw_measure();
 }
 
 
