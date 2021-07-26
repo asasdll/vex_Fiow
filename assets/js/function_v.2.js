@@ -607,7 +607,8 @@ $('html')
     //setStyle_Black_clear();
     // setStyle_Black_clear();
     redraw_notes();
-
+    obj_note = " ";
+    index_array = " ";
 
   });
 
@@ -1039,6 +1040,12 @@ function vacuumAr() {
       this["notes_2Measure" + j][0] = get_new_note('b', 4, '1r', true);
     }
   }
+}
+
+function addAccidental(Accidental) {
+
+
+
 }
 
 
