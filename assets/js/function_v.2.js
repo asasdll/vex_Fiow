@@ -374,7 +374,7 @@ var level_ = "";
 
 
 function mousedown(e) {
-
+  setStyle_Black_clear();
   arr_type = e.attr('arr');
   mea_ = e.attr('measure');
   level_ = e.attr('level');
@@ -603,7 +603,7 @@ $('html') // unbind mousemove
 
 $('html')
   .click(function () {
-   // setStyle_Black_clear();
+    //setStyle_Black_clear();
     redraw_notes();
     
 
