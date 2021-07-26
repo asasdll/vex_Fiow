@@ -12,8 +12,8 @@ function get_new_note(key, octave, duration, position) {
 
   let obj = new VF.StaveNote({
     clef: "treble",
-    keys: [key + "/" + octave ],
-   // keys: [key + "/" + octave , "b" + "/"+ 3],
+    keys: [key + "/" + octave],
+    // keys: [key + "/" + octave , "b" + "/"+ 3],
     //keys: note_key,
     duration: duration,
     align_center: position,
@@ -39,7 +39,7 @@ function draw_notes() {
   voice = new VF.Voice({ num_beats: 6, beat_value: 4 });
 
   notesMeasure1001 = [
-    get_new_note('b', 4,  "1r", true),
+    get_new_note('b', 4, "1r", true),
     // get_new_note('b', 4, "q", false),
     // get_new_note('c', 4, "q", false),
     // get_new_note('d', 4, "q", false),
@@ -127,7 +127,7 @@ function addType(array) {
   group2 = ele2[0].children;
   group3 = ele1[0].children[0].children[0].children;
   group4 = ele2[0].children[0].children[0].children;
- // console.log(group3,group4);
+  // console.log(group3,group4);
   let i = 0;
   let k = 0;
   for (j = 0; j < group1.length; j++) {
@@ -154,19 +154,19 @@ function addType(array) {
 
     }
   }
-   let u_i = 0;
-   let v_i = 0;
+  let u_i = 0;
+  let v_i = 0;
   for (let u = 0; u < group3.length; u++) {
     group3[u].setAttribute("idu", "u_" + u_i);
     u_i++;
     group3[u].setAttribute("onmousedown", "increase_note($(this))");
-    
+
   }
   for (let v = 0; v < group4.length; v++) {
     group4[v].setAttribute("idu", "u_" + v_i);
     v_i++;
     group4[v].setAttribute("onmousedown", "increase_note($(this))");
-    
+
   }
 }
 
@@ -362,9 +362,9 @@ function modifyStave() {
 function increase_note(e) {
 
   id_u = e.attr('idu');
- //notesMeasure1001[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
- //notes[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
-  console.log("id_u",id_u);
+  //notesMeasure1001[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
+  //notes[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
+  console.log("id_u", id_u);
 }
 
 
@@ -374,12 +374,12 @@ var level_ = "";
 
 
 function mousedown(e) {
-  setStyle_Black_clear();
+  setStyle_Black_clear()
+
   arr_type = e.attr('arr');
   mea_ = e.attr('measure');
   level_ = e.attr('level');
-  console.log("936699333",arr_type,mea_,level_);
- 
+
   note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
   obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
@@ -410,17 +410,18 @@ function mousedown(e) {
 
   substr_notes(search_array);
 
+  let customTypes = obj_note[index_array].customTypes;
+
+  if (customTypes == 'r' && note_duration != '1') {
+    notes_Click();
+  }
+
+
 
   checkIndex = index_array;
   checkObj = obj_note;
 
-  let customTypes = obj_note[index_array].customTypes;
 
-  if (customTypes == 'r' && note_duration != '1') {
-
-    notes_Click();
-
-  }
 
 
 
@@ -460,19 +461,19 @@ function mousedown(e) {
 
 
 
-  $("path")
-    .mousedown(function (e) {
-      let id = $(this).attr("id");
+// $("path")
+//   .mousedown(function (e) {
+//     let id = $(this).attr("id");
 
-      if (id == "time_6" || id == "time_7") {
-        $('#exampleModal').modal("toggle");
-        time_Signature_Popup();
-      }
-
-
+//     if (id == "time_6" || id == "time_7") {
+//       $('#exampleModal').modal("toggle");
+//       time_Signature_Popup();
+//     }
 
 
-    });
+
+
+//   });
 
 
 
@@ -499,7 +500,7 @@ function notes_up() {
   setStyle_OrangeRed();
   redraw_measure();
   redraw_measure();
-  (mea_);
+  addType(mea_);
 
 }
 
@@ -560,7 +561,7 @@ function redraw_measure() {
 
     context.closeGroup(); // close
   }
-  btnNote();
+  // btnNote();
 }
 
 function substr_notes(value) {
@@ -595,7 +596,7 @@ $('html') // unbind mousemove
   .mouseup(function () {
     unBind();
     setStyle_Black();
-   
+
     console.log("444");
   });
 
@@ -604,8 +605,9 @@ $('html') // unbind mousemove
 $('html')
   .click(function () {
     //setStyle_Black_clear();
+    // setStyle_Black_clear();
     redraw_notes();
-    
+
 
   });
 
@@ -1196,21 +1198,21 @@ function text_key_Signature(e) {
 
 
 function btnNote() {
- /* let va = document.getElementsByClassName("vf-notehead");
-
-  va[0].setAttribute("tys","555");
- //$( ".vf-notehead" ).each(f
- //va.attr("tt","555");
-
-  let i = 0;
-  $('.vf-notehead').each(function(){
-    // this.setAttribute("id_u","15");
-     this.setAttribute("onmousedown", "mousedown($(this))");
-   this.setAttribute("id_u","i"+ i);
- //  this.setAttribute("id_i", "i"+ i);
-    i++;
-  });
-*/
+  /* let va = document.getElementsByClassName("vf-notehead");
+ 
+   va[0].setAttribute("tys","555");
+  //$( ".vf-notehead" ).each(f
+  //va.attr("tt","555");
+ 
+   let i = 0;
+   $('.vf-notehead').each(function(){
+     // this.setAttribute("id_u","15");
+      this.setAttribute("onmousedown", "mousedown($(this))");
+    this.setAttribute("id_u","i"+ i);
+  //  this.setAttribute("id_i", "i"+ i);
+     i++;
+   });
+ */
 
 
 

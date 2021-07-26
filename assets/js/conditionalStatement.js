@@ -1,8 +1,8 @@
 var notes = [];
 
 function fillTheRest(button, version) {
-//console.log(button,version);
-    let note =  obj_note[index_array].duration;
+    //console.log(button,version);
+    let note = obj_note[index_array].duration;
     let noteVal = findValue(note);
     let buttonVal = findValue(button);
     let index = index_array;
@@ -22,8 +22,6 @@ function fillTheRest(button, version) {
     let between = anchor - rope; // ช่องว่าง
 
     if (rope > anchor || rope === anchor) {
-        console.log('rope')
-
         return;
     }
 
@@ -38,18 +36,14 @@ function fillTheRest(button, version) {
     }
 
     if (version === 'b') {
-       
         obj_note[index_array] = get_new_note('b', 4, `${button}`);
         setStyle_OrangeRed();
-       
     } else {
-       
         obj_note[index_array] = get_new_note('b', 4, `${button}r`);
-    
     }
- 
+
     obj_note[Number(index_array) + 1] = get_new_note('b', 4, `${button}r`);
-    
+
 
 
 
@@ -60,7 +54,6 @@ function fillTheRest(button, version) {
         spaceVal = spaceVal - val;
         i++;
         u++;
-
     }
     //console.log(arr_sum);
     arr_index = "";
