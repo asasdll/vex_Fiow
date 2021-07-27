@@ -125,9 +125,9 @@ function addType(array) {
 
   group1 = ele1[0].children;
   group2 = ele2[0].children;
-  group3 = ele1[0].children[0].children[0].children;
-  group4 = ele2[0].children[0].children[0].children;
-  // console.log(group3,group4);
+  // group3 = ele1[0].children[0].children[0].children;
+  // group4 = ele2[0].children[0].children[0].children;
+  // // console.log(group3,group4);
   let i = 0;
   let k = 0;
   for (j = 0; j < group1.length; j++) {
@@ -154,20 +154,20 @@ function addType(array) {
 
     }
   }
-  let u_i = 0;
-  let v_i = 0;
-  for (let u = 0; u < group3.length; u++) {
-    group3[u].setAttribute("idu", "u_" + u_i);
-    u_i++;
-    group3[u].setAttribute("onmousedown", "increase_note($(this))");
+  // let u_i = 0;
+  // let v_i = 0;
+  // for (let u = 0; u < group3.length; u++) {
+  //   group3[u].setAttribute("idu", "u_" + u_i);
+  //   u_i++;
+  //   group3[u].setAttribute("onmousedown", "increase_note($(this))");
 
-  }
-  for (let v = 0; v < group4.length; v++) {
-    group4[v].setAttribute("idu", "u_" + v_i);
-    v_i++;
-    group4[v].setAttribute("onmousedown", "increase_note($(this))");
+  // }
+  // for (let v = 0; v < group4.length; v++) {
+  //   group4[v].setAttribute("idu", "u_" + v_i);
+  //   v_i++;
+  //   group4[v].setAttribute("onmousedown", "increase_note($(this))");
 
-  }
+  // }
 }
 
 let measure = 1001;
@@ -359,13 +359,13 @@ function modifyStave() {
 }
 
 
-function increase_note(e) {
+// function increase_note(e) {
 
-  id_u = e.attr('idu');
-  //notesMeasure1001[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
-  //notes[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
-  console.log("id_u", id_u);
-}
+//   id_u = e.attr('idu');
+//   //notesMeasure1001[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
+//   //notes[0].addAccidental("A/4", new Vex.Flow.Accidental('b'));
+//   console.log("id_u", id_u);
+// }
 
 
 var arr_type = "";
@@ -515,7 +515,6 @@ function notes_down() {
     let duration = "1r";
     obj_note[index_array] = get_new_note(key, octave, duration, true);
   } else {
-    console.log("down _2", duration);
     obj_note[index_array] = get_new_note(key, octave, duration, false);
   }
 
@@ -596,10 +595,8 @@ $('html') // unbind mousemove
   .mouseup(function () {
     unBind();
     setStyle_Black();
-
     console.log("444");
   });
-
 
 
 $('html')
@@ -607,7 +604,8 @@ $('html')
     //setStyle_Black_clear();
     // setStyle_Black_clear();
     redraw_notes();
-
+    obj_note = " ";
+    index_array = " ";
 
   });
 
@@ -1039,6 +1037,22 @@ function vacuumAr() {
       this["notes_2Measure" + j][0] = get_new_note('b', 4, '1r', true);
     }
   }
+}
+
+function addAccidental(Accidental) {
+  if (obj_note != ' ') {
+    if (obj_note[index_array].customTypes == 'n') {
+      if (obj_note[index_array].modifiers.length == 0) {
+        obj_note[index_array].addAccidental(0, new VF.Accidental(Accidental));
+      } else {
+        console.log('already')
+        obj_note[index_array].modifiers = [];
+      }
+    }
+  }
+
+
+  redraw_measure();
 }
 
 
