@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(148, 148, 148);
+    background-color: rgb(210, 211, 197);
 }
 
 .headText {
@@ -7,12 +7,18 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: rgb(239, 237, 222);
     height: 170px;
     min-width: 900px;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+}
+
+.headbutton {
+    margin-top: 0.5em;
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 

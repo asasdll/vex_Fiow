@@ -24,33 +24,27 @@
   <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   <link rel="stylesheet" href="assets/css/main.css">
   <div class="headText">
-    <div class="paletteElement paletteButton note3 selected advanced" data-bind="visible: visible, css: css, click: clicked, tip: {title:
-          title, shortcut: shortcut}, attr: {id: controlId}" id="control-thirtysecond">
-      <span data-bind="resource: title" data-resource="palette.thirtysecond">32nd Note</span>
-      <!-- ko if: shortcut -->
-      <!-- /ko -->
-      <select>
-        <option>-select-</option>
-        <option>duration</option>
-      </select>
-      <button type="button" onclick="fillTheRest('w','a')">&#119133;</button>
-      <button type="button" onclick="fillTheRest('h','a')">&#119134;</button>
-      <button type="button" onclick="fillTheRest('q','a')">&#119135;</button>
-      <button type="button" onclick="fillTheRest('8','a')">&#119136;</button>
-      <button type="button" onclick="fillTheRest('16','a')">&#119137;</button>
-      <button type="button" onclick="fillTheRest('32','a')">&#119138;</button>
-      <button type="button" onclick="fillTheRest('64','a')">&#119138;</button>
-      <button type="button" onclick="add_measure_after()">Measure After</button>
-      <button type="button" onclick="add_measure_before()">Measure Before</button>
-      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="time_Signature_Popup()">Time
-        Signature</button>
-      <button type="button" data-bs-toggle="modal" onclick="text_key_Signature('0')"
-        data-bs-target="#staticBackdrop">Key Signature</button>
-      <button type="button" onclick="vacuumAr()"> sound play</button>
+      <div class="headbutton">
+        <img src="../assets/image/button/1w.png"  onclick="fillTheRest('w','a')" id="MeasureAfter" width="25px" alt="..." onmouseover="bigNote(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/2w.png"  onclick="fillTheRest('h','a')" id="MeasureAfter" width="25px" alt="..." onmouseover="bigNote(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/3w.png"  onclick="fillTheRest('q','a')" id="MeasureAfter" width="25px" alt="..." onmouseover="bigNote(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/4w.png"  onclick="fillTheRest('8','a')" id="MeasureAfter" width="25px" alt="..." onmouseover="bigNote(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/5w.png"  onclick="fillTheRest('16','a')" id="MeasureAfter" width="25px" alt="..." onmouseover="bigNote(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/6w.png"  onclick="fillTheRest('32','a')" id="MeasureAfter" width="25px" alt="..." onmouseover="bigNote(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/7w.png"  onclick="fillTheRest('64','a')" id="MeasureAfter" width="25px" alt="..." onmouseover="bigNote(this)" onmouseout="normalImg(this)">
 
-      <button type="button" onclick="btnNote()"> sound play55</button>
+        
+        <img src="../assets/image/button/MeasureAfter.png"  onclick="add_measure_after()" id="MeasureAfter" width="35px" alt="..." onmouseover="bigImg(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/MeasureBefore.png" onclick="add_measure_before()" id="measure_before" width="35px" alt="..." onmouseover="bigImg(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/TimeSignature.png" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="time_Signature_Popup()" id="timeSignature" width="35px" alt="..." onmouseover="bigImg(this)" onmouseout="normalImg(this)">
+        <img src="../assets/image/button/KeySignature.png"   data-bs-toggle="modal" onclick="text_key_Signature('0')"
+        data-bs-target="#staticBackdrop" id="keySignature" width="35px" alt="..." onmouseover="bigImg(this)" onmouseout="normalImg(this)">
 
+        <button type="button" onclick="vacuumAr()"> sound play</button>
 
+        <button type="button"> sound play</button>
+
+      </div>
     </div>
   </div>
 
@@ -270,7 +264,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <div id="page" class="zoom-lineNote" ></div>
+          <div id="page" class="zoom-lineNote"></div>
         </div>
 
       </div>
@@ -286,13 +280,13 @@
 
 
 
-</body>
+
 <!----<script src="assets/js/style.js"></script>-->
 <script src="assets/js/function_v.2.js"></script>
 <script src="assets/js/conditionalStatement.js"></script>
-
+<script src="assets/js/button.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+</body>
 </html>
