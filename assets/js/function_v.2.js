@@ -1092,6 +1092,21 @@ function convert_Key() {
 
       this["notesMeasure" + j][i] = get_new_note(realKey, octave, durationM)
     }
+
+    for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
+      let wholeKey = this["notes_2Measure" + j][i].keys[0];
+      let partKey = wholeKey.substr(0, 1);
+      let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
+      let realKey = eval('keyManager.scaleMap.' + partKey);
+
+      if (this["notes_2Measure" + j][i].customTypes == 'r') {
+        durationM = this["notes_2Measure" + j][i].duration + 'r';
+      } else {
+        durationM = this["notes_2Measure" + j][i].duration;
+      }
+
+      this["notes_2Measure" + j][i] = get_new_note(realKey, octave, durationM)
+    }
   }
 
 
