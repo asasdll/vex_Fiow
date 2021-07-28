@@ -595,7 +595,6 @@ function notes_Click() {
 
 $('html') // unbind mousemove 
   .mouseup(function () {
-    convert_Key();
     unBind();
     setStyle_Black();
   });
@@ -605,7 +604,6 @@ $('html')
   .click(function () {
     //setStyle_Black_clear();
     // setStyle_Black_clear();
-    convert_Key();
     redraw_notes();
     obj_note = " ";
     index_array = " ";
@@ -1065,8 +1063,14 @@ function key_Setter(key) {
 
 }
 
+function compute_Key() {
+
+}
+
 function key_Commit() {
   keySig = elemKey;
+  convert_Key();
+  compute_Key();
   computeStave();
   key_Manager_setup();
   redraw_notes();
@@ -1092,7 +1096,15 @@ function convert_Key() {
         durationM = this["notesMeasure" + j][i].duration;
       }
 
-      this["notesMeasure" + j][i] = get_new_note(realKey, octave, durationM)
+      let center = " ";
+
+      if (this["notesMeasure" + j][i].align_center == true) {
+        center = true;
+      } else {
+        center = false;
+      }
+
+      this["notesMeasure" + j][i] = get_new_note(realKey, octave, durationM, center)
     }
 
     for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
@@ -1107,7 +1119,15 @@ function convert_Key() {
         durationM = this["notes_2Measure" + j][i].duration;
       }
 
-      this["notes_2Measure" + j][i] = get_new_note(realKey, octave, durationM)
+      let center = " ";
+
+      if (this["notes_2Measure" + j][i].align_center == true) {
+        center = true;
+      } else {
+        center = false;
+      }
+
+      this["notes_2Measure" + j][i] = get_new_note(realKey, octave, durationM, center)
     }
   }
 }
