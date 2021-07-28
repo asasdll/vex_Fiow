@@ -13,7 +13,7 @@ function get_new_note(key, octave, duration, position) {
   let obj = new VF.StaveNote({
     clef: "treble",
     keys: [key + "/" + octave],
-    // keys: [key + "/" + octave , "b" + "/"+ 3],
+    // keys: [key + "/" + octave, "b" + "/" + 3],
     //keys: note_key,
     duration: duration,
     align_center: position,
@@ -343,7 +343,7 @@ function computeStave() {
 let upperTime = 4;
 let lowerTime = 4;
 
-keySig = 'C';
+keySig = 'B';
 timeSig = upperTime + '/' + lowerTime;
 clef = 'bass';
 lowerClef = 'bass';
@@ -582,7 +582,6 @@ function notes_Click() {
   let duration = note_duration;
 
   let btn = computeDuration(String(lowerTime))
-  console.log("test Click");
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
 
@@ -595,7 +594,6 @@ $('html') // unbind mousemove
   .mouseup(function () {
     unBind();
     setStyle_Black();
-    console.log("444");
   });
 
 
@@ -1064,6 +1062,8 @@ function key_Signature() {
 
 function text_key_Signature(e) {
   // console.log("log", e);
+
+
 
   let keySignature = ""
   if (e == 0) {
