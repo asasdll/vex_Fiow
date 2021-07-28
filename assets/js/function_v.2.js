@@ -1054,9 +1054,13 @@ function addAccidental(Accidental) {
 }
 
 
-function key_Signature() {
+function key_Setter(key) {
 
-  console.log("5555555");
+  console.log(key);
+
+}
+
+function key_Commit() {
 
 }
 
