@@ -63,15 +63,14 @@ function draw_notes() {
 }
 
 function redraw_notes() {
-
   renderer.ctx.clear();
   let marker = 1002 - u;
-
+ 
   for (i = measure; i >= marker; i--) {
-
+    context.openGroup('flag', 'flag' + i , { pointerBBox: true });
     this["staveMeasure" + i].setContext(context).draw();
     this["stave_2Measure" + i].setContext(context).draw();
-
+    context.closeGroup(); // close
 
     this["group" + i] = context.openGroup(); // open
     this["group" + i].setAttribute("name", "group" + i);
@@ -84,6 +83,7 @@ function redraw_notes() {
 
 
     context.closeGroup(); // close
+
 
     this["groupt" + i] = context.openGroup(); // open
     this["groupt" + i].setAttribute("name", "groupt" + i)

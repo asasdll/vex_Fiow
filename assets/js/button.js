@@ -19,5 +19,8 @@ function bigImg(x) {
     x.style.position = "static";
  
   }
+
+
+
   
   

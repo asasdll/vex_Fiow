@@ -5,6 +5,7 @@
         "divzoom",
         "notehead",
         "stavenote",
+        "tlabel",
         "typeidex"
     ],
     "liveServer.settings.port": 5501
