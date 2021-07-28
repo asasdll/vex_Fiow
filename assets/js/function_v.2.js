@@ -10,8 +10,7 @@ var checkObj;
 //var note_key = ["b/4","c/4"];
 function get_new_note(key, octave, duration, position) {
 
-  var keyManager = new Vex.Flow.KeyManager(keySig)
-  console.log(keyManager);
+  // var cpf = keyManager.scale
   cpKey = key;
 
   let obj = new VF.StaveNote({
@@ -59,6 +58,7 @@ function draw_notes() {
 
 
   cpTime = computeSpace(String(upperTime), String(lowerTime));
+  key_Manager_setup();
 
   computeStave();
   redraw_notes();
@@ -1067,7 +1067,12 @@ function key_Setter(key) {
 function key_Commit() {
   keySig = elemKey;
   computeStave();
+  key_Manager_setup();
   redraw_notes();
+}
+
+function key_Manager_setup() {
+  keyManager = new Vex.Flow.KeyManager(keySig)
 }
 
 function text_key_Signature(e) {
