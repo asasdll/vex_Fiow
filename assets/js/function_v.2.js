@@ -1076,6 +1076,15 @@ function compute_Key() {
       let cpKey = eval(realKey);
       console.log(cpKey);
 
+      if (cpKey.change == true && this["notesMeasure" + j][i].customTypes != 'r') {
+        if (cpKey.accidental == null) {
+          this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('n'));
+        } else if (cpKey.accidental == '#') {
+          this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('#'));
+        } else {
+          this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('b'));
+        }
+      }
     }
   }
 }
