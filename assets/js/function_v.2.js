@@ -1081,8 +1081,12 @@ function compute_Key() {
           this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('n'));
         } else if (cpKey.accidental == '#') {
           this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('#'));
-        } else {
+        } else if (cpKey.accidental == 'b') {
           this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('b'));
+        }
+      } else if (cpKey.change == false) {
+        if (this["notesMeasure" + j][i].modifiers.length != 0) {
+          this["notesMeasure" + j][i].modifiers = [];
         }
       }
     }
