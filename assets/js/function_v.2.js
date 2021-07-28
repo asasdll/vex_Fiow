@@ -343,9 +343,9 @@ function computeStave() {
 let upperTime = 4;
 let lowerTime = 4;
 
-keySig = 'B';
+keySig = 'C';
 timeSig = upperTime + '/' + lowerTime;
-clef = 'bass';
+clef = 'treble';
 lowerClef = 'bass';
 
 
@@ -1056,12 +1056,14 @@ function addAccidental(Accidental) {
 
 function key_Setter(key) {
 
-  console.log(key);
+  elemKey = key;
 
 }
 
 function key_Commit() {
-
+  keySig = elemKey;
+  computeStave();
+  redraw_notes();
 }
 
 function text_key_Signature(e) {
