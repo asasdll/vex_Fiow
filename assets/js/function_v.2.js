@@ -1065,14 +1065,28 @@ function key_Setter(key) {
 
 function compute_Key() {
 
+  let marker = 1002 - u;
+  for (let j = marker; j <= measure; j++) {
+    for (let i = 0; i < this["notesMeasure" + j].length; i++) {
+      let wholeKey = this["notesMeasure" + j][i].keys[0];
+      // let partKey = wholeKey.substr(0, 1);
+      let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
+      let partKey = this["notesMeasure" + j][i].keyaccess;
+      let realKey = `keyManager.selectNote('${partKey}')`;
+      let cpKey = eval(realKey);
+      console.log(cpKey);
+
+    }
+  }
 }
 
 function key_Commit() {
-  keySig = elemKey;
   convert_Key();
+  oldKS = keySig;
+  keySig = elemKey;
+  key_Manager_setup();
   compute_Key();
   computeStave();
-  key_Manager_setup();
   redraw_notes();
 }
 
@@ -1089,6 +1103,7 @@ function convert_Key() {
       let partKey = wholeKey.substr(0, 1);
       let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
       let realKey = eval('keyManager.scaleMap.' + partKey);
+      console.log(realKey);
 
       if (this["notesMeasure" + j][i].customTypes == 'r') {
         durationM = this["notesMeasure" + j][i].duration + 'r';
@@ -1105,6 +1120,7 @@ function convert_Key() {
       }
 
       this["notesMeasure" + j][i] = get_new_note(realKey, octave, durationM, center)
+      this["notesMeasure" + j][i].keyaccess = realKey;
     }
 
     for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
