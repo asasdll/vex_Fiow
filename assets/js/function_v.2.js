@@ -10,11 +10,9 @@ var checkObj;
 //var note_key = ["b/4","c/4"];
 function get_new_note(key, octave, duration, position) {
 
-  let temKey = eval('keyManager.scaleMap.' + key);
-
   let obj = new VF.StaveNote({
     clef: "treble",
-    keys: [temKey + "/" + octave],
+    keys: [key + "/" + octave],
     // keys: [key + "/" + octave, "b" + "/" + 3],
     //keys: note_key,
     duration: duration,
@@ -1076,10 +1074,23 @@ function key_Manager_setup() {
   keyManager = new Vex.Flow.KeyManager(keySig)
 }
 
+function convert_Key() {
+
+  let marker = 1002 - u;
+  for (let j = marker; j <= measure; j++) {
+    for (let i = 0; i < this["notesMeasure" + j].length; i++) {
+      let wholeKey = this["notesMeasure" + j][i].keys[0];
+      let partKey = wholeKey.substr(0, 1);
+      let realKey = eval('keyManager.scaleMap.' + partKey);
+      console.log(realKey);
+    }
+  }
+
+  // let temKey = eval('keyManager.scaleMap.' + key);
+}
+
 function text_key_Signature(e) {
   // console.log("log", e);
-
-
 
   let keySignature = ""
   if (e == 0) {
