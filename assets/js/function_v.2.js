@@ -1099,11 +1099,16 @@ function key_Commit() {
   redraw_notes();
 }
 
+function key_reset() {
+  keyManager.reset();
+}
+
 function key_Manager_setup() {
   keyManager = new Vex.Flow.KeyManager(keySig)
 }
 
 function convert_Key() {
+  key_Manager_setup();
 
   let marker = 1002 - u;
   for (let j = marker; j <= measure; j++) {
