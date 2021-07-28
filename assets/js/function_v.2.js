@@ -1081,12 +1081,20 @@ function convert_Key() {
     for (let i = 0; i < this["notesMeasure" + j].length; i++) {
       let wholeKey = this["notesMeasure" + j][i].keys[0];
       let partKey = wholeKey.substr(0, 1);
+      let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
       let realKey = eval('keyManager.scaleMap.' + partKey);
-      console.log(realKey);
+
+      if (this["notesMeasure" + j][i].customTypes == 'r') {
+        durationM = this["notesMeasure" + j][i].duration + 'r';
+      } else {
+        durationM = this["notesMeasure" + j][i].duration;
+      }
+
+      this["notesMeasure" + j][i] = get_new_note(realKey, octave, durationM)
     }
   }
 
-  // let temKey = eval('keyManager.scaleMap.' + key);
+
 }
 
 function text_key_Signature(e) {
