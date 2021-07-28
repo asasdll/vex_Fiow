@@ -10,13 +10,11 @@ var checkObj;
 //var note_key = ["b/4","c/4"];
 function get_new_note(key, octave, duration, position) {
 
-  var cpf = keyManager.scaleMap.c;
-  console.log(cpf);
-  cpKey = key;
+  let temKey = eval('keyManager.scaleMap.' + key);
 
   let obj = new VF.StaveNote({
     clef: "treble",
-    keys: [cpKey + "/" + octave],
+    keys: [temKey + "/" + octave],
     // keys: [key + "/" + octave, "b" + "/" + 3],
     //keys: note_key,
     duration: duration,
