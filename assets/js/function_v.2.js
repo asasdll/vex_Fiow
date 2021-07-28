@@ -67,17 +67,21 @@ function redraw_notes() {
   let marker = 1002 - u;
  
   for (i = measure; i >= marker; i--) {
+    context.openGroup('flag', 'group_notes' + i , { pointerBBox: true });
     context.openGroup('flag', 'flag' + i , { pointerBBox: true });
     this["staveMeasure" + i].setContext(context).draw();
+    context.closeGroup(); 
+    context.openGroup('flag', 'flag_2' + i , { pointerBBox: true });
     this["stave_2Measure" + i].setContext(context).draw();
     context.closeGroup(); // close
-
+    context.closeGroup(); 
     this["group" + i] = context.openGroup(); // open
     this["group" + i].setAttribute("name", "group" + i);
 
     Vex.Flow.Formatter.FormatAndDraw(context,
       this["staveMeasure" + i],
       this["notesMeasure" + i]);
+
     var voice = VF.Beam.generateBeams(this["notesMeasure" + i]);
     voice.forEach(function (b) { b.setContext(context).draw() });
 
