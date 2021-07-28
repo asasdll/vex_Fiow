@@ -1095,7 +1095,7 @@ function compute_Key() {
       let wholeKey = this["notes_2Measure" + j][i].keys[0];
       let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
       let partKey = this["notes_2Measure" + j][i].keyaccess;
-      let realKey = `keyManager.selectNote('${partKey}')`;
+      let realKey = `keyManager2.selectNote('${partKey}')`;
       let cpKey = eval(realKey);
       console.log(cpKey);
 
@@ -1129,10 +1129,12 @@ function key_Commit() {
 
 function key_reset() {
   keyManager.reset();
+  key2Manager.reset();
 }
 
 function key_Manager_setup() {
   keyManager = new Vex.Flow.KeyManager(keySig)
+  keyManager2 = new Vex.Flow.KeyManager(keySig)
 }
 
 function convert_Key() {
@@ -1172,7 +1174,7 @@ function convert_Key() {
       let wholeKey = this["notes_2Measure" + j][i].keys[0];
       let partKey = wholeKey.substr(0, 1);
       let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
-      let realKey = eval('keyManager.scaleMap.' + partKey);
+      let realKey = eval('keyManager2.scaleMap.' + partKey);
 
 
       if (this["notes_2Measure" + j][i].modifiers.length == 0) {
