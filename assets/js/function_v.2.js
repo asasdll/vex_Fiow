@@ -1090,6 +1090,29 @@ function compute_Key() {
         }
       }
     }
+
+    for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
+      let wholeKey = this["notes_2Measure" + j][i].keys[0];
+      let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
+      let partKey = this["notes_2Measure" + j][i].keyaccess;
+      let realKey = `keyManager.selectNote('${partKey}')`;
+      let cpKey = eval(realKey);
+      console.log(cpKey);
+
+      if (cpKey.change == true && this["notes_2Measure" + j][i].customTypes != 'r') {
+        if (cpKey.accidental == null) {
+          this["notes_2Measure" + j][i].addAccidental(0, new VF.Accidental('n'));
+        } else if (cpKey.accidental == '#') {
+          this["notes_2Measure" + j][i].addAccidental(0, new VF.Accidental('#'));
+        } else if (cpKey.accidental == 'b') {
+          this["notes_2Measure" + j][i].addAccidental(0, new VF.Accidental('b'));
+        }
+      } else if (cpKey.change == false) {
+        if (this["notes_2Measure" + j][i].modifiers.length != 0) {
+          this["notes_2Measure" + j][i].modifiers = [];
+        }
+      }
+    }
   }
 }
 
@@ -1101,6 +1124,7 @@ function key_Commit() {
   compute_Key();
   computeStave();
   redraw_notes();
+  elemKey = ' ';
 }
 
 function key_reset() {
@@ -1150,21 +1174,27 @@ function convert_Key() {
       let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
       let realKey = eval('keyManager.scaleMap.' + partKey);
 
-      if (this["notes_2Measure" + j][i].customTypes == 'r') {
-        durationM = this["notes_2Measure" + j][i].duration + 'r';
-      } else {
-        durationM = this["notes_2Measure" + j][i].duration;
+
+      if (this["notes_2Measure" + j][i].modifiers.length == 0) {
+
+
+        if (this["notes_2Measure" + j][i].customTypes == 'r') {
+          durationM = this["notes_2Measure" + j][i].duration + 'r';
+        } else {
+          durationM = this["notes_2Measure" + j][i].duration;
+        }
+
+        let center = " ";
+
+        if (this["notes_2Measure" + j][i].align_center == true) {
+          center = true;
+        } else {
+          center = false;
+        }
+
+        this["notes_2Measure" + j][i] = get_new_note(realKey, octave, durationM, center)
+        this["notes_2Measure" + j][i].keyaccess = realKey;
       }
-
-      let center = " ";
-
-      if (this["notes_2Measure" + j][i].align_center == true) {
-        center = true;
-      } else {
-        center = false;
-      }
-
-      this["notes_2Measure" + j][i] = get_new_note(realKey, octave, durationM, center)
     }
   }
 }
