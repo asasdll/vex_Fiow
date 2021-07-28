@@ -10,7 +10,8 @@ var checkObj;
 //var note_key = ["b/4","c/4"];
 function get_new_note(key, octave, duration, position) {
 
-  // var cpf = keyManager.scale
+  var cpf = keyManager.scaleMap.c;
+  console.log(cpf);
   cpKey = key;
 
   let obj = new VF.StaveNote({
@@ -40,6 +41,8 @@ function draw_notes() {
   context.setFont("Arial", 50, 700).setBackgroundFillStyle("#eed");
 
   voice = new VF.Voice({ num_beats: 6, beat_value: 4 });
+  key_Manager_setup();
+
 
   notesMeasure1001 = [
     get_new_note('b', 4, "1r", true),
@@ -58,7 +61,7 @@ function draw_notes() {
 
 
   cpTime = computeSpace(String(upperTime), String(lowerTime));
-  key_Manager_setup();
+
 
   computeStave();
   redraw_notes();
