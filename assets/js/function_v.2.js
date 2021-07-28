@@ -1119,22 +1119,25 @@ function convert_Key() {
       let realKey = eval('keyManager.scaleMap.' + partKey);
       console.log(realKey);
 
-      if (this["notesMeasure" + j][i].customTypes == 'r') {
-        durationM = this["notesMeasure" + j][i].duration + 'r';
-      } else {
-        durationM = this["notesMeasure" + j][i].duration;
+      if (this["notesMeasure" + j][i].modifiers.length == 0) {
+
+        if (this["notesMeasure" + j][i].customTypes == 'r') {
+          durationM = this["notesMeasure" + j][i].duration + 'r';
+        } else {
+          durationM = this["notesMeasure" + j][i].duration;
+        }
+
+        let center = " ";
+
+        if (this["notesMeasure" + j][i].align_center == true) {
+          center = true;
+        } else {
+          center = false;
+        }
+
+        this["notesMeasure" + j][i] = get_new_note(realKey, octave, durationM, center)
+        this["notesMeasure" + j][i].keyaccess = realKey;
       }
-
-      let center = " ";
-
-      if (this["notesMeasure" + j][i].align_center == true) {
-        center = true;
-      } else {
-        center = false;
-      }
-
-      this["notesMeasure" + j][i] = get_new_note(realKey, octave, durationM, center)
-      this["notesMeasure" + j][i].keyaccess = realKey;
     }
 
     for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
