@@ -595,6 +595,7 @@ function notes_Click() {
 
 $('html') // unbind mousemove 
   .mouseup(function () {
+    convert_Key();
     unBind();
     setStyle_Black();
   });
@@ -604,6 +605,7 @@ $('html')
   .click(function () {
     //setStyle_Black_clear();
     // setStyle_Black_clear();
+    convert_Key();
     redraw_notes();
     obj_note = " ";
     index_array = " ";
@@ -1108,8 +1110,6 @@ function convert_Key() {
       this["notes_2Measure" + j][i] = get_new_note(realKey, octave, durationM)
     }
   }
-
-
 }
 
 function text_key_Signature(e) {
