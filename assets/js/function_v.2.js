@@ -10,9 +10,13 @@ var checkObj;
 //var note_key = ["b/4","c/4"];
 function get_new_note(key, octave, duration, position) {
 
+  var keyManager = new Vex.Flow.KeyManager(keySig)
+  console.log(keyManager);
+  cpKey = key;
+
   let obj = new VF.StaveNote({
     clef: "treble",
-    keys: [key + "/" + octave],
+    keys: [cpKey + "/" + octave],
     // keys: [key + "/" + octave, "b" + "/" + 3],
     //keys: note_key,
     duration: duration,
