@@ -612,15 +612,12 @@ function notes_Click() {
 $('html') // unbind mousemove 
   .mouseup(function () {
     unBind();
-    setStyle_Black();
-    console.log("444");
   });
 
 
 $('html')
   .click(function () {
-    //setStyle_Black_clear();
-    // setStyle_Black_clear();
+    setStyle_Black();
     redraw_notes();
     obj_note = " ";
     index_array = " ";
@@ -642,9 +639,10 @@ function setStyle_OrangeRed() {
 
 function setStyle_Black() {
 
-  if (index_array != undefined && index_array != "") {
-    obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
-  }
+ 
+if (index_array != undefined && index_array != " ") {
+  obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
+}
 }
 
 function setStyle_Black_clear() {
