@@ -129,11 +129,6 @@ function redraw_notes() {
   // time_Signature();
 }
 
-function value_clef(e) {
-  let levelClef = e.attr('Clevel');
-  console.log(levelClef);
-}
-
 function addType(array) {
   ele1 = document.getElementsByName("group" + array);
   ele2 = document.getElementsByName("groupt" + array);
@@ -146,8 +141,8 @@ function addType(array) {
   stave2 = ele4[0].children;
 
   stave1[7].setAttribute("onmousedown", "value_clef($(this))");
-  stave1[7].setAttribute("Clevel", "top");
-  stave2[7].setAttribute("Clevel", "down");
+  stave1[7].setAttribute("level", `upper`);
+  stave2[7].setAttribute("level", `lower`);
   stave2[7].setAttribute("onmousedown", "value_clef($(this))");
 
   let i = 0;
@@ -367,10 +362,23 @@ function modifyStave() {
   }
 }
 
+levelClef = " "
+
 function set_clef(clef_param) {
-  clef = clef_param
+  if (levelClef == "upper") {
+    clef = clef_param;
+  } else if ((levelClef == "lower")) {
+    lowerClef = clef_param;
+  }
+
   computeStave();
   redraw_notes();
+  levelClef = " ";
+}
+
+function value_clef(e) {
+  levelClef = e.attr('level');
+  console.log(levelClef);
 }
 
 
@@ -636,7 +644,6 @@ function setStyle_OrangeRed() {
 }
 
 function setStyle_Black() {
-  console.log('inin');
   if (index_array != undefined && index_array != " ") {
     obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
   }
