@@ -68,10 +68,10 @@ function redraw_notes() {
  
   for (i = measure; i >= marker; i--) {
     context.openGroup('flag', 'group_notes' + i , { pointerBBox: true });
-    context.openGroup('flag', 'flag' + i , { pointerBBox: true });
+    context.openGroup('flagup', 'flagup' + i , { pointerBBox: true });
     this["staveMeasure" + i].setContext(context).draw();
     context.closeGroup(); 
-    context.openGroup('flag', 'flag_2' + i , { pointerBBox: true });
+    context.openGroup('flaglower', 'flaglower' + i , { pointerBBox: true });
     this["stave_2Measure" + i].setContext(context).draw();
     context.closeGroup(); // close
     context.closeGroup(); 
@@ -127,8 +127,12 @@ function addType(array) {
   ele1 = document.getElementsByName("group" + array);
   ele2 = document.getElementsByName("groupt" + array);
 
+  ele3 = document.querySelectorAll(".vf-flagup");
+  ele4 = document.querySelectorAll(".vf-flaglower");
+
   group1 = ele1[0].children;
   group2 = ele2[0].children;
+
   // group3 = ele1[0].children[0].children[0].children;
   // group4 = ele2[0].children[0].children[0].children;
   // // console.log(group3,group4);
@@ -158,6 +162,16 @@ function addType(array) {
 
     }
   }
+
+for (let u = 0; u < ele3.length; u++) {
+  ele3[u].setAttribute("onmousedown", "btnNote($(this))");
+  
+}
+
+for (let k = 0; k < ele4.length; k++) {
+  ele3[k].setAttribute("onmousedown", "btnNote($(this))");
+  
+}
   // let u_i = 0;
   // let v_i = 0;
   // for (let u = 0; u < group3.length; u++) {
@@ -1215,7 +1229,11 @@ function text_key_Signature(e) {
 }
 
 
-function btnNote() {
+function btnNote(e) {
+  console.log("555");
+  document.body.style.backgroundColor = "red";
+e.style.borderColor = "red";
+  //document.getElementById("vf-flagup100").style.backgroundColor = "red";
   /* let va = document.getElementsByClassName("vf-notehead");
  
    va[0].setAttribute("tys","555");
