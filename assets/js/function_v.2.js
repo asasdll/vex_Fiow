@@ -61,7 +61,7 @@ function draw_notes() {
 
   computeStave();
   redraw_notes();
-  click_time_Signature();
+  // click_time_Signature();
   //btnNote();
 }
 
@@ -125,14 +125,13 @@ function redraw_notes() {
     }
     addType(i);
   }
-  click_time_Signature();
+  // click_time_Signature();
   // time_Signature();
 }
 
 function value_clef(e) {
-  let levelClef = e.attr('Clvl');
-  console.log(e);
-  console.log(e.attr('Clvl'));
+  let levelClef = e.attr('Clevel');
+  console.log(levelClef);
 }
 
 function addType(array) {
@@ -147,8 +146,8 @@ function addType(array) {
   stave2 = ele4[0].children;
 
   stave1[7].setAttribute("onmousedown", "value_clef($(this))");
-  stave1[7].setAttribute("Clvl", "top");
-  stave2[7].setAttribute("Clvl", "down");
+  stave1[7].setAttribute("Clevel", "top");
+  stave2[7].setAttribute("Clevel", "down");
   stave2[7].setAttribute("onmousedown", "value_clef($(this))");
 
   let i = 0;
@@ -637,8 +636,8 @@ function setStyle_OrangeRed() {
 }
 
 function setStyle_Black() {
-
-  if (index_array != undefined && index_array != "") {
+  console.log('inin');
+  if (index_array != undefined && index_array != " ") {
     obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
   }
 }
@@ -680,18 +679,18 @@ function sound() {
 
 }
 
-function click_time_Signature() {
+// function click_time_Signature() {
 
-  let i = 0;
+//   let i = 0;
 
-  $("path").each(function () {
+//   $("path").each(function () {
 
-    $(this).attr("id", "time_" + i);
+//     $(this).attr("id", "time_" + i);
 
-    i++;
+//     i++;
 
-  });
-}
+//   });
+// }
 
 function computeDuration(lowerT) { // เปลี่ยน lowerTime เป็นโน๊ท
   let computedD;
