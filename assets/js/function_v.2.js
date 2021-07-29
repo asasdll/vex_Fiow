@@ -72,9 +72,16 @@ function redraw_notes() {
 
   for (i = measure; i >= marker; i--) {
 
-    this["staveMeasure" + i].setContext(context).draw();
-    this["stave_2Measure" + i].setContext(context).draw();
 
+    this["groupstave" + i] = context.openGroup();
+    this["groupstave" + i].setAttribute("name", "groupstave" + i);
+    this["staveMeasure" + i].setContext(context).draw();
+    context.closeGroup();
+
+    this["grouptstave" + i] = context.openGroup();
+    this["grouptstave" + i].setAttribute("name", "grouptstave" + i);
+    this["stave_2Measure" + i].setContext(context).draw();
+    context.closeGroup();
 
     this["group" + i] = context.openGroup(); // open
     this["group" + i].setAttribute("name", "group" + i);
@@ -125,6 +132,10 @@ function redraw_notes() {
 function addType(array) {
   ele1 = document.getElementsByName("group" + array);
   ele2 = document.getElementsByName("groupt" + array);
+  ele3 = document.getElementsByName("groupstave" + array);
+  ele4 = document.getElementsByName("grouptstave" + array);
+  console.log(ele4);
+
 
   group1 = ele1[0].children;
   group2 = ele2[0].children;
@@ -383,6 +394,8 @@ var level_ = "";
 
 
 function mousedown(e) {
+  console.log(e);
+
   setStyle_Black_clear()
 
   arr_type = e.attr('arr');
