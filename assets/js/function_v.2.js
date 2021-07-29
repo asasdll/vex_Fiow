@@ -36,7 +36,7 @@ function draw_notes() {
 
   context.setFont("Arial", 50, 700).setBackgroundFillStyle("#eed");
 
-  voice = new VF.Voice({ num_beats: 6, beat_value: 4 });
+  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
   key_Manager_setup();
 
 
@@ -359,6 +359,12 @@ function modifyStave() {
       this["stave_2Measure" + i].addClef(lowerClef).addKeySignature(keySig).addTimeSignature(timeSig);
     }
   }
+}
+
+function set_clef(clef_param) {
+  clef = clef_param
+  computeStave();
+  redraw_notes();
 }
 
 
