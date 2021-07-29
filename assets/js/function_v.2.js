@@ -13,7 +13,7 @@ function get_new_note(key, octave, duration, position) {
   let obj = new VF.StaveNote({
     clef: "treble",
     keys: [key + "/" + octave],
-    // keys: [key + "/" + octave, "b" + "/" + 3],
+    // keys: [key + "/" + octave , "b" + "/"+ 3],
     //keys: note_key,
     duration: duration,
     align_center: position,
@@ -36,9 +36,7 @@ function draw_notes() {
 
   context.setFont("Arial", 50, 700).setBackgroundFillStyle("#eed");
 
-  voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
-  key_Manager_setup();
-
+  voice = new VF.Voice({ num_beats: 6, beat_value: 4 });
 
   notesMeasure1001 = [
     get_new_note('b', 4, "1r", true),
@@ -58,10 +56,9 @@ function draw_notes() {
 
   cpTime = computeSpace(String(upperTime), String(lowerTime));
 
-
   computeStave();
   redraw_notes();
-  // click_time_Signature();
+  click_time_Signature();
   //btnNote();
 }
 
@@ -122,15 +119,13 @@ function redraw_notes() {
     }
     addType(i);
   }
-  // click_time_Signature();
+  click_time_Signature();
   // time_Signature();
 }
 
 function addType(array) {
   ele1 = document.getElementsByName("group" + array);
   ele2 = document.getElementsByName("groupt" + array);
-  ele3 = document.getElementsByName("groupstave" + array);
-  ele4 = document.getElementsByName("grouptstave" + array);
 
   ele3 = document.querySelectorAll(".vf-flagup");
   ele4 = document.querySelectorAll(".vf-flaglower");
@@ -141,14 +136,6 @@ function addType(array) {
   // group3 = ele1[0].children[0].children[0].children;
   // group4 = ele2[0].children[0].children[0].children;
   // // console.log(group3,group4);
-  stave1 = ele3[0].children;
-  stave2 = ele4[0].children;
-
-  stave1[7].setAttribute("onmousedown", "value_clef($(this))");
-  stave1[7].setAttribute("level", `upper`);
-  stave2[7].setAttribute("level", `lower`);
-  stave2[7].setAttribute("onmousedown", "value_clef($(this))");
-
   let i = 0;
   let k = 0;
   for (j = 0; j < group1.length; j++) {
@@ -376,7 +363,7 @@ let lowerTime = 4;
 
 keySig = 'C';
 timeSig = upperTime + '/' + lowerTime;
-clef = 'treble';
+clef = 'bass';
 lowerClef = 'bass';
 
 
@@ -387,25 +374,6 @@ function modifyStave() {
       this["stave_2Measure" + i].addClef(lowerClef).addKeySignature(keySig).addTimeSignature(timeSig);
     }
   }
-}
-
-levelClef = " "
-
-function set_clef(clef_param) {
-  if (levelClef == "upper") {
-    clef = clef_param;
-  } else if ((levelClef == "lower")) {
-    lowerClef = clef_param;
-  }
-
-  computeStave();
-  redraw_notes();
-  levelClef = " ";
-}
-
-function value_clef(e) {
-  levelClef = e.attr('level');
-  console.log(levelClef);
 }
 
 
@@ -424,15 +392,13 @@ var level_ = "";
 
 
 function mousedown(e) {
-  console.log(e);
-
   setStyle_Black_clear()
 
   arr_type = e.attr('arr');
   mea_ = e.attr('measure');
   level_ = e.attr('level');
 
-  // note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
+  note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
   obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
@@ -634,6 +600,7 @@ function notes_Click() {
   let duration = note_duration;
 
   let btn = computeDuration(String(lowerTime))
+  console.log("test Click");
   obj_note[index_array] = get_new_note(key, octave, duration);
   setStyle_OrangeRed();
 
@@ -645,12 +612,15 @@ function notes_Click() {
 $('html') // unbind mousemove 
   .mouseup(function () {
     unBind();
+    setStyle_Black();
+    console.log("444");
   });
 
 
 $('html')
   .click(function () {
-    setStyle_Black();
+    //setStyle_Black_clear();
+    // setStyle_Black_clear();
     redraw_notes();
     obj_note = " ";
     index_array = " ";
@@ -671,7 +641,8 @@ function setStyle_OrangeRed() {
 }
 
 function setStyle_Black() {
-  if (index_array != undefined && index_array != " ") {
+
+  if (index_array != undefined && index_array != "") {
     obj_note[index_array].setStyle({ fillStyle: "Black", strokeStyle: "Black" });
   }
 }
@@ -713,18 +684,18 @@ function sound() {
 
 }
 
-// function click_time_Signature() {
+function click_time_Signature() {
 
-//   let i = 0;
+  let i = 0;
 
-//   $("path").each(function () {
+  $("path").each(function () {
 
-//     $(this).attr("id", "time_" + i);
+    $(this).attr("id", "time_" + i);
 
-//     i++;
+    i++;
 
-//   });
-// }
+  });
+}
 
 function computeDuration(lowerT) { // เปลี่ยน lowerTime เป็นโน๊ท
   let computedD;
@@ -1103,148 +1074,10 @@ function addAccidental(Accidental) {
 }
 
 
-function key_Setter(key) {
+function key_Signature() {
 
-  elemKey = key;
+  console.log("5555555");
 
-}
-
-function compute_Key() {
-
-  let marker = 1002 - u;
-  for (let j = marker; j <= measure; j++) {
-    for (let i = 0; i < this["notesMeasure" + j].length; i++) {
-      let wholeKey = this["notesMeasure" + j][i].keys[0];
-      // let partKey = wholeKey.substr(0, 1);
-      let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
-      let partKey = this["notesMeasure" + j][i].keyaccess;
-      let realKey = `keyManager.selectNote('${partKey}')`;
-      let cpKey = eval(realKey);
-      console.log(cpKey);
-
-      if (cpKey.change == true && this["notesMeasure" + j][i].customTypes != 'r') {
-        if (cpKey.accidental == null) {
-          this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('n'));
-        } else if (cpKey.accidental == '#') {
-          this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('#'));
-        } else if (cpKey.accidental == 'b') {
-          this["notesMeasure" + j][i].addAccidental(0, new VF.Accidental('b'));
-        }
-      } else if (cpKey.change == false) {
-        if (this["notesMeasure" + j][i].modifiers.length != 0) {
-          this["notesMeasure" + j][i].modifiers = [];
-        }
-      }
-    }
-
-    for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
-      let wholeKey = this["notes_2Measure" + j][i].keys[0];
-      let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
-      let partKey = this["notes_2Measure" + j][i].keyaccess;
-      let realKey = `keyManager2.selectNote('${partKey}')`;
-      let cpKey = eval(realKey);
-      console.log(cpKey);
-
-      if (cpKey.change == true && this["notes_2Measure" + j][i].customTypes != 'r') {
-        if (cpKey.accidental == null) {
-          this["notes_2Measure" + j][i].addAccidental(0, new VF.Accidental('n'));
-        } else if (cpKey.accidental == '#') {
-          this["notes_2Measure" + j][i].addAccidental(0, new VF.Accidental('#'));
-        } else if (cpKey.accidental == 'b') {
-          this["notes_2Measure" + j][i].addAccidental(0, new VF.Accidental('b'));
-        }
-      } else if (cpKey.change == false) {
-        if (this["notes_2Measure" + j][i].modifiers.length != 0) {
-          this["notes_2Measure" + j][i].modifiers = [];
-        }
-      }
-    }
-  }
-}
-
-function key_Commit() {
-  convert_Key();
-  oldKS = keySig;
-  keySig = elemKey;
-  key_Manager_setup();
-  compute_Key();
-  computeStave();
-  redraw_notes();
-  elemKey = ' ';
-}
-
-function key_reset() {
-  keyManager.reset();
-  key2Manager.reset();
-}
-
-function key_Manager_setup() {
-  keyManager = new Vex.Flow.KeyManager(keySig)
-  keyManager2 = new Vex.Flow.KeyManager(keySig)
-}
-
-function convert_Key() {
-  key_Manager_setup();
-
-  let marker = 1002 - u;
-  for (let j = marker; j <= measure; j++) {
-    for (let i = 0; i < this["notesMeasure" + j].length; i++) {
-      let wholeKey = this["notesMeasure" + j][i].keys[0];
-      let partKey = wholeKey.substr(0, 1);
-      let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
-      let realKey = eval('keyManager.scaleMap.' + partKey);
-      console.log(realKey);
-
-      if (this["notesMeasure" + j][i].modifiers.length == 0) {
-
-        if (this["notesMeasure" + j][i].customTypes == 'r') {
-          durationM = this["notesMeasure" + j][i].duration + 'r';
-        } else {
-          durationM = this["notesMeasure" + j][i].duration;
-        }
-
-        let center = " ";
-
-        if (this["notesMeasure" + j][i].align_center == true) {
-          center = true;
-        } else {
-          center = false;
-        }
-
-        this["notesMeasure" + j][i] = get_new_note(realKey, octave, durationM, center)
-        this["notesMeasure" + j][i].keyaccess = realKey;
-      }
-    }
-
-    for (let i = 0; i < this["notes_2Measure" + j].length; i++) {
-      let wholeKey = this["notes_2Measure" + j][i].keys[0];
-      let partKey = wholeKey.substr(0, 1);
-      let octave = wholeKey.substr(wholeKey.length - 1, wholeKey.length);
-      let realKey = eval('keyManager2.scaleMap.' + partKey);
-
-
-      if (this["notes_2Measure" + j][i].modifiers.length == 0) {
-
-
-        if (this["notes_2Measure" + j][i].customTypes == 'r') {
-          durationM = this["notes_2Measure" + j][i].duration + 'r';
-        } else {
-          durationM = this["notes_2Measure" + j][i].duration;
-        }
-
-        let center = " ";
-
-        if (this["notes_2Measure" + j][i].align_center == true) {
-          center = true;
-        } else {
-          center = false;
-        }
-
-        this["notes_2Measure" + j][i] = get_new_note(realKey, octave, durationM, center)
-        this["notes_2Measure" + j][i].keyaccess = realKey;
-      }
-    }
-  }
 }
 
 function text_key_Signature(e) {
