@@ -129,19 +129,28 @@ function redraw_notes() {
   // time_Signature();
 }
 
+function value_clef(e) {
+  let levelClef = e.attr('Clvl');
+  console.log(e);
+  console.log(e.attr('Clvl'));
+}
+
 function addType(array) {
   ele1 = document.getElementsByName("group" + array);
   ele2 = document.getElementsByName("groupt" + array);
   ele3 = document.getElementsByName("groupstave" + array);
   ele4 = document.getElementsByName("grouptstave" + array);
-  console.log(ele4);
-
 
   group1 = ele1[0].children;
   group2 = ele2[0].children;
-  // group3 = ele1[0].children[0].children[0].children;
-  // group4 = ele2[0].children[0].children[0].children;
-  // // console.log(group3,group4);
+  stave1 = ele3[0].children;
+  stave2 = ele4[0].children;
+
+  stave1[7].setAttribute("onmousedown", "value_clef($(this))");
+  stave1[7].setAttribute("Clvl", "top");
+  stave2[7].setAttribute("Clvl", "down");
+  stave2[7].setAttribute("onmousedown", "value_clef($(this))");
+
   let i = 0;
   let k = 0;
   for (j = 0; j < group1.length; j++) {
@@ -168,20 +177,7 @@ function addType(array) {
 
     }
   }
-  // let u_i = 0;
-  // let v_i = 0;
-  // for (let u = 0; u < group3.length; u++) {
-  //   group3[u].setAttribute("idu", "u_" + u_i);
-  //   u_i++;
-  //   group3[u].setAttribute("onmousedown", "increase_note($(this))");
 
-  // }
-  // for (let v = 0; v < group4.length; v++) {
-  //   group4[v].setAttribute("idu", "u_" + v_i);
-  //   v_i++;
-  //   group4[v].setAttribute("onmousedown", "increase_note($(this))");
-
-  // }
 }
 
 let measure = 1001;
@@ -402,7 +398,7 @@ function mousedown(e) {
   mea_ = e.attr('measure');
   level_ = e.attr('level');
 
-  note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
+  // note_substr = arr_type.substr(0, 12); // ตัดตัวอักษร ว่าอยู่ บนหรือล่าง
 
   obj_note = eval(arr_type); // เปลี่ยน  String เป็น obj
 
@@ -615,14 +611,12 @@ function notes_Click() {
 $('html') // unbind mousemove 
   .mouseup(function () {
     unBind();
-    setStyle_Black();
   });
 
 
 $('html')
   .click(function () {
-    //setStyle_Black_clear();
-    // setStyle_Black_clear();
+    setStyle_Black();
     redraw_notes();
     obj_note = " ";
     index_array = " ";
