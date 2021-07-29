@@ -28,15 +28,22 @@ function get_new_note(key, octave, duration, position) {
 function draw_notes() {
   VF = Vex.Flow;
   var div = document.getElementById("page")
-  renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+
+
+  renderer = new VF.Renderer(div,VF.Renderer.Backends.SVG);
 
   renderer.resize(700, 700);
+
+
 
   context = renderer.getContext();
 
   context.setFont("Arial", 50, 700).setBackgroundFillStyle("#eed");
 
   voice = new VF.Voice({ num_beats: 6, beat_value: 4 });
+
+
+
 
   notesMeasure1001 = [
     get_new_note('b', 4, "1r", true),
@@ -70,6 +77,7 @@ function redraw_notes() {
     context.openGroup('flag', 'group_notes' + i , { pointerBBox: true });
     context.openGroup('flagup', 'flagup' + i , { pointerBBox: true });
     this["staveMeasure" + i].setContext(context).draw();
+   //this["staveMeasure" + i].setContext(context).draw());
     context.closeGroup(); 
     context.openGroup('flaglower', 'flaglower' + i , { pointerBBox: true });
     this["stave_2Measure" + i].setContext(context).draw();
@@ -634,7 +642,7 @@ function unBind() { // unbind mousemove
 function setStyle_OrangeRed() {
 
   obj_note[index_array].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-
+  obj_note[index_array].setStemStyle({ strokeStyle: 'OrangeRed' });
 }
 
 function setStyle_Black() {
@@ -1227,30 +1235,7 @@ function text_key_Signature(e) {
 }
 
 
-function btnNote(e) {
-  console.log("555");
-  document.body.style.backgroundColor = "red";
-e.style.borderColor = "red";
-  //document.getElementById("vf-flagup100").style.backgroundColor = "red";
-  /* let va = document.getElementsByClassName("vf-notehead");
- 
-   va[0].setAttribute("tys","555");
-  //$( ".vf-notehead" ).each(f
-  //va.attr("tt","555");
- 
-   let i = 0;
-   $('.vf-notehead').each(function(){
-     // this.setAttribute("id_u","15");
-      this.setAttribute("onmousedown", "mousedown($(this))");
-    this.setAttribute("id_u","i"+ i);
-  //  this.setAttribute("id_i", "i"+ i);
-     i++;
-   });
- */
 
-
-
-}
 
 
 

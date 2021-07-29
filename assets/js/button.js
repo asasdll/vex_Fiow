@@ -21,6 +21,15 @@ function bigImg(x) {
   }
 
 
+  function btnNote(e) {
+    /*
+    document.body.style.backgroundColor = "red";
+    document.getElementById("menu").style.backgroundColor = "Chartreuse";
+    document.getElementById("container").style.backgroundColor = "Chartreuse";
+    document.getElementById("page").style.backgroundColor = "DarkOrange";
+    document.getElementById("vf-flag").style.backgroundColor = "red";
+  */
+  }
 
   
   
