@@ -30,7 +30,7 @@ function draw_notes() {
   var div = document.getElementById("page")
   renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
-  renderer.resize(700, 700);
+  renderer.resize(1650, 700);
 
   context = renderer.getContext();
 
@@ -239,7 +239,7 @@ function computeStave() {
   pointer2 = 1001 - (u - 1); // pointer ตัวที่สอง
   level = 0; // ความสูงเส้นแรก
   level2 = 100; // ความสูงเส้นสอง
-  let vit = 480; // ความยาว
+  let vit = 1480; // ความยาว
   let trackHead = 0;
 
   for (i = j; i <= measure; i++) { // ลูปจากห้องติดลบ ไปห้องสุดท้าย
@@ -318,7 +318,7 @@ function computeStave() {
         }
 
         head = 1;
-        vit = 480 - eater;  // ลบด้วยตัวกินเส้น
+        vit = 1480 - eater;  // ลบด้วยตัวกินเส้น
         level += 200;
         level2 += 200;
       } else {
@@ -339,7 +339,7 @@ function computeStave() {
             level += 200;
             level2 += 200;
             rest = 0;
-            pointerMeasure.width = 550;
+            pointerMeasure.width = 1550;
           }
 
           pointerMeasure.width += rest;
