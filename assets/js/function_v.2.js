@@ -1429,7 +1429,7 @@ function text_key_Signature(e) {
 
 
 function btnNote() {
-  /* let va = document.getElementsByClassName("vf-notehead");
+   let va = document.getElementsByClassName("vf-notehead");
  
    va[0].setAttribute("tys","555");
   //$( ".vf-notehead" ).each(f
@@ -1443,7 +1443,7 @@ function btnNote() {
   //  this.setAttribute("id_i", "i"+ i);
      i++;
    });
- */
+ 
 
 
 
