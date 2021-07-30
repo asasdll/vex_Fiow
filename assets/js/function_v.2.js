@@ -32,7 +32,7 @@ function draw_notes() {
 
   renderer = new VF.Renderer(div,VF.Renderer.Backends.SVG);
 
-  renderer.resize(700, 700);
+  renderer.resize(1650, 700);
 
 
 
@@ -47,21 +47,20 @@ function draw_notes() {
 
   notesMeasure1001 = [
     get_new_note('b', 4, "1r", true),
-    // get_new_note('b', 4, "q", false),
-    // get_new_note('c', 4, "q", false),
-    // get_new_note('d', 4, "q", false),
   ];
-
-
 
   notes_2Measure1001 = [
     get_new_note('b', 4, "1r", true),
-
   ];
 
 
 
   cpTime = computeSpace(String(upperTime), String(lowerTime));
+
+  add_measure_after()
+  add_measure_after()
+  add_measure_after()
+
 
   computeStave();
   redraw_notes();
@@ -131,6 +130,7 @@ function redraw_notes() {
   // time_Signature();
 }
 
+
 function addType(array) {
   ele1 = document.getElementsByName("group" + array);
   ele2 = document.getElementsByName("groupt" + array);
@@ -140,6 +140,26 @@ function addType(array) {
 
   group1 = ele1[0].children;
   group2 = ele2[0].children;
+  stave1 = ele3[0].children;
+  stave2 = ele4[0].children;
+
+
+
+  let skip = keySpec(keyManager.key);
+
+  if (stave1.length > 7 && stave2.length > 7) {
+
+    stave1[7].setAttribute("onmousedown", "value_clef($(this))");
+    stave1[7].setAttribute("level", `upper`);
+    stave2[7].setAttribute("level", `lower`);
+    stave2[7].setAttribute("onmousedown", "value_clef($(this))");
+
+    stave1[8 + skip].setAttribute("onmousedown", "toggle_time()");
+    stave2[8 + skip].setAttribute("onmousedown", "toggle_time()");
+    stave1[9 + skip].setAttribute("onmousedown", "toggle_time()");
+    stave2[9 + skip].setAttribute("onmousedown", "toggle_time()");
+  }
+
 
   // group3 = ele1[0].children[0].children[0].children;
   // group4 = ele2[0].children[0].children[0].children;
@@ -247,7 +267,7 @@ function computeStave() {
   pointer2 = 1001 - (u - 1); // pointer ตัวที่สอง
   level = 0; // ความสูงเส้นแรก
   level2 = 100; // ความสูงเส้นสอง
-  let vit = 480; // ความยาว
+  let vit = 1050; // ความยาว
   let trackHead = 0;
 
   for (i = j; i <= measure; i++) { // ลูปจากห้องติดลบ ไปห้องสุดท้าย
@@ -326,7 +346,7 @@ function computeStave() {
         }
 
         head = 1;
-        vit = 480 - eater;  // ลบด้วยตัวกินเส้น
+        vit = 1050 - eater;  // ลบด้วยตัวกินเส้น
         level += 200;
         level2 += 200;
       } else {
@@ -347,7 +367,7 @@ function computeStave() {
             level += 200;
             level2 += 200;
             rest = 0;
-            pointerMeasure.width = 550;
+            pointerMeasure.width = 1120;
           }
 
           pointerMeasure.width += rest;
@@ -1032,6 +1052,53 @@ function commit_time() {
   redraw_notes();
 }
 
+function keySpec(key) {
+  let keySpec;
+  switch (key) {
+    case 'C':
+      keySpec = 0;
+      break;
+    case 'G':
+    case 'F':
+      keySpec = 1;
+      break;
+    case 'D':
+    case 'Bb':
+      keySpec = 2;
+      break;
+    case 'A':
+    case 'Eb':
+      keySpec = 3;
+      break;
+    case 'E':
+    case 'Ab':
+      keySpec = 4;
+      break;
+    case 'B':
+    case 'Db':
+      keySpec = 5;
+      break;
+    case 'F#':
+    case 'Gb':
+      keySpec = 6;
+      break;
+    case 'C#':
+    case 'Cb':
+      keySpec = 7;
+      break;
+    default:
+      console.log("Don't have this value");
+  }
+  return keySpec;
+}
+
+function toggle_time() {
+
+  $('#exampleModal').modal("toggle");
+  time_Signature_Popup();
+
+}
+
 function vacuumAr() {
   let marker = 1002 - u;
   for (let j = marker; j <= measure; j++) {
@@ -1136,7 +1203,7 @@ function text_key_Signature(e) {
     textEnd_1 = "F"; textEnd_2 = "Bb"; textEnd_3 = "Eb"; textEnd_4 = "Ab";
     textEnd_5 = "Db"; textEnd_6 = "Gb"; textEnd_7 = "Cb";
 
-    
+
   }
   else if (keySignature == 'Dorian') {
     //Dorian
