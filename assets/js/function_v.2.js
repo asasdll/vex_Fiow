@@ -42,21 +42,19 @@ function draw_notes() {
 
   notesMeasure1001 = [
     get_new_note('b', 4, "1r", true),
-    // get_new_note('b', 4, "q", false),
-    // get_new_note('c', 4, "q", false),
-    // get_new_note('d', 4, "q", false),
   ];
-
-
 
   notes_2Measure1001 = [
     get_new_note('b', 4, "1r", true),
-
   ];
 
 
 
   cpTime = computeSpace(String(upperTime), String(lowerTime));
+
+  add_measure_after()
+  add_measure_after()
+  add_measure_after()
 
 
   computeStave();
