@@ -237,7 +237,7 @@ function computeStave() {
   pointer2 = 1001 - (u - 1); // pointer ตัวที่สอง
   level = 0; // ความสูงเส้นแรก
   level2 = 100; // ความสูงเส้นสอง
-  let vit = 1480; // ความยาว
+  let vit = 1050; // ความยาว
   let trackHead = 0;
 
   for (i = j; i <= measure; i++) { // ลูปจากห้องติดลบ ไปห้องสุดท้าย
@@ -316,7 +316,7 @@ function computeStave() {
         }
 
         head = 1;
-        vit = 1480 - eater;  // ลบด้วยตัวกินเส้น
+        vit = 1050 - eater;  // ลบด้วยตัวกินเส้น
         level += 200;
         level2 += 200;
       } else {
@@ -337,7 +337,7 @@ function computeStave() {
             level += 200;
             level2 += 200;
             rest = 0;
-            pointerMeasure.width = 1550;
+            pointerMeasure.width = 1120;
           }
 
           pointerMeasure.width += rest;
