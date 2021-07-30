@@ -141,17 +141,23 @@ function addType(array) {
   stave1 = ele3[0].children;
   stave2 = ele4[0].children;
 
-  stave1[7].setAttribute("onmousedown", "value_clef($(this))");
-  stave1[7].setAttribute("level", `upper`);
-  stave2[7].setAttribute("level", `lower`);
-  stave2[7].setAttribute("onmousedown", "value_clef($(this))");
+
 
   let skip = keySpec(keyManager.key);
 
-  stave1[8 + skip].setAttribute("onmousedown", "toggle_time()");
-  stave2[8 + skip].setAttribute("onmousedown", "toggle_time()");
-  stave1[9 + skip].setAttribute("onmousedown", "toggle_time()");
-  stave2[9 + skip].setAttribute("onmousedown", "toggle_time()");
+  if (stave1.length > 7 && stave2.length > 7) {
+
+    stave1[7].setAttribute("onmousedown", "value_clef($(this))");
+    stave1[7].setAttribute("level", `upper`);
+    stave2[7].setAttribute("level", `lower`);
+    stave2[7].setAttribute("onmousedown", "value_clef($(this))");
+
+    stave1[8 + skip].setAttribute("onmousedown", "toggle_time()");
+    stave2[8 + skip].setAttribute("onmousedown", "toggle_time()");
+    stave1[9 + skip].setAttribute("onmousedown", "toggle_time()");
+    stave2[9 + skip].setAttribute("onmousedown", "toggle_time()");
+  }
+
 
   let i = 0;
   let k = 0;
