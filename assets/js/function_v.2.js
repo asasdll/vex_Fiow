@@ -1136,6 +1136,7 @@ function text_key_Signature(e) {
     textEnd_1 = "F"; textEnd_2 = "Bb"; textEnd_3 = "Eb"; textEnd_4 = "Ab";
     textEnd_5 = "Db"; textEnd_6 = "Gb"; textEnd_7 = "Cb";
 
+    
   }
   else if (keySignature == 'Dorian') {
     //Dorian
