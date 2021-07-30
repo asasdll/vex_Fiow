@@ -129,52 +129,6 @@ function redraw_notes() {
   // time_Signature();
 }
 
-function keySpec(key) {
-  let keySpec;
-  switch (key) {
-    case 'C':
-      keySpec = 0;
-      break;
-    case 'G':
-    case 'F':
-      keySpec = 1;
-      break;
-    case 'D':
-    case 'Bb':
-      keySpec = 2;
-      break;
-    case 'A':
-    case 'Eb':
-      keySpec = 3;
-      break;
-    case 'E':
-    case 'Ab':
-      keySpec = 4;
-      break;
-    case 'B':
-    case 'Db':
-      keySpec = 5;
-      break;
-    case 'F#':
-    case 'Gb':
-      keySpec = 6;
-      break;
-    case 'C#':
-    case 'Cb':
-      keySpec = 7;
-      break;
-    default:
-      console.log("Don't have this value");
-  }
-  return keySpec;
-}
-
-function toggle_time() {
-
-  $('#exampleModal').modal("toggle");
-  time_Signature_Popup();
-
-}
 
 function addType(array) {
   ele1 = document.getElementsByName("group" + array);
@@ -192,8 +146,12 @@ function addType(array) {
   stave2[7].setAttribute("level", `lower`);
   stave2[7].setAttribute("onmousedown", "value_clef($(this))");
 
-  stave1[8].setAttribute("onmousedown", "toggle_time()");
-  stave2[8].setAttribute("onmousedown", "toggle_time()");
+  let skip = keySpec(keyManager.key);
+
+  stave1[8 + skip].setAttribute("onmousedown", "toggle_time()");
+  stave2[8 + skip].setAttribute("onmousedown", "toggle_time()");
+  stave1[9 + skip].setAttribute("onmousedown", "toggle_time()");
+  stave2[9 + skip].setAttribute("onmousedown", "toggle_time()");
 
   let i = 0;
   let k = 0;
@@ -1076,6 +1034,53 @@ function commit_time() {
   provideSpace();
   computeStave();
   redraw_notes();
+}
+
+function keySpec(key) {
+  let keySpec;
+  switch (key) {
+    case 'C':
+      keySpec = 0;
+      break;
+    case 'G':
+    case 'F':
+      keySpec = 1;
+      break;
+    case 'D':
+    case 'Bb':
+      keySpec = 2;
+      break;
+    case 'A':
+    case 'Eb':
+      keySpec = 3;
+      break;
+    case 'E':
+    case 'Ab':
+      keySpec = 4;
+      break;
+    case 'B':
+    case 'Db':
+      keySpec = 5;
+      break;
+    case 'F#':
+    case 'Gb':
+      keySpec = 6;
+      break;
+    case 'C#':
+    case 'Cb':
+      keySpec = 7;
+      break;
+    default:
+      console.log("Don't have this value");
+  }
+  return keySpec;
+}
+
+function toggle_time() {
+
+  $('#exampleModal').modal("toggle");
+  time_Signature_Popup();
+
 }
 
 function vacuumAr() {
