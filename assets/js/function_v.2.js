@@ -63,6 +63,10 @@ function draw_notes() {
   //btnNote();
 }
 
+function resize() {
+  renderer.resize(1650, 1000);
+}
+
 function redraw_notes() {
 
   renderer.ctx.clear();
