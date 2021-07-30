@@ -129,6 +129,13 @@ function redraw_notes() {
   // time_Signature();
 }
 
+function toggle_time() {
+
+  $('#exampleModal').modal("toggle");
+  time_Signature_Popup();
+
+}
+
 function addType(array) {
   ele1 = document.getElementsByName("group" + array);
   ele2 = document.getElementsByName("groupt" + array);
@@ -144,6 +151,9 @@ function addType(array) {
   stave1[7].setAttribute("level", `upper`);
   stave2[7].setAttribute("level", `lower`);
   stave2[7].setAttribute("onmousedown", "value_clef($(this))");
+
+  stave1[8].setAttribute("onmousedown", "toggle_time()");
+  stave2[8].setAttribute("onmousedown", "toggle_time()");
 
   let i = 0;
   let k = 0;
