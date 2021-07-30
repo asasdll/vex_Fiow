@@ -7,6 +7,7 @@ var num_shift;
 var note_duration;
 var checkIndex;
 var checkObj;
+var checkSize = 700;
 //var note_key = ["b/4","c/4"];
 function get_new_note(key, octave, duration, position) {
 
@@ -63,8 +64,8 @@ function draw_notes() {
   //btnNote();
 }
 
-function resize() {
-  renderer.resize(1650, 1000);
+function resize(size) {
+  renderer.resize(1650, size);
 }
 
 function redraw_notes() {
@@ -357,6 +358,11 @@ function computeStave() {
       }
     }
   }
+  if (level2 >= checkSize) {
+    resize(level2 + 200);
+    checkSize = level2 + 200;
+  }
+
   modifyStave();
 }
 
