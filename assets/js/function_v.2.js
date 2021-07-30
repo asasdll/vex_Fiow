@@ -642,7 +642,7 @@ function unBind() { // unbind mousemove
 function setStyle_OrangeRed() {
 
   obj_note[index_array].setStyle({ fillStyle: "OrangeRed", strokeStyle: "Black" });
-  obj_note[index_array].setStemStyle({ strokeStyle: 'OrangeRed' });
+  //obj_note[index_array].setStemStyle({ strokeStyle: 'OrangeRed' });
 }
 
 function setStyle_Black() {
@@ -1230,9 +1230,9 @@ function text_key_Signature(e) {
   document.getElementById("textEnd_6").innerHTML = textEnd_6;
   document.getElementById("textEnd_7").innerHTML = textEnd_7;
 
-
-
 }
+
+
 
 
 
